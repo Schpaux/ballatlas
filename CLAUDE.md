@@ -418,13 +418,55 @@ Do not build in these directories until research is complete.
 
 | Phase | Name                  | Status         |
 | ----- | --------------------- | -------------- |
-| 1     | Foundation            | 🟡 In Progress |
-| 2     | Golf Ball Registry    | ⬜ Not Started |
+| 1     | Foundation            | ✅ Complete    |
+| 2     | Data Platform         | 🟡 In Progress |
 | 3     | Valuation Engine      | ⬜ Not Started |
 | 4     | Admin & Import System | ⬜ Not Started |
 | 5     | Image Identification  | ⬜ Not Started |
 | 6     | Public API            | ⬜ Not Started |
 | 7     | AI Intelligence Layer | ⬜ Not Started |
+
+---
+
+## Phase 2 Key Conventions
+
+### Database Entity Names
+
+Canonical hierarchy: **brands → ball_families → ball_versions**
+
+Old placeholder names (`golf_balls`, `manufacturers`, `specifications`) are superseded
+by ADR-004. Do not use them.
+
+### Slug Conventions
+
+| Entity        | Scope         | Example                |
+| ------------- | ------------- | ---------------------- |
+| brands.slug   | Global unique | `titleist`             |
+| families.slug | Unique/brand  | `pro-v1`               |
+| versions.slug | Global unique | `titleist-pro-v1-2025` |
+
+### Import Pipeline
+
+```bash
+pnpm validate:balls    # validate raw JSON
+pnpm import:balls      # import to local Supabase (idempotent)
+pnpm import:balls --dry-run  # validate only
+```
+
+Add data to `packages/golfball-data/raw/versions.json`.
+
+### Types Regeneration
+
+Run after any migration:
+
+```bash
+supabase db push --local && pnpm supabase:types
+```
+
+### Admin
+
+Admin at `/admin` (no auth in Phase 2 — protect before production).
+Server Actions use `SUPABASE_SERVICE_ROLE_KEY` (bypasses RLS).
 
 ---
 

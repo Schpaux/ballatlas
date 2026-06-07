@@ -1,0 +1,2441 @@
+[
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1",
+    "name": "Pro V1 2025",
+    "slug": "titleist-pro-v1-2025",
+    "release_year": 2025,
+    "msrp_usd": 54.99,
+    "msrp_nok": 599,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 87,
+      "cover_material": "Urethane",
+      "core_material": "High-speed Urethane Elastomer",
+      "dimple_count": 388,
+      "dimple_pattern": "Tetrahedral",
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "alignment_marking": "Single line",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1", "importance_score": 10 },
+      { "feature_type": "logo", "feature_value": "Titleist cursive script", "importance_score": 9 },
+      {
+        "feature_type": "dimple_pattern",
+        "feature_value": "388 tetrahedral dimples",
+        "importance_score": 5
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1",
+    "name": "Pro V1 2023",
+    "slug": "titleist-pro-v1-2023",
+    "release_year": 2023,
+    "msrp_usd": 54.99,
+    "msrp_nok": 599,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 87,
+      "cover_material": "Urethane",
+      "core_material": "High-speed Urethane Elastomer",
+      "dimple_count": 388,
+      "dimple_pattern": "Tetrahedral",
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "alignment_marking": "Single line",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1", "importance_score": 10 },
+      { "feature_type": "logo", "feature_value": "Titleist cursive script", "importance_score": 9 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1",
+    "name": "Pro V1 2021",
+    "slug": "titleist-pro-v1-2021",
+    "release_year": 2021,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 87,
+      "cover_material": "Urethane",
+      "core_material": "Urethane Elastomer",
+      "dimple_count": 388,
+      "dimple_pattern": "Tetrahedral",
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "alignment_marking": "Single line",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1",
+    "name": "Pro V1 2019",
+    "slug": "titleist-pro-v1-2019",
+    "release_year": 2019,
+    "msrp_usd": 47.99,
+    "msrp_nok": 529,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 90,
+      "cover_material": "Urethane",
+      "dimple_count": 352,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1x",
+    "name": "Pro V1x 2025",
+    "slug": "titleist-pro-v1x-2025",
+    "release_year": 2025,
+    "msrp_usd": 54.99,
+    "msrp_nok": 599,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 97,
+      "cover_material": "Urethane",
+      "core_material": "Dual Core",
+      "dimple_count": 348,
+      "dimple_pattern": "Tetrahedral",
+      "launch_profile": "high",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "alignment_marking": "Double line",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1x", "importance_score": 10 },
+      {
+        "feature_type": "dimple_pattern",
+        "feature_value": "348 tetrahedral dimples",
+        "importance_score": 5
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1x",
+    "name": "Pro V1x 2023",
+    "slug": "titleist-pro-v1x-2023",
+    "release_year": 2023,
+    "msrp_usd": 54.99,
+    "msrp_nok": 599,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 97,
+      "cover_material": "Urethane",
+      "dimple_count": 348,
+      "launch_profile": "high",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1x", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1x",
+    "name": "Pro V1x 2021",
+    "slug": "titleist-pro-v1x-2021",
+    "release_year": 2021,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 97,
+      "cover_material": "Urethane",
+      "dimple_count": 348,
+      "launch_profile": "high",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1x", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "avx",
+    "name": "AVX 2024",
+    "slug": "titleist-avx-2024",
+    "release_year": 2024,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 75,
+      "cover_material": "Urethane",
+      "dimple_count": 352,
+      "dimple_pattern": "Catenary",
+      "launch_profile": "low",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "AVX", "importance_score": 10 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "avx",
+    "name": "AVX 2022",
+    "slug": "titleist-avx-2022",
+    "release_year": 2022,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 75,
+      "cover_material": "Urethane",
+      "dimple_count": 352,
+      "launch_profile": "low",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "AVX", "importance_score": 10 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "tour-soft",
+    "name": "Tour Soft 2024",
+    "slug": "titleist-tour-soft-2024",
+    "release_year": 2024,
+    "msrp_usd": 37.99,
+    "msrp_nok": 419,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 65,
+      "cover_material": "Urethane",
+      "dimple_count": 342,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Tour Soft", "importance_score": 10 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "truefeel",
+    "name": "TruFeel 2024",
+    "slug": "titleist-truefeel-2024",
+    "release_year": 2024,
+    "msrp_usd": 27.99,
+    "msrp_nok": 319,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 60,
+      "cover_material": "TruFlex Ionomer",
+      "dimple_count": 376,
+      "launch_profile": "low",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "TruFeel", "importance_score": 10 }
+    ],
+    "segments": ["soft-feel"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "velocity",
+    "name": "Velocity 2024",
+    "slug": "titleist-velocity-2024",
+    "release_year": 2024,
+    "msrp_usd": 37.99,
+    "msrp_nok": 419,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 65,
+      "cover_material": "NAZ2 Ionomer",
+      "dimple_count": 350,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Velocity", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "tour-speed",
+    "name": "Tour Speed 2024",
+    "slug": "titleist-tour-speed-2024",
+    "release_year": 2024,
+    "msrp_usd": 44.99,
+    "msrp_nok": 499,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 87,
+      "cover_material": "Urethane",
+      "dimple_count": 346,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Tour Speed", "importance_score": 10 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "chrome-tour",
+    "name": "Chrome Tour 2024",
+    "slug": "callaway-chrome-tour-2024",
+    "release_year": 2024,
+    "msrp_usd": 54.99,
+    "msrp_nok": 599,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 75,
+      "cover_material": "Urethane",
+      "dimple_count": 332,
+      "dimple_pattern": "HEX Aerodynamics",
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Callaway swoosh",
+      "logo_text": "CALLAWAY",
+      "alignment_marking": "none",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "CALLAWAY", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Chrome Tour", "importance_score": 10 },
+      { "feature_type": "logo", "feature_value": "Callaway chevron swoosh", "importance_score": 9 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "chrome-tour",
+    "name": "Chrome Tour X 2024",
+    "slug": "callaway-chrome-tour-x-2024",
+    "release_year": 2024,
+    "msrp_usd": 54.99,
+    "msrp_nok": 599,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 90,
+      "cover_material": "Urethane",
+      "dimple_count": 332,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Callaway swoosh",
+      "logo_text": "CALLAWAY",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "CALLAWAY", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Chrome Tour X", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "chrome-soft",
+    "name": "Chrome Soft 2022",
+    "slug": "callaway-chrome-soft-2022",
+    "release_year": 2022,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 75,
+      "cover_material": "Urethane",
+      "dimple_count": 332,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Callaway swoosh",
+      "logo_text": "CALLAWAY",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "CALLAWAY", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Chrome Soft", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "chrome-soft",
+    "name": "Chrome Soft Truvis 2022",
+    "slug": "callaway-chrome-soft-truvis-2022",
+    "release_year": 2022,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 75,
+      "cover_material": "Urethane",
+      "dimple_count": 332,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Callaway swoosh",
+      "logo_text": "CALLAWAY",
+      "special_markings": "Truvis pentagon pattern",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "CALLAWAY", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Chrome Soft", "importance_score": 10 },
+      {
+        "feature_type": "special_marking",
+        "feature_value": "Truvis hexagonal/pentagon pattern",
+        "importance_score": 9
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "chrome-soft-x",
+    "name": "Chrome Soft X 2022",
+    "slug": "callaway-chrome-soft-x-2022",
+    "release_year": 2022,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 90,
+      "cover_material": "Urethane",
+      "dimple_count": 332,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Callaway swoosh",
+      "logo_text": "CALLAWAY",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "CALLAWAY", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Chrome Soft X", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "chrome-soft-x",
+    "name": "Chrome Soft X LS 2022",
+    "slug": "callaway-chrome-soft-x-ls-2022",
+    "release_year": 2022,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 90,
+      "cover_material": "Urethane",
+      "launch_profile": "low",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Callaway swoosh",
+      "logo_text": "CALLAWAY",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "CALLAWAY", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Chrome Soft X LS", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "supersoft",
+    "name": "Supersoft 2023",
+    "slug": "callaway-supersoft-2023",
+    "release_year": 2023,
+    "msrp_usd": 29.99,
+    "msrp_nok": 329,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 38,
+      "cover_material": "Surlyn",
+      "dimple_count": 332,
+      "dimple_pattern": "HEX",
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Callaway swoosh",
+      "logo_text": "CALLAWAY",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "CALLAWAY", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Supersoft", "importance_score": 10 }
+    ],
+    "segments": ["soft-feel"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "supersoft",
+    "name": "Supersoft Yellow 2023",
+    "slug": "callaway-supersoft-yellow-2023",
+    "release_year": 2023,
+    "msrp_usd": 29.99,
+    "msrp_nok": 329,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 38,
+      "cover_material": "Surlyn",
+      "dimple_count": 332,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "yellow",
+      "finish": "glossy",
+      "logo_style": "Callaway swoosh",
+      "logo_text": "CALLAWAY",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "CALLAWAY", "importance_score": 10 },
+      { "feature_type": "color", "feature_value": "yellow", "importance_score": 8 },
+      { "feature_type": "model_text", "feature_value": "Supersoft", "importance_score": 10 }
+    ],
+    "segments": ["soft-feel"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "erc-soft",
+    "name": "ERC Soft 2023",
+    "slug": "callaway-erc-soft-2023",
+    "release_year": 2023,
+    "msrp_usd": 39.99,
+    "msrp_nok": 449,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 60,
+      "cover_material": "Urethane",
+      "dimple_count": 332,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Callaway swoosh",
+      "logo_text": "CALLAWAY",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "CALLAWAY", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "ERC Soft", "importance_score": 10 }
+    ],
+    "segments": ["performance", "soft-feel"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "tp5",
+    "name": "TP5 2024",
+    "slug": "taylormade-tp5-2024",
+    "release_year": 2024,
+    "msrp_usd": 54.99,
+    "msrp_nok": 599,
+    "status": "published",
+    "specs": {
+      "construction_layers": 5,
+      "compression": 85,
+      "cover_material": "Urethane",
+      "core_material": "HFM Speed Core",
+      "dimple_count": 322,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "TaylorMade block",
+      "logo_text": "TaylorMade",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "TP5", "importance_score": 10 },
+      {
+        "feature_type": "logo",
+        "feature_value": "TaylorMade block text logo",
+        "importance_score": 8
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "tp5",
+    "name": "TP5 2022",
+    "slug": "taylormade-tp5-2022",
+    "release_year": 2022,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 5,
+      "compression": 85,
+      "cover_material": "Urethane",
+      "dimple_count": 322,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "TaylorMade block",
+      "logo_text": "TaylorMade",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "TP5", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "tp5x",
+    "name": "TP5x 2024",
+    "slug": "taylormade-tp5x-2024",
+    "release_year": 2024,
+    "msrp_usd": 54.99,
+    "msrp_nok": 599,
+    "status": "published",
+    "specs": {
+      "construction_layers": 5,
+      "compression": 97,
+      "cover_material": "Urethane",
+      "dimple_count": 322,
+      "launch_profile": "high",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "TaylorMade block",
+      "logo_text": "TaylorMade",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "TP5x", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "tp5x",
+    "name": "TP5x 2022",
+    "slug": "taylormade-tp5x-2022",
+    "release_year": 2022,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 5,
+      "compression": 97,
+      "cover_material": "Urethane",
+      "dimple_count": 322,
+      "launch_profile": "high",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "TaylorMade block",
+      "logo_text": "TaylorMade",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "TP5x", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "tour-response",
+    "name": "Tour Response 2024",
+    "slug": "taylormade-tour-response-2024",
+    "release_year": 2024,
+    "msrp_usd": 37.99,
+    "msrp_nok": 419,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 90,
+      "cover_material": "Urethane",
+      "dimple_count": 322,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "TaylorMade block",
+      "logo_text": "TaylorMade",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Tour Response", "importance_score": 10 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "distance-plus",
+    "name": "Distance Plus 2024",
+    "slug": "taylormade-distance-plus-2024",
+    "release_year": 2024,
+    "msrp_usd": 24.99,
+    "msrp_nok": 279,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 77,
+      "cover_material": "Ionomer",
+      "dimple_count": 342,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "TaylorMade block",
+      "logo_text": "TaylorMade",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Distance+", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "soft-response",
+    "name": "Soft Response 2024",
+    "slug": "taylormade-soft-response-2024",
+    "release_year": 2024,
+    "msrp_usd": 27.99,
+    "msrp_nok": 299,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 35,
+      "cover_material": "Ionomer",
+      "dimple_count": 342,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "TaylorMade block",
+      "logo_text": "TaylorMade",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Soft Response", "importance_score": 10 }
+    ],
+    "segments": ["soft-feel"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "z-star",
+    "name": "Z-Star 8 2023",
+    "slug": "srixon-z-star-8-2023",
+    "release_year": 2023,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 88,
+      "cover_material": "Urethane",
+      "dimple_count": 338,
+      "dimple_pattern": "338 Speed Dimple Pattern",
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Srixon block",
+      "logo_text": "SRIXON",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "SRIXON", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Z-Star", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "z-star",
+    "name": "Z-Star 7 2021",
+    "slug": "srixon-z-star-7-2021",
+    "release_year": 2021,
+    "msrp_usd": 47.99,
+    "msrp_nok": 529,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 88,
+      "cover_material": "Urethane",
+      "dimple_count": 338,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Srixon block",
+      "logo_text": "SRIXON",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "SRIXON", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Z-Star", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "z-star-xv",
+    "name": "Z-Star XV 8 2023",
+    "slug": "srixon-z-star-xv-8-2023",
+    "release_year": 2023,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 102,
+      "cover_material": "Urethane",
+      "dimple_count": 338,
+      "launch_profile": "high",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Srixon block",
+      "logo_text": "SRIXON",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "SRIXON", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Z-Star XV", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "z-star-xv",
+    "name": "Z-Star XV 7 2021",
+    "slug": "srixon-z-star-xv-7-2021",
+    "release_year": 2021,
+    "msrp_usd": 47.99,
+    "msrp_nok": 529,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 102,
+      "cover_material": "Urethane",
+      "dimple_count": 338,
+      "launch_profile": "high",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Srixon block",
+      "logo_text": "SRIXON",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "SRIXON", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Z-Star XV", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "q-star-tour",
+    "name": "Q-Star Tour 5 2023",
+    "slug": "srixon-q-star-tour-5-2023",
+    "release_year": 2023,
+    "msrp_usd": 39.99,
+    "msrp_nok": 449,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 72,
+      "cover_material": "Urethane",
+      "dimple_count": 338,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Srixon block",
+      "logo_text": "SRIXON",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "SRIXON", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Q-Star Tour", "importance_score": 10 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "q-star",
+    "name": "Q-Star 6 2023",
+    "slug": "srixon-q-star-6-2023",
+    "release_year": 2023,
+    "msrp_usd": 32.99,
+    "msrp_nok": 369,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 75,
+      "cover_material": "Ionomer",
+      "dimple_count": 338,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Srixon block",
+      "logo_text": "SRIXON",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "SRIXON", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Q-Star", "importance_score": 10 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "soft-feel",
+    "name": "Soft Feel 13 2023",
+    "slug": "srixon-soft-feel-13-2023",
+    "release_year": 2023,
+    "msrp_usd": 24.99,
+    "msrp_nok": 279,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 60,
+      "cover_material": "Ionomer",
+      "dimple_count": 338,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Srixon block",
+      "logo_text": "SRIXON",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "SRIXON", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Soft Feel", "importance_score": 10 }
+    ],
+    "segments": ["soft-feel"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "tour-b-xs",
+    "name": "Tour B XS 2024",
+    "slug": "bridgestone-tour-b-xs-2024",
+    "release_year": 2024,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 80,
+      "cover_material": "Urethane",
+      "core_material": "SlipRes Gradational Core",
+      "dimple_count": 330,
+      "dimple_pattern": "330 Dual Dimple",
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Bridgestone B script",
+      "logo_text": "BRIDGESTONE",
+      "number_color": "red"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "BRIDGESTONE", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Tour B XS", "importance_score": 10 },
+      { "feature_type": "number_color", "feature_value": "red", "importance_score": 4 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "tour-b-xs",
+    "name": "Tour B XS 2022",
+    "slug": "bridgestone-tour-b-xs-2022",
+    "release_year": 2022,
+    "msrp_usd": 47.99,
+    "msrp_nok": 529,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 80,
+      "cover_material": "Urethane",
+      "dimple_count": 330,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Bridgestone B script",
+      "logo_text": "BRIDGESTONE",
+      "number_color": "red"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "BRIDGESTONE", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Tour B XS", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "tour-b-x",
+    "name": "Tour B X 2024",
+    "slug": "bridgestone-tour-b-x-2024",
+    "release_year": 2024,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 92,
+      "cover_material": "Urethane",
+      "dimple_count": 330,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Bridgestone B script",
+      "logo_text": "BRIDGESTONE",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "BRIDGESTONE", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Tour B X", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "tour-b-rx",
+    "name": "Tour B RX 2024",
+    "slug": "bridgestone-tour-b-rx-2024",
+    "release_year": 2024,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 72,
+      "cover_material": "Urethane",
+      "dimple_count": 330,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Bridgestone B script",
+      "logo_text": "BRIDGESTONE",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "BRIDGESTONE", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Tour B RX", "importance_score": 10 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "tour-b-rxs",
+    "name": "Tour B RXS 2024",
+    "slug": "bridgestone-tour-b-rxs-2024",
+    "release_year": 2024,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 60,
+      "cover_material": "Urethane",
+      "dimple_count": 330,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Bridgestone B script",
+      "logo_text": "BRIDGESTONE",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "BRIDGESTONE", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Tour B RXS", "importance_score": 10 }
+    ],
+    "segments": ["performance", "soft-feel"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "e12-speed",
+    "name": "e12 Speed 2021",
+    "slug": "bridgestone-e12-speed-2021",
+    "release_year": 2021,
+    "msrp_usd": 37.99,
+    "msrp_nok": 419,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 78,
+      "cover_material": "Ionomer",
+      "dimple_count": 326,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Bridgestone B script",
+      "logo_text": "BRIDGESTONE",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "BRIDGESTONE", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "e12 Speed", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "e12-soft",
+    "name": "e12 Soft 2021",
+    "slug": "bridgestone-e12-soft-2021",
+    "release_year": 2021,
+    "msrp_usd": 37.99,
+    "msrp_nok": 419,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 55,
+      "cover_material": "Ionomer",
+      "dimple_count": 326,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Bridgestone B script",
+      "logo_text": "BRIDGESTONE",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "BRIDGESTONE", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "e12 Soft", "importance_score": 10 }
+    ],
+    "segments": ["soft-feel"]
+  },
+  {
+    "brand_slug": "vice",
+    "family_slug": "pro-plus",
+    "name": "Vice Pro Plus 2023",
+    "slug": "vice-pro-plus-2023",
+    "release_year": 2023,
+    "msrp_usd": 34.99,
+    "msrp_nok": 379,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 95,
+      "cover_material": "Urethane",
+      "dimple_count": 336,
+      "launch_profile": "high",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Vice script",
+      "logo_text": "Vice",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Vice", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro Plus", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "vice",
+    "family_slug": "pro",
+    "name": "Vice Pro 2023",
+    "slug": "vice-pro-2023",
+    "release_year": 2023,
+    "msrp_usd": 29.99,
+    "msrp_nok": 329,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 85,
+      "cover_material": "Urethane",
+      "dimple_count": 318,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Vice script",
+      "logo_text": "Vice",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Vice", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro", "importance_score": 10 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "vice",
+    "family_slug": "drive",
+    "name": "Vice Drive 2022",
+    "slug": "vice-drive-2022",
+    "release_year": 2022,
+    "msrp_usd": 19.99,
+    "msrp_nok": 219,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 80,
+      "cover_material": "Surlyn",
+      "dimple_count": 318,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Vice script",
+      "logo_text": "Vice",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Vice", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Drive", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "wilson",
+    "family_slug": "staff-model",
+    "name": "Staff Model 2024",
+    "slug": "wilson-staff-model-2024",
+    "release_year": 2024,
+    "msrp_usd": 39.99,
+    "msrp_nok": 449,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 90,
+      "cover_material": "Urethane",
+      "dimple_count": 362,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Wilson W script",
+      "logo_text": "Wilson Staff",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Wilson Staff", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Staff Model", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "wilson",
+    "family_slug": "duo-soft",
+    "name": "Duo Soft 2023",
+    "slug": "wilson-duo-soft-2023",
+    "release_year": 2023,
+    "msrp_usd": 24.99,
+    "msrp_nok": 279,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 29,
+      "cover_material": "Ionomer",
+      "dimple_count": 302,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Wilson W script",
+      "logo_text": "Wilson",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Wilson", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Duo Soft", "importance_score": 10 }
+    ],
+    "segments": ["soft-feel"]
+  },
+  {
+    "brand_slug": "wilson",
+    "family_slug": "duo-optix",
+    "name": "Duo Optix 2022",
+    "slug": "wilson-duo-optix-2022",
+    "release_year": 2022,
+    "msrp_usd": 24.99,
+    "msrp_nok": 279,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 35,
+      "cover_material": "Ionomer",
+      "dimple_count": 302,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "yellow",
+      "finish": "glossy",
+      "logo_style": "Wilson W script",
+      "logo_text": "Wilson",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Wilson", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Duo Optix", "importance_score": 10 },
+      { "feature_type": "color", "feature_value": "yellow/neon", "importance_score": 8 }
+    ],
+    "segments": ["soft-feel"]
+  },
+  {
+    "brand_slug": "volvik",
+    "family_slug": "vivid",
+    "name": "Vivid 2022 White",
+    "slug": "volvik-vivid-2022-white",
+    "release_year": 2022,
+    "msrp_usd": 34.99,
+    "msrp_nok": 389,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 78,
+      "cover_material": "Urethane",
+      "dimple_count": 322,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "matte",
+      "logo_style": "Volvik script",
+      "logo_text": "Volvik",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Volvik", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "VIVID", "importance_score": 10 },
+      { "feature_type": "finish", "feature_value": "matte", "importance_score": 7 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "volvik",
+    "family_slug": "vivid",
+    "name": "Vivid 2022 Yellow",
+    "slug": "volvik-vivid-2022-yellow",
+    "release_year": 2022,
+    "msrp_usd": 34.99,
+    "msrp_nok": 389,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 78,
+      "cover_material": "Urethane",
+      "dimple_count": 322,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "yellow",
+      "finish": "matte",
+      "logo_style": "Volvik script",
+      "logo_text": "Volvik",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Volvik", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "VIVID", "importance_score": 10 },
+      { "feature_type": "color", "feature_value": "matte yellow", "importance_score": 10 },
+      { "feature_type": "finish", "feature_value": "matte", "importance_score": 7 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "volvik",
+    "family_slug": "vivid",
+    "name": "Vivid 2022 Orange",
+    "slug": "volvik-vivid-2022-orange",
+    "release_year": 2022,
+    "msrp_usd": 34.99,
+    "msrp_nok": 389,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 78,
+      "cover_material": "Urethane",
+      "dimple_count": 322,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "orange",
+      "finish": "matte",
+      "logo_style": "Volvik script",
+      "logo_text": "Volvik",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Volvik", "importance_score": 10 },
+      { "feature_type": "color", "feature_value": "matte orange", "importance_score": 10 },
+      { "feature_type": "finish", "feature_value": "matte", "importance_score": 7 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "volvik",
+    "family_slug": "vivid",
+    "name": "Vivid 2022 Pink",
+    "slug": "volvik-vivid-2022-pink",
+    "release_year": 2022,
+    "msrp_usd": 34.99,
+    "msrp_nok": 389,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 78,
+      "cover_material": "Urethane",
+      "dimple_count": 322,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "pink",
+      "finish": "matte",
+      "logo_style": "Volvik script",
+      "logo_text": "Volvik",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Volvik", "importance_score": 10 },
+      { "feature_type": "color", "feature_value": "matte pink", "importance_score": 10 },
+      { "feature_type": "finish", "feature_value": "matte", "importance_score": 7 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "volvik",
+    "family_slug": "chrome-tour",
+    "name": "Chrome Tour 2023",
+    "slug": "volvik-chrome-tour-2023",
+    "release_year": 2023,
+    "msrp_usd": 39.99,
+    "msrp_nok": 449,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 85,
+      "cover_material": "Urethane",
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Volvik script",
+      "logo_text": "Volvik",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Volvik", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Chrome Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "mizuno",
+    "family_slug": "rb-tour",
+    "name": "RB Tour 2023",
+    "slug": "mizuno-rb-tour-2023",
+    "release_year": 2023,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 90,
+      "cover_material": "Urethane",
+      "dimple_count": 360,
+      "dimple_pattern": "C-Dimple",
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Mizuno block",
+      "logo_text": "Mizuno",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Mizuno", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RB Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "mizuno",
+    "family_slug": "rb-tour-x",
+    "name": "RB Tour X 2023",
+    "slug": "mizuno-rb-tour-x-2023",
+    "release_year": 2023,
+    "msrp_usd": 49.99,
+    "msrp_nok": 549,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 100,
+      "cover_material": "Urethane",
+      "dimple_count": 360,
+      "launch_profile": "high",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Mizuno block",
+      "logo_text": "Mizuno",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Mizuno", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RB Tour X", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "mizuno",
+    "family_slug": "rb-566",
+    "name": "RB 566 2023",
+    "slug": "mizuno-rb-566-2023",
+    "release_year": 2023,
+    "msrp_usd": 39.99,
+    "msrp_nok": 449,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 70,
+      "cover_material": "Ionomer",
+      "dimple_count": 566,
+      "dimple_pattern": "Micro C-Dimple",
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Mizuno block",
+      "logo_text": "Mizuno",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Mizuno", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RB 566", "importance_score": 10 },
+      {
+        "feature_type": "dimple_pattern",
+        "feature_value": "566 micro C-dimples",
+        "importance_score": 6
+      }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "20xi",
+    "name": "20XI-X 2015",
+    "slug": "nike-20xi-x-2015",
+    "release_year": 2015,
+    "msrp_usd": 47.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 98,
+      "cover_material": "Urethane",
+      "dimple_count": 348,
+      "launch_profile": "high",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Nike swoosh",
+      "logo_text": "Nike",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "logo", "feature_value": "Nike swoosh", "importance_score": 9 },
+      { "feature_type": "model_text", "feature_value": "20XI", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "20xi",
+    "name": "20XI-S 2015",
+    "slug": "nike-20xi-s-2015",
+    "release_year": 2015,
+    "msrp_usd": 47.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 90,
+      "cover_material": "Urethane",
+      "dimple_count": 348,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Nike swoosh",
+      "logo_text": "Nike",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "logo", "feature_value": "Nike swoosh", "importance_score": 9 },
+      { "feature_type": "model_text", "feature_value": "20XI", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "one-platinum",
+    "name": "RZN Platinum 2016",
+    "slug": "nike-rzn-platinum-2016",
+    "release_year": 2016,
+    "msrp_usd": 47.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 85,
+      "cover_material": "Urethane",
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Nike swoosh",
+      "logo_text": "Nike",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "logo", "feature_value": "Nike swoosh", "importance_score": 9 },
+      { "feature_type": "model_text", "feature_value": "RZN Platinum", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "snell",
+    "family_slug": "mtb-x",
+    "name": "MTB-X 2023",
+    "slug": "snell-mtb-x-2023",
+    "release_year": 2023,
+    "msrp_usd": 37.99,
+    "msrp_nok": 419,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 93,
+      "cover_material": "Urethane",
+      "dimple_count": 360,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Snell script",
+      "logo_text": "Snell",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Snell", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "MTB-X", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "snell",
+    "family_slug": "mtb-black",
+    "name": "MTB Black 2023",
+    "slug": "snell-mtb-black-2023",
+    "release_year": 2023,
+    "msrp_usd": 37.99,
+    "msrp_nok": 419,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 85,
+      "cover_material": "Urethane",
+      "dimple_count": 360,
+      "launch_profile": "low",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Snell script",
+      "logo_text": "Snell",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Snell", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "MTB Black", "importance_score": 10 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "pinnacle",
+    "family_slug": "rush",
+    "name": "Pinnacle Rush 2023",
+    "slug": "pinnacle-rush-2023",
+    "release_year": 2023,
+    "msrp_usd": 19.99,
+    "msrp_nok": 219,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 68,
+      "cover_material": "Ionomer",
+      "dimple_count": 332,
+      "dimple_pattern": "332 tetrahedral",
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Pinnacle block",
+      "logo_text": "Pinnacle",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Pinnacle", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Rush", "importance_score": 10 }
+    ],
+    "segments": ["distance", "value"]
+  },
+  {
+    "brand_slug": "pinnacle",
+    "family_slug": "soft",
+    "name": "Pinnacle Soft 2023",
+    "slug": "pinnacle-soft-2023",
+    "release_year": 2023,
+    "msrp_usd": 19.99,
+    "msrp_nok": 219,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 47,
+      "cover_material": "Ionomer",
+      "dimple_count": 332,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Pinnacle block",
+      "logo_text": "Pinnacle",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Pinnacle", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Soft", "importance_score": 10 }
+    ],
+    "segments": ["soft-feel", "value"]
+  },
+  {
+    "brand_slug": "pinnacle",
+    "family_slug": "gold",
+    "name": "Pinnacle Gold 2022",
+    "slug": "pinnacle-gold-2022",
+    "release_year": 2022,
+    "msrp_usd": 17.99,
+    "msrp_nok": 199,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 90,
+      "cover_material": "Surlyn",
+      "dimple_count": 332,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Pinnacle block",
+      "logo_text": "Pinnacle",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Pinnacle", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Gold", "importance_score": 10 }
+    ],
+    "segments": ["distance", "value"]
+  },
+  {
+    "brand_slug": "top-flite",
+    "family_slug": "gamer",
+    "name": "Top Flite Gamer 2022",
+    "slug": "top-flite-gamer-2022",
+    "release_year": 2022,
+    "msrp_usd": 24.99,
+    "msrp_nok": 279,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 80,
+      "cover_material": "Surlyn",
+      "dimple_count": 392,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Top Flite block",
+      "logo_text": "Top Flite",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Top Flite", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Gamer", "importance_score": 10 }
+    ],
+    "segments": ["value"]
+  },
+  {
+    "brand_slug": "top-flite",
+    "family_slug": "xl",
+    "name": "Top Flite XL 2022",
+    "slug": "top-flite-xl-2022",
+    "release_year": 2022,
+    "msrp_usd": 17.99,
+    "msrp_nok": 199,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 90,
+      "cover_material": "Surlyn",
+      "dimple_count": 392,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Top Flite block",
+      "logo_text": "Top Flite",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Top Flite", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "XL", "importance_score": 10 }
+    ],
+    "segments": ["distance", "value"]
+  },
+  {
+    "brand_slug": "maxfli",
+    "family_slug": "tour",
+    "name": "Maxfli Tour 2023",
+    "slug": "maxfli-tour-2023",
+    "release_year": 2023,
+    "msrp_usd": 29.99,
+    "msrp_nok": 329,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 87,
+      "cover_material": "Urethane",
+      "dimple_count": 336,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Maxfli block",
+      "logo_text": "Maxfli",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Maxfli", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Tour", "importance_score": 10 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "maxfli",
+    "family_slug": "softfli",
+    "name": "Maxfli SoftFli 2023",
+    "slug": "maxfli-softfli-2023",
+    "release_year": 2023,
+    "msrp_usd": 19.99,
+    "msrp_nok": 219,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 35,
+      "cover_material": "Ionomer",
+      "dimple_count": 332,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Maxfli block",
+      "logo_text": "Maxfli",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Maxfli", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "SoftFli", "importance_score": 10 }
+    ],
+    "segments": ["soft-feel", "value"]
+  },
+  {
+    "brand_slug": "oncore",
+    "family_slug": "vero-x1",
+    "name": "Vero X1 2023",
+    "slug": "oncore-vero-x1-2023",
+    "release_year": 2023,
+    "msrp_usd": 34.99,
+    "msrp_nok": 389,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 85,
+      "cover_material": "Urethane",
+      "dimple_count": 338,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "OnCore block",
+      "logo_text": "OnCore",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "OnCore", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Vero X1", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "oncore",
+    "family_slug": "elixr",
+    "name": "ELIXR 2022",
+    "slug": "oncore-elixr-2022",
+    "release_year": 2022,
+    "msrp_usd": 29.99,
+    "msrp_nok": 329,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 75,
+      "cover_material": "Urethane",
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "OnCore block",
+      "logo_text": "OnCore",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "OnCore", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "ELIXR", "importance_score": 10 }
+    ],
+    "segments": ["performance"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "warbird",
+    "name": "Warbird 2023",
+    "slug": "callaway-warbird-2023",
+    "release_year": 2023,
+    "msrp_usd": 24.99,
+    "msrp_nok": 279,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "compression": 78,
+      "cover_material": "Surlyn",
+      "dimple_count": 432,
+      "dimple_pattern": "HEX aerodynamics",
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Callaway swoosh",
+      "logo_text": "CALLAWAY",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "CALLAWAY", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Warbird", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1",
+    "name": "Pro V1x Left Dash 2023",
+    "slug": "titleist-pro-v1x-left-dash-2023",
+    "release_year": 2023,
+    "msrp_usd": 54.99,
+    "msrp_nok": 599,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 97,
+      "cover_material": "Urethane",
+      "dimple_count": 348,
+      "launch_profile": "high",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Titleist script",
+      "logo_text": "Titleist",
+      "alignment_marking": "Left Dash",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      {
+        "feature_type": "model_text",
+        "feature_value": "Pro V1x Left Dash",
+        "importance_score": 10
+      },
+      {
+        "feature_type": "alignment_marking",
+        "feature_value": "Left Dash arrow marking",
+        "importance_score": 9
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "chrome-tour",
+    "name": "Chrome Tour Triple Track 2024",
+    "slug": "callaway-chrome-tour-triple-track-2024",
+    "release_year": 2024,
+    "msrp_usd": 54.99,
+    "msrp_nok": 599,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "compression": 75,
+      "cover_material": "Urethane",
+      "dimple_count": 332,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Callaway swoosh",
+      "logo_text": "CALLAWAY",
+      "alignment_marking": "Triple Track",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "CALLAWAY", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Chrome Tour", "importance_score": 10 },
+      {
+        "feature_type": "alignment_marking",
+        "feature_value": "Triple Track — three parallel blue lines",
+        "importance_score": 10
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "tp5",
+    "name": "TP5 Pix 2024",
+    "slug": "taylormade-tp5-pix-2024",
+    "release_year": 2024,
+    "msrp_usd": 54.99,
+    "msrp_nok": 599,
+    "status": "published",
+    "specs": {
+      "construction_layers": 5,
+      "compression": 85,
+      "cover_material": "Urethane",
+      "dimple_count": 322,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "TaylorMade block",
+      "logo_text": "TaylorMade",
+      "special_markings": "TP5 Pix pattern — geometric visibility graphics"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "TP5 Pix", "importance_score": 10 },
+      {
+        "feature_type": "special_marking",
+        "feature_value": "Pix geometric pattern for alignment and visibility",
+        "importance_score": 8
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "z-star",
+    "name": "Z-Star Divide 2021",
+    "slug": "srixon-z-star-divide-2021",
+    "release_year": 2021,
+    "msrp_usd": 47.99,
+    "msrp_nok": 529,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "compression": 88,
+      "cover_material": "Urethane",
+      "dimple_count": 338,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "primary_color": "white",
+      "finish": "glossy",
+      "logo_style": "Srixon block",
+      "logo_text": "SRIXON",
+      "special_markings": "Divide two-tone hemisphere pattern"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "SRIXON", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Z-Star Divide", "importance_score": 10 },
+      {
+        "feature_type": "special_marking",
+        "feature_value": "Divide two-tone hemisphere print",
+        "importance_score": 9
+      }
+    ],
+    "segments": ["tour-premium"]
+  }
+]

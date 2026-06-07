@@ -1,0 +1,10 @@
+{
+  "extends": "@ballatlas/typescript-config/base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "resolveJsonModule": true
+  },
+  "include": ["scripts/**/*.ts", "imports/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

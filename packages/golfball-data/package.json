@@ -1,0 +1,23 @@
+{
+  "name": "@ballatlas/golfball-data",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Seed data files and import pipeline for BallAtlas. Tooling package — not deployed.",
+  "scripts": {
+    "import": "tsx scripts/import.ts",
+    "validate": "tsx scripts/validate.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ballatlas/database": "workspace:*",
+    "@ballatlas/validators": "workspace:*",
+    "@supabase/supabase-js": "^2.49.4",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@ballatlas/typescript-config": "workspace:*",
+    "@types/node": "^20.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

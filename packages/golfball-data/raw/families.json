@@ -1,0 +1,442 @@
+[
+  {
+    "brand_slug": "titleist",
+    "name": "Pro V1",
+    "slug": "pro-v1",
+    "description": "Titleist flagship 3-piece urethane tour ball. The best-selling premium tour ball worldwide.",
+    "first_release_year": 2000,
+    "status": "published"
+  },
+  {
+    "brand_slug": "titleist",
+    "name": "Pro V1x",
+    "slug": "pro-v1x",
+    "description": "Higher flight and firmer feel variant of the Pro V1. 4-piece construction, 348 dimples.",
+    "first_release_year": 2003,
+    "status": "published"
+  },
+  {
+    "brand_slug": "titleist",
+    "name": "AVX",
+    "slug": "avx",
+    "description": "Lower flight, lower spin, softer feel than Pro V1. 3-piece GRN41 cast thermoset urethane.",
+    "first_release_year": 2018,
+    "status": "published"
+  },
+  {
+    "brand_slug": "titleist",
+    "name": "Tour Soft",
+    "slug": "tour-soft",
+    "description": "Titleist's largest core golf ball for distance and soft feel. 4CE urethane cover.",
+    "first_release_year": 2018,
+    "status": "published"
+  },
+  {
+    "brand_slug": "titleist",
+    "name": "TruFeel",
+    "slug": "truefeel",
+    "description": "Titleist's softest feel golf ball. 2-piece with TruFlex cover technology.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+  {
+    "brand_slug": "titleist",
+    "name": "Velocity",
+    "slug": "velocity",
+    "description": "Fast, high-flying distance ball. 2-piece NaZ2 ionomer cover.",
+    "first_release_year": 2010,
+    "status": "published"
+  },
+  {
+    "brand_slug": "titleist",
+    "name": "Tour Speed",
+    "slug": "tour-speed",
+    "description": "Speed-focused tour ball at a lower price than Pro V1. 3-piece urethane.",
+    "first_release_year": 2020,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "callaway",
+    "name": "Chrome Soft",
+    "slug": "chrome-soft",
+    "description": "Callaway's flagship tour ball. 4-piece with Graphene-infused Dual SoftFast Core and SoftFeel urethane cover.",
+    "first_release_year": 2015,
+    "status": "published"
+  },
+  {
+    "brand_slug": "callaway",
+    "name": "Chrome Soft X",
+    "slug": "chrome-soft-x",
+    "description": "Firmer and higher spinning variant of Chrome Soft, designed for faster swing speeds.",
+    "first_release_year": 2018,
+    "status": "published"
+  },
+  {
+    "brand_slug": "callaway",
+    "name": "Chrome Tour",
+    "slug": "chrome-tour",
+    "description": "Successor to Chrome Soft with Precision Technology for consistent flight.",
+    "first_release_year": 2024,
+    "status": "published"
+  },
+  {
+    "brand_slug": "callaway",
+    "name": "Supersoft",
+    "slug": "supersoft",
+    "description": "Callaway's ultra-low compression distance ball. 2-piece HEX aerodynamics.",
+    "first_release_year": 2014,
+    "status": "published"
+  },
+  {
+    "brand_slug": "callaway",
+    "name": "Warbird",
+    "slug": "warbird",
+    "description": "High-energy core distance ball for maximum length off the driver.",
+    "first_release_year": 2012,
+    "status": "published"
+  },
+  {
+    "brand_slug": "callaway",
+    "name": "ERC Soft",
+    "slug": "erc-soft",
+    "description": "3-piece with GRIP-IT urethane cover designed for mid-speed players.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "taylormade",
+    "name": "TP5",
+    "slug": "tp5",
+    "description": "TaylorMade's flagship 5-layer cast urethane tour ball. Used by Rory McIlroy.",
+    "first_release_year": 2017,
+    "status": "published"
+  },
+  {
+    "brand_slug": "taylormade",
+    "name": "TP5x",
+    "slug": "tp5x",
+    "description": "Higher launching, less spinning variant of TP5. 5-layer construction.",
+    "first_release_year": 2017,
+    "status": "published"
+  },
+  {
+    "brand_slug": "taylormade",
+    "name": "Tour Response",
+    "slug": "tour-response",
+    "description": "3-piece cast urethane ball offering tour performance at a lower price point.",
+    "first_release_year": 2020,
+    "status": "published"
+  },
+  {
+    "brand_slug": "taylormade",
+    "name": "Distance Plus",
+    "slug": "distance-plus",
+    "description": "2-piece ionomer distance ball for maximum yardage.",
+    "first_release_year": 2016,
+    "status": "published"
+  },
+  {
+    "brand_slug": "taylormade",
+    "name": "Soft Response",
+    "slug": "soft-response",
+    "description": "2-piece low compression ball with ultra-soft feel.",
+    "first_release_year": 2021,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "srixon",
+    "name": "Z-Star",
+    "slug": "z-star",
+    "description": "Srixon's flagship 3-piece tour ball with 338 Speed Dimple pattern and 72 Alignment.",
+    "first_release_year": 2003,
+    "status": "published"
+  },
+  {
+    "brand_slug": "srixon",
+    "name": "Z-Star XV",
+    "slug": "z-star-xv",
+    "description": "Higher spin, firmer feel variant of Z-Star. Extra high velocity for faster swingers.",
+    "first_release_year": 2009,
+    "status": "published"
+  },
+  {
+    "brand_slug": "srixon",
+    "name": "Q-Star Tour",
+    "slug": "q-star-tour",
+    "description": "3-piece urethane ball balancing distance and greenside control.",
+    "first_release_year": 2015,
+    "status": "published"
+  },
+  {
+    "brand_slug": "srixon",
+    "name": "Q-Star",
+    "slug": "q-star",
+    "description": "2-piece ionomer ball offering good distance and feel at a mid-tier price.",
+    "first_release_year": 2011,
+    "status": "published"
+  },
+  {
+    "brand_slug": "srixon",
+    "name": "Soft Feel",
+    "slug": "soft-feel",
+    "description": "Srixon's low-compression recreational ball for maximum softness.",
+    "first_release_year": 2002,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "bridgestone",
+    "name": "Tour B XS",
+    "slug": "tour-b-xs",
+    "description": "Bridgestone's premium soft tour ball. Used by Tiger Woods. Reactive urethane cover.",
+    "first_release_year": 2015,
+    "status": "published"
+  },
+  {
+    "brand_slug": "bridgestone",
+    "name": "Tour B X",
+    "slug": "tour-b-x",
+    "description": "Firmer, higher-spinning tour ball for fast swing speeds. 330 Dual Dimple design.",
+    "first_release_year": 2015,
+    "status": "published"
+  },
+  {
+    "brand_slug": "bridgestone",
+    "name": "Tour B RX",
+    "slug": "tour-b-rx",
+    "description": "Designed for moderate swing speeds (under 105 mph). 4-piece gradational core.",
+    "first_release_year": 2015,
+    "status": "published"
+  },
+  {
+    "brand_slug": "bridgestone",
+    "name": "Tour B RXS",
+    "slug": "tour-b-rxs",
+    "description": "Softer Tour B RX for players prioritising feel over distance.",
+    "first_release_year": 2015,
+    "status": "published"
+  },
+  {
+    "brand_slug": "bridgestone",
+    "name": "e12 Speed",
+    "slug": "e12-speed",
+    "description": "3-piece Active Acceleration Mantle for distance. 326 Seamless Golf Dimple.",
+    "first_release_year": 2021,
+    "status": "published"
+  },
+  {
+    "brand_slug": "bridgestone",
+    "name": "e12 Soft",
+    "slug": "e12-soft",
+    "description": "Softer e12 variant with Contact Force Dimple for improved ball contact.",
+    "first_release_year": 2021,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "vice",
+    "name": "Pro Plus",
+    "slug": "pro-plus",
+    "description": "Vice's premium tour ball with 4-piece construction and cast urethane cover.",
+    "first_release_year": 2015,
+    "status": "published"
+  },
+  {
+    "brand_slug": "vice",
+    "name": "Pro",
+    "slug": "pro",
+    "description": "Vice's flagship 3-piece tour ball balancing distance, control, and value.",
+    "first_release_year": 2015,
+    "status": "published"
+  },
+  {
+    "brand_slug": "vice",
+    "name": "Drive",
+    "slug": "drive",
+    "description": "Vice's high-energy 2-piece distance ball.",
+    "first_release_year": 2016,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "wilson",
+    "name": "Staff Model",
+    "slug": "staff-model",
+    "description": "Wilson's premium urethane tour ball with 362 dimple pattern.",
+    "first_release_year": 2018,
+    "status": "published"
+  },
+  {
+    "brand_slug": "wilson",
+    "name": "Duo Soft",
+    "slug": "duo-soft",
+    "description": "Ultra-low compression (29) soft feel ball for the slowest swing speeds.",
+    "first_release_year": 2013,
+    "status": "published"
+  },
+  {
+    "brand_slug": "wilson",
+    "name": "Duo Optix",
+    "slug": "duo-optix",
+    "description": "Coloured variant of Duo Soft for maximum visibility.",
+    "first_release_year": 2020,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "volvik",
+    "name": "Vivid",
+    "slug": "vivid",
+    "description": "Volvik's signature matte-finish coloured ball. 3-piece urethane in multiple vivid colours.",
+    "first_release_year": 2012,
+    "status": "published"
+  },
+  {
+    "brand_slug": "volvik",
+    "name": "Chrome Tour",
+    "slug": "chrome-tour",
+    "description": "Volvik's premium glossy tour ball with nano-coating technology.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "mizuno",
+    "name": "RB Tour",
+    "slug": "rb-tour",
+    "description": "Mizuno's flagship 4-piece urethane tour ball with C-Dimple technology.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+  {
+    "brand_slug": "mizuno",
+    "name": "RB Tour X",
+    "slug": "rb-tour-x",
+    "description": "Firmer, higher spinning RB Tour variant for faster swing players.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+  {
+    "brand_slug": "mizuno",
+    "name": "RB 566",
+    "slug": "rb-566",
+    "description": "Distance ball with 566 micro C-Dimples for maximum aerodynamic efficiency.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "nike",
+    "name": "20XI",
+    "slug": "20xi",
+    "description": "Nike's last premium tour ball before exiting the equipment market. RZN core technology.",
+    "first_release_year": 2012,
+    "last_release_year": 2016,
+    "status": "discontinued"
+  },
+  {
+    "brand_slug": "nike",
+    "name": "One Platinum",
+    "slug": "one-platinum",
+    "description": "Nike's premium 3-piece tour ball from the One family.",
+    "first_release_year": 2004,
+    "last_release_year": 2016,
+    "status": "discontinued"
+  },
+
+  {
+    "brand_slug": "snell",
+    "name": "MTB-X",
+    "slug": "mtb-x",
+    "description": "Snell's premium 3-piece urethane tour ball with ZiO core for high spin players.",
+    "first_release_year": 2016,
+    "status": "published"
+  },
+  {
+    "brand_slug": "snell",
+    "name": "MTB Black",
+    "slug": "mtb-black",
+    "description": "Snell's 3-piece urethane tour ball focused on low spin and maximum distance.",
+    "first_release_year": 2018,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "pinnacle",
+    "name": "Rush",
+    "slug": "rush",
+    "description": "Pinnacle's high-energy distance ball with 332 tetrahedral dimple design.",
+    "first_release_year": 2014,
+    "status": "published"
+  },
+  {
+    "brand_slug": "pinnacle",
+    "name": "Soft",
+    "slug": "soft",
+    "description": "Pinnacle's low compression recreational ball emphasising soft feel.",
+    "first_release_year": 2016,
+    "status": "published"
+  },
+  {
+    "brand_slug": "pinnacle",
+    "name": "Gold",
+    "slug": "gold",
+    "description": "Pinnacle's classic distance ball. One of the best-selling value balls in the US.",
+    "first_release_year": 1998,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "top-flite",
+    "name": "Gamer",
+    "slug": "gamer",
+    "description": "Top Flite's premium offering with 3-piece construction for better players.",
+    "first_release_year": 2010,
+    "status": "published"
+  },
+  {
+    "brand_slug": "top-flite",
+    "name": "XL",
+    "slug": "xl",
+    "description": "Top Flite's classic high-energy distance ball.",
+    "first_release_year": 1995,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "maxfli",
+    "name": "Tour",
+    "slug": "tour",
+    "description": "Maxfli's premium 4-piece urethane tour ball.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+  {
+    "brand_slug": "maxfli",
+    "name": "SoftFli",
+    "slug": "softfli",
+    "description": "Ultra-low compression (35) recreational ball for soft feel.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "oncore",
+    "name": "Vero X1",
+    "slug": "vero-x1",
+    "description": "OnCore's premium 4-piece urethane tour ball with polycarbonate inner core.",
+    "first_release_year": 2017,
+    "status": "published"
+  },
+  {
+    "brand_slug": "oncore",
+    "name": "ELIXR",
+    "slug": "elixr",
+    "description": "OnCore's 3-piece urethane ball for moderate swing speeds.",
+    "first_release_year": 2020,
+    "status": "published"
+  }
+]

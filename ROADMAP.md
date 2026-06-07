@@ -38,27 +38,37 @@ deliverables are shipped to production and the Definition of Done is met.
 
 ---
 
-## Phase 2 — Golf Ball Registry
+## Phase 2 — Data Platform
 
-**Goal:** Search, browse, and view golf ball specifications. The core product.
+**Goal:** Production-grade data foundation. Schema, import pipeline, internal API,
+and admin tooling. The database is the product.
 
 **Deliverables:**
 
-- [ ] Database schema: `golf_balls`, `manufacturers`, `specifications`, `categories`
-- [ ] Supabase RLS policies for all tables
-- [ ] `packages/golf-data`: domain entities, taxonomy, specification models
-- [ ] `packages/validators`: golf ball input schemas
-- [ ] Search page: full-text search with filters (manufacturer, category, year)
-- [ ] Golf ball detail page: specifications, images, metadata
-- [ ] Manufacturer index page
-- [ ] Category/taxonomy browser
-- [ ] Seed dataset: initial golf ball records from research
-- [ ] Image storage: Supabase Storage bucket for ball photos
-- [ ] `next/image` integration with Supabase CDN
+- [x] Database schema: `brands`, `ball_families`, `ball_versions` hierarchy (ADR-004)
+- [x] Database schema: `technical_specs`, `visual_signatures`, `identification_features`
+- [x] Database schema: `segments`, `version_segments`, `sources`, `price_observations`, `images`
+- [x] Supabase RLS policies — all tables
+- [x] Storage buckets: `ball-images` (public), `identification`, `admin-assets`
+- [x] Full-text search indexes (GIN on tsvector) — ADR-005
+- [x] `packages/golf-data`: domain entities, taxonomy, identification + valuation placeholders
+- [x] `packages/validators`: ball, specs, visual, pricing, and import Zod schemas
+- [x] `packages/golfball-data`: import pipeline + curated seed data (~75 versions)
+- [x] `pnpm import:balls` / `pnpm validate:balls` CLI commands
+- [x] Internal API: GET /api/brands, /api/families, /api/balls, /api/balls/[id], /api/search
+- [x] Admin UI: dashboard, brands list, families list, versions list, create forms
+- [x] Documentation: ADR-004, ADR-005, ADR-006, schema ref, RLS matrix, pipeline guide
+- [ ] Seed data expanded to 250–300 versions
+- [ ] Migrations applied and verified in local Supabase
+- [ ] Admin edit flows (edit existing brand/version)
+- [ ] Price observation entry in admin
+- [ ] Image upload in admin
+- [ ] Search + detail pages in public-facing web app
 - [ ] SEO: metadata, OpenGraph, structured data (JSON-LD)
 - [ ] Sitemap generation
+- [ ] Deploy to Vercel preview and smoke-tested
 
-**Research dependencies:** Database schema, golf ball taxonomy, seed dataset
+**See:** `docs/status/phase-2.md` for detailed checklist and run instructions
 
 ---
 

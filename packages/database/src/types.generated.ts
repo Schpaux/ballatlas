@@ -4,6 +4,8 @@
 //
 // This file is tracked in git so CI doesn't need supabase CLI installed.
 // Regenerate whenever the database schema changes.
+//
+// Last manually updated: 2026-06-07 (Phase 2 schema)
 
 export type Json =
   | string
@@ -15,10 +17,486 @@ export type Json =
 
 export type Database = {
   public: {
-    Tables: Record<string, never>
+    Tables: {
+      brands: {
+        Row: {
+          id: string
+          name: string
+          slug: string
+          country: string | null
+          website: string | null
+          logo_url: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          slug: string
+          country?: string | null
+          website?: string | null
+          logo_url?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          slug?: string
+          country?: string | null
+          website?: string | null
+          logo_url?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      ball_families: {
+        Row: {
+          id: string
+          brand_id: string
+          name: string
+          slug: string
+          description: string | null
+          first_release_year: number | null
+          last_release_year: number | null
+          status: Database['public']['Enums']['ball_status']
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          brand_id: string
+          name: string
+          slug: string
+          description?: string | null
+          first_release_year?: number | null
+          last_release_year?: number | null
+          status?: Database['public']['Enums']['ball_status']
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          brand_id?: string
+          name?: string
+          slug?: string
+          description?: string | null
+          first_release_year?: number | null
+          last_release_year?: number | null
+          status?: Database['public']['Enums']['ball_status']
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'ball_families_brand_id_fkey'
+            columns: ['brand_id']
+            isOneToOne: false
+            referencedRelation: 'brands'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      ball_versions: {
+        Row: {
+          id: string
+          family_id: string
+          name: string
+          slug: string
+          release_year: number | null
+          release_date: string | null
+          msrp_usd: number | null
+          msrp_nok: number | null
+          status: Database['public']['Enums']['ball_status']
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          family_id: string
+          name: string
+          slug: string
+          release_year?: number | null
+          release_date?: string | null
+          msrp_usd?: number | null
+          msrp_nok?: number | null
+          status?: Database['public']['Enums']['ball_status']
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          family_id?: string
+          name?: string
+          slug?: string
+          release_year?: number | null
+          release_date?: string | null
+          msrp_usd?: number | null
+          msrp_nok?: number | null
+          status?: Database['public']['Enums']['ball_status']
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'ball_versions_family_id_fkey'
+            columns: ['family_id']
+            isOneToOne: false
+            referencedRelation: 'ball_families'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      technical_specs: {
+        Row: {
+          id: string
+          version_id: string
+          construction_layers: number | null
+          compression: number | null
+          cover_material: string | null
+          core_material: string | null
+          dimple_count: number | null
+          dimple_pattern: string | null
+          launch_profile: Database['public']['Enums']['launch_profile'] | null
+          spin_profile: Database['public']['Enums']['spin_profile'] | null
+          feel_profile: Database['public']['Enums']['feel_profile'] | null
+          notes: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          version_id: string
+          construction_layers?: number | null
+          compression?: number | null
+          cover_material?: string | null
+          core_material?: string | null
+          dimple_count?: number | null
+          dimple_pattern?: string | null
+          launch_profile?: Database['public']['Enums']['launch_profile'] | null
+          spin_profile?: Database['public']['Enums']['spin_profile'] | null
+          feel_profile?: Database['public']['Enums']['feel_profile'] | null
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          version_id?: string
+          construction_layers?: number | null
+          compression?: number | null
+          cover_material?: string | null
+          core_material?: string | null
+          dimple_count?: number | null
+          dimple_pattern?: string | null
+          launch_profile?: Database['public']['Enums']['launch_profile'] | null
+          spin_profile?: Database['public']['Enums']['spin_profile'] | null
+          feel_profile?: Database['public']['Enums']['feel_profile'] | null
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'technical_specs_version_id_fkey'
+            columns: ['version_id']
+            isOneToOne: true
+            referencedRelation: 'ball_versions'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      visual_signatures: {
+        Row: {
+          id: string
+          version_id: string
+          primary_color: string | null
+          finish: Database['public']['Enums']['ball_finish'] | null
+          logo_style: string | null
+          logo_text: string | null
+          alignment_marking: string | null
+          number_style: string | null
+          number_color: string | null
+          special_markings: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          version_id: string
+          primary_color?: string | null
+          finish?: Database['public']['Enums']['ball_finish'] | null
+          logo_style?: string | null
+          logo_text?: string | null
+          alignment_marking?: string | null
+          number_style?: string | null
+          number_color?: string | null
+          special_markings?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          version_id?: string
+          primary_color?: string | null
+          finish?: Database['public']['Enums']['ball_finish'] | null
+          logo_style?: string | null
+          logo_text?: string | null
+          alignment_marking?: string | null
+          number_style?: string | null
+          number_color?: string | null
+          special_markings?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'visual_signatures_version_id_fkey'
+            columns: ['version_id']
+            isOneToOne: true
+            referencedRelation: 'ball_versions'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      identification_features: {
+        Row: {
+          id: string
+          version_id: string
+          feature_type: Database['public']['Enums']['identification_feature_type']
+          feature_value: string
+          importance_score: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          version_id: string
+          feature_type: Database['public']['Enums']['identification_feature_type']
+          feature_value: string
+          importance_score: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          version_id?: string
+          feature_type?: Database['public']['Enums']['identification_feature_type']
+          feature_value?: string
+          importance_score?: number
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'identification_features_version_id_fkey'
+            columns: ['version_id']
+            isOneToOne: false
+            referencedRelation: 'ball_versions'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      images: {
+        Row: {
+          id: string
+          version_id: string
+          image_type: Database['public']['Enums']['image_type']
+          storage_path: string | null
+          source_url: string | null
+          license: string | null
+          width: number | null
+          height: number | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          version_id: string
+          image_type: Database['public']['Enums']['image_type']
+          storage_path?: string | null
+          source_url?: string | null
+          license?: string | null
+          width?: number | null
+          height?: number | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          version_id?: string
+          image_type?: Database['public']['Enums']['image_type']
+          storage_path?: string | null
+          source_url?: string | null
+          license?: string | null
+          width?: number | null
+          height?: number | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'images_version_id_fkey'
+            columns: ['version_id']
+            isOneToOne: false
+            referencedRelation: 'ball_versions'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      segments: {
+        Row: {
+          id: string
+          name: string
+          slug: string
+          description: string | null
+          sort_order: number
+        }
+        Insert: {
+          id?: string
+          name: string
+          slug: string
+          description?: string | null
+          sort_order?: number
+        }
+        Update: {
+          id?: string
+          name?: string
+          slug?: string
+          description?: string | null
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      version_segments: {
+        Row: {
+          version_id: string
+          segment_id: string
+        }
+        Insert: {
+          version_id: string
+          segment_id: string
+        }
+        Update: {
+          version_id?: string
+          segment_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'version_segments_version_id_fkey'
+            columns: ['version_id']
+            isOneToOne: false
+            referencedRelation: 'ball_versions'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'version_segments_segment_id_fkey'
+            columns: ['segment_id']
+            isOneToOne: false
+            referencedRelation: 'segments'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      sources: {
+        Row: {
+          id: string
+          name: string
+          url: string | null
+          source_type: Database['public']['Enums']['source_type']
+          reliability_score: number
+          license_notes: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          url?: string | null
+          source_type: Database['public']['Enums']['source_type']
+          reliability_score?: number
+          license_notes?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          url?: string | null
+          source_type?: Database['public']['Enums']['source_type']
+          reliability_score?: number
+          license_notes?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
+      price_observations: {
+        Row: {
+          id: string
+          version_id: string
+          condition: Database['public']['Enums']['price_condition']
+          market: string
+          currency: string
+          price: number
+          observed_at: string
+          source_id: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          version_id: string
+          condition: Database['public']['Enums']['price_condition']
+          market?: string
+          currency?: string
+          price: number
+          observed_at?: string
+          source_id?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          version_id?: string
+          condition?: Database['public']['Enums']['price_condition']
+          market?: string
+          currency?: string
+          price?: number
+          observed_at?: string
+          source_id?: string | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'price_observations_version_id_fkey'
+            columns: ['version_id']
+            isOneToOne: false
+            referencedRelation: 'ball_versions'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'price_observations_source_id_fkey'
+            columns: ['source_id']
+            isOneToOne: false
+            referencedRelation: 'sources'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+    }
     Views: Record<string, never>
     Functions: Record<string, never>
-    Enums: Record<string, never>
+    Enums: {
+      ball_status: 'draft' | 'published' | 'archived' | 'discontinued'
+      ball_finish: 'glossy' | 'matte' | 'satin'
+      launch_profile: 'low' | 'mid' | 'high'
+      spin_profile: 'low' | 'mid' | 'high'
+      feel_profile: 'soft' | 'medium' | 'firm'
+      image_type: 'hero' | 'logo' | 'alignment' | 'number' | 'side' | 'dimple' | 'packaging'
+      price_condition: 'new' | 'mint' | 'near_mint' | 'good' | 'fair' | 'recycled' | 'lake_ball'
+      source_type: 'manufacturer' | 'retailer' | 'review' | 'community' | 'auction'
+      identification_feature_type:
+        | 'brand_text'
+        | 'model_text'
+        | 'logo'
+        | 'alignment_marking'
+        | 'number_color'
+        | 'finish'
+        | 'color'
+        | 'dimple_pattern'
+        | 'special_marking'
+    }
     CompositeTypes: Record<string, never>
   }
 }
@@ -48,6 +526,52 @@ export type Tables<
         Row: infer R
       }
       ? R
+      : never
+    : never
+
+export type TablesInsert<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema['Tables']
+    | { schema: keyof Database },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[DefaultSchemaTableNameOrOptions['schema']]['Tables']
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
+  ? Database[DefaultSchemaTableNameOrOptions['schema']]['Tables'][TableName] extends {
+      Insert: infer I
+    }
+    ? I
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema['Tables']
+    ? DefaultSchema['Tables'][DefaultSchemaTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
+    : never
+
+export type TablesUpdate<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema['Tables']
+    | { schema: keyof Database },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[DefaultSchemaTableNameOrOptions['schema']]['Tables']
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
+  ? Database[DefaultSchemaTableNameOrOptions['schema']]['Tables'][TableName] extends {
+      Update: infer U
+    }
+    ? U
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema['Tables']
+    ? DefaultSchema['Tables'][DefaultSchemaTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
       : never
     : never
 

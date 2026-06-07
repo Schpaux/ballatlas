@@ -1,0 +1,77 @@
+[
+  {
+    "name": "Titleist",
+    "slug": "titleist",
+    "country": "US",
+    "website": "https://www.titleist.com"
+  },
+  {
+    "name": "Callaway Golf",
+    "slug": "callaway",
+    "country": "US",
+    "website": "https://www.callawaygolf.com"
+  },
+  {
+    "name": "TaylorMade",
+    "slug": "taylormade",
+    "country": "US",
+    "website": "https://www.taylormadegolf.com"
+  },
+  { "name": "Srixon", "slug": "srixon", "country": "JP", "website": "https://www.srixon.com" },
+  {
+    "name": "Bridgestone Golf",
+    "slug": "bridgestone",
+    "country": "JP",
+    "website": "https://www.bridgestonegolf.com"
+  },
+  { "name": "Vice Golf", "slug": "vice", "country": "DE", "website": "https://www.vicegolf.com" },
+  {
+    "name": "Wilson Staff",
+    "slug": "wilson",
+    "country": "US",
+    "website": "https://www.wilson.com"
+  },
+  { "name": "Volvik", "slug": "volvik", "country": "KR", "website": "https://www.volvik.com" },
+  { "name": "Mizuno", "slug": "mizuno", "country": "JP", "website": "https://www.mizuno.com" },
+  { "name": "Nike Golf", "slug": "nike", "country": "US", "website": null },
+  {
+    "name": "Pinnacle",
+    "slug": "pinnacle",
+    "country": "US",
+    "website": "https://www.pinnaclegolf.com"
+  },
+  {
+    "name": "Top Flite",
+    "slug": "top-flite",
+    "country": "US",
+    "website": "https://www.topflite.com"
+  },
+  {
+    "name": "Snell Golf",
+    "slug": "snell",
+    "country": "US",
+    "website": "https://www.snellgolf.com"
+  },
+  { "name": "Maxfli", "slug": "maxfli", "country": "US", "website": "https://www.maxfli.com" },
+  {
+    "name": "OnCore Golf",
+    "slug": "oncore",
+    "country": "US",
+    "website": "https://www.oncoregolf.com"
+  },
+  { "name": "Noodle Golf", "slug": "noodle", "country": "US", "website": null },
+  {
+    "name": "Slazenger",
+    "slug": "slazenger",
+    "country": "GB",
+    "website": "https://www.slazenger.com"
+  },
+  { "name": "Precept", "slug": "precept", "country": "JP", "website": null },
+  {
+    "name": "Dunlop Sports",
+    "slug": "dunlop",
+    "country": "GB",
+    "website": "https://www.dunlopsports.com"
+  },
+  { "name": "Inesis", "slug": "inesis", "country": "FR", "website": "https://www.decathlon.com" }
+]

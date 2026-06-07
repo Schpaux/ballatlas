@@ -41,11 +41,16 @@
 ┌──────────────────────▼──────────────────────────────────────────┐
 │                    SUPABASE BACKEND                              │
 │                                                                  │
-│  PostgreSQL         Auth            Storage                      │
-│  ├── golf_balls     ├── Email/PWD   ├── ball-images              │
-│  ├── manufacturers  ├── OAuth       ├── identification-uploads   │
-│  ├── specifications └── RLS         └── admin-assets             │
-│  ├── valuations                                                  │
+│  PostgreSQL              Auth            Storage                  │
+│  ├── brands              ├── Email/PWD   ├── ball-images          │
+│  ├── ball_families       ├── OAuth       ├── identification-uploads│
+│  ├── ball_versions       └── RLS         └── admin-assets         │
+│  ├── technical_specs                                              │
+│  ├── visual_signatures                                            │
+│  ├── identification_features                                      │
+│  ├── images                                                       │
+│  ├── segments / version_segments                                  │
+│  ├── sources / price_observations                                 │
 │  └── [pgvector Phase 7]                                          │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -101,16 +106,21 @@ use it cleanly. Keep it pure: TypeScript + Zod + `packages/types` only.
 
 ## Data Ownership
 
-| Data Domain         | Owner Package              | Persisted In              |
-| ------------------- | -------------------------- | ------------------------- |
-| Golf ball entities  | `packages/golf-data`       | Supabase `golf_balls`     |
-| Specifications      | `packages/golf-data`       | Supabase `specifications` |
-| Taxonomy/categories | `packages/golf-data`       | Supabase `categories`     |
-| Valuations          | `packages/golf-data`       | Supabase `valuations`     |
-| User accounts       | Supabase Auth              | Supabase `auth.users`     |
-| Ball images         | `apps/web` upload handlers | Supabase Storage          |
-| API keys            | `apps/api` [Phase 6]       | Supabase `api_keys`       |
-| Vector embeddings   | [Phase 7]                  | Supabase pgvector         |
+| Data Domain             | Owner Package              | Persisted In                       |
+| ----------------------- | -------------------------- | ---------------------------------- |
+| Brands                  | `packages/golf-data`       | Supabase `brands`                  |
+| Ball families           | `packages/golf-data`       | Supabase `ball_families`           |
+| Ball versions           | `packages/golf-data`       | Supabase `ball_versions`           |
+| Technical specs         | `packages/golf-data`       | Supabase `technical_specs`         |
+| Visual signatures       | `packages/golf-data`       | Supabase `visual_signatures`       |
+| Identification features | `packages/golf-data`       | Supabase `identification_features` |
+| Market segments         | `packages/golf-data`       | Supabase `segments`                |
+| Price observations      | `packages/golf-data`       | Supabase `price_observations`      |
+| Ball images             | `apps/web` upload handlers | Supabase Storage `ball-images`     |
+| User accounts           | Supabase Auth              | Supabase `auth.users`              |
+| API keys                | `apps/api` [Phase 6]       | Supabase `api_keys`                |
+| Vector embeddings       | [Phase 7]                  | Supabase pgvector                  |
+| Seed / import data      | `packages/golfball-data`   | JSON files in `raw/`               |
 
 ---
 
@@ -122,15 +132,21 @@ Every table has RLS enabled. Policy patterns:
 
 ```sql
 -- Public read for published records
-CREATE POLICY "Public can read published balls"
-  ON golf_balls FOR SELECT
+CREATE POLICY "Public can read published versions"
+  ON ball_versions FOR SELECT
   USING (status = 'published');
 
--- Authenticated write for admins
+-- Public read for brands and families (always visible)
+CREATE POLICY "Public can read brands"
+  ON brands FOR SELECT USING (true);
+
+-- Authenticated write for admins (service role bypasses RLS entirely)
 CREATE POLICY "Admins can write"
-  ON golf_balls FOR ALL
+  ON ball_versions FOR ALL
   USING (auth.jwt() ->> 'role' = 'admin');
 ```
+
+See `docs/database/rls.md` for the full policy matrix.
 
 Never use `SUPABASE_SERVICE_ROLE_KEY` on the client side. Service role bypasses RLS
 and is server-only (Next.js Server Components, Server Actions, Route Handlers).
@@ -316,4 +332,31 @@ CI and local builds share cache artifacts — significantly reduces build times.
 
 ---
 
-_Last updated: 2026-06-07_
+---
+
+## Import Pipeline Architecture
+
+The seed dataset and bulk import tooling live in `packages/golfball-data`:
+
+```
+packages/golfball-data/
+├── raw/              ← Curated JSON source files (brands, families, versions)
+├── processed/        ← Normalized output (generated, gitignored)
+├── imports/          ← Reusable import utilities
+├── exports/          ← Export utilities (future)
+├── schemas/          ← JSON Schema for non-TS consumers
+└── scripts/          ← CLI entry points (import.ts, validate.ts)
+```
+
+Run the import pipeline:
+
+```bash
+pnpm import:balls    # Validate + import all raw data to local Supabase
+pnpm validate:balls  # Validate only, no DB writes
+```
+
+See `docs/imports/pipeline.md` for full pipeline documentation.
+
+---
+
+_Last updated: 2026-06-07 — Phase 2 schema added_

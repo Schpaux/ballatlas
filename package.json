@@ -14,7 +14,9 @@
     "format": "prettier --write \"**/*.{ts,tsx,md,json,css}\" --ignore-path .prettierignore",
     "format:check": "prettier --check \"**/*.{ts,tsx,md,json,css}\" --ignore-path .prettierignore",
     "prepare": "husky",
-    "supabase:types": "supabase gen types typescript --local > packages/database/src/types.generated.ts"
+    "supabase:types": "supabase gen types typescript --local > packages/database/src/types.generated.ts",
+    "import:balls": "tsx packages/golfball-data/scripts/import.ts",
+    "validate:balls": "tsx packages/golfball-data/scripts/validate.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
