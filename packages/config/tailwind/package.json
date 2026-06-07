@@ -1,0 +1,14 @@
+{
+  "name": "@ballatlas/tailwind-config",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "main": "./index.ts",
+  "files": [
+    "index.ts",
+    "package.json"
+  ],
+  "peerDependencies": {
+    "tailwindcss": ">=3.0.0"
+  }
+}

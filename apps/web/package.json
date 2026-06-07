@@ -1,0 +1,43 @@
+{
+  "name": "@ballatlas/web",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf .next"
+  },
+  "dependencies": {
+    "@ballatlas/database": "workspace:*",
+    "@ballatlas/types": "workspace:*",
+    "@ballatlas/ui": "workspace:*",
+    "@ballatlas/validators": "workspace:*",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.49.4",
+    "@t3-oss/env-nextjs": "^0.11.1",
+    "clsx": "^2.1.1",
+    "geist": "^1.3.1",
+    "next": "^15.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.5.5",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@ballatlas/eslint-config": "workspace:*",
+    "@ballatlas/tailwind-config": "workspace:*",
+    "@ballatlas/typescript-config": "workspace:*",
+    "@types/node": "^20.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^15.3.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3"
+  }
+}

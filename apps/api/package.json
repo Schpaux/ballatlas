@@ -1,0 +1,11 @@
+{
+  "name": "@ballatlas/api",
+  "version": "0.0.1",
+  "private": true,
+  "description": "[Phase 6] BallAtlas public API — Hono on Vercel Functions",
+  "scripts": {
+    "dev": "echo 'API app is a Phase 6 deliverable. See docs/roadmap/README.md'",
+    "build": "echo 'API app is a Phase 6 deliverable.'",
+    "type-check": "echo 'No types to check yet.'"
+  }
+}

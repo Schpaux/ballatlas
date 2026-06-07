@@ -1,0 +1,319 @@
+# BallAtlas Architecture
+
+> This document describes the high-level architecture of the BallAtlas platform.
+> For decisions and their rationale, see `docs/decisions/`.
+
+---
+
+## High-Level Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         CLIENT LAYER                             │
+│  Browser (Next.js RSC + Hydration)  │  Mobile [future]          │
+└──────────────────────┬──────────────────────────────────────────┘
+                       │ HTTPS
+┌──────────────────────▼──────────────────────────────────────────┐
+│                      VERCEL EDGE NETWORK                         │
+│  CDN + Fluid Compute + Middleware (auth gates, redirects)        │
+└──────────────────────┬──────────────────────────────────────────┘
+                       │
+┌──────────────────────▼──────────────────────────────────────────┐
+│                     APPLICATIONS                                 │
+│                                                                  │
+│  apps/web (Next.js 15)          apps/api [Phase 6] (Hono)       │
+│  ├── App Router (RSC)           ├── REST API v1                  │
+│  ├── Server Actions             ├── API Key auth                 │
+│  ├── Route Handlers             ├── Rate limiting                │
+│  └── Middleware (auth)          └── OpenAPI spec                 │
+└──────────────────────┬──────────────────────────────────────────┘
+                       │
+┌──────────────────────▼──────────────────────────────────────────┐
+│                    SHARED PACKAGES                               │
+│                                                                  │
+│  packages/golf-data    ← Domain logic (framework-free)          │
+│  packages/database     ← Supabase client + generated types      │
+│  packages/ui           ← Design system (shadcn/ui base)         │
+│  packages/validators   ← Zod schemas                            │
+│  packages/types        ← Pure TypeScript types                  │
+└──────────────────────┬──────────────────────────────────────────┘
+                       │
+┌──────────────────────▼──────────────────────────────────────────┐
+│                    SUPABASE BACKEND                              │
+│                                                                  │
+│  PostgreSQL         Auth            Storage                      │
+│  ├── golf_balls     ├── Email/PWD   ├── ball-images              │
+│  ├── manufacturers  ├── OAuth       ├── identification-uploads   │
+│  ├── specifications └── RLS         └── admin-assets             │
+│  ├── valuations                                                  │
+│  └── [pgvector Phase 7]                                          │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Package Boundaries
+
+### Dependency Rules
+
+```
+apps/web    → packages/golf-data ✅
+apps/web    → packages/database  ✅
+apps/web    → packages/ui        ✅
+apps/web    → packages/validators ✅
+apps/web    → packages/types     ✅
+
+apps/api    → packages/golf-data ✅
+apps/api    → packages/database  ✅
+apps/api    → packages/validators ✅
+apps/api    → packages/types     ✅
+apps/api    → packages/ui        ❌ (API has no UI)
+
+packages/golf-data → packages/types      ✅
+packages/golf-data → packages/validators ✅
+packages/golf-data → packages/database   ❌ (domain must not know about DB client)
+packages/golf-data → packages/ui         ❌ (domain has no UI concerns)
+packages/golf-data → apps/*              ❌ (never depend upward)
+
+packages/database → packages/types      ✅
+packages/database → packages/validators ✅
+packages/database → packages/ui         ❌
+packages/database → packages/golf-data  ❌
+
+packages/ui       → packages/types      ✅
+packages/ui       → packages/validators ✅
+packages/ui       → packages/golf-data  ❌ (UI is generic, not domain-aware)
+```
+
+### Why domain isolation matters
+
+`packages/golf-data` must be consumable by:
+
+- `apps/web` today
+- `apps/api` in Phase 6
+- A future mobile app
+- Server-side scripts and importers
+
+If it depended on React, Next.js, or Supabase client, none of those consumers could
+use it cleanly. Keep it pure: TypeScript + Zod + `packages/types` only.
+
+---
+
+## Data Ownership
+
+| Data Domain         | Owner Package              | Persisted In              |
+| ------------------- | -------------------------- | ------------------------- |
+| Golf ball entities  | `packages/golf-data`       | Supabase `golf_balls`     |
+| Specifications      | `packages/golf-data`       | Supabase `specifications` |
+| Taxonomy/categories | `packages/golf-data`       | Supabase `categories`     |
+| Valuations          | `packages/golf-data`       | Supabase `valuations`     |
+| User accounts       | Supabase Auth              | Supabase `auth.users`     |
+| Ball images         | `apps/web` upload handlers | Supabase Storage          |
+| API keys            | `apps/api` [Phase 6]       | Supabase `api_keys`       |
+| Vector embeddings   | [Phase 7]                  | Supabase pgvector         |
+
+---
+
+## Supabase Architecture
+
+### Row Level Security
+
+Every table has RLS enabled. Policy patterns:
+
+```sql
+-- Public read for published records
+CREATE POLICY "Public can read published balls"
+  ON golf_balls FOR SELECT
+  USING (status = 'published');
+
+-- Authenticated write for admins
+CREATE POLICY "Admins can write"
+  ON golf_balls FOR ALL
+  USING (auth.jwt() ->> 'role' = 'admin');
+```
+
+Never use `SUPABASE_SERVICE_ROLE_KEY` on the client side. Service role bypasses RLS
+and is server-only (Next.js Server Components, Server Actions, Route Handlers).
+
+### Type Generation Pipeline
+
+```bash
+# Run after any migration
+supabase gen types typescript --local > packages/database/src/types.generated.ts
+```
+
+The generated file is gitignored because it is always derived from migrations.
+CI regenerates it as part of the build verification step.
+
+### Storage Buckets (Phase 2+)
+
+| Bucket           | Access      | Purpose                                 |
+| ---------------- | ----------- | --------------------------------------- |
+| `ball-images`    | Public read | Official golf ball product images       |
+| `identification` | Private     | User-uploaded images for identification |
+| `admin-assets`   | Private     | Internal admin uploads                  |
+
+---
+
+## Next.js Application Architecture
+
+### Route Structure (apps/web)
+
+```
+app/
+├── (marketing)/          ← Route group: public marketing pages
+│   ├── page.tsx          ← Homepage
+│   ├── about/page.tsx
+│   └── layout.tsx
+├── (app)/                ← Route group: authenticated app [Phase 2+]
+│   ├── search/page.tsx
+│   ├── balls/
+│   │   └── [slug]/page.tsx
+│   └── layout.tsx
+├── api/                  ← Internal API routes (not the public API)
+│   └── ...route.ts
+├── globals.css
+└── layout.tsx            ← Root layout (fonts, providers)
+```
+
+### Server vs Client Components
+
+```
+Server Components (default):
+  ├── page.tsx files
+  ├── layout.tsx files
+  ├── Data fetching components
+  └── Static display components
+
+Client Components ('use client'):
+  ├── Search input (keyboard interaction)
+  ├── Filter controls (state)
+  ├── Modals and sheets
+  ├── Animated components
+  └── Any component using React hooks
+```
+
+### Data Fetching Pattern
+
+```ts
+// In Server Components — direct Supabase access
+import { createClient } from '@/lib/supabase/server'
+
+export default async function BallPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const supabase = await createClient()
+  const { data } = await supabase.from('golf_balls').select('*').eq('slug', slug).single()
+  // ...
+}
+```
+
+---
+
+## Future AI Architecture (Phase 7)
+
+### Vector Search Pipeline
+
+```
+User query (text)
+    ↓
+Embedding model (OpenAI text-embedding-3-small via Vercel AI SDK)
+    ↓
+pgvector similarity search in Supabase
+    ↓
+Ranked results with metadata
+    ↓
+Optional: LLM reranking + explanation
+```
+
+### AI Package Structure
+
+```
+packages/ai/ [Phase 7]
+├── src/
+│   ├── embeddings.ts     ← Generate and store embeddings
+│   ├── search.ts         ← Semantic search interface
+│   ├── identification.ts ← Image-to-ball matching
+│   └── chat.ts           ← Conversational AI interface
+```
+
+### pgvector Setup (Phase 7)
+
+```sql
+-- Enable extension (run in Supabase SQL editor for production)
+CREATE EXTENSION IF NOT EXISTS vector;
+
+-- Add to golf_balls table
+ALTER TABLE golf_balls ADD COLUMN embedding vector(1536);
+
+-- Create index
+CREATE INDEX ON golf_balls USING ivfflat (embedding vector_cosine_ops);
+```
+
+---
+
+## Future API Architecture (Phase 6)
+
+### API Design Principles
+
+- REST over GraphQL for predictable caching
+- Versioned from day one: `/v1/`
+- API keys scoped by capability (read, write, admin)
+- Rate limiting: 100 req/min free, 1000 req/min paid
+- OpenAPI 3.1 spec generated from route types
+- TypeScript SDK published as `@ballatlas/sdk`
+
+### API Package Boundary
+
+`apps/api` consumes `packages/golf-data` and `packages/database`.
+It does NOT share routes, middleware, or handlers with `apps/web`.
+Both apps share domain logic through packages only.
+
+---
+
+## Security Architecture
+
+### Threat Model
+
+| Threat                     | Mitigation                                        |
+| -------------------------- | ------------------------------------------------- |
+| Unauthorized DB writes     | Supabase RLS on every table                       |
+| Service role key exposure  | Server-only, validated via @t3-oss/env-nextjs     |
+| SQL injection              | Supabase query builder (parameterized)            |
+| XSS                        | React DOM escaping + Content Security Policy      |
+| Dependency vulnerabilities | Trivy scan in CI + weekly schedule                |
+| Credential leaks           | .gitignore + pre-commit hook checking for secrets |
+
+### Content Security Policy (Phase 2)
+
+Will be configured in `apps/web/middleware.ts` as response headers.
+Supabase CDN domain must be allowlisted for images.
+
+---
+
+## Deployment Architecture
+
+### Vercel Project Structure
+
+Two separate Vercel projects (when `apps/api` exists in Phase 6):
+
+| Vercel Project  | Root Directory | Domain              |
+| --------------- | -------------- | ------------------- |
+| `ballatlas-web` | `apps/web`     | `ballatlas.com`     |
+| `ballatlas-api` | `apps/api`     | `api.ballatlas.com` |
+
+### Turborepo Remote Cache
+
+Configured via `TURBO_TOKEN` and `TURBO_TEAM` in Vercel environment variables.
+CI and local builds share cache artifacts — significantly reduces build times.
+
+### Environment Tiers
+
+| Tier       | Supabase                    | Vercel                 | Branch     |
+| ---------- | --------------------------- | ---------------------- | ---------- |
+| Local      | `supabase start` (Docker)   | `vercel dev`           | any        |
+| Preview    | Staging Supabase project    | Auto-deploy PR         | feature/\* |
+| Production | Production Supabase project | `vercel deploy --prod` | main       |
+
+---
+
+_Last updated: 2026-06-07_
