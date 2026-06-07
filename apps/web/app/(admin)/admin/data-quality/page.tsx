@@ -118,7 +118,12 @@ export default async function DataQualityPage() {
     { label: 'Active Observations', value: activeObservations ?? 0, href: '/admin/prices' },
   ]
 
-  const gaps = [
+  const gaps: Array<{
+    label: string
+    versions: GapVersion[]
+    href: Route
+    severity: 'high' | 'medium' | 'low'
+  }> = [
     {
       label: 'Versions Without Approved Images',
       versions: (versionsWithoutImages ?? []) as GapVersion[],
