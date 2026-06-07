@@ -5,7 +5,7 @@ import { z } from 'zod'
 // Add new vars here and to .env.example.
 export const env = createEnv({
   server: {
-    SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
+    SUPABASE_SERVICE_ROLE_KEY: z.string().min(1).optional(),
     NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   },
   client: {
