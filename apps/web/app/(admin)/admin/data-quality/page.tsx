@@ -1,3 +1,4 @@
+import type { Route } from 'next'
 import Link from 'next/link'
 
 import { createClient } from '@/lib/supabase/server'
@@ -106,7 +107,7 @@ export default async function DataQualityPage() {
     ((versionsWithoutImages?.length ?? 0) > 0 ? versionsWithoutImages!.length : 0)
   void imageGapCount
 
-  const stats = [
+  const stats: Array<{ label: string; value: number; href: Route }> = [
     { label: 'Total Versions', value: totalVersions ?? 0, href: '/admin/versions' },
     { label: 'Published', value: publishedVersions ?? 0, href: '/admin/versions' },
     { label: 'Total Brands', value: totalBrands ?? 0, href: '/admin/brands' },
