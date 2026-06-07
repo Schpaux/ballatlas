@@ -1,5 +1,6 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { type NextRequest, NextResponse } from 'next/server'
+
 import type { Database } from '@ballatlas/database'
 
 // Refreshes the Supabase session on each request.

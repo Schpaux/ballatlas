@@ -1,6 +1,7 @@
 'use client'
 
 import { createBrowserClient } from '@supabase/ssr'
+
 import type { Database } from '@ballatlas/database'
 
 // Browser (client-side) Supabase client.
