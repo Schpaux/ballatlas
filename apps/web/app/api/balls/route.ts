@@ -1,7 +1,9 @@
-import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
-import { SearchQuerySchema } from '@ballatlas/validators'
 import { z } from 'zod'
+
+import { SearchQuerySchema } from '@ballatlas/validators'
+
+import { createClient } from '@/lib/supabase/server'
 
 const BallsQuerySchema = SearchQuerySchema.extend({
   brand_id: z.string().uuid().optional(),
@@ -26,7 +28,6 @@ export async function GET(request: Request) {
     q,
     brand_id,
     family_id,
-    segment,
     release_year,
     cover,
     compression_min,

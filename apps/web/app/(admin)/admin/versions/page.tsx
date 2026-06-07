@@ -1,5 +1,6 @@
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+
+import { createClient } from '@/lib/supabase/server'
 
 export default async function VersionsPage({
   searchParams,
@@ -63,7 +64,6 @@ export default async function VersionsPage({
           <tbody>
             {versions?.map((v) => {
               const brandName = v.family?.brand?.name as string | undefined
-              const familyName = v.family?.name as string | undefined
               return (
                 <tr
                   key={v.id}

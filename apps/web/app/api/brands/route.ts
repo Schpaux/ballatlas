@@ -1,6 +1,8 @@
-import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
+
 import { SearchQuerySchema } from '@ballatlas/validators'
+
+import { createClient } from '@/lib/supabase/server'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)

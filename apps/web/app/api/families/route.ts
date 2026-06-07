@@ -1,7 +1,9 @@
-import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
-import { SearchQuerySchema } from '@ballatlas/validators'
 import { z } from 'zod'
+
+import { SearchQuerySchema } from '@ballatlas/validators'
+
+import { createClient } from '@/lib/supabase/server'
 
 const FamilyQuerySchema = SearchQuerySchema.extend({
   brand_id: z.string().uuid().optional(),
