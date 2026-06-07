@@ -46,20 +46,26 @@ export async function createClient(): Promise<SupabaseClient<Database>> {
 export async function createAdminClient(): Promise<SupabaseClient<Database>> {
   const cookieStore = await cookies()
 
-  return createServerClient<Database>(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, {
-    cookies: {
-      getAll() {
-        return cookieStore.getAll()
+  return createServerClient<Database>(
+    env.NEXT_PUBLIC_SUPABASE_URL,
+    env.SUPABASE_SERVICE_ROLE_KEY ?? '',
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll()
+        },
+        setAll(cookiesToSet: { name: string; value: string; options: CookieOptions }[]) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            )
+          } catch {}
+        },
       },
-      setAll(cookiesToSet: { name: string; value: string; options: CookieOptions }[]) {
-        try {
-          cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
-        } catch {}
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
       },
-    },
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  }) as unknown as SupabaseClient<Database>
+    }
+  ) as unknown as SupabaseClient<Database>
 }
