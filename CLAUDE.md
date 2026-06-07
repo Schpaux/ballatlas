@@ -412,15 +412,15 @@ Do not build in these directories until research is complete.
 
 ## Phase Status
 
-| Phase | Name                  | Status         |
-| ----- | --------------------- | -------------- |
-| 1     | Foundation            | ✅ Complete    |
-| 2     | Data Platform         | ✅ Complete    |
-| 3     | Registry Experience   | 🟡 In Progress |
-| 4     | Admin & Import System | ⬜ Not Started |
-| 5     | Image Identification  | ⬜ Not Started |
-| 6     | Public API            | ⬜ Not Started |
-| 7     | AI Intelligence Layer | ⬜ Not Started |
+| Phase | Name                          | Status         |
+| ----- | ----------------------------- | -------------- |
+| 1     | Foundation                    | ✅ Complete    |
+| 2     | Data Platform                 | ✅ Complete    |
+| 3     | Registry Experience           | ✅ Complete    |
+| 4     | Market Data & Data Governance | 🟡 In Progress |
+| 5     | Image Identification          | ⬜ Not Started |
+| 6     | Public API                    | ⬜ Not Started |
+| 7     | AI Intelligence Layer         | ⬜ Not Started |
 
 ---
 
@@ -540,4 +540,52 @@ many-to-many join requires a subquery approach not yet implemented.
 
 ---
 
-_Last updated: 2026-06-07 — Phase 3: Registry Experience (home, search, ball detail, alias search, valuation display)_
+## Phase 4 Key Conventions
+
+### ADR Numbering
+
+ADRs 007 and 008 are taken (Alias System, Valuation Foundation). Phase 4 ADRs are:
+
+- ADR-009: Hosted Supabase Development Strategy
+- ADR-010: Data Acquisition Strategy
+
+### Image Review Workflow
+
+`images.review_status`: `pending → approved | rejected`  
+Only `approved` images are publicly visible (RLS policy on `images` table enforces this).  
+Admin: `/admin/images`
+
+### Price Observations
+
+Append-only. Never update historical rows — insert new observations.  
+Archive stale observations via `is_archived = true`.  
+Every observation must have a `source_id` (no anonymous pricing).  
+Admin: `/admin/prices`
+
+### Valuation Engine
+
+`packages/golf-data/src/valuation/engine.ts` — `computeValuation()`.  
+Returns `{ ok: false, reason }` when no data exists — never fabricates.  
+Confidence score (0.0–1.0) is always included in the output.
+
+### Acquisition Interfaces
+
+Provider interfaces in `packages/golf-data/src/acquisition/`.  
+Phase 4 defines interfaces only — no implementations, no scrapers.
+
+### New Admin Routes
+
+| Route                 | Purpose                                    |
+| --------------------- | ------------------------------------------ |
+| `/admin/images`       | Image upload, categorization, review queue |
+| `/admin/prices`       | Price observation management               |
+| `/admin/data-quality` | Gap analysis and enrichment dashboard      |
+
+### Data Acquisition Principle
+
+**Missing values are acceptable. Fabricated values are not.**  
+See ADR-010 and `docs/acquisition/README.md`.
+
+---
+
+_Last updated: 2026-06-07 — Phase 4: Market Data, Image Acquisition & Data Governance_

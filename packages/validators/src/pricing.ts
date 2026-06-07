@@ -18,6 +18,11 @@ export const PriceObservationSchema = z.object({
   price: z.number().nonnegative(),
   observed_at: z.string().datetime().optional(),
   source_id: z.string().uuid().optional().nullable(),
+  notes: z.string().max(1000).optional().nullable(),
+})
+
+export const ArchivePriceObservationSchema = z.object({
+  id: z.string().uuid(),
 })
 
 export type PriceObservationInput = z.infer<typeof PriceObservationSchema>

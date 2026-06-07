@@ -28,8 +28,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link href="/admin/aliases" className="transition-colors hover:text-neutral-100">
               Aliases
             </Link>
+            <Link href="/admin/images" className="transition-colors hover:text-neutral-100">
+              Images
+            </Link>
+            <Link href="/admin/prices" className="transition-colors hover:text-neutral-100">
+              Prices
+            </Link>
             <Link href="/admin/valuation" className="transition-colors hover:text-neutral-100">
               Valuation
+            </Link>
+            <Link href="/admin/data-quality" className="transition-colors hover:text-neutral-100">
+              Data Quality
             </Link>
           </div>
         </div>

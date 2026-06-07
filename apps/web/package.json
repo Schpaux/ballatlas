@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@ballatlas/database": "workspace:*",
+    "@ballatlas/golf-data": "workspace:*",
     "@ballatlas/types": "workspace:*",
     "@ballatlas/ui": "workspace:*",
     "@ballatlas/validators": "workspace:*",

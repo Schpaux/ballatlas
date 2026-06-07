@@ -34,18 +34,7 @@ async function getBrands() {
 }
 
 async function searchBalls(params: SearchParams) {
-  const {
-    q,
-    brand,
-    // segment filter requires a join subquery — wired in FilterPanel URL but queried separately below
-    segment: _segment,
-    year,
-    cover,
-    compression_min,
-    compression_max,
-    page = '1',
-  } = params
-  void _segment
+  const { q, brand, segment, year, cover, compression_min, compression_max, page = '1' } = params
 
   const pageNum = Math.max(1, parseInt(page, 10) || 1)
   const pageSize = 24
@@ -54,6 +43,21 @@ async function searchBalls(params: SearchParams) {
 
   try {
     const supabase = await createClient()
+
+    // When filtering by segment, collect matching version IDs first via the
+    // version_segments join. This avoids N+1 and works cleanly with pagination.
+    let segmentVersionIds: string[] | null = null
+    if (segment) {
+      const { data: segRows } = await supabase
+        .from('version_segments')
+        .select('version_id, segment:segments!inner(slug)')
+        .eq('segment.slug', segment)
+      segmentVersionIds = segRows?.map((r) => r.version_id) ?? []
+      // If segment exists but has no versions, return empty immediately
+      if (segmentVersionIds.length === 0) {
+        return { balls: [], total: 0, pageNum, pageSize, error: null }
+      }
+    }
 
     // Alias lookup — find version IDs matching the query as an alias
     let aliasVersionIds: string[] = []
@@ -92,6 +96,8 @@ async function searchBalls(params: SearchParams) {
     if (compression_min) query = query.gte('specs.compression', parseInt(compression_min, 10))
     if (compression_max) query = query.lte('specs.compression', parseInt(compression_max, 10))
     if (brand) query = query.eq('family.brand.slug', brand)
+    // Segment filter applied as an IN constraint on pre-collected version IDs
+    if (segmentVersionIds !== null) query = query.in('id', segmentVersionIds)
 
     const { data: ftsBalls, count, error } = await query
     if (error) throw error

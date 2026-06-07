@@ -5,7 +5,7 @@
 // This file is tracked in git so CI doesn't need supabase CLI installed.
 // Regenerate whenever the database schema changes.
 //
-// Last manually updated: 2026-06-07 (Phase 2 schema + alias/valuation tables)
+// Last manually updated: 2026-06-07 (Phase 4 — images review workflow, price observations archive, sources market_type)
 
 export type Json =
   | string
@@ -443,6 +443,12 @@ export type Database = {
           license: string | null
           width: number | null
           height: number | null
+          review_status: Database['public']['Enums']['image_review_status']
+          image_quality_score: number | null
+          attribution: string | null
+          alt_text: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
           created_at: string
         }
         Insert: {
@@ -454,6 +460,12 @@ export type Database = {
           license?: string | null
           width?: number | null
           height?: number | null
+          review_status?: Database['public']['Enums']['image_review_status']
+          image_quality_score?: number | null
+          attribution?: string | null
+          alt_text?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
           created_at?: string
         }
         Update: {
@@ -465,6 +477,12 @@ export type Database = {
           license?: string | null
           width?: number | null
           height?: number | null
+          review_status?: Database['public']['Enums']['image_review_status']
+          image_quality_score?: number | null
+          attribution?: string | null
+          alt_text?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
           created_at?: string
         }
         Relationships: [
@@ -539,6 +557,8 @@ export type Database = {
           source_type: Database['public']['Enums']['source_type']
           reliability_score: number
           license_notes: string | null
+          market_type: Database['public']['Enums']['market_type'] | null
+          is_active: boolean
           created_at: string
         }
         Insert: {
@@ -548,6 +568,8 @@ export type Database = {
           source_type: Database['public']['Enums']['source_type']
           reliability_score?: number
           license_notes?: string | null
+          market_type?: Database['public']['Enums']['market_type'] | null
+          is_active?: boolean
           created_at?: string
         }
         Update: {
@@ -557,6 +579,8 @@ export type Database = {
           source_type?: Database['public']['Enums']['source_type']
           reliability_score?: number
           license_notes?: string | null
+          market_type?: Database['public']['Enums']['market_type'] | null
+          is_active?: boolean
           created_at?: string
         }
         Relationships: []
@@ -571,6 +595,8 @@ export type Database = {
           price: number
           observed_at: string
           source_id: string | null
+          is_archived: boolean
+          notes: string | null
           created_at: string
         }
         Insert: {
@@ -582,6 +608,8 @@ export type Database = {
           price: number
           observed_at?: string
           source_id?: string | null
+          is_archived?: boolean
+          notes?: string | null
           created_at?: string
         }
         Update: {
@@ -593,6 +621,8 @@ export type Database = {
           price?: number
           observed_at?: string
           source_id?: string | null
+          is_archived?: boolean
+          notes?: string | null
           created_at?: string
         }
         Relationships: [
@@ -628,6 +658,8 @@ export type Database = {
       spin_profile: 'low' | 'mid' | 'high'
       feel_profile: 'soft' | 'medium' | 'firm'
       image_type: 'hero' | 'logo' | 'alignment' | 'number' | 'side' | 'dimple' | 'packaging'
+      image_review_status: 'pending' | 'approved' | 'rejected'
+      market_type: 'retail' | 'used' | 'recycled' | 'auction' | 'marketplace' | 'reference'
       price_condition: 'new' | 'mint' | 'near_mint' | 'good' | 'fair' | 'recycled' | 'lake_ball'
       source_type: 'manufacturer' | 'retailer' | 'review' | 'community' | 'auction'
       identification_feature_type:

@@ -70,6 +70,27 @@ export default async function AdminDashboard() {
           <div className="font-medium">+ New Version</div>
           <div className="mt-1 text-sm text-neutral-500">Add a specific ball release year</div>
         </Link>
+        <Link
+          href="/admin/images?status=pending"
+          className="rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-colors hover:border-neutral-600"
+        >
+          <div className="font-medium">Image Review Queue</div>
+          <div className="mt-1 text-sm text-neutral-500">Approve or reject pending images</div>
+        </Link>
+        <Link
+          href="/admin/prices"
+          className="rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-colors hover:border-neutral-600"
+        >
+          <div className="font-medium">Price Observations</div>
+          <div className="mt-1 text-sm text-neutral-500">Manage market pricing data</div>
+        </Link>
+        <Link
+          href="/admin/data-quality"
+          className="rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-colors hover:border-neutral-600"
+        >
+          <div className="font-medium">Data Quality</div>
+          <div className="mt-1 text-sm text-neutral-500">Gap analysis and enrichment targets</div>
+        </Link>
       </div>
     </div>
   )

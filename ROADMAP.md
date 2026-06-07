@@ -100,21 +100,34 @@ Phase 3 builds the display layer on top of it, not new schema.
 
 ---
 
-## Phase 4 — Admin & Import System
+## Phase 4 — Market Data, Image Acquisition & Data Governance
 
-**Goal:** Internal tooling for data management and bulk imports.
+**Goal:** Transform BallAtlas from a registry into a continuously improving golf ball
+intelligence platform. Build data acquisition workflows, valuation engine, and quality
+dashboards. The BallAtlas competitive advantage is data quality — this phase builds
+the infrastructure to grow it.
 
 **Deliverables:**
 
-- [ ] Admin authentication (Supabase RLS + role-based access)
-- [ ] Admin dashboard: overview metrics
-- [ ] Golf ball CRUD interface
-- [ ] Bulk CSV/JSON import pipeline
-- [ ] Image upload and management
-- [ ] Manufacturer management
-- [ ] Data quality validation interface
-- [ ] Audit log for all admin actions
-- [ ] Supabase Edge Function for async import processing
+- [x] ADR-009: Hosted Supabase Development Strategy
+- [x] ADR-010: Data Acquisition Strategy
+- [x] Schema: `images` extended (review_status, image_quality_score, attribution, alt_text)
+- [x] Schema: `price_observations` extended (is_archived, notes)
+- [x] Schema: `sources` extended (market_type enum, is_active)
+- [x] Image upload admin (`/admin/images`) — upload file or URL, categorize, review workflow
+- [x] Image review queue — Pending / Approved / Rejected tabs
+- [x] Price observation admin (`/admin/prices`) — create, archive, filter
+- [x] Source tracking — every observation requires a registered source
+- [x] Valuation Engine v1 (`packages/golf-data/src/valuation/engine.ts`)
+- [x] Confidence scoring — honest uncertainty, never fabricates values
+- [x] Data quality dashboard (`/admin/data-quality`) — coverage bars + gap tables
+- [x] Acquisition readiness interfaces (`packages/golf-data/src/acquisition/`)
+- [x] Segment filter fix in search page
+- [x] Documentation: images, pricing, valuation, data-quality, acquisition
+- [ ] Admin authentication (protect `/admin` before production)
+- [ ] Valuation Engine wired into `/balls/[slug]` ValuationCard
+- [ ] `/admin/sources` management UI
+- [ ] Sitemap generation (carried from Phase 3)
 
 ---
 
