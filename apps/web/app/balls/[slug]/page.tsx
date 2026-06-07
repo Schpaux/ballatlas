@@ -103,7 +103,7 @@ async function getBall(slug: string): Promise<BallDetail | null> {
         )
         `
       )
-      .or(`id.eq.${slug},slug.eq.${slug}`)
+      .eq('slug', slug)
       .in('status', ['published', 'discontinued'])
       .single()
 
