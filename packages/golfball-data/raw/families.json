@@ -438,5 +438,195 @@
     "description": "OnCore's 3-piece urethane ball for moderate swing speeds.",
     "first_release_year": 2020,
     "status": "published"
+  },
+  {
+    "brand_slug": "oncore",
+    "name": "Avant",
+    "slug": "avant",
+    "description": "OnCore's 3-piece urethane ball designed for mid-speed players seeking tour-level short game performance.",
+    "first_release_year": 2022,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "srixon",
+    "name": "AD333",
+    "slug": "ad333",
+    "description": "Srixon's mid-tier 2-piece ball popular in Europe, offering distance and durability.",
+    "first_release_year": 2011,
+    "status": "published"
+  },
+  {
+    "brand_slug": "srixon",
+    "name": "AD333 Tour",
+    "slug": "ad333-tour",
+    "description": "Srixon's 3-piece urethane version of the AD333, adding greenside spin at a performance price.",
+    "first_release_year": 2015,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "bridgestone",
+    "name": "e6",
+    "slug": "e6",
+    "description": "Bridgestone's straight-distance ball designed for golfers with moderate swing speed and off-centre hits.",
+    "first_release_year": 2006,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "vice",
+    "name": "Vice Tour",
+    "slug": "tour",
+    "description": "Vice Golf's premium 4-piece cast urethane tour ball offering maximum greenside control.",
+    "first_release_year": 2018,
+    "status": "published"
+  },
+  {
+    "brand_slug": "vice",
+    "name": "Vice Soft",
+    "slug": "soft",
+    "description": "Vice's 2-piece low-compression ball for players seeking a softer feel at a direct-to-consumer price.",
+    "first_release_year": 2017,
+    "status": "published"
+  },
+  {
+    "brand_slug": "vice",
+    "name": "Vice Speed",
+    "slug": "speed",
+    "description": "Vice's 2-piece distance ball optimised for maximum ball speed off the driver.",
+    "first_release_year": 2016,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "wilson",
+    "name": "Staff Model R",
+    "slug": "staff-model-r",
+    "description": "Wilson's 4-piece tour ball tuned for mid-spin with enhanced greenside control. The softer, lower-spinning sibling of Staff Model.",
+    "first_release_year": 2021,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "noodle",
+    "name": "Noodle Easy Distance",
+    "slug": "easy-distance",
+    "description": "TaylorMade's Noodle entry-level distance ball offering consistent flight for beginner to mid-handicap players.",
+    "first_release_year": 2010,
+    "status": "published"
+  },
+  {
+    "brand_slug": "noodle",
+    "name": "Noodle Long & Soft",
+    "slug": "long-and-soft",
+    "description": "Noodle's ultra-soft distance ball combining maximum length with a noticeably soft feel.",
+    "first_release_year": 2012,
+    "status": "published"
+  },
+  {
+    "brand_slug": "noodle",
+    "name": "Noodle Ice",
+    "slug": "noodle-ice",
+    "description": "Cold-weather optimised Noodle designed to maintain performance in low-temperature conditions.",
+    "first_release_year": 2018,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "top-flite",
+    "name": "D2",
+    "slug": "d2",
+    "description": "Top Flite's dedicated distance ball with 2-piece construction for maximum straight distance.",
+    "first_release_year": 2016,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "maxfli",
+    "name": "Tour X",
+    "slug": "tour-x",
+    "description": "Maxfli's hardest-spinning 4-piece urethane ball for faster swing speeds demanding high spin.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "snell",
+    "name": "Get Sum",
+    "slug": "get-sum",
+    "description": "Snell's value-tier 2-piece ball offering solid performance at a budget-friendly direct-to-consumer price.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "inesis",
+    "name": "Tour 900",
+    "slug": "tour-900",
+    "description": "Inesis (Decathlon) premium tour ball with urethane cover, engineered for experienced golfers.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+  {
+    "brand_slug": "inesis",
+    "name": "Distance 500",
+    "slug": "distance-500",
+    "description": "Inesis mid-range 2-piece distance ball for regular golfers seeking extra length.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+  {
+    "brand_slug": "inesis",
+    "name": "Soft 500",
+    "slug": "soft-500",
+    "description": "Inesis low-compression soft-feel ball for players prioritising a comfortable sensation at impact.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "taylormade",
+    "name": "Speedsoft",
+    "slug": "speedsoft",
+    "description": "TaylorMade's entry-level urethane ball offering a soft feel at an accessible price, bridging the gap between recreational and performance categories.",
+    "first_release_year": 2023,
+    "status": "published"
+  },
+  {
+    "brand_slug": "kirkland",
+    "name": "Signature",
+    "slug": "signature",
+    "description": "Costco Kirkland Signature golf ball offering tour-level performance at a dramatically lower price point. Famous for disrupting the premium ball market.",
+    "first_release_year": 2016,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "dunlop",
+    "name": "DDH Tour One",
+    "slug": "ddh",
+    "description": "Dunlop's premium 3-piece urethane tour ball for the Japanese and Asian markets.",
+    "first_release_year": 2014,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "slazenger",
+    "name": "Raw Distance",
+    "slug": "raw-distance",
+    "description": "Slazenger's 2-piece distance ball for everyday recreational golfers.",
+    "first_release_year": 2015,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "precept",
+    "name": "Laddie Extreme",
+    "slug": "laddie-extreme",
+    "description": "Precept's budget-friendly 2-piece distance ball, popular as a pond ball. Precept was absorbed by Bridgestone.",
+    "first_release_year": 2008,
+    "last_release_year": 2016,
+    "status": "discontinued"
   }
 ]

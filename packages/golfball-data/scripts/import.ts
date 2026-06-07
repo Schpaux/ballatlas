@@ -25,6 +25,7 @@ import {
   RawBrandsFileSchema,
   RawFamiliesFileSchema,
   RawVersionsFileSchema,
+  RawAliasesFileSchema,
 } from '@ballatlas/validators'
 
 import { createImportClient } from '../imports/client'
@@ -63,9 +64,10 @@ async function main() {
   const brands = loadAndValidate('brands.json', RawBrandsFileSchema)
   const families = loadAndValidate('families.json', RawFamiliesFileSchema)
   const versions = loadAndValidate('versions.json', RawVersionsFileSchema)
+  const aliases = loadAndValidate('aliases.json', RawAliasesFileSchema)
 
   console.log(
-    `Loaded: ${brands.length} brands, ${families.length} families, ${versions.length} versions`
+    `Loaded: ${brands.length} brands, ${families.length} families, ${versions.length} versions, ${aliases.length} aliases`
   )
 
   if (DRY_RUN) {
@@ -197,8 +199,42 @@ async function main() {
   }
   printCounter('Versions', versionCounter)
 
+  // ─── Phase 4: Upsert aliases ─────────────────────────────────────────────────
+  console.log('\nImporting aliases...')
+  const aliasCounter = makeCounter()
+
+  // Build a slug → version_id lookup from what we imported
+  const versionIdBySlug = new Map<string, string>()
+  for (const raw of versions) {
+    const { data } = await db.from('ball_versions').select('id, slug').eq('slug', raw.slug).single()
+    if (data) versionIdBySlug.set(data.slug, data.id)
+  }
+
+  for (const raw of aliases) {
+    const versionId = versionIdBySlug.get(raw.version_slug)
+    if (!versionId) {
+      console.error(`  ✗ Alias "${raw.alias}": version_slug "${raw.version_slug}" not found`)
+      aliasCounter.failed++
+      continue
+    }
+    const { error } = await db
+      .from('ball_aliases')
+      .upsert(
+        { version_id: versionId, alias: raw.alias, alias_type: raw.alias_type },
+        { onConflict: 'version_id,alias', ignoreDuplicates: true }
+      )
+    if (error) {
+      console.error(`  ✗ Alias "${raw.alias}": ${error.message}`)
+      aliasCounter.failed++
+    } else {
+      aliasCounter.inserted++
+    }
+  }
+  printCounter('Aliases', aliasCounter)
+
   // ─── Summary ─────────────────────────────────────────────────────────────────
-  const totalFailed = brandCounter.failed + familyCounter.failed + versionCounter.failed
+  const totalFailed =
+    brandCounter.failed + familyCounter.failed + versionCounter.failed + aliasCounter.failed
   console.log('\n' + '─'.repeat(50))
   if (totalFailed === 0) {
     console.log('✓ Import complete — no errors.\n')

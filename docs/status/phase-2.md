@@ -24,6 +24,8 @@
 - [x] `price_observations` table (`20260607000012`)
 - [x] RLS policies — all tables (`20260607000013`)
 - [x] Storage buckets: ball-images, identification, admin-assets (`20260607000014`)
+- [x] `ball_aliases` table with `alias_type_enum` (`20260607000015`)
+- [x] `valuation_profiles`, `condition_multipliers`, `valuation_rules` tables (`20260607000016`)
 - [ ] Migrations applied to local Supabase (requires: `supabase start` + Docker)
 - [ ] Migrations applied to production Supabase project
 - [ ] TypeScript types regenerated from live schema (`pnpm supabase:types`)
@@ -38,12 +40,15 @@
 - [x] `packages/validators`: Specs schemas
 - [x] `packages/validators`: Visual + identification feature schemas
 - [x] `packages/validators`: Pricing schemas
-- [x] `packages/validators`: Import schemas (raw JSON formats)
+- [x] `packages/validators`: Import schemas (raw JSON formats, incl. `RawAliasSchema`)
+- [x] `packages/validators`: Alias schemas (`AliasTypeSchema`, `BallAliasSchema`, `CreateBallAliasSchema`)
+- [x] `packages/validators`: Valuation schemas (`ValuationProfileSchema`, `ConditionMultiplierSchema`, `ValuationRuleSchema`)
 - [x] `packages/golfball-data`: Package scaffolded (tooling, not deployed)
 - [x] `packages/golfball-data`: Seed data — brands (~20 brands)
-- [x] `packages/golfball-data`: Seed data — families (~53 families)
-- [x] `packages/golfball-data`: Seed data — versions (~75 curated versions)
-- [ ] Seed data — expand to 250–300 versions
+- [x] `packages/golfball-data`: Seed data — families (75 families)
+- [x] `packages/golfball-data`: Seed data — versions (250 versions, 20+ brands)
+- [x] `packages/golfball-data`: Seed data — aliases (51 aliases, key ball lines)
+- [x] `pnpm dataset:report` — offline stats + quality check script
 
 ### Import Pipeline
 
@@ -72,7 +77,11 @@
 - [x] `/admin/families` — families list
 - [x] `/admin/versions` — versions list with pagination
 - [x] `/admin/versions/new` — create version form (Server Action)
-- [ ] Edit existing brand/version
+- [x] `/admin/brands/[id]/edit` — edit brand form
+- [x] `/admin/families/[id]/edit` — edit family form
+- [x] `/admin/versions/[id]/edit` — edit version form
+- [x] `/admin/aliases` — alias management (create, delete, search, paginate)
+- [x] `/admin/valuation` — valuation profile + multiplier + rule management
 - [ ] Price observation entry form
 - [ ] Image upload interface
 
@@ -81,6 +90,8 @@
 - [x] ADR-004: Database schema hierarchy
 - [x] ADR-005: Full-text search strategy
 - [x] ADR-006: Import pipeline design
+- [x] ADR-007: Alias system design
+- [x] ADR-008: Valuation foundation design
 - [x] `docs/database/schema.md` — full schema reference
 - [x] `docs/database/rls.md` — RLS policy matrix
 - [x] `docs/imports/pipeline.md` — import pipeline guide

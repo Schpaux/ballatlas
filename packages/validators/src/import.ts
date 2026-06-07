@@ -46,10 +46,21 @@ export const RawVersionSchema = z.object({
   segments: z.array(SlugSchema).optional().default([]),
 })
 
+// Raw alias shape — uses version_slug instead of UUID for human-authored JSON
+export const RawAliasSchema = z.object({
+  version_slug: SlugSchema,
+  alias: z.string().min(1).max(200),
+  alias_type: z
+    .enum(['common_name', 'abbreviation', 'misspelling', 'regional_name', 'generation_tag'])
+    .default('common_name'),
+})
+
 export const RawBrandsFileSchema = z.array(RawBrandSchema)
 export const RawFamiliesFileSchema = z.array(RawFamilySchema)
 export const RawVersionsFileSchema = z.array(RawVersionSchema)
+export const RawAliasesFileSchema = z.array(RawAliasSchema)
 
 export type RawBrand = z.infer<typeof RawBrandSchema>
 export type RawFamily = z.infer<typeof RawFamilySchema>
 export type RawVersion = z.infer<typeof RawVersionSchema>
+export type RawAlias = z.infer<typeof RawAliasSchema>

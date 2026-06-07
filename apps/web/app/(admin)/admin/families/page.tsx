@@ -1,5 +1,6 @@
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+
+import { createClient } from '@/lib/supabase/server'
 
 export default async function FamiliesPage() {
   const supabase = await createClient()
@@ -30,6 +31,7 @@ export default async function FamiliesPage() {
               <th className="px-4 py-3 text-left font-normal text-neutral-400">Family</th>
               <th className="px-4 py-3 text-left font-normal text-neutral-400">Years</th>
               <th className="px-4 py-3 text-left font-normal text-neutral-400">Status</th>
+              <th className="px-4 py-3 text-left font-normal text-neutral-400"></th>
             </tr>
           </thead>
           <tbody>
@@ -39,7 +41,6 @@ export default async function FamiliesPage() {
                 className="border-b border-neutral-800 last:border-0 hover:bg-neutral-900/50"
               >
                 <td className="px-4 py-3 text-neutral-400">
-                  {/* @ts-expect-error — Supabase join type is object | null */}
                   {(family.brand as { name: string } | null)?.name ?? '—'}
                 </td>
                 <td className="px-4 py-3 font-medium">{family.name}</td>
@@ -58,6 +59,14 @@ export default async function FamiliesPage() {
                   >
                     {family.status}
                   </span>
+                </td>
+                <td className="px-4 py-3 text-right">
+                  <Link
+                    href={`/admin/families/${family.id}/edit`}
+                    className="text-xs text-neutral-500 hover:text-neutral-200"
+                  >
+                    Edit
+                  </Link>
                 </td>
               </tr>
             ))}

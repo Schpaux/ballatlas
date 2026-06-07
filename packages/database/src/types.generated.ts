@@ -5,7 +5,7 @@
 // This file is tracked in git so CI doesn't need supabase CLI installed.
 // Regenerate whenever the database schema changes.
 //
-// Last manually updated: 2026-06-07 (Phase 2 schema)
+// Last manually updated: 2026-06-07 (Phase 2 schema + alias/valuation tables)
 
 export type Json =
   | string
@@ -144,6 +144,144 @@ export type Database = {
             columns: ['family_id']
             isOneToOne: false
             referencedRelation: 'ball_families'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      ball_aliases: {
+        Row: {
+          id: string
+          version_id: string
+          alias: string
+          alias_type: Database['public']['Enums']['alias_type_enum']
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          version_id: string
+          alias: string
+          alias_type?: Database['public']['Enums']['alias_type_enum']
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          version_id?: string
+          alias?: string
+          alias_type?: Database['public']['Enums']['alias_type_enum']
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'ball_aliases_version_id_fkey'
+            columns: ['version_id']
+            isOneToOne: false
+            referencedRelation: 'ball_versions'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      condition_multipliers: {
+        Row: {
+          id: string
+          profile_id: string
+          condition: string
+          multiplier: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          profile_id: string
+          condition: string
+          multiplier: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          profile_id?: string
+          condition?: string
+          multiplier?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'condition_multipliers_profile_id_fkey'
+            columns: ['profile_id']
+            isOneToOne: false
+            referencedRelation: 'valuation_profiles'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      valuation_profiles: {
+        Row: {
+          id: string
+          segment: string
+          description: string | null
+          is_active: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          segment: string
+          description?: string | null
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          segment?: string
+          description?: string | null
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      valuation_rules: {
+        Row: {
+          id: string
+          profile_id: string
+          age_adjustment: number
+          demand_adjustment: number
+          availability_adjustment: number
+          notes: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          profile_id: string
+          age_adjustment?: number
+          demand_adjustment?: number
+          availability_adjustment?: number
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          profile_id?: string
+          age_adjustment?: number
+          demand_adjustment?: number
+          availability_adjustment?: number
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'valuation_rules_profile_id_fkey'
+            columns: ['profile_id']
+            isOneToOne: false
+            referencedRelation: 'valuation_profiles'
             referencedColumns: ['id']
           },
         ]
@@ -478,6 +616,12 @@ export type Database = {
     Views: Record<string, never>
     Functions: Record<string, never>
     Enums: {
+      alias_type_enum:
+        | 'common_name'
+        | 'abbreviation'
+        | 'misspelling'
+        | 'regional_name'
+        | 'generation_tag'
       ball_status: 'draft' | 'published' | 'archived' | 'discontinued'
       ball_finish: 'glossy' | 'matte' | 'satin'
       launch_profile: 'low' | 'mid' | 'high'

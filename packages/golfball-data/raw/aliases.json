@@ -1,0 +1,143 @@
+[
+  { "version_slug": "titleist-pro-v1-2025", "alias": "Pro V1", "alias_type": "common_name" },
+  { "version_slug": "titleist-pro-v1-2025", "alias": "ProV1", "alias_type": "abbreviation" },
+  { "version_slug": "titleist-pro-v1-2025", "alias": "PV1", "alias_type": "abbreviation" },
+  {
+    "version_slug": "titleist-pro-v1-2025",
+    "alias": "Titleist Pro V1",
+    "alias_type": "common_name"
+  },
+  {
+    "version_slug": "titleist-pro-v1-2025",
+    "alias": "Pro V1 2025",
+    "alias_type": "generation_tag"
+  },
+
+  {
+    "version_slug": "titleist-pro-v1-2023",
+    "alias": "Pro V1 2023",
+    "alias_type": "generation_tag"
+  },
+  {
+    "version_slug": "titleist-pro-v1-2021",
+    "alias": "Pro V1 2021",
+    "alias_type": "generation_tag"
+  },
+
+  { "version_slug": "titleist-pro-v1x-2025", "alias": "Pro V1x", "alias_type": "common_name" },
+  { "version_slug": "titleist-pro-v1x-2025", "alias": "ProV1x", "alias_type": "abbreviation" },
+  { "version_slug": "titleist-pro-v1x-2025", "alias": "PV1x", "alias_type": "abbreviation" },
+  {
+    "version_slug": "titleist-pro-v1x-2025",
+    "alias": "Titleist Pro V1x",
+    "alias_type": "common_name"
+  },
+  {
+    "version_slug": "titleist-pro-v1x-left-dash-2025",
+    "alias": "Left Dash",
+    "alias_type": "abbreviation"
+  },
+  {
+    "version_slug": "titleist-pro-v1x-left-dash-2025",
+    "alias": "Pro V1x Left Dash",
+    "alias_type": "common_name"
+  },
+  {
+    "version_slug": "titleist-pro-v1x-left-dash-2025",
+    "alias": "Left Dash 2025",
+    "alias_type": "generation_tag"
+  },
+
+  { "version_slug": "titleist-avx-2024", "alias": "AVX", "alias_type": "common_name" },
+  { "version_slug": "titleist-avx-2024", "alias": "Titleist AVX", "alias_type": "common_name" },
+
+  {
+    "version_slug": "callaway-chrome-soft-2024",
+    "alias": "Chrome Soft",
+    "alias_type": "common_name"
+  },
+  {
+    "version_slug": "callaway-chrome-soft-2024",
+    "alias": "Callaway Chrome Soft",
+    "alias_type": "common_name"
+  },
+  { "version_slug": "callaway-chrome-soft-2024", "alias": "CS", "alias_type": "abbreviation" },
+
+  {
+    "version_slug": "callaway-chrome-soft-x-2024",
+    "alias": "Chrome Soft X",
+    "alias_type": "common_name"
+  },
+  { "version_slug": "callaway-chrome-soft-x-2024", "alias": "CSX", "alias_type": "abbreviation" },
+
+  {
+    "version_slug": "callaway-chrome-tour-2024",
+    "alias": "Chrome Tour",
+    "alias_type": "common_name"
+  },
+  {
+    "version_slug": "callaway-chrome-tour-x-2024",
+    "alias": "Chrome Tour X",
+    "alias_type": "common_name"
+  },
+  { "version_slug": "callaway-chrome-tour-x-2024", "alias": "CTX", "alias_type": "abbreviation" },
+
+  { "version_slug": "taylormade-tp5-2024", "alias": "TP5", "alias_type": "common_name" },
+  { "version_slug": "taylormade-tp5-2024", "alias": "TaylorMade TP5", "alias_type": "common_name" },
+  { "version_slug": "taylormade-tp5x-2024", "alias": "TP5x", "alias_type": "common_name" },
+  { "version_slug": "srixon-z-star-8-2023", "alias": "Z-Star", "alias_type": "common_name" },
+  { "version_slug": "srixon-z-star-8-2023", "alias": "ZStar", "alias_type": "abbreviation" },
+  { "version_slug": "srixon-z-star-xv-8-2023", "alias": "Z-Star XV", "alias_type": "common_name" },
+  { "version_slug": "srixon-z-star-xv-8-2023", "alias": "ZStarXV", "alias_type": "abbreviation" },
+
+  {
+    "version_slug": "bridgestone-tour-b-xs-2024",
+    "alias": "Tour B XS",
+    "alias_type": "common_name"
+  },
+  { "version_slug": "bridgestone-tour-b-xs-2024", "alias": "B XS", "alias_type": "abbreviation" },
+  { "version_slug": "bridgestone-tour-b-x-2024", "alias": "Tour B X", "alias_type": "common_name" },
+  {
+    "version_slug": "bridgestone-tour-b-rx-2024",
+    "alias": "Tour B RX",
+    "alias_type": "common_name"
+  },
+  {
+    "version_slug": "bridgestone-tour-b-rxs-2024",
+    "alias": "Tour B RXS",
+    "alias_type": "common_name"
+  },
+
+  { "version_slug": "vice-pro-plus-2023", "alias": "Pro Plus", "alias_type": "common_name" },
+  { "version_slug": "vice-pro-2023", "alias": "Vice Pro", "alias_type": "common_name" },
+
+  { "version_slug": "kirkland-signature-2023", "alias": "Kirkland", "alias_type": "common_name" },
+  { "version_slug": "kirkland-signature-2023", "alias": "KS", "alias_type": "abbreviation" },
+  {
+    "version_slug": "kirkland-signature-v1-2016",
+    "alias": "Kirkland V1",
+    "alias_type": "generation_tag"
+  },
+  {
+    "version_slug": "kirkland-signature-v1-2016",
+    "alias": "Kirkland 3-piece",
+    "alias_type": "common_name"
+  },
+
+  { "version_slug": "snell-mtb-x-2023", "alias": "MTB-X", "alias_type": "common_name" },
+  { "version_slug": "snell-mtb-black-2023", "alias": "MTB Black", "alias_type": "common_name" },
+  { "version_slug": "snell-get-sum-2022", "alias": "Get Sum", "alias_type": "common_name" },
+
+  { "version_slug": "maxfli-tour-x-2023", "alias": "Tour X", "alias_type": "common_name" },
+  { "version_slug": "maxfli-tour-2023", "alias": "Maxfli Tour", "alias_type": "common_name" },
+
+  { "version_slug": "oncore-vero-x1-2021", "alias": "Vero X1", "alias_type": "common_name" },
+  { "version_slug": "oncore-avant-55-2023", "alias": "Avant 55", "alias_type": "common_name" },
+
+  { "version_slug": "volvik-vivid-2024-white", "alias": "Vivid", "alias_type": "common_name" },
+  {
+    "version_slug": "volvik-vivid-2024-white",
+    "alias": "Volvik Vivid",
+    "alias_type": "common_name"
+  }
+]

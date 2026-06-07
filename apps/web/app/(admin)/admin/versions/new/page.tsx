@@ -57,7 +57,6 @@ export default async function NewVersionPage() {
             <option value="">Select family…</option>
             {families?.map((f) => (
               <option key={f.id} value={f.id}>
-                {/* @ts-expect-error — nested join type */}
                 {(f.brand as { name: string } | null)?.name} — {f.name}
               </option>
             ))}

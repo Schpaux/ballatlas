@@ -57,13 +57,12 @@ export default async function VersionsPage({
               <th className="px-4 py-3 text-left font-normal text-neutral-400">Year</th>
               <th className="px-4 py-3 text-left font-normal text-neutral-400">MSRP</th>
               <th className="px-4 py-3 text-left font-normal text-neutral-400">Status</th>
+              <th className="px-4 py-3 text-left font-normal text-neutral-400"></th>
             </tr>
           </thead>
           <tbody>
             {versions?.map((v) => {
-              // @ts-expect-error — nested join type inference limitation
               const brandName = v.family?.brand?.name as string | undefined
-              // @ts-expect-error
               const familyName = v.family?.name as string | undefined
               return (
                 <tr
@@ -92,6 +91,14 @@ export default async function VersionsPage({
                     >
                       {v.status}
                     </span>
+                  </td>
+                  <td className="px-4 py-3 text-right">
+                    <Link
+                      href={`/admin/versions/${v.id}/edit`}
+                      className="text-xs text-neutral-500 hover:text-neutral-200"
+                    >
+                      Edit
+                    </Link>
                   </td>
                 </tr>
               )

@@ -1,5 +1,6 @@
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+
+import { createClient } from '@/lib/supabase/server'
 
 export default async function BrandsPage() {
   const supabase = await createClient()
@@ -35,6 +36,7 @@ export default async function BrandsPage() {
               <th className="px-4 py-3 text-left font-normal text-neutral-400">Slug</th>
               <th className="px-4 py-3 text-left font-normal text-neutral-400">Country</th>
               <th className="px-4 py-3 text-left font-normal text-neutral-400">Website</th>
+              <th className="px-4 py-3 text-left font-normal text-neutral-400"></th>
             </tr>
           </thead>
           <tbody>
@@ -59,6 +61,14 @@ export default async function BrandsPage() {
                   ) : (
                     '—'
                   )}
+                </td>
+                <td className="px-4 py-3 text-right">
+                  <Link
+                    href={`/admin/brands/${brand.id}/edit`}
+                    className="text-xs text-neutral-500 hover:text-neutral-200"
+                  >
+                    Edit
+                  </Link>
                 </td>
               </tr>
             ))}

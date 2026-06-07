@@ -73,5 +73,11 @@
     "country": "GB",
     "website": "https://www.dunlopsports.com"
   },
-  { "name": "Inesis", "slug": "inesis", "country": "FR", "website": "https://www.decathlon.com" }
+  { "name": "Inesis", "slug": "inesis", "country": "FR", "website": "https://www.decathlon.com" },
+  {
+    "name": "Kirkland Signature",
+    "slug": "kirkland",
+    "country": "US",
+    "website": "https://www.costco.com"
+  }
 ]

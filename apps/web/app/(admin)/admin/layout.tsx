@@ -25,6 +25,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link href="/admin/versions" className="transition-colors hover:text-neutral-100">
               Versions
             </Link>
+            <Link href="/admin/aliases" className="transition-colors hover:text-neutral-100">
+              Aliases
+            </Link>
+            <Link href="/admin/valuation" className="transition-colors hover:text-neutral-100">
+              Valuation
+            </Link>
           </div>
         </div>
       </nav>

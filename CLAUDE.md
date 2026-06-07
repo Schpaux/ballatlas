@@ -448,12 +448,31 @@ by ADR-004. Do not use them.
 ### Import Pipeline
 
 ```bash
-pnpm validate:balls    # validate raw JSON
-pnpm import:balls      # import to local Supabase (idempotent)
+pnpm validate:balls    # validate raw JSON (brands, families, versions, aliases)
+pnpm import:balls      # import to local Supabase (idempotent, 5-stage + aliases)
 pnpm import:balls --dry-run  # validate only
+pnpm dataset:report    # offline stats + quality checks (no DB required)
 ```
 
-Add data to `packages/golfball-data/raw/versions.json`.
+Raw data files: `packages/golfball-data/raw/{brands,families,versions,aliases}.json`
+
+### Alias System
+
+`ball_aliases` table: `(version_id, lower(alias))` unique — case-insensitive per version.  
+`alias_type_enum`: `common_name | abbreviation | misspelling | regional_name | generation_tag`  
+Seed aliases live in `packages/golfball-data/raw/aliases.json` as `{ version_slug, alias, alias_type }`.
+
+### Valuation Tables
+
+Three-table foundation (ADR-008):
+
+- `valuation_profiles` — one row per market segment
+- `condition_multipliers` — physical condition scaling per profile
+- `valuation_rules` — age/demand/availability adjustments per profile (one row per profile)
+
+Formula: `base_price × condition_multiplier × age_adj × demand_adj × avail_adj`
+
+Data quality rule: **missing values are acceptable; fabricated values are not.**
 
 ### Types Regeneration
 
@@ -463,11 +482,17 @@ Run after any migration:
 supabase db push --local && pnpm supabase:types
 ```
 
+`packages/database/src/types.generated.ts` is tracked in git and can be manually updated when Supabase is not running. See the file header for instructions.
+
 ### Admin
 
 Admin at `/admin` (no auth in Phase 2 — protect before production).
-Server Actions use `SUPABASE_SERVICE_ROLE_KEY` (bypasses RLS).
+Server Actions use `SUPABASE_SERVICE_ROLE_KEY` (bypasses RLS) via `createAdminClient()`.
+
+Edit forms available for brands, families, versions.
+Alias management at `/admin/aliases`.
+Valuation management at `/admin/valuation`.
 
 ---
 
-_Last updated: 2026-06-07 — Phase 1 Foundation setup_
+_Last updated: 2026-06-07 — Phase 2A: dataset expansion, alias system, valuation foundation, admin edit forms_

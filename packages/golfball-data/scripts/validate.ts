@@ -12,6 +12,7 @@ import {
   RawBrandsFileSchema,
   RawFamiliesFileSchema,
   RawVersionsFileSchema,
+  RawAliasesFileSchema,
 } from '@ballatlas/validators'
 
 function loadJson(filename: string): unknown {
@@ -93,6 +94,36 @@ function main() {
       }
     }
     printResult('versions.json', versionsResult.data.length, crossErrors)
+    totalErrors += crossErrors.length
+  }
+
+  // Validate aliases
+  const rawAliases = loadJson('aliases.json')
+  const aliasesResult = RawAliasesFileSchema.safeParse(rawAliases)
+  if (!aliasesResult.success) {
+    const errs = aliasesResult.error.issues.map((i) => `[${i.path.join('.')}] ${i.message}`)
+    printResult('aliases.json', 0, errs)
+    totalErrors += errs.length
+  } else {
+    const crossErrors: string[] = []
+    if (versionsResult.success) {
+      const versionSlugs = new Set(versionsResult.data.map((v) => v.slug))
+      for (const a of aliasesResult.data) {
+        if (!versionSlugs.has(a.version_slug)) {
+          crossErrors.push(`Alias "${a.alias}" references unknown version_slug "${a.version_slug}"`)
+        }
+      }
+    }
+    // Check for duplicate alias text within same version
+    const aliasKeys = new Set<string>()
+    for (const a of aliasesResult.data) {
+      const key = `${a.version_slug}::${a.alias.toLowerCase()}`
+      if (aliasKeys.has(key)) {
+        crossErrors.push(`Duplicate alias "${a.alias}" for version "${a.version_slug}"`)
+      }
+      aliasKeys.add(key)
+    }
+    printResult('aliases.json', aliasesResult.data.length, crossErrors)
     totalErrors += crossErrors.length
   }
 
