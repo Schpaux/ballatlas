@@ -154,12 +154,12 @@ and is server-only (Next.js Server Components, Server Actions, Route Handlers).
 ### Type Generation Pipeline
 
 ```bash
-# Run after any migration
+# Run after any migration (requires local Supabase running)
 supabase gen types typescript --local > packages/database/src/types.generated.ts
 ```
 
-The generated file is gitignored because it is always derived from migrations.
-CI regenerates it as part of the build verification step.
+The generated file is **tracked in git** so CI does not require Supabase CLI or Docker.
+Regenerate manually after any migration, commit the updated file with the migration.
 
 ### Storage Buckets (Phase 2+)
 
@@ -177,20 +177,30 @@ CI regenerates it as part of the build verification step.
 
 ```
 app/
-├── (marketing)/          ← Route group: public marketing pages
-│   ├── page.tsx          ← Homepage
-│   ├── about/page.tsx
-│   └── layout.tsx
-├── (app)/                ← Route group: authenticated app [Phase 2+]
-│   ├── search/page.tsx
-│   ├── balls/
-│   │   └── [slug]/page.tsx
-│   └── layout.tsx
-├── api/                  ← Internal API routes (not the public API)
-│   └── ...route.ts
+├── page.tsx                    ← / Home (hero search, registry stats)
+├── search/
+│   └── page.tsx                ← /search (FTS + alias search, URL-state filters)
+├── balls/
+│   └── [slug]/
+│       ├── page.tsx            ← /balls/[slug] (ball detail — specs, valuation, similar)
+│       ├── loading.tsx         ← Skeleton
+│       └── not-found.tsx       ← 404
+├── (admin)/
+│   └── admin/
+│       ├── layout.tsx          ← Admin nav layout
+│       └── ...                 ← Admin CRUD pages
+├── api/                        ← Internal route handlers
+│   ├── balls/route.ts          ← GET /api/balls (list + filter)
+│   ├── balls/[id]/route.ts     ← GET /api/balls/:id
+│   ├── brands/route.ts         ← GET /api/brands
+│   ├── families/route.ts       ← GET /api/families
+│   └── search/route.ts         ← GET /api/search (alias-aware FTS)
 ├── globals.css
-└── layout.tsx            ← Root layout (fonts, providers)
+└── layout.tsx                  ← Root layout (fonts, dark mode, html/body)
 ```
+
+Public pages use `RegistryLayout` (wraps `SiteHeader` + `<main>`). Admin pages
+use their own layout. Root `layout.tsx` only sets up fonts and the dark class.
 
 ### Server vs Client Components
 
@@ -359,4 +369,4 @@ See `docs/imports/pipeline.md` for full pipeline documentation.
 
 ---
 
-_Last updated: 2026-06-07 — Phase 2 schema added_
+_Last updated: 2026-06-07 — Phase 3 route structure added_

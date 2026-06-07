@@ -11,7 +11,7 @@
 # Validate raw data — no DB writes
 pnpm validate:balls
 
-# Full import to local Supabase
+# Full import to hosted Supabase
 pnpm import:balls
 
 # Dry run — validate + normalize, no DB writes
@@ -22,13 +22,14 @@ pnpm import:balls --dry-run
 
 ## Prerequisites
 
-1. Local Supabase running: `supabase start`
-2. Migrations applied: `supabase db push --local`
-3. Environment variables in `.env.local`:
+1. Supabase project linked: `supabase link --project-ref <ref>`
+2. Migrations applied to hosted project: `supabase db push`
+3. Environment variables in `apps/web/.env.local`:
    ```
-   NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
-   SUPABASE_SERVICE_ROLE_KEY=<from supabase status>
+   NEXT_PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co
+   SUPABASE_SERVICE_ROLE_KEY=<service-role-key-from-supabase-dashboard>
    ```
+   Easiest to pull via: `vercel env pull apps/web/.env.local`
 
 ---
 

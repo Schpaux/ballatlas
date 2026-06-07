@@ -61,7 +61,7 @@
 - [x] `supabase/config.toml` — local development config
 - [x] `supabase/seed.sql` — seed data placeholder
 - [ ] Supabase project created in cloud
-- [ ] Local `supabase start` verified working
+- [ ] Hosted Supabase project linked (`supabase link`)
 - [ ] Type generation pipeline tested
 
 ### CI/CD
@@ -84,4 +84,4 @@ _None currently_
 
 - Research process running in parallel — outputs will integrate in Phase 2
 - Vercel CLI must be installed before running `vercel link` and `vercel env pull`
-- Supabase requires Docker Desktop for local development
+- Primary workflow is hosted Supabase — no local Docker required

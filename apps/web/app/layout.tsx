@@ -31,7 +31,7 @@ export default function RootLayout({
     // suppressHydrationWarning prevents dark mode class hydration mismatch
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable} dark`}
       suppressHydrationWarning
     >
       <body className="bg-background min-h-screen font-sans antialiased">{children}</body>

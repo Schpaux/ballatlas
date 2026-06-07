@@ -26,9 +26,8 @@
 - [x] Storage buckets: ball-images, identification, admin-assets (`20260607000014`)
 - [x] `ball_aliases` table with `alias_type_enum` (`20260607000015`)
 - [x] `valuation_profiles`, `condition_multipliers`, `valuation_rules` tables (`20260607000016`)
-- [ ] Migrations applied to local Supabase (requires: `supabase start` + Docker)
-- [ ] Migrations applied to production Supabase project
-- [ ] TypeScript types regenerated from live schema (`pnpm supabase:types`)
+- [ ] Migrations applied to hosted Supabase project (`supabase db push`)
+- [ ] TypeScript types regenerated from live schema (`supabase gen types typescript --linked`)
 
 ### Packages
 
@@ -57,7 +56,7 @@
 - [x] `imports/normalizer.ts` — slug normalization and row builders
 - [x] `imports/client.ts` — service role Supabase client
 - [x] `pnpm validate:balls` and `pnpm import:balls` root scripts
-- [ ] Import run against local Supabase (requires running Supabase)
+- [ ] Import run against hosted Supabase (`pnpm import:balls`)
 
 ### Internal API
 
@@ -102,21 +101,20 @@
 
 ---
 
-## To Run Locally
+## To Run Against Hosted Supabase
 
 ```bash
-# 1. Start Supabase (requires Docker Desktop)
-supabase start
+# 1. Link to Supabase project (one-time)
+supabase link --project-ref <project-ref>
 
-# 2. Apply migrations
-supabase db push --local
+# 2. Push migrations to hosted Supabase
+supabase db push
 
 # 3. Regenerate TypeScript types
-pnpm supabase:types
+supabase gen types typescript --linked > packages/database/src/types.generated.ts
 
-# 4. Pull env vars (if Vercel project linked)
+# 4. Pull env vars (requires Vercel project linked)
 vercel env pull apps/web/.env.local
-# OR manually create apps/web/.env.local with values from `supabase status`
 
 # 5. Validate and import seed data
 pnpm validate:balls
@@ -133,6 +131,5 @@ pnpm dev
 
 ## Blockers
 
-- Docker required for local Supabase (`supabase start`)
 - Vercel project must be linked (`vercel link`) before env pull
 - Seed data currently ~75 versions; target is 250–300

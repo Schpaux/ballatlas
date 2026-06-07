@@ -302,7 +302,6 @@ technology additions, API design patterns, security model changes, major library
 # Required local tools
 node --version          # >= 20.0.0
 pnpm --version          # >= 9.0.0
-docker --version        # Docker Desktop (for Supabase local)
 
 # Install CLIs
 npm install -g vercel   # Vercel CLI
@@ -319,32 +318,29 @@ pnpm install
 # Link to Vercel project (one-time)
 vercel link --yes
 
-# Start Supabase locally (requires Docker)
-supabase start
+# Link to hosted Supabase project (one-time)
+supabase link --project-ref <project-ref>
 
 # Pull environment variables from Vercel
 vercel env pull apps/web/.env.local
 
-# Start dev server
+# Start dev server (connects to hosted Supabase via .env.local)
 pnpm dev
 ```
 
 ### Supabase CLI Workflow
 
 ```bash
-supabase start                        # Start local Supabase (Docker required)
-supabase stop                         # Stop local Supabase
-supabase status                       # View local service URLs + keys
+supabase link --project-ref <ref>     # Link to hosted Supabase project (one-time)
 
 supabase migration new <name>         # Create a new migration file
-supabase db push --local              # Apply pending migrations locally
-supabase db reset                     # Reset local DB and replay all migrations
+supabase db push                      # Push pending migrations to hosted project
+supabase db diff --use-migra          # Diff local migrations vs hosted schema
 
 # After any schema change — regenerate types
+supabase gen types typescript --linked > packages/database/src/types.generated.ts
+# Or via the alias:
 pnpm supabase:types                   # → packages/database/src/types.generated.ts
-
-supabase db diff --use-migra          # Diff local vs remote schema
-supabase db push                      # Push migrations to linked remote project
 ```
 
 ### Vercel CLI Workflow
@@ -378,10 +374,10 @@ gh issue create --title "..." --label "bug"
 ### apps/web/.env.local (required)
 
 ```bash
-# Supabase — local dev values from `supabase status`
-NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key-from-supabase-status>
-SUPABASE_SERVICE_ROLE_KEY=<service-role-key-from-supabase-status>
+# Supabase — hosted project values (pulled via `vercel env pull`)
+NEXT_PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key-from-supabase-dashboard>
+SUPABASE_SERVICE_ROLE_KEY=<service-role-key-from-supabase-dashboard>
 
 # App
 NEXT_PUBLIC_APP_URL=http://localhost:3000
@@ -419,8 +415,8 @@ Do not build in these directories until research is complete.
 | Phase | Name                  | Status         |
 | ----- | --------------------- | -------------- |
 | 1     | Foundation            | ✅ Complete    |
-| 2     | Data Platform         | 🟡 In Progress |
-| 3     | Valuation Engine      | ⬜ Not Started |
+| 2     | Data Platform         | ✅ Complete    |
+| 3     | Registry Experience   | 🟡 In Progress |
 | 4     | Admin & Import System | ⬜ Not Started |
 | 5     | Image Identification  | ⬜ Not Started |
 | 6     | Public API            | ⬜ Not Started |
@@ -449,7 +445,7 @@ by ADR-004. Do not use them.
 
 ```bash
 pnpm validate:balls    # validate raw JSON (brands, families, versions, aliases)
-pnpm import:balls      # import to local Supabase (idempotent, 5-stage + aliases)
+pnpm import:balls      # import to hosted Supabase (idempotent, 5-stage + aliases)
 pnpm import:balls --dry-run  # validate only
 pnpm dataset:report    # offline stats + quality checks (no DB required)
 ```
@@ -495,4 +491,53 @@ Valuation management at `/admin/valuation`.
 
 ---
 
-_Last updated: 2026-06-07 — Phase 2A: dataset expansion, alias system, valuation foundation, admin edit forms_
+## Phase 3 Key Conventions
+
+### Public Route Structure
+
+```
+app/
+├── page.tsx                    ← Home (hero search, stats, popular pills)
+├── search/page.tsx             ← Search results (URL state, alias-aware)
+├── balls/[slug]/page.tsx       ← Ball detail (specs, visual, valuation, similar)
+└── (admin)/admin/*             ← Admin (unchanged)
+```
+
+### Registry Components
+
+All public-facing components live in `apps/web/components/registry/`.
+
+| Component            | Type         | Purpose                                          |
+| -------------------- | ------------ | ------------------------------------------------ |
+| `RegistryLayout`     | Server       | SiteHeader + main wrapper for public pages       |
+| `SiteHeader`         | Server       | Sticky nav: BallAtlas logo, Browse, Admin links  |
+| `SearchBar`          | Client       | Debounced input → navigates to `/search?q=`      |
+| `BallCard`           | Server       | Search result card                               |
+| `FilterPanel`        | Client       | Brand/segment/year/cover filters + mobile toggle |
+| `SegmentBadge`       | Server       | Colored segment label                            |
+| `SpecGrid`           | Server       | Compression bar, profile bars, spec rows         |
+| `VisualIdentityCard` | Server       | Visual ID data rows                              |
+| `ValuationCard`      | Server       | Estimated value range with honest empty state    |
+| `SimilarBalls`       | Async Server | Same segment + ±20 compression, Suspense-wrapped |
+
+### Alias-Aware Search
+
+`GET /api/search?q=` runs FTS and alias lookup in parallel. Alias matches float to the
+top of page 1 results. The search page (`app/search/page.tsx`) also does this directly
+via Supabase for Server Component rendering.
+
+### Valuation Display
+
+`ValuationCard` shows estimated range from `valuation_profiles + condition_multipliers +
+valuation_rules`. When no `price_observations` exist for a version, the card shows an
+explicit "No data yet" state — never fabricates values (per ADR-008).
+
+### Known Gap: Segment Filtering
+
+The `segment=` URL parameter is parsed by `FilterPanel` but not yet applied to the
+Supabase query in `app/search/page.tsx` — filtering via the `version_segments`
+many-to-many join requires a subquery approach not yet implemented.
+
+---
+
+_Last updated: 2026-06-07 — Phase 3: Registry Experience (home, search, ball detail, alias search, valuation display)_

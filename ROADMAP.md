@@ -72,21 +72,31 @@ and admin tooling. The database is the product.
 
 ---
 
-## Phase 3 — Valuation Engine
+## Phase 3 — Registry Experience
 
-**Goal:** Market value tracking and pricing history for golf balls.
+**Goal:** First real BallAtlas user experience. The platform is usable as a golf ball
+registry, reference database, discovery platform, and valuation reference.
+
+**Note:** Valuation schema (three-table foundation) was completed in Phase 2 (ADR-008).
+Phase 3 builds the display layer on top of it, not new schema.
 
 **Deliverables:**
 
-- [ ] Database schema: `valuations`, `price_history`, `market_conditions`
-- [ ] Valuation model in `packages/golf-data/src/valuation/`
-- [ ] Price history chart component
-- [ ] Condition grading system (Mint, Near Mint, Good, Fair, Poor)
-- [ ] Valuation detail page per golf ball
-- [ ] Historical price trend visualization
-- [ ] Market value badge on golf ball cards
+- [ ] Home page — search bar, popular balls, quick filters, live DB counts
+- [ ] Search page (`/search`) — FTS + alias search, URL state, shareable
+- [ ] Ball detail page (`/balls/[slug]`) — hero, specs, visual ID, valuation, similar balls
+- [ ] Filter panel — brand, segment, year, compression, cover material
+- [ ] Valuation display — estimated range using valuation profiles + multipliers
+- [ ] Similar balls — same segment / comparable compression
+- [ ] SEO — metadata, OpenGraph, JSON-LD structured data
+- [ ] Sitemap generation
+- [ ] Analytics abstraction layer (no vendor yet)
+- [ ] Mobile-first responsive layouts
+- [ ] Motion — intentional micro-interactions (search transitions, card hovers)
+- [ ] Documentation: `docs/frontend/`, `docs/search/`, updated ARCHITECTURE.md
 
-**Research dependencies:** Valuation framework, condition grading standards
+**Design direction:** Linear / Stripe / Raycast aesthetic — premium, data-dense, fast.  
+**Research dependencies:** None — all required schema is live from Phase 2.
 
 ---
 

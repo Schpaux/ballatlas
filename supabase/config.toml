@@ -97,7 +97,6 @@ policy = "oneshot"
 inspector_port = 8083
 
 [functions]
-verify_jwt = true
 
 [analytics]
 enabled = false
