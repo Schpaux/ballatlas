@@ -1,5 +1,6 @@
 'use client'
 
+import type { Route } from 'next'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -26,9 +27,9 @@ export function SearchBar({
   const navigate = useCallback(
     (query: string) => {
       if (query.trim()) {
-        router.push(`/search?q=${encodeURIComponent(query.trim())}`)
+        router.push(`/search?q=${encodeURIComponent(query.trim())}` as Route)
       } else {
-        router.push('/search')
+        router.push('/search' as Route)
       }
     },
     [router]

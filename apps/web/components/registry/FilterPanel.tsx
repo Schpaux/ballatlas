@@ -1,5 +1,6 @@
 'use client'
 
+import type { Route } from 'next'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useState } from 'react'
 
@@ -48,12 +49,12 @@ export function FilterPanel({ brands }: { brands: Brand[] }) {
       Object.entries(current).forEach(([k, v]) => {
         if (v) next.set(k, v)
       })
-      return `/search?${next.toString()}`
+      return `/search?${next.toString()}` as Route
     },
     [q, activeBrand, activeSegment, activeYear, activeCover, activeCompMin, activeCompMax]
   )
 
-  const filterBtn = (label: string, isActive: boolean, href: string) => (
+  const filterBtn = (label: string, isActive: boolean, href: Route) => (
     <a
       key={label}
       href={href}
@@ -120,7 +121,9 @@ export function FilterPanel({ brands }: { brands: Brand[] }) {
       {/* Clear all */}
       {activeCount > 0 && (
         <button
-          onClick={() => router.push(q ? `/search?q=${encodeURIComponent(q)}` : '/search')}
+          onClick={() =>
+            router.push((q ? `/search?q=${encodeURIComponent(q)}` : '/search') as Route)
+          }
           className="text-left text-xs text-neutral-600 underline-offset-2 hover:text-neutral-400 hover:underline"
         >
           Clear {activeCount} filter{activeCount > 1 ? 's' : ''}
