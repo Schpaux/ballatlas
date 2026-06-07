@@ -2,12 +2,22 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
+import {
+  computeValuation,
+  buildBallSummary,
+  type CompletenessInput,
+  type ObservationInput,
+} from '@ballatlas/golf-data'
+
+import { DataCompletenessCard } from '@/components/registry/DataCompletenessCard'
+import { FeedbackForm } from '@/components/registry/FeedbackForm'
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
 import { SegmentBadge } from '@/components/registry/SegmentBadge'
 import { SimilarBalls } from '@/components/registry/SimilarBalls'
 import { SpecGrid } from '@/components/registry/SpecGrid'
-import { ValuationCard, type ValuationCardProps } from '@/components/registry/ValuationCard'
+import { ValuationCard } from '@/components/registry/ValuationCard'
 import { VisualIdentityCard } from '@/components/registry/VisualIdentityCard'
+import { env } from '@/lib/env'
 import { createClient } from '@/lib/supabase/server'
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -68,8 +78,10 @@ type BallDetail = {
     price: number
     currency: string
     observed_at: string
+    is_archived: boolean
     source: { id: string; name: string; url: string | null; reliability_score: number } | null
   }>
+  images: Array<{ review_status: string }>
 }
 
 // ── Data fetching ─────────────────────────────────────────────────────────────
@@ -98,9 +110,10 @@ async function getBall(slug: string): Promise<BallDetail | null> {
           segment:segments(id, name, slug)
         ),
         price_observations(
-          condition, price, currency, observed_at,
+          condition, price, currency, observed_at, is_archived,
           source:sources(id, name, url, reliability_score)
-        )
+        ),
+        images(review_status)
         `
       )
       .eq('slug', slug)
@@ -114,9 +127,7 @@ async function getBall(slug: string): Promise<BallDetail | null> {
   }
 }
 
-async function getValuationProfile(
-  primarySegmentSlug: string | null
-): Promise<ValuationCardProps['valuationProfile']> {
+async function getValuationProfile(primarySegmentSlug: string | null) {
   if (!primarySegmentSlug) return null
   try {
     const supabase = await createClient()
@@ -149,22 +160,24 @@ export async function generateMetadata({
   const ball = await getBall(slug)
   if (!ball) return { title: 'Ball Not Found' }
 
-  const brand = ball.family?.brand.name
-  const description = [
-    brand && `By ${brand}.`,
-    ball.specs?.compression != null && `Compression ${ball.specs.compression}.`,
-    ball.specs?.cover_material && `${ball.specs.cover_material} cover.`,
-    ball.release_year && `Released ${ball.release_year}.`,
-  ]
-    .filter(Boolean)
-    .join(' ')
+  const summary = buildBallSummary({
+    name: ball.name,
+    segmentSlug: ball.version_segments[0]?.segment?.slug ?? null,
+    constructionLayers: ball.specs?.construction_layers ?? null,
+    coverMaterial: ball.specs?.cover_material ?? null,
+    compression: ball.specs?.compression ?? null,
+    launchProfile: ball.specs?.launch_profile ?? null,
+    spinProfile: ball.specs?.spin_profile ?? null,
+    feelProfile: ball.specs?.feel_profile ?? null,
+  })
 
   return {
     title: ball.name,
-    description: description || `${ball.name} golf ball — BallAtlas registry.`,
+    description: summary,
     openGraph: {
       title: `${ball.name} | BallAtlas`,
-      description,
+      description: summary,
+      url: `${env.NEXT_PUBLIC_APP_URL}/balls/${ball.slug}`,
     },
   }
 }
@@ -197,10 +210,65 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
 
   const valuationProfile = await getValuationProfile(primarySegment?.slug ?? null)
 
+  // Map observations to engine input shape
+  const observations: ObservationInput[] = ball.price_observations.map((o) => ({
+    price: o.price,
+    currency: o.currency,
+    condition: o.condition as ObservationInput['condition'],
+    observed_at: o.observed_at,
+    source_reliability: (o.source as { reliability_score: number } | null)?.reliability_score ?? 5,
+    is_archived: o.is_archived,
+  }))
+
+  const valuationResult = computeValuation({
+    version_id: ball.id,
+    release_year: ball.release_year,
+    target_condition: 'mint',
+    observations,
+    condition_multipliers: valuationProfile?.condition_multipliers ?? [],
+    valuation_rule: valuationProfile?.valuation_rules?.[0] ?? null,
+  })
+
+  // Data completeness
+  const hasApprovedImage = ball.images.some((img) => img.review_status === 'approved')
+  const completenessInput: CompletenessInput = {
+    specs: ball.specs,
+    visual: ball.visual,
+    priceObservationCount: observations.filter((o) => !o.is_archived).length,
+    hasApprovedImage,
+  }
+
+  // Build JSON-LD summary
+  const summaryText = buildBallSummary({
+    name: ball.name,
+    segmentSlug: primarySegment?.slug ?? null,
+    constructionLayers: ball.specs?.construction_layers ?? null,
+    coverMaterial: ball.specs?.cover_material ?? null,
+    compression: ball.specs?.compression ?? null,
+    launchProfile: ball.specs?.launch_profile ?? null,
+    spinProfile: ball.specs?.spin_profile ?? null,
+    feelProfile: ball.specs?.feel_profile ?? null,
+  })
+
   const segmentIds = segments.map((s) => s!.id)
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: ball.name,
+    description: summaryText,
+    url: `${env.NEXT_PUBLIC_APP_URL}/balls/${ball.slug}`,
+    ...(brand && { brand: { '@type': 'Brand', name: brand.name } }),
+    ...(ball.release_year && { releaseDate: String(ball.release_year) }),
+  }
 
   return (
     <RegistryLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
         {/* Breadcrumb */}
         <nav className="mb-6 flex items-center gap-2 text-xs text-neutral-600">
@@ -211,7 +279,7 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
             <>
               <span>/</span>
               <a
-                href={`/search?brand=${brand.slug}`}
+                href={`/brands/${brand.slug}`}
                 className="transition-colors hover:text-neutral-400"
               >
                 {brand.name}
@@ -279,7 +347,6 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
               <VisualIdentityCard visual={ball.visual} />
             </Section>
 
-            {/* Similar balls */}
             <Section title="Similar Balls">
               <Suspense
                 fallback={
@@ -297,6 +364,10 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
                   versionId={ball.id}
                   segmentIds={segmentIds}
                   compression={ball.specs?.compression ?? null}
+                  currentBallSpecs={ball.specs}
+                  currentBallSegments={
+                    segments.filter(Boolean) as { id: string; slug: string; name: string }[]
+                  }
                 />
               </Suspense>
             </Section>
@@ -304,13 +375,12 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
 
           {/* Right column */}
           <div className="flex flex-col gap-6">
-            {/* Valuation */}
             <ValuationCard
               primarySegment={primarySegment?.slug ?? null}
-              releaseYear={ball.release_year}
-              priceObservations={ball.price_observations}
-              valuationProfile={valuationProfile}
+              valuationResult={valuationResult}
             />
+
+            <DataCompletenessCard input={completenessInput} />
 
             {/* Brand info */}
             {brand && (
@@ -318,7 +388,12 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
                 <p className="mb-1 text-xs font-medium uppercase tracking-wider text-neutral-600">
                   Brand
                 </p>
-                <p className="text-sm font-medium text-neutral-200">{brand.name}</p>
+                <a
+                  href={`/brands/${brand.slug}`}
+                  className="text-sm font-medium text-neutral-200 transition-colors hover:text-white"
+                >
+                  {brand.name}
+                </a>
                 {brand.country && (
                   <p className="mt-0.5 text-xs text-neutral-600">{brand.country}</p>
                 )}
@@ -367,7 +442,20 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
                 )}
               </div>
             </div>
+
+            {/* Compare link */}
+            <a
+              href={`/compare?balls=${ball.slug}`}
+              className="block rounded-lg border border-white/[0.06] bg-white/[0.02] p-3 text-center text-xs text-neutral-500 transition-all hover:border-white/[0.12] hover:text-neutral-300"
+            >
+              Compare this ball →
+            </a>
           </div>
+        </div>
+
+        {/* Feedback */}
+        <div className="mt-12 border-t border-white/[0.04] pt-8">
+          <FeedbackForm versionId={ball.id} ballName={ball.name} />
         </div>
       </div>
     </RegistryLayout>

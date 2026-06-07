@@ -40,6 +40,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link href="/admin/data-quality" className="transition-colors hover:text-neutral-100">
               Data Quality
             </Link>
+            <Link href="/admin/feedback" className="transition-colors hover:text-neutral-100">
+              Feedback
+            </Link>
           </div>
         </div>
       </nav>

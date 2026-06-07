@@ -21,7 +21,7 @@
 ┌──────────────────────▼──────────────────────────────────────────┐
 │                     APPLICATIONS                                 │
 │                                                                  │
-│  apps/web (Next.js 15)          apps/api [Phase 6] (Hono)       │
+│  apps/web (Next.js 15)          apps/api [Phase 7] (Hono)       │
 │  ├── App Router (RSC)           ├── REST API v1                  │
 │  ├── Server Actions             ├── API Key auth                 │
 │  ├── Route Handlers             ├── Rate limiting                │
@@ -51,7 +51,8 @@
 │  ├── images                                                       │
 │  ├── segments / version_segments                                  │
 │  ├── sources / price_observations                                 │
-│  └── [pgvector Phase 7]                                          │
+│  ├── feedback_submissions                                         │
+│  └── [pgvector Phase 8]                                          │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -119,7 +120,8 @@ use it cleanly. Keep it pure: TypeScript + Zod + `packages/types` only.
 | Ball images             | `apps/web` upload handlers | Supabase Storage `ball-images`     |
 | User accounts           | Supabase Auth              | Supabase `auth.users`              |
 | API keys                | `apps/api` [Phase 6]       | Supabase `api_keys`                |
-| Vector embeddings       | [Phase 7]                  | Supabase pgvector                  |
+| Feedback submissions    | `apps/web` Server Actions  | Supabase `feedback_submissions`    |
+| Vector embeddings       | [Phase 8]                  | Supabase pgvector                  |
 | Seed / import data      | `packages/golfball-data`   | JSON files in `raw/`               |
 
 ---
@@ -183,18 +185,29 @@ app/
 ├── balls/
 │   └── [slug]/
 │       ├── page.tsx            ← /balls/[slug] (ball detail — specs, valuation, similar)
+│       ├── actions.ts          ← submitFeedback Server Action
 │       ├── loading.tsx         ← Skeleton
 │       └── not-found.tsx       ← 404
+├── brands/
+│   ├── page.tsx                ← /brands (brand listing with counts)
+│   └── [slug]/
+│       ├── page.tsx            ← /brands/[slug] (brand detail, family explorer)
+│       └── loading.tsx         ← Skeleton
+├── compare/
+│   └── page.tsx                ← /compare?balls=slug1,slug2 (URL-state, max 4)
 ├── (admin)/
 │   └── admin/
 │       ├── layout.tsx          ← Admin nav layout
-│       └── ...                 ← Admin CRUD pages
+│       └── ...                 ← Admin CRUD pages (including /admin/feedback)
 ├── api/                        ← Internal route handlers
 │   ├── balls/route.ts          ← GET /api/balls (list + filter)
 │   ├── balls/[id]/route.ts     ← GET /api/balls/:id
 │   ├── brands/route.ts         ← GET /api/brands
 │   ├── families/route.ts       ← GET /api/families
-│   └── search/route.ts         ← GET /api/search (alias-aware FTS)
+│   ├── search/route.ts         ← GET /api/search (alias-aware FTS)
+│   └── autocomplete/route.ts   ← GET /api/autocomplete (suggestions, pg_trgm)
+├── sitemap.ts                  ← Dynamic sitemap (brands + versions)
+├── robots.ts                   ← Robots policy (disallows /admin)
 ├── globals.css
 └── layout.tsx                  ← Root layout (fonts, dark mode, html/body)
 ```
@@ -235,7 +248,29 @@ export default async function BallPage({ params }: { params: Promise<{ slug: str
 
 ---
 
-## Future AI Architecture (Phase 7)
+## Intelligence Architecture (Phase 5)
+
+### packages/golf-data/src/intelligence/
+
+All deterministic scoring and template logic. Framework-free — no React, no Supabase client.
+
+```
+packages/golf-data/src/intelligence/
+├── config.ts        ← SimilarityWeights, DEFAULT_SIMILARITY_WEIGHTS, thresholds
+├── similarity.ts    ← computeSimilarityScore(), rankBySimilarity(), BallProfile
+├── completeness.ts  ← computeCompleteness(), CompletenessResult
+├── comparison.ts    ← computeFieldDiff(), buildDifferenceSummary(), HighlightTag
+├── summaries.ts     ← buildBallSummary(), SEGMENT_DESCRIPTIONS, getSegmentDescription()
+└── index.ts         ← barrel export
+```
+
+**Key rule:** Similarity weights are a product/business decision, not an algorithm detail.
+They live in `config.ts` and are passed to `computeSimilarityScore()` as an optional parameter.
+Tune weights without touching the algorithm.
+
+---
+
+## Future AI Architecture (Phase 8)
 
 ### Vector Search Pipeline
 
@@ -262,7 +297,7 @@ packages/ai/ [Phase 7]
 │   └── chat.ts           ← Conversational AI interface
 ```
 
-### pgvector Setup (Phase 7)
+### pgvector Setup (Phase 8)
 
 ```sql
 -- Enable extension (run in Supabase SQL editor for production)
@@ -277,7 +312,7 @@ CREATE INDEX ON golf_balls USING ivfflat (embedding vector_cosine_ops);
 
 ---
 
-## Future API Architecture (Phase 6)
+## Future API Architecture (Phase 7)
 
 ### API Design Principles
 
@@ -292,7 +327,7 @@ CREATE INDEX ON golf_balls USING ivfflat (embedding vector_cosine_ops);
 
 `apps/api` consumes `packages/golf-data` and `packages/database`.
 It does NOT share routes, middleware, or handlers with `apps/web`.
-Both apps share domain logic through packages only.
+Both apps share domain logic through packages only — including `packages/golf-data/src/intelligence/`.
 
 ---
 
@@ -369,4 +404,4 @@ See `docs/imports/pipeline.md` for full pipeline documentation.
 
 ---
 
-_Last updated: 2026-06-07 — Phase 3 route structure added_
+_Last updated: 2026-06-09 — Phase 5 intelligence architecture, Phase 5 routes, phase renumbering_

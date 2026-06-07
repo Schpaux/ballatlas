@@ -131,7 +131,32 @@ the infrastructure to grow it.
 
 ---
 
-## Phase 5 — Image Identification
+## Phase 5 — Registry Intelligence & Discovery
+
+**Goal:** Transform BallAtlas from a searchable database into an intelligent golf ball
+discovery platform. No AI — all intelligence is deterministic and template-driven.
+
+**Deliverables:**
+
+- [x] Compare experience (`/compare`) — side-by-side specs for 2–4 balls, URL state, shareable
+- [x] Similarity engine — `computeSimilarityScore()` with configurable weights, `SimilarityReason` labels
+- [x] Brand explorer (`/brands`, `/brands/[slug]`) — family timeline, segment distribution
+- [x] Intelligence layer — `buildBallSummary()`, `SEGMENT_DESCRIPTIONS`, `buildDifferenceSummary()`
+- [x] `computeCompleteness()` + `DataCompletenessCard` — weighted coverage scoring
+- [x] Community feedback — `feedback_submissions` table, `FeedbackForm`, `/admin/feedback`
+- [x] Autocomplete API (`/api/autocomplete`) + `SearchBar` suggestions dropdown
+- [x] `pg_trgm` extension + trigram indexes for fast fuzzy substring search
+- [x] SEO foundation — `sitemap.ts`, `robots.ts`, JSON-LD on ball detail pages
+- [x] Valuation Engine wired into `ValuationCard` (Phase 4 gap resolved)
+- [x] ADR-011, ADR-012, docs/discovery, docs/comparison, docs/intelligence
+
+**Architecture note:** `packages/golf-data/src/intelligence/` is the domain home for all
+deterministic scoring and template logic. Phase 6 (Public API) and Phase 7 (AI) both consume
+these services without duplication.
+
+---
+
+## Phase 6 — Image Identification
 
 **Goal:** Identify golf balls from uploaded photos.
 
@@ -151,7 +176,7 @@ Reserve seam in `packages/golf-data/src/identification/`.
 
 ---
 
-## Phase 6 — Public API
+## Phase 7 — Public API
 
 **Goal:** Developer API for accessing the BallAtlas database programmatically.
 
@@ -169,7 +194,7 @@ Reserve seam in `packages/golf-data/src/identification/`.
 
 ---
 
-## Phase 7 — AI Intelligence Layer
+## Phase 8 — AI Intelligence Layer
 
 **Goal:** AI-powered features: natural language search, smart recommendations, deep analysis.
 
@@ -199,4 +224,4 @@ Reserve `packages/ai` for this phase.
 
 ---
 
-_Last updated: 2026-06-07_
+_Last updated: 2026-06-09 — Phase 5 complete; phases 6–8 renumbered_

@@ -138,10 +138,10 @@ New quick-action cards on admin dashboard for Phase 4 workflows.
 
 ## Remaining Gaps
 
-| Gap                          | Priority | Notes                                                                      |
-| ---------------------------- | -------- | -------------------------------------------------------------------------- |
-| `/admin/sources` management  | Medium   | Sources are in DB (seeded) but no admin UI to add/edit them yet            |
-| Valuation Engine integration | Medium   | Engine exists but not yet wired into `/balls/[slug]` ValuationCard display |
-| Image dimension extraction   | Low      | `width`/`height` stored as null on upload — need sharp or similar          |
-| Auth on admin                | High     | Admin has no auth gate — must protect before production                    |
-| Sitemap generation           | Medium   | Not yet built (Phase 3 gap carried forward)                                |
+| Gap                          | Priority   | Notes                                                                        |
+| ---------------------------- | ---------- | ---------------------------------------------------------------------------- |
+| `/admin/sources` management  | Medium     | Sources are in DB (seeded) but no admin UI to add/edit them yet              |
+| Valuation Engine integration | ~~Medium~~ | ✅ **Resolved in Phase 5** — `computeValuation()` wired into `ValuationCard` |
+| Image dimension extraction   | Low        | `width`/`height` stored as null on upload — need sharp or similar            |
+| Auth on admin                | High       | Admin has no auth gate — must protect before production                      |
+| Sitemap generation           | Medium     | Not yet built (Phase 3 gap carried forward)                                  |

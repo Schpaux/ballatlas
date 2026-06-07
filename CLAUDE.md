@@ -417,10 +417,11 @@ Do not build in these directories until research is complete.
 | 1     | Foundation                    | ✅ Complete    |
 | 2     | Data Platform                 | ✅ Complete    |
 | 3     | Registry Experience           | ✅ Complete    |
-| 4     | Market Data & Data Governance | 🟡 In Progress |
-| 5     | Image Identification          | ⬜ Not Started |
-| 6     | Public API                    | ⬜ Not Started |
-| 7     | AI Intelligence Layer         | ⬜ Not Started |
+| 4     | Market Data & Data Governance | ✅ Complete    |
+| 5     | Registry Intelligence         | ✅ Complete    |
+| 6     | Image Identification          | ⬜ Not Started |
+| 7     | Public API                    | ⬜ Not Started |
+| 8     | AI Intelligence Layer         | ⬜ Not Started |
 
 ---
 
@@ -588,4 +589,60 @@ See ADR-010 and `docs/acquisition/README.md`.
 
 ---
 
-_Last updated: 2026-06-07 — Phase 4: Market Data, Image Acquisition & Data Governance_
+## Phase 5 Key Conventions
+
+### ADR Numbering
+
+Phase 5 ADRs:
+
+- ADR-011: Compare Experience Architecture
+- ADR-012: Fuzzy Search Strategy
+
+### New Public Routes
+
+| Route            | Purpose                                                |
+| ---------------- | ------------------------------------------------------ |
+| `/compare`       | Side-by-side ball comparison, URL state (`?balls=...`) |
+| `/brands`        | Brand listing with family/version counts               |
+| `/brands/[slug]` | Brand detail — family explorer, segment distribution   |
+
+Compare URL format: `/compare?balls=slug1,slug2` — comma-separated, max 4, fully shareable.  
+`robots: { index: false }` on `/compare` — no canonical URL to index.
+
+### Intelligence Package
+
+All deterministic scoring and template logic lives in `packages/golf-data/src/intelligence/`:
+
+| Module            | Exports                                                                 |
+| ----------------- | ----------------------------------------------------------------------- |
+| `config.ts`       | `SimilarityWeights`, `DEFAULT_SIMILARITY_WEIGHTS`, thresholds           |
+| `similarity.ts`   | `computeSimilarityScore()`, `rankBySimilarity()`                        |
+| `completeness.ts` | `computeCompleteness()`                                                 |
+| `comparison.ts`   | `computeFieldDiff()`, `buildDifferenceSummary()`                        |
+| `summaries.ts`    | `buildBallSummary()`, `SEGMENT_DESCRIPTIONS`, `getSegmentDescription()` |
+
+**Rule:** Similarity weights are a business rule, not an implementation detail. Change them in `config.ts`; never hardcode in `similarity.ts`.
+
+### Feedback Submissions
+
+`feedback_submissions` table: public INSERT only (RLS), no public SELECT.  
+`source_url` (optional) — lets users cite evidence for corrections.  
+Server Action uses `createAdminClient()` for the insert (bypasses RLS insert policy).  
+Admin: `/admin/feedback`
+
+### Fuzzy Search
+
+`pg_trgm` extension enabled via migration `20260609000002`.  
+Trigram GIN indexes on `ball_versions.name`, `brands.name`, `ball_families.name`.  
+`/api/autocomplete?q=` — returns up to 8 suggestions across versions, brands, families.  
+`SearchBar` debounces at 200ms; keyboard nav: ↑↓ to move, Enter to select, Esc to close.
+
+### ValuationCard Integration
+
+`computeValuation()` is called server-side in `app/balls/[slug]/page.tsx`.  
+The `ValuationResult` discriminated union is passed as a prop to `ValuationCard`.  
+`ValuationCard` is a pure display component — it performs no calculations.
+
+---
+
+_Last updated: 2026-06-09 — Phase 5: Registry Intelligence & Discovery complete_

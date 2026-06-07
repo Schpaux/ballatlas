@@ -5,7 +5,7 @@
 // This file is tracked in git so CI doesn't need supabase CLI installed.
 // Regenerate whenever the database schema changes.
 //
-// Last manually updated: 2026-06-07 (Phase 4 — images review workflow, price observations archive, sources market_type)
+// Last manually updated: 2026-06-09 (Phase 5 — feedback_submissions table, feedback_type enum)
 
 export type Json =
   | string
@@ -585,6 +585,44 @@ export type Database = {
         }
         Relationships: []
       }
+      feedback_submissions: {
+        Row: {
+          id: string
+          version_id: string | null
+          type: Database['public']['Enums']['feedback_type']
+          message: string
+          email: string | null
+          source_url: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          version_id?: string | null
+          type: Database['public']['Enums']['feedback_type']
+          message: string
+          email?: string | null
+          source_url?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          version_id?: string | null
+          type?: Database['public']['Enums']['feedback_type']
+          message?: string
+          email?: string | null
+          source_url?: string | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'feedback_submissions_version_id_fkey'
+            columns: ['version_id']
+            isOneToOne: false
+            referencedRelation: 'ball_versions'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       price_observations: {
         Row: {
           id: string
@@ -662,6 +700,11 @@ export type Database = {
       market_type: 'retail' | 'used' | 'recycled' | 'auction' | 'marketplace' | 'reference'
       price_condition: 'new' | 'mint' | 'near_mint' | 'good' | 'fair' | 'recycled' | 'lake_ball'
       source_type: 'manufacturer' | 'retailer' | 'review' | 'community' | 'auction'
+      feedback_type:
+        | 'incorrect_info'
+        | 'suggest_correction'
+        | 'request_ball'
+        | 'missing_specs'
       identification_feature_type:
         | 'brand_text'
         | 'model_text'

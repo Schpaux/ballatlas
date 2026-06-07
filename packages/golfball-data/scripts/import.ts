@@ -60,8 +60,8 @@ function loadAndValidate<T>(
 
 // Supabase returns network errors as { error } rather than throwing, so we
 // check the error message and retry on transient fetch failures.
-async function withRetry<T extends { error: { message: string } | null }>(
-  fn: () => Promise<T>,
+async function withRetry<T extends { data: unknown; error: { message: string } | null }>(
+  fn: () => PromiseLike<T>,
   retries = 4,
   delayMs = 800
 ): Promise<T> {

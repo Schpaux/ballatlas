@@ -17,6 +17,18 @@ export function SiteHeader() {
           >
             Browse
           </Link>
+          <Link
+            href="/brands"
+            className="text-neutral-400 transition-colors hover:text-neutral-100"
+          >
+            Brands
+          </Link>
+          <Link
+            href="/compare"
+            className="text-neutral-400 transition-colors hover:text-neutral-100"
+          >
+            Compare
+          </Link>
           <Link href="/admin" className="text-neutral-600 transition-colors hover:text-neutral-400">
             Admin
           </Link>
