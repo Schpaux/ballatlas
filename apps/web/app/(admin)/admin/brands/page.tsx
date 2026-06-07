@@ -1,3 +1,4 @@
+import type { Route } from 'next'
 import Link from 'next/link'
 
 import { createClient } from '@/lib/supabase/server'
@@ -64,7 +65,7 @@ export default async function BrandsPage() {
                 </td>
                 <td className="px-4 py-3 text-right">
                   <Link
-                    href={`/admin/brands/${brand.id}/edit`}
+                    href={`/admin/brands/${brand.id}/edit` as Route}
                     className="text-xs text-neutral-500 hover:text-neutral-200"
                   >
                     Edit

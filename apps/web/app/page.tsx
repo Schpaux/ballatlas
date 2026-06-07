@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Route } from 'next'
 import Link from 'next/link'
 
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
@@ -72,7 +72,7 @@ export default async function HomePage() {
               {POPULAR.map(({ label, query }) => (
                 <Link
                   key={label}
-                  href={`/search?q=${encodeURIComponent(query)}`}
+                  href={`/search?q=${encodeURIComponent(query)}` as Route}
                   className="rounded-full border border-white/[0.06] bg-white/[0.02] px-3 py-1 text-xs text-neutral-500 transition-colors hover:border-white/[0.10] hover:text-neutral-300"
                 >
                   {label}

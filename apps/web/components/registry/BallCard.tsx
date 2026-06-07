@@ -1,3 +1,4 @@
+import type { Route } from 'next'
 import Link from 'next/link'
 
 import { SegmentBadge } from './SegmentBadge'
@@ -37,7 +38,7 @@ export function BallCard({ ball }: { ball: BallCardData }) {
 
   return (
     <Link
-      href={`/balls/${ball.slug}`}
+      href={`/balls/${ball.slug}` as Route}
       className="group flex flex-col gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] p-4 transition-all duration-150 hover:border-white/[0.12] hover:bg-white/[0.04]"
     >
       {/* Brand + Year row */}

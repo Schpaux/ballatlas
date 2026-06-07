@@ -1,3 +1,4 @@
+import type { Route } from 'next'
 import Link from 'next/link'
 
 import { createClient } from '@/lib/supabase/server'
@@ -62,7 +63,7 @@ export default async function FamiliesPage() {
                 </td>
                 <td className="px-4 py-3 text-right">
                   <Link
-                    href={`/admin/families/${family.id}/edit`}
+                    href={`/admin/families/${family.id}/edit` as Route}
                     className="text-xs text-neutral-500 hover:text-neutral-200"
                   >
                     Edit

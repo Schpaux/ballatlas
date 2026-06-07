@@ -1,3 +1,4 @@
+import type { Route } from 'next'
 import Link from 'next/link'
 
 import { createClient } from '@/lib/supabase/server'
@@ -71,7 +72,7 @@ export default async function VersionsPage({
                 >
                   <td className="px-4 py-3 text-neutral-400">{brandName ?? '—'}</td>
                   <td className="px-4 py-3 font-medium">
-                    <Link href={`/admin/versions/${v.id}`} className="hover:underline">
+                    <Link href={`/admin/versions/${v.id}` as Route} className="hover:underline">
                       {v.name}
                     </Link>
                   </td>
@@ -94,7 +95,7 @@ export default async function VersionsPage({
                   </td>
                   <td className="px-4 py-3 text-right">
                     <Link
-                      href={`/admin/versions/${v.id}/edit`}
+                      href={`/admin/versions/${v.id}/edit` as Route}
                       className="text-xs text-neutral-500 hover:text-neutral-200"
                     >
                       Edit
@@ -111,7 +112,7 @@ export default async function VersionsPage({
         <div className="mt-4 flex gap-2 text-sm">
           {page > 1 && (
             <Link
-              href={`/admin/versions?page=${page - 1}`}
+              href={`/admin/versions?page=${page - 1}` as Route}
               className="text-neutral-400 hover:text-neutral-100"
             >
               ← Previous
@@ -122,7 +123,7 @@ export default async function VersionsPage({
           </span>
           {page < totalPages && (
             <Link
-              href={`/admin/versions?page=${page + 1}`}
+              href={`/admin/versions?page=${page + 1}` as Route}
               className="text-neutral-400 hover:text-neutral-100"
             >
               Next →
