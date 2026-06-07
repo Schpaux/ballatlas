@@ -1,3 +1,4 @@
+import type { Route } from 'next'
 import Link from 'next/link'
 
 import { createClient } from '@/lib/supabase/server'
@@ -20,7 +21,7 @@ export default async function AdminDashboard() {
       .eq('status', 'published'),
   ])
 
-  const stats = [
+  const stats: { label: string; value: number; href: Route }[] = [
     { label: 'Brands', value: brandCount ?? 0, href: '/admin/brands' },
     { label: 'Families', value: familyCount ?? 0, href: '/admin/families' },
     { label: 'Versions (total)', value: versionCount ?? 0, href: '/admin/versions' },
