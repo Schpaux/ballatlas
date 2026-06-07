@@ -56,6 +56,37 @@ function loadAndValidate<T>(
   return result.data as T
 }
 
+// ─── Retry helper ────────────────────────────────────────────────────────────
+
+// Supabase returns network errors as { error } rather than throwing, so we
+// check the error message and retry on transient fetch failures.
+async function withRetry<T extends { error: { message: string } | null }>(
+  fn: () => Promise<T>,
+  retries = 4,
+  delayMs = 800
+): Promise<T> {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    let result: T
+    try {
+      result = await fn()
+    } catch (err) {
+      if (attempt === retries) throw err
+      await new Promise((r) => setTimeout(r, delayMs * attempt))
+      continue
+    }
+    const isNetworkError =
+      result.error?.message?.includes('fetch failed') ||
+      result.error?.message?.includes('network') ||
+      result.error?.message?.includes('ECONNRESET')
+    if (isNetworkError && attempt < retries) {
+      await new Promise((r) => setTimeout(r, delayMs * attempt))
+      continue
+    }
+    return result
+  }
+  throw new Error('unreachable')
+}
+
 // ─── Main import ─────────────────────────────────────────────────────────────
 
 async function main() {
@@ -84,11 +115,13 @@ async function main() {
 
   for (const raw of brands) {
     const row = normalizeBrand(raw)
-    const { data, error } = await db
-      .from('brands')
-      .upsert(row, { onConflict: 'slug', ignoreDuplicates: false })
-      .select('id, slug')
-      .single()
+    const { data, error } = await withRetry(() =>
+      db
+        .from('brands')
+        .upsert(row, { onConflict: 'slug', ignoreDuplicates: false })
+        .select('id, slug')
+        .single()
+    )
 
     if (error) {
       console.error(`  ✗ ${row.name}: ${error.message}`)
@@ -114,11 +147,13 @@ async function main() {
       continue
     }
     const row = normalizeFamily(raw, brandId)
-    const { data, error } = await db
-      .from('ball_families')
-      .upsert(row, { onConflict: 'brand_id,slug', ignoreDuplicates: false })
-      .select('id, slug')
-      .single()
+    const { data, error } = await withRetry(() =>
+      db
+        .from('ball_families')
+        .upsert(row, { onConflict: 'brand_id,slug', ignoreDuplicates: false })
+        .select('id, slug')
+        .single()
+    )
 
     if (error) {
       console.error(`  ✗ ${row.name}: ${error.message}`)
@@ -144,11 +179,13 @@ async function main() {
     }
 
     const row = normalizeVersion(raw, familyId)
-    const { data: versionData, error: versionError } = await db
-      .from('ball_versions')
-      .upsert(row, { onConflict: 'slug', ignoreDuplicates: false })
-      .select('id')
-      .single()
+    const { data: versionData, error: versionError } = await withRetry(() =>
+      db
+        .from('ball_versions')
+        .upsert(row, { onConflict: 'slug', ignoreDuplicates: false })
+        .select('id')
+        .single()
+    )
 
     if (versionError || !versionData) {
       console.error(`  ✗ ${row.name}: ${versionError?.message ?? 'no data returned'}`)
@@ -219,13 +256,15 @@ async function main() {
     }
     const { error } = await db
       .from('ball_aliases')
-      .upsert(
-        { version_id: versionId, alias: raw.alias, alias_type: raw.alias_type },
-        { onConflict: 'version_id,alias', ignoreDuplicates: true }
-      )
+      .insert({ version_id: versionId, alias: raw.alias, alias_type: raw.alias_type })
     if (error) {
-      console.error(`  ✗ Alias "${raw.alias}": ${error.message}`)
-      aliasCounter.failed++
+      // 23505 = unique_violation — alias already exists for this version, skip
+      if (error.code === '23505') {
+        aliasCounter.skipped++
+      } else {
+        console.error(`  ✗ Alias "${raw.alias}": ${error.message}`)
+        aliasCounter.failed++
+      }
     } else {
       aliasCounter.inserted++
     }
