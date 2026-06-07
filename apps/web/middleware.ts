@@ -1,21 +1,15 @@
+import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-import { updateSession } from '@/lib/supabase/middleware'
-
-export async function middleware(request: NextRequest) {
-  return await updateSession(request)
+// Session refresh via @supabase/ssr is restored here when auth is implemented (Phase 4+).
+// Supabase-js uses process.version which crashes Edge Runtime — Node.js middleware
+// support is not stable across Next.js 15.x patch versions yet.
+export function middleware(_request: NextRequest) {
+  return NextResponse.next()
 }
 
 export const config = {
-  runtime: 'nodejs',
   matcher: [
-    /*
-     * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization)
-     * - favicon.ico, sitemap.xml, robots.txt (metadata files)
-     * - Static file extensions
-     */
     '/((?!_next/static|_next/image|favicon\\.ico|sitemap\\.xml|robots\\.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)',
   ],
 }
