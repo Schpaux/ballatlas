@@ -254,7 +254,6 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ sl
           <div className="mb-3 flex items-center gap-3">
             {logo && (
               <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md border border-white/[0.08] bg-white/[0.04] p-1.5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={logo.url}
                   alt={logo.alt_text ?? `${brand.name} logo`}
