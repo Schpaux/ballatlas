@@ -94,6 +94,44 @@ function main() {
   console.log(`  Missing features:      ${pct(missingFeatures)}`)
   console.log(`  Missing msrp_usd:      ${pct(missingMsrp)}`)
 
+  // ─── Identification coverage ────────────────────────────────────────────────
+  header('IDENTIFICATION COVERAGE')
+
+  let withBrandText = 0
+  let withModelText = 0
+  let withAlignmentMarking = 0
+  let withNumberColor = 0
+  let withVisual = 0
+  let fullReadiness = 0 // has visual + brand_text + model_text
+
+  for (const v of versions) {
+    const featureTypes = new Set((v.features ?? []).map((f) => f.feature_type))
+    const hasBrand = featureTypes.has('brand_text')
+    const hasModel = featureTypes.has('model_text')
+    const hasAlign = featureTypes.has('alignment_marking') || !!v.visual?.alignment_marking
+    const hasNumColor = featureTypes.has('number_color') || !!v.visual?.number_color
+    const hasVis = !!v.visual
+
+    if (hasBrand) withBrandText++
+    if (hasModel) withModelText++
+    if (hasAlign) withAlignmentMarking++
+    if (hasNumColor) withNumberColor++
+    if (hasVis) withVisual++
+    if (hasVis && hasBrand && hasModel) fullReadiness++
+  }
+
+  const pctN = (n: number) => `${n} (${Math.round((n / versions.length) * 100)}%)`
+  console.log(`  Visual signature:      ${pctN(withVisual)}`)
+  console.log(`  Brand text (id):       ${pctN(withBrandText)}`)
+  console.log(`  Model text (id):       ${pctN(withModelText)}`)
+  console.log(`  Alignment marking:     ${pctN(withAlignmentMarking)}`)
+  console.log(`  Number color:          ${pctN(withNumberColor)}`)
+  console.log(`  Full readiness:        ${pctN(fullReadiness)}`)
+  console.log()
+  console.log(
+    `  Identification engine readiness: ${Math.round((fullReadiness / versions.length) * 100)}%`
+  )
+
   // ─── Duplicate slug check ───────────────────────────────────────────────────
   header('DUPLICATE CHECK')
   const slugCounts = new Map<string, number>()

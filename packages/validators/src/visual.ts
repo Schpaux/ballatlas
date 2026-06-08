@@ -12,6 +12,9 @@ export const IdentificationFeatureTypeSchema = z.enum([
   'color',
   'dimple_pattern',
   'special_marking',
+  'play_number',
+  'number_style',
+  'visual_pattern',
 ])
 
 export const VisualSignatureSchema = z.object({

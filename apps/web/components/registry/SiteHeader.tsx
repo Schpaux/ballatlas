@@ -29,6 +29,12 @@ export function SiteHeader() {
           >
             Compare
           </Link>
+          <Link
+            href="/identify"
+            className="text-neutral-400 transition-colors hover:text-neutral-100"
+          >
+            Identify
+          </Link>
           <Link href="/admin" className="text-neutral-600 transition-colors hover:text-neutral-400">
             Admin
           </Link>

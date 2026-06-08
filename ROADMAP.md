@@ -156,27 +156,59 @@ these services without duplication.
 
 ---
 
-## Phase 6 — Image Identification
+## Phase 6 — Platform Generalization & Asset Strategy
 
-**Goal:** Identify golf balls from uploaded photos.
+**Goal:** Future-proof the platform architecture and establish first-class brand asset
+management. No new product categories built — architecture prepared for them.
 
 **Deliverables:**
 
-- [ ] Image upload interface (drag-and-drop, mobile camera)
-- [ ] Supabase Storage for uploaded identification images
-- [ ] Image preprocessing pipeline
-- [ ] Feature extraction service
-- [ ] Similarity matching against known golf ball images
-- [ ] Identification confidence scoring
-- [ ] "Did you mean?" fallback suggestions
-- [ ] Identification history per user (optional account)
-
-**Architecture note:** Requires a separate inference service (TBD in research).
-Reserve seam in `packages/golf-data/src/identification/`.
+- [x] ADR-013: Asset Management Strategy (Accepted)
+- [x] ADR-014: Product Domain Generalization (Proposed — not implemented)
+- [x] `brand_assets` table — brand logos, marks, and visual references
+- [x] `asset_review_status` + `brand_asset_type` enums
+- [x] `brands.primary_color` + `brands.secondary_color` — brand identity metadata
+- [x] `brand-assets` public Supabase Storage bucket
+- [x] SVG safety validation (`validateSvgSafety()` in `packages/validators`)
+- [x] `/admin/brand-assets` — upload, review, approve, archive brand assets
+- [x] `/brands/[slug]` — SVG-first logo rendering with three-level fallback
+- [x] Asset abstraction layer (`packages/golf-data/src/assets/`) — interfaces only
+- [x] Generalization review (`docs/platform/generalization-review.md`)
+- [x] Future equipment strategy (`docs/platform/future-equipment-strategy.md`)
+- [x] Registry compatibility audit — zero regressions confirmed
 
 ---
 
-## Phase 7 — Public API
+## Phase 7 — Identification Intelligence & Dataset Expansion
+
+**Goal:** Build BallAtlas Identification Intelligence — a deterministic, explainable engine
+that accepts observed golf ball characteristics and returns ranked candidates with confidence
+and evidence. Expand dataset toward 1000+ versions.
+
+**Deliverables:**
+
+- [x] ADR-015: Identification Intelligence Strategy (Accepted)
+- [x] DB migration: extend `identification_feature_type` enum (play_number, number_style, visual_pattern)
+- [x] `packages/golf-data/src/identification/engine.ts` — `identifyBall()` pure function
+- [x] `packages/golf-data/src/identification/config.ts` — configurable `IdentificationWeights`
+- [x] `packages/golf-data/src/identification/coverage.ts` — `computeIdentificationCoverage()`
+- [x] `packages/golf-data/src/identification/contracts.ts` — AI readiness interfaces
+- [x] `POST /api/identify` route handler
+- [x] `/identify` page — feature-driven identification UI (no image upload, no AI)
+- [x] `IdentificationForm` + `IdentificationResultCard` components
+- [x] `/admin/data-quality` — Identification Readiness section
+- [x] `pnpm dataset:report` — identification coverage metrics
+- [~] Dataset expansion stopped at 353 versions (target: 1000+, baseline: 250)
+- [x] `docs/identification/README.md`
+- [x] `docs/decisions/ADR-015`
+
+**Architecture note:** BallAtlas owns identification logic. Future AI (Phase 9) produces
+`FeatureExtractionResult` — structurally identical to `ObservedFeatures` — and the engine
+consumes it without modification. See ADR-015.
+
+---
+
+## Phase 8 — Public API
 
 **Goal:** Developer API for accessing the BallAtlas database programmatically.
 
@@ -194,7 +226,7 @@ Reserve seam in `packages/golf-data/src/identification/`.
 
 ---
 
-## Phase 8 — AI Intelligence Layer
+## Phase 9 — AI Intelligence Layer
 
 **Goal:** AI-powered features: natural language search, smart recommendations, deep analysis.
 
@@ -224,4 +256,4 @@ Reserve `packages/ai` for this phase.
 
 ---
 
-_Last updated: 2026-06-09 — Phase 5 complete; phases 6–8 renumbered_
+_Last updated: 2026-06-10 — Phase 6 complete; phases 7–9 renumbered_

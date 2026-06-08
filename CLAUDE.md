@@ -10,7 +10,7 @@ Read at the start of every session. Keep it current.
 **BallAtlas** is the most comprehensive golf ball registry, identification platform,
 valuation platform, and golf ball intelligence database.
 
-**Current Phase:** Phase 1 — Foundation  
+**Current Phase:** Phase 7 — Identification Intelligence & Dataset Expansion  
 **Status:** Active development  
 **Started:** 2026-06-07
 
@@ -412,16 +412,17 @@ Do not build in these directories until research is complete.
 
 ## Phase Status
 
-| Phase | Name                          | Status         |
-| ----- | ----------------------------- | -------------- |
-| 1     | Foundation                    | ✅ Complete    |
-| 2     | Data Platform                 | ✅ Complete    |
-| 3     | Registry Experience           | ✅ Complete    |
-| 4     | Market Data & Data Governance | ✅ Complete    |
-| 5     | Registry Intelligence         | ✅ Complete    |
-| 6     | Image Identification          | ⬜ Not Started |
-| 7     | Public API                    | ⬜ Not Started |
-| 8     | AI Intelligence Layer         | ⬜ Not Started |
+| Phase | Name                             | Status         |
+| ----- | -------------------------------- | -------------- |
+| 1     | Foundation                       | ✅ Complete    |
+| 2     | Data Platform                    | ✅ Complete    |
+| 3     | Registry Experience              | ✅ Complete    |
+| 4     | Market Data & Data Governance    | ✅ Complete    |
+| 5     | Registry Intelligence            | ✅ Complete    |
+| 6     | Platform Generalization & Assets | ✅ Complete    |
+| 7     | Identification Intelligence      | 🔄 In Progress |
+| 8     | Public API                       | ⬜ Not Started |
+| 9     | AI Intelligence Layer            | ⬜ Not Started |
 
 ---
 
@@ -645,4 +646,145 @@ The `ValuationResult` discriminated union is passed as a prop to `ValuationCard`
 
 ---
 
-_Last updated: 2026-06-09 — Phase 5: Registry Intelligence & Discovery complete_
+## Phase 6 Key Conventions
+
+### ADR Numbering
+
+Phase 6 ADRs:
+
+- ADR-013: Asset Management Strategy (Accepted)
+- ADR-014: Product Domain Generalization (Proposed — not implemented)
+
+### Brand Assets
+
+`brand_assets` table: managed brand logos, marks, and visual references.  
+`asset_review_status`: `uploaded → pending_review → approved | archived`  
+Only `approved` assets are publicly visible (RLS policy enforces this).  
+Admin: `/admin/brand-assets`
+
+Logo resolution order on brand pages:
+
+1. `brand_assets` SVG (approved, highest quality first)
+2. `brand_assets` PNG (approved, highest quality first)
+3. `brands.logo_url` (legacy fallback)
+
+### SVG Safety Validation
+
+All SVG uploads pass through `validateSvgSafety()` in `packages/validators/src/assets.ts`.  
+Checks: no `<script>`, no `on*` event handlers, no `javascript:` URIs, no external `<use>`,
+no `<foreignObject>`, max 512 KB.  
+Validation runs server-side in the upload Server Action before storage upload.
+
+### Brand Identity
+
+`brands.primary_color` and `brands.secondary_color` — optional CSS color values.  
+Edited on the brand edit page at `/admin/brands/[id]/edit`.  
+Used for future UI theming, API consumers, comparison views.
+
+### Asset Abstraction Layer
+
+Framework-free interfaces in `packages/golf-data/src/assets/`:
+
+| Type                    | Purpose                                                        |
+| ----------------------- | -------------------------------------------------------------- |
+| `AssetMetadata`         | Canonical metadata shape for all asset categories              |
+| `AssetReference`        | Lightweight pointer for rendering (id + url + type + alt_text) |
+| `AssetValidationResult` | `{ ok: true } \| { ok: false; errors: string[] }`              |
+| `AssetProvider`         | Interface for future automated asset acquisition               |
+
+Phase 6 defines interfaces only — no implementations.
+
+### Storage Bucket
+
+`brand-assets` — public-read Supabase Storage bucket for approved brand assets.  
+Path convention: `{brand-slug}/{asset-type}-{timestamp}.{ext}`  
+e.g., `titleist/logo_svg-1749600000000.svg`
+
+### Generalization Strategy
+
+The `Brand → Family → Version` hierarchy is correct for all product types — do not rename.  
+When new product categories are introduced, follow ADR-014:
+
+- Add `product_category` discriminator to `ball_versions`
+- Create per-category spec tables (`driver_specs`, `putter_specs`)
+- Add `domain` discriminator to `segments`
+
+See `docs/platform/generalization-review.md` for the five-question architectural analysis.  
+See `docs/platform/future-equipment-strategy.md` for per-category research.
+
+### New Admin Route
+
+| Route                 | Purpose                                                |
+| --------------------- | ------------------------------------------------------ |
+| `/admin/brand-assets` | Upload, review, approve, archive brand logos and marks |
+
+---
+
+---
+
+## Phase 7 Key Conventions
+
+### ADR Numbering
+
+Phase 7 ADRs:
+
+- ADR-015: Identification Intelligence Strategy (Accepted)
+
+### Identification Engine
+
+`packages/golf-data/src/identification/engine.ts` — `identifyBall(observedFeatures, candidates)`.  
+Pure function: no DB client, no framework imports.  
+Input: `ObservedFeatures` (all optional — at least one must be provided).  
+Output: `IdentificationResult[]` sorted descending by confidence (0–100).
+
+**Critical rule:** BallAtlas owns identification logic. AI owns feature extraction only.  
+`FeatureExtractionResult` in `contracts.ts` is structurally identical to `ObservedFeatures` — future AI systems produce it, the engine consumes it without modification.
+
+### Identification Weights
+
+Configurable in `packages/golf-data/src/identification/config.ts`.  
+Default: Brand 40 / Logo Text 20 / Alignment 15 / Number Color 10 / Logo Style 5 / Play Number 5 / Other 5.  
+Change weights here; never hardcode in `engine.ts`.
+
+### New Feature Types (Phase 7)
+
+Three new `identification_feature_type` enum values added:
+
+- `play_number` — the play number printed on the ball (1–8)
+- `number_style` — number typography style (bold, outline, standard, script)
+- `visual_pattern` — distinctive surface patterns (Truvis, camo, marble, etc.)
+
+Migration: `supabase/migrations/20260611000001_extend_identification_feature_types.sql`
+
+### Identification API
+
+`POST /api/identify` — accepts `ObservedFeatures` JSON body, returns `IdentificationResult[]`.  
+At least one feature is required. Returns up to 8 ranked candidates above 30% confidence.
+
+### Identify Page
+
+`/identify` — feature-driven identification page.  
+No image upload. No AI. User enters observable characteristics; engine returns ranked candidates.  
+`IdentificationForm` (client) + `IdentificationResultCard` (display).
+
+### Identification Coverage
+
+`computeIdentificationCoverage()` in `packages/golf-data/src/identification/coverage.ts`.  
+Readiness levels: `full` | `partial` | `minimal` | `none`.  
+Displayed in `/admin/data-quality` — Identification Readiness section.
+
+### Dataset Size
+
+Current: **353 versions**, 107 families, 21 brands (baseline was 250 / 75 / 21).  
+Target of 1000+ was not reached — expansion was deliberately stopped.  
+**Data quality rule:** Never fabricate. Missing values are acceptable; incorrect values are not.
+
+### New Public Route
+
+| Route       | Purpose                                 |
+| ----------- | --------------------------------------- |
+| `/identify` | Feature-driven golf ball identification |
+
+---
+
+_Last updated: 2026-06-11 — Phase 7: Identification Intelligence & Dataset Expansion_

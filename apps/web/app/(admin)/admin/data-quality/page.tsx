@@ -23,11 +23,16 @@ export default async function DataQualityPage() {
     { count: pendingImages },
     { count: totalObservations },
     { count: activeObservations },
+    { count: versionsWithVisual },
+    { count: versionsWithFeatures },
+    { count: versionsWithBrandText },
+    { count: versionsWithModelText },
     { data: versionsWithoutImages },
     { data: versionsWithoutPrices },
     { data: versionsWithoutSpecs },
     { data: versionsWithoutAliases },
     { data: brandsWithoutImages },
+    { data: versionsWithoutIdentification },
   ] = await Promise.all([
     supabase.from('ball_versions').select('*', { count: 'exact', head: true }),
     supabase
@@ -49,6 +54,18 @@ export default async function DataQualityPage() {
       .from('price_observations')
       .select('*', { count: 'exact', head: true })
       .eq('is_archived', false),
+
+    // Identification coverage counts
+    supabase.from('visual_signatures').select('*', { count: 'exact', head: true }),
+    supabase.from('identification_features').select('version_id', { count: 'exact', head: true }),
+    supabase
+      .from('identification_features')
+      .select('version_id', { count: 'exact', head: true })
+      .eq('feature_type', 'brand_text'),
+    supabase
+      .from('identification_features')
+      .select('version_id', { count: 'exact', head: true })
+      .eq('feature_type', 'model_text'),
 
     // Versions without any approved image
     supabase
@@ -83,6 +100,15 @@ export default async function DataQualityPage() {
       .select(`id, name, slug, family:ball_families(name, brand:brands(name))`)
       .eq('status', 'published')
       .not('id', 'in', `(select version_id from ball_aliases)`)
+      .order('name')
+      .limit(50),
+
+    // Versions without visual signatures or identification features
+    supabase
+      .from('ball_versions')
+      .select(`id, name, slug, family:ball_families(name, brand:brands(name))`)
+      .eq('status', 'published')
+      .not('id', 'in', `(select version_id from visual_signatures)`)
       .order('name')
       .limit(50),
 
@@ -147,6 +173,12 @@ export default async function DataQualityPage() {
       versions: (versionsWithoutAliases ?? []) as GapVersion[],
       href: '/admin/aliases',
       severity: 'low' as const,
+    },
+    {
+      label: 'Versions Without Visual Signatures',
+      versions: (versionsWithoutIdentification ?? []) as GapVersion[],
+      href: '/admin/versions',
+      severity: 'medium' as const,
     },
   ]
 
@@ -225,6 +257,76 @@ export default async function DataQualityPage() {
             )
           })}
         </div>
+      </div>
+
+      {/* Identification Readiness */}
+      <div className="mb-8 rounded-lg border border-neutral-800 p-5">
+        <h2 className="mb-1 text-sm font-medium uppercase tracking-wider text-neutral-500">
+          Identification Readiness
+        </h2>
+        <p className="mb-4 text-xs text-neutral-600">
+          Coverage of structured visual and identification data required by the identification
+          engine.
+        </p>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {[
+            {
+              label: 'Visual Signatures',
+              count: versionsWithVisual ?? 0,
+              total: totalVersions ?? 0,
+            },
+            {
+              label: 'ID Features',
+              count: versionsWithFeatures ?? 0,
+              total: totalVersions ?? 0,
+            },
+            {
+              label: 'Brand Text',
+              count: versionsWithBrandText ?? 0,
+              total: totalVersions ?? 0,
+            },
+            {
+              label: 'Model Text',
+              count: versionsWithModelText ?? 0,
+              total: totalVersions ?? 0,
+            },
+          ].map((c) => {
+            const pct = c.total > 0 ? Math.round((c.count / c.total) * 100) : 0
+            const color = pct >= 80 ? 'bg-green-500' : pct >= 50 ? 'bg-yellow-500' : 'bg-red-500'
+            return (
+              <div key={c.label}>
+                <div className="mb-1 flex justify-between text-xs">
+                  <span className="text-neutral-400">{c.label}</span>
+                  <span className="font-mono text-neutral-300">
+                    {c.count}/{c.total} ({pct}%)
+                  </span>
+                </div>
+                <div className="h-1.5 overflow-hidden rounded-full bg-neutral-800">
+                  <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {versionsWithoutIdentification && versionsWithoutIdentification.length > 0 && (
+          <div className="mt-4 border-t border-neutral-800 pt-4">
+            <p className="mb-2 text-xs text-neutral-500">
+              {versionsWithoutIdentification.length} published version
+              {versionsWithoutIdentification.length !== 1 ? 's' : ''} missing visual signatures:
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {versionsWithoutIdentification.map((v) => (
+                <span
+                  key={v.id}
+                  className="rounded border border-neutral-700 px-2 py-0.5 font-mono text-[11px] text-neutral-500"
+                >
+                  {v.slug}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Brands without images */}

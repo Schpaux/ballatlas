@@ -9973,5 +9973,2715 @@
       }
     ],
     "segments": ["performance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1",
+    "name": "Pro V1 2000",
+    "slug": "titleist-pro-v1-2000",
+    "release_year": 2000,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 90,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1",
+    "name": "Pro V1 2003",
+    "slug": "titleist-pro-v1-2003",
+    "release_year": 2003,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 87,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1",
+    "name": "Pro V1 2005",
+    "slug": "titleist-pro-v1-2005",
+    "release_year": 2005,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 87,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1",
+    "name": "Pro V1 2007",
+    "slug": "titleist-pro-v1-2007",
+    "release_year": 2007,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 87,
+      "dimple_count": 392,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1x",
+    "name": "Pro V1x 2003",
+    "slug": "titleist-pro-v1x-2003",
+    "release_year": 2003,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 95,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1x", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1x",
+    "name": "Pro V1x 2005",
+    "slug": "titleist-pro-v1x-2005",
+    "release_year": 2005,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 95,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1x", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1x",
+    "name": "Pro V1x 2007",
+    "slug": "titleist-pro-v1x-2007",
+    "release_year": 2007,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 95,
+      "dimple_count": 332,
+      "launch_profile": "high",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1x", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1x",
+    "name": "Pro V1x 2009",
+    "slug": "titleist-pro-v1x-2009",
+    "release_year": 2009,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 95,
+      "dimple_count": 332,
+      "launch_profile": "high",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1x", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "pro-v1x",
+    "name": "Pro V1x 2011",
+    "slug": "titleist-pro-v1x-2011",
+    "release_year": 2011,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 95,
+      "dimple_count": 332,
+      "launch_profile": "high",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro V1x", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "nxt-tour",
+    "name": "NXT Tour 2006",
+    "slug": "titleist-nxt-tour-2006",
+    "release_year": 2006,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 88,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "NXT Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "nxt-tour",
+    "name": "NXT Tour 2008",
+    "slug": "titleist-nxt-tour-2008",
+    "release_year": 2008,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 88,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "NXT Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "nxt-tour",
+    "name": "NXT Tour 2010",
+    "slug": "titleist-nxt-tour-2010",
+    "release_year": 2010,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 86,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "NXT Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "nxt-tour",
+    "name": "NXT Tour 2012",
+    "slug": "titleist-nxt-tour-2012",
+    "release_year": 2012,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 86,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "NXT Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "nxt-tour",
+    "name": "NXT Tour 2014",
+    "slug": "titleist-nxt-tour-2014",
+    "release_year": 2014,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 86,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "NXT Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "nxt-tour-s",
+    "name": "NXT Tour S 2010",
+    "slug": "titleist-nxt-tour-s-2010",
+    "release_year": 2010,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 72,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "NXT Tour S", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "nxt-tour-s",
+    "name": "NXT Tour S 2012",
+    "slug": "titleist-nxt-tour-s-2012",
+    "release_year": 2012,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 72,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "NXT Tour S", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "nxt-tour-s",
+    "name": "NXT Tour S 2014",
+    "slug": "titleist-nxt-tour-s-2014",
+    "release_year": 2014,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 70,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "NXT Tour S", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "dt-trusoft",
+    "name": "DT TruSoft 2014",
+    "slug": "titleist-dt-trusoft-2014",
+    "release_year": 2014,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 60,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "DT TruSoft", "importance_score": 10 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "dt-trusoft",
+    "name": "DT TruSoft 2016",
+    "slug": "titleist-dt-trusoft-2016",
+    "release_year": 2016,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 60,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "DT TruSoft", "importance_score": 10 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "titleist",
+    "family_slug": "dt-trusoft",
+    "name": "DT TruSoft 2018",
+    "slug": "titleist-dt-trusoft-2018",
+    "release_year": 2018,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 60,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Titleist", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "DT TruSoft", "importance_score": 10 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "chrome-soft-triple-track",
+    "name": "Chrome Soft Triple Track 2020",
+    "slug": "callaway-chrome-soft-triple-track-2020",
+    "release_year": 2020,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 75,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Callaway", "importance_score": 10 },
+      {
+        "feature_type": "model_text",
+        "feature_value": "Chrome Soft Triple Track",
+        "importance_score": 10
+      },
+      {
+        "feature_type": "alignment_marking",
+        "feature_value": "Triple Track alignment lines",
+        "importance_score": 9
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "chrome-soft-triple-track",
+    "name": "Chrome Soft Triple Track 2024",
+    "slug": "callaway-chrome-soft-triple-track-2024",
+    "release_year": 2024,
+    "msrp_usd": 54.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 75,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Callaway", "importance_score": 10 },
+      {
+        "feature_type": "model_text",
+        "feature_value": "Chrome Soft Triple Track",
+        "importance_score": 10
+      },
+      {
+        "feature_type": "alignment_marking",
+        "feature_value": "Triple Track alignment lines",
+        "importance_score": 9
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "chrome-soft-x-ls",
+    "name": "Chrome Soft X LS 2024",
+    "slug": "callaway-chrome-soft-x-ls-2024",
+    "release_year": 2024,
+    "msrp_usd": 54.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 90,
+      "launch_profile": "low",
+      "spin_profile": "low",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Callaway", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Chrome Soft X LS", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "supersoft-magma",
+    "name": "Supersoft Magma 2022",
+    "slug": "callaway-supersoft-magma-2022",
+    "release_year": 2022,
+    "msrp_usd": 27.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 35,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "color": "orange",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Callaway", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Supersoft Magma", "importance_score": 10 },
+      { "feature_type": "color", "feature_value": "Magma Orange", "importance_score": 8 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "supersoft-magma",
+    "name": "Supersoft Magma 2024",
+    "slug": "callaway-supersoft-magma-2024",
+    "release_year": 2024,
+    "msrp_usd": 27.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 35,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "color": "orange",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Callaway", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Supersoft Magma", "importance_score": 10 },
+      { "feature_type": "color", "feature_value": "Magma Orange", "importance_score": 8 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "hex-chrome",
+    "name": "Hex Chrome 2013",
+    "slug": "callaway-hex-chrome-2013",
+    "release_year": 2013,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Callaway", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Hex Chrome", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "callaway",
+    "family_slug": "hex-chrome",
+    "name": "Hex Chrome+ 2015",
+    "slug": "callaway-hex-chrome-plus-2015",
+    "release_year": 2015,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Callaway", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Hex Chrome+", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "project-a",
+    "name": "Project (a) 2014",
+    "slug": "taylormade-project-a-2014",
+    "release_year": 2014,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 77,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Project (a)", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "project-a",
+    "name": "Project (a) 2016",
+    "slug": "taylormade-project-a-2016",
+    "release_year": 2016,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 77,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Project (a)", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "project-a",
+    "name": "Project (a) 2018",
+    "slug": "taylormade-project-a-2018",
+    "release_year": 2018,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 77,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Project (a)", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "tp5-pix",
+    "name": "TP5 Pix 2019",
+    "slug": "taylormade-tp5-pix-2019",
+    "release_year": 2019,
+    "msrp_usd": 49.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 5,
+      "cover_material": "urethane",
+      "compression": 87,
+      "dimple_count": 322,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "TP5 Pix", "importance_score": 10 },
+      {
+        "feature_type": "visual_pattern",
+        "feature_value": "Pix printed alignment pattern",
+        "importance_score": 9
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "tp5-pix",
+    "name": "TP5 Pix 2021",
+    "slug": "taylormade-tp5-pix-2021",
+    "release_year": 2021,
+    "msrp_usd": 49.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 5,
+      "cover_material": "urethane",
+      "compression": 87,
+      "dimple_count": 322,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "TP5 Pix", "importance_score": 10 },
+      {
+        "feature_type": "visual_pattern",
+        "feature_value": "Pix printed alignment pattern",
+        "importance_score": 9
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "taylormade",
+    "family_slug": "tour-response-stripe",
+    "name": "Tour Response Stripe 2022",
+    "slug": "taylormade-tour-response-stripe-2022",
+    "release_year": 2022,
+    "msrp_usd": 39.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "TaylorMade", "importance_score": 10 },
+      {
+        "feature_type": "model_text",
+        "feature_value": "Tour Response Stripe",
+        "importance_score": 10
+      },
+      { "feature_type": "visual_pattern", "feature_value": "Stripe pattern", "importance_score": 8 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "z-star-diamond",
+    "name": "Z-Star Diamond 2021",
+    "slug": "srixon-z-star-diamond-2021",
+    "release_year": 2021,
+    "msrp_usd": 47.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 92,
+      "dimple_count": 338,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Srixon", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Z-Star Diamond", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "z-star-diamond",
+    "name": "Z-Star Diamond 2023",
+    "slug": "srixon-z-star-diamond-2023",
+    "release_year": 2023,
+    "msrp_usd": 47.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 92,
+      "dimple_count": 338,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Srixon", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Z-Star Diamond", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "q-star-tour-divide",
+    "name": "Q-Star Tour Divide 2021",
+    "slug": "srixon-q-star-tour-divide-2021",
+    "release_year": 2021,
+    "msrp_usd": 44.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 83,
+      "dimple_count": 338,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Srixon", "importance_score": 10 },
+      {
+        "feature_type": "model_text",
+        "feature_value": "Q-Star Tour Divide",
+        "importance_score": 10
+      },
+      {
+        "feature_type": "color",
+        "feature_value": "Half white / half yellow",
+        "importance_score": 9
+      }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "ad333-tour",
+    "name": "AD333 Tour 2015",
+    "slug": "srixon-ad333-tour-2015",
+    "release_year": 2015,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Srixon", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "AD333 Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "ad333-tour",
+    "name": "AD333 Tour 2017",
+    "slug": "srixon-ad333-tour-2017",
+    "release_year": 2017,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Srixon", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "AD333 Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "srixon",
+    "family_slug": "ad333-tour",
+    "name": "AD333 Tour 2019",
+    "slug": "srixon-ad333-tour-2019",
+    "release_year": 2019,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Srixon", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "AD333 Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "e6",
+    "name": "e6 2006",
+    "slug": "bridgestone-e6-2006",
+    "release_year": 2006,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 65,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Bridgestone", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "e6", "importance_score": 10 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "e6",
+    "name": "e6 2008",
+    "slug": "bridgestone-e6-2008",
+    "release_year": 2008,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 65,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Bridgestone", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "e6", "importance_score": 10 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "e6",
+    "name": "e6 2011",
+    "slug": "bridgestone-e6-2011",
+    "release_year": 2011,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 65,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Bridgestone", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "e6", "importance_score": 10 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "e6",
+    "name": "e6 2013",
+    "slug": "bridgestone-e6-2013",
+    "release_year": 2013,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 65,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Bridgestone", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "e6", "importance_score": 10 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "e7",
+    "name": "e7 2011",
+    "slug": "bridgestone-e7-2011",
+    "release_year": 2011,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "surlyn",
+      "compression": 70,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Bridgestone", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "e7", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "e7",
+    "name": "e7 2013",
+    "slug": "bridgestone-e7-2013",
+    "release_year": 2013,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "surlyn",
+      "compression": 70,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Bridgestone", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "e7", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "e7",
+    "name": "e7 2015",
+    "slug": "bridgestone-e7-2015",
+    "release_year": 2015,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "surlyn",
+      "compression": 70,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Bridgestone", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "e7", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "e7",
+    "name": "e7 2017",
+    "slug": "bridgestone-e7-2017",
+    "release_year": 2017,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "surlyn",
+      "compression": 70,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Bridgestone", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "e7", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "b-xs",
+    "name": "B XS 2016",
+    "slug": "bridgestone-b-xs-2016",
+    "release_year": 2016,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 60,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Bridgestone", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "B XS", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "b-xs",
+    "name": "B XS 2018",
+    "slug": "bridgestone-b-xs-2018",
+    "release_year": 2018,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 60,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Bridgestone", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "B XS", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "extra-soft",
+    "name": "Extra Soft 2018",
+    "slug": "bridgestone-extra-soft-2018",
+    "release_year": 2018,
+    "msrp_usd": 24.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 40,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Bridgestone", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Extra Soft", "importance_score": 10 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "extra-soft",
+    "name": "Extra Soft 2020",
+    "slug": "bridgestone-extra-soft-2020",
+    "release_year": 2020,
+    "msrp_usd": 24.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 40,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Bridgestone", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Extra Soft", "importance_score": 10 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "bridgestone",
+    "family_slug": "extra-soft",
+    "name": "Extra Soft 2022",
+    "slug": "bridgestone-extra-soft-2022",
+    "release_year": 2022,
+    "msrp_usd": 24.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 40,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Bridgestone", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Extra Soft", "importance_score": 10 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "vice",
+    "family_slug": "pro-drip",
+    "name": "Vice Pro Drip 2019",
+    "slug": "vice-pro-drip-2019",
+    "release_year": 2019,
+    "msrp_usd": 34.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Vice", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro Drip", "importance_score": 10 },
+      {
+        "feature_type": "visual_pattern",
+        "feature_value": "Drip splatter pattern",
+        "importance_score": 9
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "vice",
+    "family_slug": "pro-drip",
+    "name": "Vice Pro Drip 2021",
+    "slug": "vice-pro-drip-2021",
+    "release_year": 2021,
+    "msrp_usd": 34.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Vice", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro Drip", "importance_score": 10 },
+      {
+        "feature_type": "visual_pattern",
+        "feature_value": "Drip splatter pattern",
+        "importance_score": 9
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "vice",
+    "family_slug": "pro-drip",
+    "name": "Vice Pro Drip 2023",
+    "slug": "vice-pro-drip-2023",
+    "release_year": 2023,
+    "msrp_usd": 34.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Vice", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro Drip", "importance_score": 10 },
+      {
+        "feature_type": "visual_pattern",
+        "feature_value": "Drip splatter pattern",
+        "importance_score": 9
+      }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "vice",
+    "family_slug": "pro-zero",
+    "name": "Vice Pro Zero 2019",
+    "slug": "vice-pro-zero-2019",
+    "release_year": 2019,
+    "msrp_usd": 29.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Vice", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro Zero", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "vice",
+    "family_slug": "pro-zero",
+    "name": "Vice Pro Zero 2021",
+    "slug": "vice-pro-zero-2021",
+    "release_year": 2021,
+    "msrp_usd": 29.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Vice", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Pro Zero", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "wilson",
+    "family_slug": "staff-model-x",
+    "name": "Staff Model X 2022",
+    "slug": "wilson-staff-model-x-2022",
+    "release_year": 2022,
+    "msrp_usd": 44.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 90,
+      "dimple_count": 362,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Wilson Staff", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Model X", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "wilson",
+    "family_slug": "staff-model-x",
+    "name": "Staff Model X 2024",
+    "slug": "wilson-staff-model-x-2024",
+    "release_year": 2024,
+    "msrp_usd": 44.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 90,
+      "dimple_count": 362,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Wilson Staff", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Model X", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "wilson",
+    "family_slug": "zip",
+    "name": "Wilson Zip 2008",
+    "slug": "wilson-zip-2008",
+    "release_year": 2008,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Wilson", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Zip", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "wilson",
+    "family_slug": "zip",
+    "name": "Wilson Zip 2010",
+    "slug": "wilson-zip-2010",
+    "release_year": 2010,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Wilson", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Zip", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "wilson",
+    "family_slug": "zip",
+    "name": "Wilson Zip 2012",
+    "slug": "wilson-zip-2012",
+    "release_year": 2012,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Wilson", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Zip", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "wilson",
+    "family_slug": "zip",
+    "name": "Wilson Zip 2014",
+    "slug": "wilson-zip-2014",
+    "release_year": 2014,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Wilson", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Zip", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "wilson",
+    "family_slug": "zip",
+    "name": "Wilson Zip 2016",
+    "slug": "wilson-zip-2016",
+    "release_year": 2016,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Wilson", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Zip", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "wilson",
+    "family_slug": "zip",
+    "name": "Wilson Zip 2018",
+    "slug": "wilson-zip-2018",
+    "release_year": 2018,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Wilson", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Zip", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "volvik",
+    "family_slug": "vivid-xt",
+    "name": "Vivid XT 2019",
+    "slug": "volvik-vivid-xt-2019",
+    "release_year": 2019,
+    "msrp_usd": 44.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "matte",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Volvik", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Vivid XT", "importance_score": 10 },
+      { "feature_type": "finish", "feature_value": "Matte finish", "importance_score": 8 }
+    ],
+    "segments": ["colored"]
+  },
+  {
+    "brand_slug": "volvik",
+    "family_slug": "vivid-xt",
+    "name": "Vivid XT 2021",
+    "slug": "volvik-vivid-xt-2021",
+    "release_year": 2021,
+    "msrp_usd": 44.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "matte",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Volvik", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Vivid XT", "importance_score": 10 },
+      { "feature_type": "finish", "feature_value": "Matte finish", "importance_score": 8 }
+    ],
+    "segments": ["colored"]
+  },
+  {
+    "brand_slug": "volvik",
+    "family_slug": "s4",
+    "name": "Volvik S4 2019",
+    "slug": "volvik-s4-2019",
+    "release_year": 2019,
+    "msrp_usd": 39.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Volvik", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "S4", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "volvik",
+    "family_slug": "s4",
+    "name": "Volvik S4 2021",
+    "slug": "volvik-s4-2021",
+    "release_year": 2021,
+    "msrp_usd": 39.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Volvik", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "S4", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "volvik",
+    "family_slug": "s4",
+    "name": "Volvik S4 2023",
+    "slug": "volvik-s4-2023",
+    "release_year": 2023,
+    "msrp_usd": 39.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Volvik", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "S4", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "volvik",
+    "family_slug": "power-soft",
+    "name": "Volvik Power Soft 2020",
+    "slug": "volvik-power-soft-2020",
+    "release_year": 2020,
+    "msrp_usd": 29.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 50,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "matte",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Volvik", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Power Soft", "importance_score": 10 },
+      { "feature_type": "finish", "feature_value": "Matte finish", "importance_score": 7 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "volvik",
+    "family_slug": "power-soft",
+    "name": "Volvik Power Soft 2022",
+    "slug": "volvik-power-soft-2022",
+    "release_year": 2022,
+    "msrp_usd": 29.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 50,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "matte",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Volvik", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Power Soft", "importance_score": 10 },
+      { "feature_type": "finish", "feature_value": "Matte finish", "importance_score": 7 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "mizuno",
+    "family_slug": "rb-max",
+    "name": "RB Max 2020",
+    "slug": "mizuno-rb-max-2020",
+    "release_year": 2020,
+    "msrp_usd": 34.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 75,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Mizuno", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RB Max", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "mizuno",
+    "family_slug": "rb-max",
+    "name": "RB Max 2022",
+    "slug": "mizuno-rb-max-2022",
+    "release_year": 2022,
+    "msrp_usd": 34.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 75,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Mizuno", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RB Max", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "mizuno",
+    "family_slug": "rb-max",
+    "name": "RB Max 2024",
+    "slug": "mizuno-rb-max-2024",
+    "release_year": 2024,
+    "msrp_usd": 34.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 75,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Mizuno", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RB Max", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "mizuno",
+    "family_slug": "rb-max-soft",
+    "name": "RB Max Soft 2021",
+    "slug": "mizuno-rb-max-soft-2021",
+    "release_year": 2021,
+    "msrp_usd": 29.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 55,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Mizuno", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RB Max Soft", "importance_score": 10 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "mizuno",
+    "family_slug": "rb-max-soft",
+    "name": "RB Max Soft 2023",
+    "slug": "mizuno-rb-max-soft-2023",
+    "release_year": 2023,
+    "msrp_usd": 29.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 55,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Mizuno", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RB Max Soft", "importance_score": 10 }
+    ],
+    "segments": ["soft"]
+  },
+  {
+    "brand_slug": "mizuno",
+    "family_slug": "rb-566v",
+    "name": "RB 566V 2021",
+    "slug": "mizuno-rb-566v-2021",
+    "release_year": 2021,
+    "msrp_usd": 39.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 85,
+      "dimple_count": 566,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Mizuno", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RB 566V", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "mizuno",
+    "family_slug": "rb-566v",
+    "name": "RB 566V 2023",
+    "slug": "mizuno-rb-566v-2023",
+    "release_year": 2023,
+    "msrp_usd": 39.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 85,
+      "dimple_count": 566,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Mizuno", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RB 566V", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "rzn",
+    "name": "Nike RZN Black 2013",
+    "slug": "nike-rzn-black-2013",
+    "release_year": 2013,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 90,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "white"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RZN Black", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "rzn",
+    "name": "Nike RZN White 2013",
+    "slug": "nike-rzn-white-2013",
+    "release_year": 2013,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RZN White", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "rzn",
+    "name": "Nike RZN Black 2014",
+    "slug": "nike-rzn-black-2014",
+    "release_year": 2014,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 90,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "white"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RZN Black", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "rzn",
+    "name": "Nike RZN Platinum 2014",
+    "slug": "nike-rzn-platinum-2014",
+    "release_year": 2014,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "RZN Platinum", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "one-tour",
+    "name": "Nike One Tour 2010",
+    "slug": "nike-one-tour-2010",
+    "release_year": 2010,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 90,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "One Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "one-tour",
+    "name": "Nike One Tour D 2010",
+    "slug": "nike-one-tour-d-2010",
+    "release_year": 2010,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "One Tour D", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "one-tour",
+    "name": "Nike One Tour 2012",
+    "slug": "nike-one-tour-2012",
+    "release_year": 2012,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 90,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "One Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "mojo",
+    "name": "Nike Mojo 2011",
+    "slug": "nike-mojo-2011",
+    "release_year": 2011,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 60,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Mojo", "importance_score": 10 },
+      {
+        "feature_type": "color",
+        "feature_value": "Available in multiple colors",
+        "importance_score": 7
+      }
+    ],
+    "segments": ["colored"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "mojo",
+    "name": "Nike Mojo 2013",
+    "slug": "nike-mojo-2013",
+    "release_year": 2013,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 60,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Mojo", "importance_score": 10 },
+      {
+        "feature_type": "color",
+        "feature_value": "Available in multiple colors",
+        "importance_score": 7
+      }
+    ],
+    "segments": ["colored"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "mojo",
+    "name": "Nike Mojo 2015",
+    "slug": "nike-mojo-2015",
+    "release_year": 2015,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 60,
+      "launch_profile": "mid",
+      "spin_profile": "low",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Mojo", "importance_score": 10 },
+      {
+        "feature_type": "color",
+        "feature_value": "Available in multiple colors",
+        "importance_score": 7
+      }
+    ],
+    "segments": ["colored"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "20xi",
+    "name": "20XI X 2012",
+    "slug": "nike-20xi-x-2012",
+    "release_year": 2012,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 96,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "firm"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "20XI X", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "nike",
+    "family_slug": "20xi",
+    "name": "20XI S 2012",
+    "slug": "nike-20xi-s-2012",
+    "release_year": 2012,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 86,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Nike", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "20XI S", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "maxfli",
+    "family_slug": "tour-s",
+    "name": "Maxfli Tour S 2020",
+    "slug": "maxfli-tour-s-2020",
+    "release_year": 2020,
+    "msrp_usd": 29.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Maxfli", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Tour S", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "maxfli",
+    "family_slug": "tour-s",
+    "name": "Maxfli Tour S 2022",
+    "slug": "maxfli-tour-s-2022",
+    "release_year": 2022,
+    "msrp_usd": 29.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Maxfli", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Tour S", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "maxfli",
+    "family_slug": "tour-s",
+    "name": "Maxfli Tour S 2024",
+    "slug": "maxfli-tour-s-2024",
+    "release_year": 2024,
+    "msrp_usd": 29.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 80,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Maxfli", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Tour S", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "snell",
+    "family_slug": "mtb-red",
+    "name": "MTB Red 2019",
+    "slug": "snell-mtb-red-2019",
+    "release_year": 2019,
+    "msrp_usd": 37.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 75,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Snell", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "MTB Red", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "snell",
+    "family_slug": "mtb-red",
+    "name": "MTB Red 2021",
+    "slug": "snell-mtb-red-2021",
+    "release_year": 2021,
+    "msrp_usd": 37.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 75,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Snell", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "MTB Red", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "snell",
+    "family_slug": "mtb-red",
+    "name": "MTB Red 2023",
+    "slug": "snell-mtb-red-2023",
+    "release_year": 2023,
+    "msrp_usd": 37.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 75,
+      "launch_profile": "mid",
+      "spin_profile": "mid",
+      "feel_profile": "soft"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Snell", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "MTB Red", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "oncore",
+    "family_slug": "vero-x2",
+    "name": "Vero X2 2022",
+    "slug": "oncore-vero-x2-2022",
+    "release_year": 2022,
+    "msrp_usd": 39.99,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 88,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "OnCore", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Vero X2", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "oncore",
+    "family_slug": "vero-x2",
+    "name": "Vero X2 2024",
+    "slug": "oncore-vero-x2-2024",
+    "release_year": 2024,
+    "msrp_usd": 39.99,
+    "status": "published",
+    "specs": {
+      "construction_layers": 4,
+      "cover_material": "urethane",
+      "compression": 88,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "OnCore", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Vero X2", "importance_score": 10 }
+    ],
+    "segments": ["tour-premium"]
+  },
+  {
+    "brand_slug": "top-flite",
+    "family_slug": "gamer-tour",
+    "name": "Gamer Tour 2011",
+    "slug": "top-flite-gamer-tour-2011",
+    "release_year": 2011,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Top Flite", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Gamer Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "top-flite",
+    "family_slug": "gamer-tour",
+    "name": "Gamer Tour 2013",
+    "slug": "top-flite-gamer-tour-2013",
+    "release_year": 2013,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 3,
+      "cover_material": "urethane",
+      "compression": 85,
+      "launch_profile": "mid",
+      "spin_profile": "high",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Top Flite", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Gamer Tour", "importance_score": 10 }
+    ],
+    "segments": ["tour-performance"]
+  },
+  {
+    "brand_slug": "pinnacle",
+    "family_slug": "gold",
+    "name": "Pinnacle Gold FE 2000",
+    "slug": "pinnacle-gold-fe-2000",
+    "release_year": 2000,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 90,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Pinnacle", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Gold FE", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
+  },
+  {
+    "brand_slug": "pinnacle",
+    "family_slug": "gold",
+    "name": "Pinnacle Gold LS 2002",
+    "slug": "pinnacle-gold-ls-2002",
+    "release_year": 2002,
+    "status": "discontinued",
+    "specs": {
+      "construction_layers": 2,
+      "cover_material": "surlyn",
+      "compression": 80,
+      "launch_profile": "high",
+      "spin_profile": "low",
+      "feel_profile": "medium"
+    },
+    "visual": {
+      "finish": "glossy",
+      "number_color": "black"
+    },
+    "features": [
+      { "feature_type": "brand_text", "feature_value": "Pinnacle", "importance_score": 10 },
+      { "feature_type": "model_text", "feature_value": "Gold LS", "importance_score": 10 }
+    ],
+    "segments": ["distance"]
   }
 ]

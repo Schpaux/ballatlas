@@ -43,8 +43,9 @@
 │                                                                  │
 │  PostgreSQL              Auth            Storage                  │
 │  ├── brands              ├── Email/PWD   ├── ball-images          │
-│  ├── ball_families       ├── OAuth       ├── identification-uploads│
-│  ├── ball_versions       └── RLS         └── admin-assets         │
+│  ├── ball_families       ├── OAuth       ├── brand-assets (pub)   │
+│  ├── ball_versions       └── RLS         ├── identification-uploads│
+│  ├── brand_assets                        └── admin-assets         │
 │  ├── technical_specs                                              │
 │  ├── visual_signatures                                            │
 │  ├── identification_features                                      │
@@ -52,7 +53,7 @@
 │  ├── segments / version_segments                                  │
 │  ├── sources / price_observations                                 │
 │  ├── feedback_submissions                                         │
-│  └── [pgvector Phase 8]                                          │
+│  └── [pgvector Phase 9]                                          │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -117,6 +118,7 @@ use it cleanly. Keep it pure: TypeScript + Zod + `packages/types` only.
 | Identification features | `packages/golf-data`       | Supabase `identification_features` |
 | Market segments         | `packages/golf-data`       | Supabase `segments`                |
 | Price observations      | `packages/golf-data`       | Supabase `price_observations`      |
+| Brand assets            | `apps/web` upload handlers | Supabase Storage `brand-assets`    |
 | Ball images             | `apps/web` upload handlers | Supabase Storage `ball-images`     |
 | User accounts           | Supabase Auth              | Supabase `auth.users`              |
 | API keys                | `apps/api` [Phase 6]       | Supabase `api_keys`                |
@@ -167,6 +169,7 @@ Regenerate manually after any migration, commit the updated file with the migrat
 
 | Bucket           | Access      | Purpose                                 |
 | ---------------- | ----------- | --------------------------------------- |
+| `brand-assets`   | Public read | Approved brand logos, marks, references |
 | `ball-images`    | Public read | Official golf ball product images       |
 | `identification` | Private     | User-uploaded images for identification |
 | `admin-assets`   | Private     | Internal admin uploads                  |
@@ -198,6 +201,7 @@ app/
 ├── (admin)/
 │   └── admin/
 │       ├── layout.tsx          ← Admin nav layout
+│       ├── brand-assets/       ← /admin/brand-assets (SVG/PNG upload, review)
 │       └── ...                 ← Admin CRUD pages (including /admin/feedback)
 ├── api/                        ← Internal route handlers
 │   ├── balls/route.ts          ← GET /api/balls (list + filter)
@@ -270,7 +274,47 @@ Tune weights without touching the algorithm.
 
 ---
 
-## Future AI Architecture (Phase 8)
+## Identification Architecture (Phase 7)
+
+### packages/golf-data/src/identification/
+
+Deterministic evidence-based identification engine. Framework-free — pure TypeScript.
+
+```
+packages/golf-data/src/identification/
+├── config.ts    ← IdentificationWeights, DEFAULT_IDENTIFICATION_WEIGHTS, thresholds
+├── engine.ts    ← identifyBall(), ObservedFeatures, IdentificationResult
+├── coverage.ts  ← computeIdentificationCoverage(), IdentificationCoverageSummary
+├── contracts.ts ← FeatureExtractionInput, FeatureExtractionResult (AI readiness)
+└── index.ts     ← barrel export
+```
+
+**Separation of concerns:** BallAtlas owns identification logic. Future AI systems own feature extraction only.
+
+```
+Image (Phase 9)
+    ↓
+FeatureExtractionResult (AI output — same shape as ObservedFeatures)
+    ↓
+identifyBall(observedFeatures, candidates)   ← BallAtlas engine
+    ↓
+IdentificationResult[] (ranked, scored, explained)
+```
+
+**Identification feature types (Phase 7 additions):** `play_number`, `number_style`, `visual_pattern`
+
+### Route: POST /api/identify
+
+Loads all published candidates from Supabase, calls `identifyBall()`, returns ranked results.
+
+### Page: /identify
+
+Feature-driven identification UI. User inputs brand, logo text, alignment, number color, etc.
+No image upload. No AI. Returns ranked candidates with confidence and evidence explanation.
+
+---
+
+## Future AI Architecture (Phase 9)
 
 ### Vector Search Pipeline
 
@@ -289,15 +333,15 @@ Optional: LLM reranking + explanation
 ### AI Package Structure
 
 ```
-packages/ai/ [Phase 7]
+packages/ai/ [Phase 9]
 ├── src/
 │   ├── embeddings.ts     ← Generate and store embeddings
 │   ├── search.ts         ← Semantic search interface
-│   ├── identification.ts ← Image-to-ball matching
+│   ├── identification.ts ← Image feature extraction (produces FeatureExtractionResult)
 │   └── chat.ts           ← Conversational AI interface
 ```
 
-### pgvector Setup (Phase 8)
+### pgvector Setup (Phase 9)
 
 ```sql
 -- Enable extension (run in Supabase SQL editor for production)
@@ -312,7 +356,7 @@ CREATE INDEX ON golf_balls USING ivfflat (embedding vector_cosine_ops);
 
 ---
 
-## Future API Architecture (Phase 7)
+## Future API Architecture (Phase 8)
 
 ### API Design Principles
 
@@ -404,4 +448,4 @@ See `docs/imports/pipeline.md` for full pipeline documentation.
 
 ---
 
-_Last updated: 2026-06-09 — Phase 5 intelligence architecture, Phase 5 routes, phase renumbering_
+_Last updated: 2026-06-10 — Phase 6: brand_assets table, brand-assets storage bucket, /admin/brand-assets route_

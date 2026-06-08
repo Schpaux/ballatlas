@@ -628,5 +628,287 @@
     "first_release_year": 2008,
     "last_release_year": 2016,
     "status": "discontinued"
+  },
+
+  {
+    "brand_slug": "titleist",
+    "name": "NXT Tour",
+    "slug": "nxt-tour",
+    "description": "Titleist's mid-tier 2-piece ionomer ball positioned below Pro V1, offering good distance and feel for mid-handicap players.",
+    "first_release_year": 2006,
+    "last_release_year": 2014,
+    "status": "discontinued"
+  },
+  {
+    "brand_slug": "titleist",
+    "name": "NXT Tour S",
+    "slug": "nxt-tour-s",
+    "description": "Softer version of the NXT Tour with enhanced feel around the greens. 2-piece with surlyn cover.",
+    "first_release_year": 2010,
+    "last_release_year": 2014,
+    "status": "discontinued"
+  },
+  {
+    "brand_slug": "titleist",
+    "name": "DT TruSoft",
+    "slug": "dt-trusoft",
+    "description": "Titleist's entry-level soft ball with very low compression for golfers seeking maximum softness at an accessible price.",
+    "first_release_year": 2014,
+    "last_release_year": 2018,
+    "status": "discontinued"
+  },
+
+  {
+    "brand_slug": "callaway",
+    "name": "Chrome Soft Triple Track",
+    "slug": "chrome-soft-triple-track",
+    "description": "Chrome Soft variant featuring the Triple Track alignment system — three parallel Callaway blue lines for putting alignment.",
+    "first_release_year": 2020,
+    "status": "published"
+  },
+  {
+    "brand_slug": "callaway",
+    "name": "Chrome Soft X LS",
+    "slug": "chrome-soft-x-ls",
+    "description": "Low-spin variant of Chrome Soft X designed for faster swing speeds seeking a lower, more penetrating ball flight.",
+    "first_release_year": 2022,
+    "status": "published"
+  },
+  {
+    "brand_slug": "callaway",
+    "name": "Supersoft Magma",
+    "slug": "supersoft-magma",
+    "description": "Vividly coloured Supersoft variant in orange and other Magma colours, same ultra-low compression formula as standard Supersoft.",
+    "first_release_year": 2022,
+    "status": "published"
+  },
+  {
+    "brand_slug": "callaway",
+    "name": "Hex Chrome",
+    "slug": "hex-chrome",
+    "description": "Callaway's mid-tier 3-piece ionomer ball with HEX aerodynamics, bridging the gap between Supersoft and Chrome Soft.",
+    "first_release_year": 2014,
+    "last_release_year": 2016,
+    "status": "discontinued"
+  },
+
+  {
+    "brand_slug": "taylormade",
+    "name": "TP5 PIX",
+    "slug": "tp5-pix",
+    "description": "TP5 variant with TaylorMade's Pix alignment system — geometric pattern of dots on the ball surface for enhanced alignment.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+  {
+    "brand_slug": "taylormade",
+    "name": "Tour Response Stripe",
+    "slug": "tour-response-stripe",
+    "description": "Tour Response with a high-visibility stripe alignment aid printed directly on the ball for improved putting setup.",
+    "first_release_year": 2022,
+    "status": "published"
+  },
+  {
+    "brand_slug": "taylormade",
+    "name": "Project (a)",
+    "slug": "project-a",
+    "description": "TaylorMade's mid-performance 3-piece ionomer ball aimed at the aspiring golfer seeking tour-like feel without full tour ball pricing.",
+    "first_release_year": 2012,
+    "last_release_year": 2016,
+    "status": "discontinued"
+  },
+
+  {
+    "brand_slug": "srixon",
+    "name": "Z-Star Diamond",
+    "slug": "z-star-diamond",
+    "description": "Srixon's highest-tier tour ball above Z-Star XV, featuring 4-piece construction and FastLayer core for maximum spin and control.",
+    "first_release_year": 2021,
+    "status": "published"
+  },
+  {
+    "brand_slug": "srixon",
+    "name": "Q-Star Tour Divide",
+    "slug": "q-star-tour-divide",
+    "description": "Q-Star Tour variant with a distinctive two-tone Divide hemisphere paint pattern for enhanced visibility and alignment.",
+    "first_release_year": 2021,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "bridgestone",
+    "name": "e7",
+    "slug": "e7",
+    "description": "Bridgestone's straightness-focused distance ball for moderate swing speeds, predecessor to the e12 line.",
+    "first_release_year": 2011,
+    "last_release_year": 2017,
+    "status": "discontinued"
+  },
+  {
+    "brand_slug": "bridgestone",
+    "name": "B XS",
+    "slug": "b-xs",
+    "description": "Bridgestone's short-lived 4-piece tour ball predecessor to the Tour B XS line, with Reactiv urethane cover.",
+    "first_release_year": 2016,
+    "last_release_year": 2019,
+    "status": "discontinued"
+  },
+  {
+    "brand_slug": "bridgestone",
+    "name": "Extra Soft",
+    "slug": "extra-soft",
+    "description": "Bridgestone's low-compression recreational ball for slower swing speeds seeking a soft feel at an accessible price.",
+    "first_release_year": 2018,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "vice",
+    "name": "Pro DRIP",
+    "slug": "pro-drip",
+    "description": "Vice Pro variant featuring a distinctive drip/splatter paint design, same core performance as the standard Pro.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+  {
+    "brand_slug": "vice",
+    "name": "Pro Zero",
+    "slug": "pro-zero",
+    "description": "Minimalist, no-logo version of the Vice Pro with plain white finish and no branding for a clean aesthetic.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "wilson",
+    "name": "Staff Model X",
+    "slug": "staff-model-x",
+    "description": "Wilson's firmer, higher-spinning tour ball for faster swing speed players demanding maximum greenside spin.",
+    "first_release_year": 2022,
+    "status": "published"
+  },
+  {
+    "brand_slug": "wilson",
+    "name": "ZIP",
+    "slug": "zip",
+    "description": "Wilson's long-running 2-piece distance ball known for durability and consistent flight.",
+    "first_release_year": 2008,
+    "last_release_year": 2018,
+    "status": "discontinued"
+  },
+
+  {
+    "brand_slug": "volvik",
+    "name": "Vivid XT",
+    "slug": "vivid-xt",
+    "description": "Volvik's firmer, higher-compression variant of the Vivid in the same matte-finish coloured format.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+  {
+    "brand_slug": "volvik",
+    "name": "S4",
+    "slug": "s4",
+    "description": "Volvik's premium tour-level urethane ball in a glossy finish, targeting better players seeking greenside control.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+  {
+    "brand_slug": "volvik",
+    "name": "Power Soft",
+    "slug": "power-soft",
+    "description": "Volvik's low-compression recreational ball combining soft feel with the brand's characteristic vibrant colours.",
+    "first_release_year": 2020,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "mizuno",
+    "name": "RB Max",
+    "slug": "rb-max",
+    "description": "Mizuno's distance-focused ball for moderate swing speeds with a large core and low-drag aerodynamics.",
+    "first_release_year": 2020,
+    "status": "published"
+  },
+  {
+    "brand_slug": "mizuno",
+    "name": "RB Max Soft",
+    "slug": "rb-max-soft",
+    "description": "Softer companion to the RB Max with lower compression for players prioritising feel and softer impact sensation.",
+    "first_release_year": 2021,
+    "status": "published"
+  },
+  {
+    "brand_slug": "mizuno",
+    "name": "RB 566 V",
+    "slug": "rb-566v",
+    "description": "Voluminous micro-dimple variant of the RB 566 with an even higher dimple count for consistent aerodynamics.",
+    "first_release_year": 2021,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "nike",
+    "name": "RZN",
+    "slug": "rzn",
+    "description": "Nike's RZN-technology tour balls featuring a reactive polymer lattice core for energy efficiency. Discontinued when Nike exited equipment.",
+    "first_release_year": 2013,
+    "last_release_year": 2016,
+    "status": "discontinued"
+  },
+  {
+    "brand_slug": "nike",
+    "name": "One Tour",
+    "slug": "one-tour",
+    "description": "Nike's premium 4-piece tour ball from the One family, predecessor to the RZN line.",
+    "first_release_year": 2010,
+    "last_release_year": 2013,
+    "status": "discontinued"
+  },
+  {
+    "brand_slug": "nike",
+    "name": "Mojo",
+    "slug": "mojo",
+    "description": "Nike's colourful recreational 2-piece ball available in multiple bright colours for visibility and fun.",
+    "first_release_year": 2011,
+    "last_release_year": 2016,
+    "status": "discontinued"
+  },
+
+  {
+    "brand_slug": "maxfli",
+    "name": "Tour S",
+    "slug": "tour-s",
+    "description": "Maxfli's softer tour ball, a lower-compression alternative to the Tour X for players preferring a softer feel.",
+    "first_release_year": 2020,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "snell",
+    "name": "MTB Red",
+    "slug": "mtb-red",
+    "description": "Snell's softer, lower-compression MTB variant designed for moderate swing speeds and players who prefer a softer feel.",
+    "first_release_year": 2019,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "oncore",
+    "name": "Vero X2",
+    "slug": "vero-x2",
+    "description": "OnCore's next-generation premium tour ball successor to the Vero X1, with refined aerodynamics and updated cover compound.",
+    "first_release_year": 2022,
+    "status": "published"
+  },
+
+  {
+    "brand_slug": "top-flite",
+    "name": "Gamer Tour",
+    "slug": "gamer-tour",
+    "description": "Top Flite's urethane-covered performance ball positioned above the standard Gamer, aimed at better players.",
+    "first_release_year": 2011,
+    "last_release_year": 2014,
+    "status": "discontinued"
   }
 ]
