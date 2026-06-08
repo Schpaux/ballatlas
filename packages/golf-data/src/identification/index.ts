@@ -1,23 +1,24 @@
-// Identification framework — Phase 5 placeholder
-//
-// This module will contain:
-//   - Image preprocessing utilities
-//   - Feature extraction interfaces
-//   - Similarity matching logic
-//   - Confidence scoring
-//
-// All identification_features and visual_signatures data collected in Phase 2
-// will feed directly into this module in Phase 5.
-//
-// See docs/decisions/ADR-004 for why these are first-class DB entities.
+export type { IdentificationWeights } from './config'
+export {
+  DEFAULT_IDENTIFICATION_WEIGHTS,
+  IDENTIFICATION_CONFIDENCE_THRESHOLD,
+  IDENTIFICATION_MAX_RESULTS,
+} from './config'
 
-export type IdentificationResult = {
-  version_id: string
-  confidence: number
-  matched_features: string[]
-}
+export type {
+  ObservedFeatures,
+  IdentificationCandidate,
+  MatchedFeature,
+  IdentificationResult,
+} from './engine'
+export { identifyBall } from './engine'
 
-export type IdentificationRequest = {
-  image_path: string
-  extracted_features?: Record<string, string>
-}
+export type {
+  CandidateCoverageInput,
+  IdentificationReadiness,
+  VersionCoverage,
+  IdentificationCoverageSummary,
+} from './coverage'
+export { computeIdentificationCoverage } from './coverage'
+
+export type { FeatureExtractionInput, FeatureExtractionResult, FeatureCategory } from './contracts'

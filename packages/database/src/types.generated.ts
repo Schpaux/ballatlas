@@ -5,7 +5,7 @@
 // This file is tracked in git so CI doesn't need supabase CLI installed.
 // Regenerate whenever the database schema changes.
 //
-// Last manually updated: 2026-06-09 (Phase 5 — feedback_submissions table, feedback_type enum)
+// Last manually updated: 2026-06-10 (Phase 6 — brand_assets table, brand_asset_type enum, asset_review_status enum, brands identity columns)
 
 export type Json =
   | string
@@ -26,6 +26,8 @@ export type Database = {
           country: string | null
           website: string | null
           logo_url: string | null
+          primary_color: string | null
+          secondary_color: string | null
           created_at: string
           updated_at: string
         }
@@ -36,6 +38,8 @@ export type Database = {
           country?: string | null
           website?: string | null
           logo_url?: string | null
+          primary_color?: string | null
+          secondary_color?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -46,10 +50,77 @@ export type Database = {
           country?: string | null
           website?: string | null
           logo_url?: string | null
+          primary_color?: string | null
+          secondary_color?: string | null
           created_at?: string
           updated_at?: string
         }
         Relationships: []
+      }
+      brand_assets: {
+        Row: {
+          id: string
+          brand_id: string
+          asset_type: Database['public']['Enums']['brand_asset_type']
+          storage_path: string
+          mime_type: string
+          file_size_bytes: number | null
+          source_url: string | null
+          attribution: string | null
+          license: string | null
+          alt_text: string | null
+          review_status: Database['public']['Enums']['asset_review_status']
+          quality_score: number | null
+          uploaded_at: string
+          reviewed_at: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          brand_id: string
+          asset_type: Database['public']['Enums']['brand_asset_type']
+          storage_path: string
+          mime_type: string
+          file_size_bytes?: number | null
+          source_url?: string | null
+          attribution?: string | null
+          license?: string | null
+          alt_text?: string | null
+          review_status?: Database['public']['Enums']['asset_review_status']
+          quality_score?: number | null
+          uploaded_at?: string
+          reviewed_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          brand_id?: string
+          asset_type?: Database['public']['Enums']['brand_asset_type']
+          storage_path?: string
+          mime_type?: string
+          file_size_bytes?: number | null
+          source_url?: string | null
+          attribution?: string | null
+          license?: string | null
+          alt_text?: string | null
+          review_status?: Database['public']['Enums']['asset_review_status']
+          quality_score?: number | null
+          uploaded_at?: string
+          reviewed_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'brand_assets_brand_id_fkey'
+            columns: ['brand_id']
+            isOneToOne: false
+            referencedRelation: 'brands'
+            referencedColumns: ['id']
+          },
+        ]
       }
       ball_families: {
         Row: {
@@ -684,6 +755,18 @@ export type Database = {
     Views: Record<string, never>
     Functions: Record<string, never>
     Enums: {
+      brand_asset_type:
+        | 'logo_svg'
+        | 'logo_png'
+        | 'brand_mark'
+        | 'hero_image'
+        | 'packaging'
+        | 'identification_reference'
+      asset_review_status:
+        | 'uploaded'
+        | 'pending_review'
+        | 'approved'
+        | 'archived'
       alias_type_enum:
         | 'common_name'
         | 'abbreviation'
@@ -715,6 +798,9 @@ export type Database = {
         | 'color'
         | 'dimple_pattern'
         | 'special_marking'
+        | 'play_number'
+        | 'number_style'
+        | 'visual_pattern'
     }
     CompositeTypes: Record<string, never>
   }

@@ -35,6 +35,74 @@ type BrandDetail = {
   families: FamilyWithVersions[]
 }
 
+// ── Logo resolution ───────────────────────────────────────────────────────────
+//
+// Resolves the best available logo for a brand using the three-level chain:
+// 1. Approved SVG from brand_assets
+// 2. Approved PNG from brand_assets
+// 3. Legacy brands.logo_url
+
+type LogoRef = {
+  url: string
+  mime_type: string
+  alt_text: string | null
+} | null
+
+async function resolveBrandLogo(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  brandId: string,
+  brandName: string,
+  legacyLogoUrl: string | null
+): Promise<LogoRef> {
+  const { data: svgAsset } = await supabase
+    .from('brand_assets')
+    .select('storage_path, mime_type, alt_text')
+    .eq('brand_id', brandId)
+    .eq('asset_type', 'logo_svg')
+    .eq('review_status', 'approved')
+    .order('quality_score', { ascending: false, nullsFirst: false })
+    .limit(1)
+    .maybeSingle()
+
+  if (svgAsset) {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    return {
+      url: `${supabaseUrl}/storage/v1/object/public/brand-assets/${svgAsset.storage_path}`,
+      mime_type: 'image/svg+xml',
+      alt_text: svgAsset.alt_text ?? `${brandName} logo`,
+    }
+  }
+
+  const { data: pngAsset } = await supabase
+    .from('brand_assets')
+    .select('storage_path, mime_type, alt_text')
+    .eq('brand_id', brandId)
+    .eq('asset_type', 'logo_png')
+    .eq('review_status', 'approved')
+    .order('quality_score', { ascending: false, nullsFirst: false })
+    .limit(1)
+    .maybeSingle()
+
+  if (pngAsset) {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    return {
+      url: `${supabaseUrl}/storage/v1/object/public/brand-assets/${pngAsset.storage_path}`,
+      mime_type: 'image/png',
+      alt_text: pngAsset.alt_text ?? `${brandName} logo`,
+    }
+  }
+
+  if (legacyLogoUrl) {
+    return {
+      url: legacyLogoUrl,
+      mime_type: 'image/png',
+      alt_text: `${brandName} logo`,
+    }
+  }
+
+  return null
+}
+
 // ── Data fetching ─────────────────────────────────────────────────────────────
 
 async function getBrandDetail(slug: string): Promise<BrandDetail | null> {
@@ -157,6 +225,9 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ sl
 
   if (!brand) notFound()
 
+  const supabase = await createClient()
+  const logo = await resolveBrandLogo(supabase, brand.id, brand.name, brand.logo_url)
+
   const totalVersions = brand.families.reduce((sum, f) => sum + f.versions.length, 0)
   const segments = topSegments(brand.families)
   const activeFamilies = brand.families.filter(
@@ -180,7 +251,17 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ sl
 
         {/* Brand header */}
         <div className="mb-10">
-          <div className="mb-1 flex items-center gap-3">
+          <div className="mb-3 flex items-center gap-3">
+            {logo && (
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md border border-white/[0.08] bg-white/[0.04] p-1.5">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={logo.url}
+                  alt={logo.alt_text ?? `${brand.name} logo`}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+            )}
             {brand.country && (
               <span className="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-xs text-neutral-500">
                 {brand.country}

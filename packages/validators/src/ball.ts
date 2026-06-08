@@ -4,12 +4,20 @@ import { SlugSchema } from './common'
 
 export const BallStatusSchema = z.enum(['draft', 'published', 'archived', 'discontinued'])
 
+const cssColorSchema = z
+  .string()
+  .regex(/^(#[0-9a-fA-F]{3,8}|[a-z]+)$/, 'Must be a CSS hex color or named color')
+  .optional()
+  .nullable()
+
 export const BrandSchema = z.object({
   name: z.string().min(1).max(100),
   slug: SlugSchema,
   country: z.string().length(2).toUpperCase().optional().nullable(),
   website: z.string().url().optional().nullable(),
   logo_url: z.string().optional().nullable(),
+  primary_color: cssColorSchema,
+  secondary_color: cssColorSchema,
 })
 
 export const BallFamilySchema = z.object({
