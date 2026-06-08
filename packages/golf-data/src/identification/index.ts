@@ -22,3 +22,10 @@ export type {
 export { computeIdentificationCoverage } from './coverage'
 
 export type { FeatureExtractionInput, FeatureExtractionResult, FeatureCategory } from './contracts'
+
+export type {
+  IdentificationConfidenceInput,
+  IdentificationConfidenceRating,
+  IdentificationConfidenceResult,
+} from './confidence'
+export { computeIdentificationConfidence, CONFIDENCE_RATING_LABELS } from './confidence'

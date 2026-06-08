@@ -10,9 +10,11 @@ import {
   type ObservationInput,
 } from '@ballatlas/golf-data'
 
+import { BallDNACard } from '@/components/registry/BallDNACard'
 import { DataCompletenessCard } from '@/components/registry/DataCompletenessCard'
 import { FeedbackForm } from '@/components/registry/FeedbackForm'
 import { GolfBallSVG } from '@/components/registry/GolfBallSVG'
+import { IdentificationConfidenceCard } from '@/components/registry/IdentificationConfidenceCard'
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
 import { SegmentBadge } from '@/components/registry/SegmentBadge'
 import { SimilarBalls } from '@/components/registry/SimilarBalls'
@@ -86,6 +88,10 @@ type BallDetail = {
     source: { id: string; name: string; url: string | null; reliability_score: number } | null
   }>
   images: Array<{ review_status: string }>
+  identification_features: Array<{
+    feature_type: string
+    importance_score: number
+  }>
 }
 
 // ── Data fetching ─────────────────────────────────────────────────────────────
@@ -117,7 +123,8 @@ async function getBall(slug: string): Promise<BallDetail | null> {
           condition, price, currency, observed_at, is_archived,
           source:sources(id, name, url, reliability_score)
         ),
-        images(review_status)
+        images(review_status),
+        identification_features(feature_type, importance_score)
         `
       )
       .eq('slug', slug)
@@ -231,6 +238,16 @@ export default async function BallDetailPage({
     condition_multipliers: valuationProfile?.condition_multipliers ?? [],
     valuation_rule: valuationProfile?.valuation_rules?.[0] ?? null,
   })
+
+  const dnaInput = {
+    segmentSlugs: segments.filter(Boolean).map((s) => s!.slug),
+    specs: ball.specs,
+  }
+
+  const confidenceInput = {
+    visual: ball.visual,
+    featureTypes: ball.identification_features.map((f) => f.feature_type),
+  }
 
   const hasApprovedImage = ball.images.some((img) => img.review_status === 'approved')
   const completenessInput: CompletenessInput = {
@@ -355,6 +372,13 @@ export default async function BallDetailPage({
           )}
         </div>
 
+        {/* Ball DNA — full-width intelligence section */}
+        <div className="mb-10">
+          <Section title="Ball DNA">
+            <BallDNACard input={dnaInput} />
+          </Section>
+        </div>
+
         {/* Main content grid */}
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_300px]">
           {/* Left column */}
@@ -395,6 +419,8 @@ export default async function BallDetailPage({
 
           {/* Right column */}
           <div className="flex flex-col gap-6">
+            <IdentificationConfidenceCard input={confidenceInput} />
+
             <ValuationCard
               primarySegment={primarySegment?.slug ?? null}
               valuationResult={valuationResult}

@@ -122,7 +122,7 @@ export async function SimilarBalls({
 
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {ranked.map(({ profile, reasons }) => {
+      {ranked.map(({ profile, score, reasons }) => {
         const raw = byId[profile.id]
         if (!raw) return null
 
@@ -152,9 +152,12 @@ export async function SimilarBalls({
                   ? (brand as { name: string }).name
                   : '—'}
               </span>
-              {raw.release_year && (
-                <span className="font-mono text-xs text-neutral-600">{raw.release_year}</span>
-              )}
+              <div className="flex items-center gap-2">
+                {raw.release_year && (
+                  <span className="font-mono text-[11px] text-neutral-700">{raw.release_year}</span>
+                )}
+                <span className="font-mono text-xs font-medium text-emerald-400/70">{score}%</span>
+              </div>
             </div>
             <p className="text-sm font-medium text-neutral-200 transition-colors group-hover:text-white">
               {profile.name}
