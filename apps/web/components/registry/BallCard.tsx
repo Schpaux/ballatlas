@@ -1,7 +1,6 @@
-import type { Route } from 'next'
-import Link from 'next/link'
-
 import { SegmentBadge } from './SegmentBadge'
+
+import { Link } from '@/i18n/navigation'
 
 export type BallCardData = {
   id: string
@@ -38,10 +37,9 @@ export function BallCard({ ball }: { ball: BallCardData }) {
 
   return (
     <Link
-      href={`/balls/${ball.slug}` as Route}
+      href={`/balls/${ball.slug}`}
       className="group flex flex-col gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] p-4 transition-all duration-150 hover:border-white/[0.12] hover:bg-white/[0.04]"
     >
-      {/* Brand + Year row */}
       <div className="flex items-center justify-between">
         <span className="text-xs text-neutral-500">{ball.family?.brand.name ?? '—'}</span>
         <div className="flex items-center gap-2">
@@ -56,12 +54,10 @@ export function BallCard({ ball }: { ball: BallCardData }) {
         </div>
       </div>
 
-      {/* Ball name */}
       <h3 className="text-sm font-medium text-neutral-200 transition-colors group-hover:text-white">
         {ball.name}
       </h3>
 
-      {/* Segments */}
       {segments.length > 0 && (
         <div className="flex flex-wrap gap-1">
           {segments.map((seg) => (
@@ -70,7 +66,6 @@ export function BallCard({ ball }: { ball: BallCardData }) {
         </div>
       )}
 
-      {/* Spec pills */}
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-neutral-500">
         {ball.specs?.construction_layers != null && (
           <span>{ball.specs.construction_layers}-piece</span>
@@ -84,7 +79,6 @@ export function BallCard({ ball }: { ball: BallCardData }) {
         {ball.specs?.cover_material && <span>{ball.specs.cover_material}</span>}
       </div>
 
-      {/* MSRP */}
       {ball.msrp_usd != null && <div className="text-xs text-neutral-600">${ball.msrp_usd}/dz</div>}
     </Link>
   )

@@ -1,0 +1,196 @@
+{
+  "navigation": {
+    "browse": "Søk",
+    "brands": "Merker",
+    "compare": "Sammenlign",
+    "identify": "Identifiser",
+    "admin": "Admin"
+  },
+  "languageSwitcher": {
+    "label": "Språk",
+    "en": "English",
+    "no": "Norsk"
+  },
+  "home": {
+    "liveIndicator": "Golfball-intelligensdatabase",
+    "tagline": "Identifiser, forsk på og verdsett enhver golfball som noen gang er laget.",
+    "searchPlaceholder": "Søk Pro V1, Chrome Soft, TP5…",
+    "stats": {
+      "brands": "Merker",
+      "families": "Familier",
+      "versions": "Versjoner"
+    }
+  },
+  "search": {
+    "title": "Bla gjennom golfballer",
+    "placeholder": "Søk etter golfballer…",
+    "results": "{count, plural, one {# resultat} other {# resultater}}",
+    "resultsFor": "{count, plural, one {# resultat} other {# resultater}} for «{query}»",
+    "noResults": "Ingen resultater for «{query}»",
+    "noResultsHint": "Prøv en annen stavemåte eller bla etter segment.",
+    "noFilterResults": "Ingen baller funnet med disse filtrene.",
+    "previous": "← Forrige",
+    "next": "Neste →",
+    "pageOf": "Side {current} av {total}"
+  },
+  "filters": {
+    "title": "Filtre",
+    "brand": "Merke",
+    "segment": "Segment",
+    "year": "År",
+    "cover": "Dekke",
+    "all": "Alle",
+    "clearFilters": "{count, plural, one {Fjern # filter} other {Fjern # filtre}}"
+  },
+  "ballDetail": {
+    "browse": "Søk",
+    "discontinued": "Utgått",
+    "atLaunch": "${price}/dz ved lansering",
+    "sections": {
+      "technicalSpecs": "Tekniske spesifikasjoner",
+      "visualIdentification": "Visuell identifikasjon",
+      "similarBalls": "Lignende baller",
+      "quickFacts": "Raske fakta",
+      "brand": "Merke"
+    },
+    "specs": {
+      "construction": "Konstruksjon",
+      "constructionPiece": "{layers}-delt",
+      "compression": "Kompresjon",
+      "cover": "Dekke",
+      "year": "År"
+    },
+    "compareCta": "Sammenlign denne ballen →"
+  },
+  "similarBalls": {
+    "comp": "Komp"
+  },
+  "brands": {
+    "title": "Merker",
+    "subtitle": "{count, plural, one {# produsent} other {# produsenter}} i registeret",
+    "models": "{count, plural, one {# modell} other {# modeller}}",
+    "versions": "{count, plural, one {# versjon} other {# versjoner}}",
+    "empty": "Ingen merker i registeret ennå."
+  },
+  "brandDetail": {
+    "breadcrumb": "Merker",
+    "modelLines": "modellserier",
+    "versionsCatalogued": "versjoner katalogisert",
+    "currentLines": "Aktive serier",
+    "discontinuedLines": "Utgåtte serier",
+    "versions": "{count, plural, one {# versjon} other {# versjoner}}",
+    "moreVersions": "+{count} til",
+    "present": "nå",
+    "empty": "Ingen ballfamilier katalogisert for dette merket ennå."
+  },
+  "compare": {
+    "title": "Sammenlign",
+    "subtitle": "Spesifikasjoner side om side for opptil 4 golfballer.",
+    "keyDifferences": "Viktige forskjeller",
+    "emptySearch": "Søk etter en golfball ovenfor for å begynne å sammenligne.",
+    "emptyAddMore": "Legg til minst én ball til for å sammenligne.",
+    "maxBalls": "Maks 4 baller per sammenligning.",
+    "searchPlaceholder": "Søk etter en ball å sammenligne…",
+    "addPlaceholder": "Legg til en annen ball…",
+    "legend": {
+      "highest": "Høyest verdi",
+      "lowest": "Lavest verdi",
+      "unique": "Unik for denne ballen"
+    }
+  },
+  "identify": {
+    "title": "Identifiser en golfball",
+    "description": "Skriv inn det du kan observere om ballen. Jo flere kjennetegn du oppgir, jo mer presis blir resultatet.",
+    "howToUse": "Slik bruker du det",
+    "steps": {
+      "step1": "Skriv inn merkenavnet som er trykket på ballen",
+      "step2": "Legg til modellteksten, f.eks. «Pro V1» eller «Chrome Soft»",
+      "step3": "Merk av linjemerker, nummerfarger eller spesielle mønstre",
+      "step4": "Send inn for å se rangerte kandidater med konfidensskår"
+    },
+    "form": {
+      "brand": "Merke",
+      "brandHint": "f.eks. Titleist, Callaway, TaylorMade",
+      "logoText": "Logotekst",
+      "logoTextHint": "Tekst trykket på ballen, f.eks. Pro V1, Chrome Soft",
+      "alignmentMarking": "Linjemarking",
+      "alignmentMarkingHint": "f.eks. Triple Track, enkeltlinje, pil, ingen",
+      "numberColor": "Nummerfarge",
+      "numberColorHint": "Farge på spillnummeret",
+      "logoStyle": "Logostil",
+      "logoStyleHint": "Visuell stil på merkelogoen, f.eks. Titleist-skrift",
+      "playNumber": "Spillnummer",
+      "playNumberHint": "Nummeret på ballen (1–8)",
+      "coverFinish": "Dekkeoverflate",
+      "coverFinishHint": "Overflatestruktur på ballen",
+      "ballColor": "Ballfarge",
+      "ballColorHint": "Dominerende farge på ballen",
+      "visualPattern": "Visuelt mønster",
+      "visualPatternHint": "Et særpreget overflatemønster, f.eks. Truvis, sekskant, kamuflasje",
+      "select": "Velg…",
+      "submit": "Identifiser ball",
+      "submitting": "Identifiserer…",
+      "reset": "Tilbakestill",
+      "networkError": "Nettverksfeil. Prøv igjen."
+    },
+    "results": {
+      "candidates": "{count, plural, one {# kandidat} other {# kandidater}} funnet",
+      "rankedByConfidence": "Rangert etter konfidens",
+      "noResults": "Ingen kandidater matchet de oppgitte kjennetegnene.",
+      "noResultsHint": "Prøv færre eller andre kjennetegn — merke og logotekst gir sterkest signal.",
+      "closeMatch": "Flere nære kandidater",
+      "closeMatchDescription": "De øverste resultatene er vanskelige å skille med de oppgitte kjennetegnene. Å legge til linjemerker, nummerfarger eller logostil vil innsnevre resultatet."
+    },
+    "evidence": "Bevis",
+    "couldImprove": "Kan forbedres med",
+    "viewFullSpecs": "Se full spesifikasjon →"
+  },
+  "feedback": {
+    "reportIssue": "Rapporter et problem med denne ballen",
+    "reportIssueFor": "Rapporter et problem med",
+    "type": "Type",
+    "message": "Melding",
+    "messageHint": "(obligatorisk, maks 500 tegn)",
+    "sourceUrl": "Kilde-URL",
+    "sourceUrlHint": "(valgfritt)",
+    "email": "E-post",
+    "emailHint": "(valgfritt, for oppfølging)",
+    "submit": "Send inn",
+    "submitting": "Sender inn…",
+    "cancel": "Avbryt",
+    "thanks": "Takk — tilbakemeldingen din er sendt inn og vil bli gjennomgått.",
+    "placeholder": {
+      "message": "Beskriv problemet eller rettelsen…",
+      "sourceUrl": "https://…",
+      "email": "deg@eksempel.no"
+    }
+  },
+  "common": {
+    "notFound": {
+      "title": "Ballen ble ikke funnet",
+      "description": "Denne ballen er kanskje ikke i registeret ennå.",
+      "browseRegistry": "Bla gjennom registeret"
+    }
+  },
+  "metadata": {
+    "home": {
+      "title": "BallAtlas — Golfball-intelligens",
+      "description": "Det mest omfattende golfballregisteret, identifikasjonsplattformen og intelligensdatabasen."
+    },
+    "search": {
+      "title": "Bla gjennom golfballer"
+    },
+    "compare": {
+      "title": "Sammenlign golfballer",
+      "description": "Sammenlign golfballspesifikasjoner side om side. Opptil 4 baller om gangen."
+    },
+    "identify": {
+      "title": "Identifiser en golfball",
+      "description": "Skriv inn observerbare kjennetegn for å identifisere en golfball i BallAtlas-registeret."
+    },
+    "brands": {
+      "title": "Golfballmerker",
+      "description": "Utforsk alle golfballprodusenter i BallAtlas-registeret."
+    }
+  }
+}

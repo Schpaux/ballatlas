@@ -1,12 +1,8 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import createMiddleware from 'next-intl/middleware'
 
-// Session refresh via @supabase/ssr is restored here when auth is implemented (Phase 4+).
-// Supabase-js uses process.version which crashes Edge Runtime — Node.js middleware
-// support is not stable across Next.js 15.x patch versions yet.
-export function middleware(_request: NextRequest) {
-  return NextResponse.next()
-}
+import { routing } from './i18n/routing'
+
+export default createMiddleware(routing)
 
 export const config = {
   matcher: [

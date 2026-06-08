@@ -1,0 +1,196 @@
+{
+  "navigation": {
+    "browse": "Browse",
+    "brands": "Brands",
+    "compare": "Compare",
+    "identify": "Identify",
+    "admin": "Admin"
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "en": "English",
+    "no": "Norsk"
+  },
+  "home": {
+    "liveIndicator": "Golf ball intelligence database",
+    "tagline": "Identify, research, and value any golf ball ever made.",
+    "searchPlaceholder": "Search Pro V1, Chrome Soft, TP5…",
+    "stats": {
+      "brands": "Brands",
+      "families": "Families",
+      "versions": "Versions"
+    }
+  },
+  "search": {
+    "title": "Browse Golf Balls",
+    "placeholder": "Search golf balls…",
+    "results": "{count, plural, one {# result} other {# results}}",
+    "resultsFor": "{count, plural, one {# result} other {# results}} for “{query}”",
+    "noResults": "No results for “{query}”",
+    "noResultsHint": "Try a different spelling or browse by segment.",
+    "noFilterResults": "No balls found with these filters.",
+    "previous": "← Previous",
+    "next": "Next →",
+    "pageOf": "Page {current} of {total}"
+  },
+  "filters": {
+    "title": "Filters",
+    "brand": "Brand",
+    "segment": "Segment",
+    "year": "Year",
+    "cover": "Cover",
+    "all": "All",
+    "clearFilters": "{count, plural, one {Clear # filter} other {Clear # filters}}"
+  },
+  "ballDetail": {
+    "browse": "Browse",
+    "discontinued": "Discontinued",
+    "atLaunch": "${price}/dz at launch",
+    "sections": {
+      "technicalSpecs": "Technical Specifications",
+      "visualIdentification": "Visual Identification",
+      "similarBalls": "Similar Balls",
+      "quickFacts": "Quick Facts",
+      "brand": "Brand"
+    },
+    "specs": {
+      "construction": "Construction",
+      "constructionPiece": "{layers}-piece",
+      "compression": "Compression",
+      "cover": "Cover",
+      "year": "Year"
+    },
+    "compareCta": "Compare this ball →"
+  },
+  "similarBalls": {
+    "comp": "Comp"
+  },
+  "brands": {
+    "title": "Brands",
+    "subtitle": "{count, plural, one {# manufacturer} other {# manufacturers}} in the registry",
+    "models": "{count, plural, one {# model} other {# models}}",
+    "versions": "{count, plural, one {# version} other {# versions}}",
+    "empty": "No brands in the registry yet."
+  },
+  "brandDetail": {
+    "breadcrumb": "Brands",
+    "modelLines": "model lines",
+    "versionsCatalogued": "versions catalogued",
+    "currentLines": "Current Lines",
+    "discontinuedLines": "Discontinued Lines",
+    "versions": "{count, plural, one {# version} other {# versions}}",
+    "moreVersions": "+{count} more",
+    "present": "present",
+    "empty": "No ball families catalogued for this brand yet."
+  },
+  "compare": {
+    "title": "Compare",
+    "subtitle": "Side-by-side specifications for up to 4 golf balls.",
+    "keyDifferences": "Key Differences",
+    "emptySearch": "Search for a golf ball above to start comparing.",
+    "emptyAddMore": "Add at least one more ball to compare.",
+    "maxBalls": "Maximum 4 balls per comparison.",
+    "searchPlaceholder": "Search for a ball to compare…",
+    "addPlaceholder": "Add another ball…",
+    "legend": {
+      "highest": "Highest value",
+      "lowest": "Lowest value",
+      "unique": "Unique to this ball"
+    }
+  },
+  "identify": {
+    "title": "Identify a Golf Ball",
+    "description": "Enter what you can observe about the ball. The more features you provide, the more precise the result.",
+    "howToUse": "How to use",
+    "steps": {
+      "step1": "Enter the brand name printed on the ball",
+      "step2": "Add the model text, e.g. “Pro V1” or “Chrome Soft”",
+      "step3": "Note any alignment markings, number color, or special patterns",
+      "step4": "Submit to see ranked candidates with confidence scores"
+    },
+    "form": {
+      "brand": "Brand",
+      "brandHint": "e.g. Titleist, Callaway, TaylorMade",
+      "logoText": "Logo Text",
+      "logoTextHint": "Text printed on the ball, e.g. Pro V1, Chrome Soft",
+      "alignmentMarking": "Alignment Marking",
+      "alignmentMarkingHint": "e.g. Triple Track, single line, arrow, none",
+      "numberColor": "Number Color",
+      "numberColorHint": "Color of the play number",
+      "logoStyle": "Logo Style",
+      "logoStyleHint": "Visual style of the brand logo, e.g. Titleist script",
+      "playNumber": "Play Number",
+      "playNumberHint": "The number on the ball (1–8)",
+      "coverFinish": "Cover Finish",
+      "coverFinishHint": "Surface texture of the ball",
+      "ballColor": "Ball Color",
+      "ballColorHint": "Dominant color of the ball",
+      "visualPattern": "Visual Pattern",
+      "visualPatternHint": "Any distinctive surface pattern, e.g. Truvis, hexagonal, camo",
+      "select": "Select…",
+      "submit": "Identify Ball",
+      "submitting": "Identifying…",
+      "reset": "Reset",
+      "networkError": "Network error. Please try again."
+    },
+    "results": {
+      "candidates": "{count, plural, one {# candidate} other {# candidates}} found",
+      "rankedByConfidence": "Ranked by confidence",
+      "noResults": "No candidates matched the provided features.",
+      "noResultsHint": "Try fewer or different features — brand and logo text give the strongest signal.",
+      "closeMatch": "Multiple close candidates",
+      "closeMatchDescription": "The top results are difficult to distinguish with the provided features. Adding alignment markings, number color, or logo style will narrow the result."
+    },
+    "evidence": "Evidence",
+    "couldImprove": "Could improve with",
+    "viewFullSpecs": "View full specs →"
+  },
+  "feedback": {
+    "reportIssue": "Report an issue with this ball",
+    "reportIssueFor": "Report an issue with",
+    "type": "Type",
+    "message": "Message",
+    "messageHint": "(required, max 500 chars)",
+    "sourceUrl": "Source URL",
+    "sourceUrlHint": "(optional)",
+    "email": "Email",
+    "emailHint": "(optional, for follow-up)",
+    "submit": "Submit",
+    "submitting": "Submitting…",
+    "cancel": "Cancel",
+    "thanks": "Thanks — your feedback has been submitted and will be reviewed.",
+    "placeholder": {
+      "message": "Describe the issue or correction…",
+      "sourceUrl": "https://…",
+      "email": "you@example.com"
+    }
+  },
+  "common": {
+    "notFound": {
+      "title": "Ball not found",
+      "description": "This ball may not be in the registry yet.",
+      "browseRegistry": "Browse the registry"
+    }
+  },
+  "metadata": {
+    "home": {
+      "title": "BallAtlas — Golf Ball Intelligence",
+      "description": "The most comprehensive golf ball registry, identification platform, and intelligence database."
+    },
+    "search": {
+      "title": "Browse Golf Balls"
+    },
+    "compare": {
+      "title": "Compare Golf Balls",
+      "description": "Compare golf ball specifications side-by-side. Up to 4 balls at once."
+    },
+    "identify": {
+      "title": "Identify a Golf Ball",
+      "description": "Enter observable features to identify any golf ball in the BallAtlas registry."
+    },
+    "brands": {
+      "title": "Golf Ball Brands",
+      "description": "Explore every golf ball manufacturer in the BallAtlas registry."
+    }
+  }
+}

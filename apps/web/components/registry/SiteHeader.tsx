@@ -1,6 +1,12 @@
-import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 
-export function SiteHeader() {
+import { LanguageSwitcher } from './LanguageSwitcher'
+
+import { Link } from '@/i18n/navigation'
+
+export async function SiteHeader() {
+  const t = await getTranslations('navigation')
+
   return (
     <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-neutral-950/90 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
@@ -15,29 +21,30 @@ export function SiteHeader() {
             href="/search"
             className="text-neutral-400 transition-colors hover:text-neutral-100"
           >
-            Browse
+            {t('browse')}
           </Link>
           <Link
             href="/brands"
             className="text-neutral-400 transition-colors hover:text-neutral-100"
           >
-            Brands
+            {t('brands')}
           </Link>
           <Link
             href="/compare"
             className="text-neutral-400 transition-colors hover:text-neutral-100"
           >
-            Compare
+            {t('compare')}
           </Link>
           <Link
             href="/identify"
             className="text-neutral-400 transition-colors hover:text-neutral-100"
           >
-            Identify
+            {t('identify')}
           </Link>
-          <Link href="/admin" className="text-neutral-600 transition-colors hover:text-neutral-400">
-            Admin
-          </Link>
+          <a href="/admin" className="text-neutral-600 transition-colors hover:text-neutral-400">
+            {t('admin')}
+          </a>
+          <LanguageSwitcher />
         </nav>
       </div>
     </header>

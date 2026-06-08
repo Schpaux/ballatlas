@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 
 import {
   computeFieldDiff,
@@ -9,12 +10,27 @@ import {
 import { BallSelector } from '@/components/compare/BallSelector'
 import { CompareTable } from '@/components/compare/CompareTable'
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
+import { locales } from '@/i18n/routing'
+import { env } from '@/lib/env'
 import { createClient } from '@/lib/supabase/server'
 
-export const metadata: Metadata = {
-  title: 'Compare Golf Balls | BallAtlas',
-  description: 'Compare golf ball specifications side-by-side. Up to 4 balls at once.',
-  robots: { index: false },
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'metadata.compare' })
+  const base = env.NEXT_PUBLIC_APP_URL
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    robots: { index: false },
+    alternates: {
+      languages: Object.fromEntries(locales.map((l) => [l, `${base}/${l}/compare`])),
+    },
+  }
 }
 
 async function getBallsForCompare(slugs: string[]): Promise<CompareBallProfile[]> {
@@ -40,7 +56,6 @@ async function getBallsForCompare(slugs: string[]): Promise<CompareBallProfile[]
 
     if (!data) return []
 
-    // Preserve URL order
     const bySlug = Object.fromEntries(data.map((b) => [b.slug, b]))
     return slugs
       .map((slug) => {
@@ -95,19 +110,25 @@ async function getBallsForCompare(slugs: string[]): Promise<CompareBallProfile[]
 }
 
 export default async function ComparePage({
+  params,
   searchParams,
 }: {
+  params: Promise<{ locale: string }>
   searchParams: Promise<{ balls?: string }>
 }) {
+  const { locale } = await params
   const { balls: ballsParam } = await searchParams
 
   const rawSlugs = (ballsParam ?? '')
     .split(',')
     .map((s) => s.trim())
     .filter(Boolean)
-  const slugs = rawSlugs.slice(0, 4) // enforce max 4
+  const slugs = rawSlugs.slice(0, 4)
 
-  const profiles = await getBallsForCompare(slugs)
+  const [profiles, t] = await Promise.all([
+    getBallsForCompare(slugs),
+    getTranslations({ locale, namespace: 'compare' }),
+  ])
 
   const rows = profiles.length >= 2 ? computeFieldDiff(profiles) : []
 
@@ -116,42 +137,36 @@ export default async function ComparePage({
       ? buildDifferenceSummary(profiles[0], profiles[1])
       : []
 
-  // Name map for BallSelector chips
   const selectedNames = Object.fromEntries(profiles.map((p) => [p.slug, p.name]))
 
   return (
     <RegistryLayout>
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold tracking-tight text-neutral-100">Compare</h1>
-          <p className="mt-1 text-sm text-neutral-500">
-            Side-by-side specifications for up to 4 golf balls.
-          </p>
+          <h1 className="text-2xl font-bold tracking-tight text-neutral-100">{t('title')}</h1>
+          <p className="mt-1 text-sm text-neutral-500">{t('subtitle')}</p>
         </div>
 
         <BallSelector selectedSlugs={slugs} selectedNames={selectedNames} />
 
         {profiles.length === 0 && (
           <div className="py-16 text-center">
-            <p className="text-sm text-neutral-600">
-              Search for a golf ball above to start comparing.
-            </p>
+            <p className="text-sm text-neutral-600">{t('emptySearch')}</p>
           </div>
         )}
 
         {profiles.length === 1 && (
           <div className="py-12 text-center">
-            <p className="text-sm text-neutral-600">Add at least one more ball to compare.</p>
+            <p className="text-sm text-neutral-600">{t('emptyAddMore')}</p>
           </div>
         )}
 
         {profiles.length >= 2 && (
           <div className="space-y-8">
-            {/* Difference summary sentences (2-ball mode only) */}
             {differenceSummary.length > 0 && (
               <div className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-4">
                 <p className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-600">
-                  Key Differences
+                  {t('keyDifferences')}
                 </p>
                 <ul className="space-y-1">
                   {differenceSummary.map((sentence, i) => (

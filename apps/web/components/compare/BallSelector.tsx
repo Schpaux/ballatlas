@@ -1,9 +1,10 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { useState, useRef, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
+import { useEffect, useRef, useState } from 'react'
 
 import type { AutocompleteSuggestion } from '@/app/api/autocomplete/route'
+import { useRouter } from '@/i18n/navigation'
 
 type BallSelectorProps = {
   selectedSlugs: string[]
@@ -11,6 +12,7 @@ type BallSelectorProps = {
 }
 
 export function BallSelector({ selectedSlugs, selectedNames }: BallSelectorProps) {
+  const t = useTranslations('compare')
   const router = useRouter()
   const [query, setQuery] = useState('')
   const [suggestions, setSuggestions] = useState<AutocompleteSuggestion[]>([])
@@ -31,7 +33,6 @@ export function BallSelector({ selectedSlugs, selectedNames }: BallSelectorProps
       try {
         const res = await fetch(`/api/autocomplete?q=${encodeURIComponent(query)}`)
         const data: AutocompleteSuggestion[] = await res.json()
-        // Filter out already-selected versions
         const filtered = data.filter((s) => s.type !== 'version' || !selectedSlugs.includes(s.slug))
         setSuggestions(filtered)
         setOpen(filtered.length > 0)
@@ -68,7 +69,6 @@ export function BallSelector({ selectedSlugs, selectedNames }: BallSelectorProps
 
   return (
     <div className="mb-8">
-      {/* Selected chips */}
       {selectedSlugs.length > 0 && (
         <div className="mb-3 flex flex-wrap gap-2">
           {selectedSlugs.map((slug) => (
@@ -89,7 +89,6 @@ export function BallSelector({ selectedSlugs, selectedNames }: BallSelectorProps
         </div>
       )}
 
-      {/* Search input */}
       {canAdd && (
         <div className="relative max-w-md">
           <input
@@ -99,9 +98,7 @@ export function BallSelector({ selectedSlugs, selectedNames }: BallSelectorProps
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => suggestions.length > 0 && setOpen(true)}
             onBlur={() => setTimeout(() => setOpen(false), 150)}
-            placeholder={
-              selectedSlugs.length === 0 ? 'Search for a ball to compare…' : 'Add another ball…'
-            }
+            placeholder={selectedSlugs.length === 0 ? t('searchPlaceholder') : t('addPlaceholder')}
             className="w-full rounded-lg border border-white/[0.08] bg-neutral-900 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 outline-none transition-colors focus:border-white/[0.16]"
           />
           {loading && (
@@ -136,7 +133,7 @@ export function BallSelector({ selectedSlugs, selectedNames }: BallSelectorProps
       )}
 
       {selectedSlugs.length >= 4 && (
-        <p className="mt-2 text-xs text-neutral-600">Maximum 4 balls per comparison.</p>
+        <p className="mt-2 text-xs text-neutral-600">{t('maxBalls')}</p>
       )}
     </div>
   )

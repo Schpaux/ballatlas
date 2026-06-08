@@ -1,12 +1,29 @@
-import type { Metadata, Route } from 'next'
-import Link from 'next/link'
+import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
+import { Link } from '@/i18n/navigation'
+import { locales } from '@/i18n/routing'
+import { env } from '@/lib/env'
 import { createClient } from '@/lib/supabase/server'
 
-export const metadata: Metadata = {
-  title: 'Golf Ball Brands | BallAtlas',
-  description: 'Explore every golf ball manufacturer in the BallAtlas registry.',
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'metadata.brands' })
+  const base = env.NEXT_PUBLIC_APP_URL
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    alternates: {
+      canonical: `${base}/${locale}/brands`,
+      languages: Object.fromEntries(locales.map((l) => [l, `${base}/${l}/brands`])),
+    },
+  }
 }
 
 type BrandStat = {
@@ -34,14 +51,12 @@ async function getBrandsWithStats(): Promise<BrandStat[]> {
 
     if (!brands) return []
 
-    // Group families by brand
     const familiesByBrand = (families ?? []).reduce<Record<string, string[]>>((acc, f) => {
       if (!acc[f.brand_id]) acc[f.brand_id] = []
       acc[f.brand_id]!.push(f.id)
       return acc
     }, {})
 
-    // Group versions by family
     const versionsByFamily = (versions ?? []).reduce<Record<string, number>>((acc, v) => {
       acc[v.family_id] = (acc[v.family_id] ?? 0) + 1
       return acc
@@ -53,35 +68,33 @@ async function getBrandsWithStats(): Promise<BrandStat[]> {
         (sum, fid) => sum + (versionsByFamily[fid] ?? 0),
         0
       )
-      return {
-        ...brand,
-        familyCount: brandFamilyIds.length,
-        versionCount,
-      }
+      return { ...brand, familyCount: brandFamilyIds.length, versionCount }
     })
   } catch {
     return []
   }
 }
 
-export default async function BrandsPage() {
-  const brands = await getBrandsWithStats()
+export default async function BrandsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const [brands, t] = await Promise.all([
+    getBrandsWithStats(),
+    getTranslations({ locale, namespace: 'brands' }),
+  ])
 
   return (
     <RegistryLayout>
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold tracking-tight text-neutral-100">Brands</h1>
-          <p className="mt-1 text-sm text-neutral-500">
-            {brands.length} manufacturer{brands.length !== 1 ? 's' : ''} in the registry
-          </p>
+          <h1 className="text-2xl font-bold tracking-tight text-neutral-100">{t('title')}</h1>
+          <p className="mt-1 text-sm text-neutral-500">{t('subtitle', { count: brands.length })}</p>
         </div>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {brands.map((brand) => (
             <Link
               key={brand.id}
-              href={`/brands/${brand.slug}` as Route}
+              href={`/brands/${brand.slug}`}
               className="group flex flex-col gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] p-4 transition-all hover:border-white/[0.12] hover:bg-white/[0.04]"
             >
               <div className="flex items-start justify-between gap-2">
@@ -95,21 +108,15 @@ export default async function BrandsPage() {
                 )}
               </div>
               <div className="flex gap-4 text-xs text-neutral-600">
-                <span>
-                  {brand.familyCount} model{brand.familyCount !== 1 ? 's' : ''}
-                </span>
-                <span>
-                  {brand.versionCount} version{brand.versionCount !== 1 ? 's' : ''}
-                </span>
+                <span>{t('models', { count: brand.familyCount })}</span>
+                <span>{t('versions', { count: brand.versionCount })}</span>
               </div>
             </Link>
           ))}
         </div>
 
         {brands.length === 0 && (
-          <p className="py-12 text-center text-sm text-neutral-600">
-            No brands in the registry yet.
-          </p>
+          <p className="py-12 text-center text-sm text-neutral-600">{t('empty')}</p>
         )}
       </div>
     </RegistryLayout>

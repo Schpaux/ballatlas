@@ -1,9 +1,12 @@
-import type { Metadata, Route } from 'next'
-import Link from 'next/link'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
 import { SegmentBadge } from '@/components/registry/SegmentBadge'
+import { Link } from '@/i18n/navigation'
+import { locales } from '@/i18n/routing'
+import { env } from '@/lib/env'
 import { createClient } from '@/lib/supabase/server'
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -36,17 +39,8 @@ type BrandDetail = {
 }
 
 // ── Logo resolution ───────────────────────────────────────────────────────────
-//
-// Resolves the best available logo for a brand using the three-level chain:
-// 1. Approved SVG from brand_assets
-// 2. Approved PNG from brand_assets
-// 3. Legacy brands.logo_url
 
-type LogoRef = {
-  url: string
-  mime_type: string
-  alt_text: string | null
-} | null
+type LogoRef = { url: string; mime_type: string; alt_text: string | null } | null
 
 async function resolveBrandLogo(
   supabase: Awaited<ReturnType<typeof createClient>>,
@@ -93,11 +87,7 @@ async function resolveBrandLogo(
   }
 
   if (legacyLogoUrl) {
-    return {
-      url: legacyLogoUrl,
-      mime_type: 'image/png',
-      alt_text: `${brandName} logo`,
-    }
+    return { url: legacyLogoUrl, mime_type: 'image/png', alt_text: `${brandName} logo` }
   }
 
   return null
@@ -137,7 +127,6 @@ async function getBrandDetail(slug: string): Promise<BrandDetail | null> {
       .in('status', ['published', 'discontinued'])
       .order('release_year', { ascending: false })
 
-    // Group versions by family
     const versionsByFamily = (versions ?? []).reduce<
       Record<string, FamilyWithVersions['versions']>
     >((acc, v) => {
@@ -159,10 +148,7 @@ async function getBrandDetail(slug: string): Promise<BrandDetail | null> {
 
     return {
       ...brand,
-      families: families.map((f) => ({
-        ...f,
-        versions: versionsByFamily[f.id] ?? [],
-      })),
+      families: families.map((f) => ({ ...f, versions: versionsByFamily[f.id] ?? [] })),
     }
   } catch {
     return null
@@ -174,31 +160,36 @@ async function getBrandDetail(slug: string): Promise<BrandDetail | null> {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
-  const { slug } = await params
+  const { locale, slug } = await params
   const brand = await getBrandDetail(slug)
   if (!brand) return { title: 'Brand Not Found' }
 
   const totalVersions = brand.families.reduce((sum, f) => sum + f.versions.length, 0)
+  const base = env.NEXT_PUBLIC_APP_URL
+
   return {
     title: `${brand.name} Golf Balls | BallAtlas`,
     description: `${brand.name} golf ball registry — ${brand.families.length} model lines, ${totalVersions} versions catalogued on BallAtlas.`,
+    alternates: {
+      canonical: `${base}/${locale}/brands/${brand.slug}`,
+      languages: Object.fromEntries(locales.map((l) => [l, `${base}/${l}/brands/${brand.slug}`])),
+    },
   }
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-function yearRange(family: FamilyWithVersions): string {
+function yearRange(family: FamilyWithVersions, present: string): string {
   const first = family.first_release_year
   const last = family.last_release_year
   if (!first) return ''
-  if (!last) return `${first}–present`
+  if (!last) return `${first}–${present}`
   if (first === last) return String(first)
   return `${first}–${last}`
 }
 
-// Collect all unique segment slugs+names across a brand's versions, sorted by count
 function topSegments(
   families: FamilyWithVersions[]
 ): { slug: string; name: string; count: number }[] {
@@ -219,9 +210,16 @@ function topSegments(
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
-export default async function BrandDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const brand = await getBrandDetail(slug)
+export default async function BrandDetailPage({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>
+}) {
+  const { locale, slug } = await params
+  const [brand, t] = await Promise.all([
+    getBrandDetail(slug),
+    getTranslations({ locale, namespace: 'brandDetail' }),
+  ])
 
   if (!brand) notFound()
 
@@ -237,13 +235,15 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ sl
     (f) => (f.status === 'discontinued' || f.status === 'archived') && f.versions.length > 0
   )
 
+  const presentLabel = t('present')
+
   return (
     <RegistryLayout>
       <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
         {/* Breadcrumb */}
         <nav className="mb-6 flex items-center gap-2 text-xs text-neutral-600">
           <Link href="/brands" className="transition-colors hover:text-neutral-400">
-            Brands
+            {t('breadcrumb')}
           </Link>
           <span>/</span>
           <span className="text-neutral-500">{brand.name}</span>
@@ -281,23 +281,21 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ sl
             </a>
           )}
 
-          {/* Stats row */}
           <div className="mt-6 flex flex-wrap gap-6 text-sm">
             <div>
               <span className="font-mono text-2xl font-semibold text-neutral-100">
                 {brand.families.length}
               </span>
-              <span className="ml-1.5 text-neutral-500">model lines</span>
+              <span className="ml-1.5 text-neutral-500">{t('modelLines')}</span>
             </div>
             <div>
               <span className="font-mono text-2xl font-semibold text-neutral-100">
                 {totalVersions}
               </span>
-              <span className="ml-1.5 text-neutral-500">versions catalogued</span>
+              <span className="ml-1.5 text-neutral-500">{t('versionsCatalogued')}</span>
             </div>
           </div>
 
-          {/* Segment distribution */}
           {segments.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-2">
               {segments.map((seg) => (
@@ -307,46 +305,66 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ sl
           )}
         </div>
 
-        {/* Active families */}
         {activeFamilies.length > 0 && (
           <section className="mb-10">
             <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-600">
-              Current Lines
+              {t('currentLines')}
             </h2>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {activeFamilies.map((family) => (
-                <FamilyCard key={family.id} family={family} brandSlug={brand.slug} />
+                <FamilyCard
+                  key={family.id}
+                  family={family}
+                  brandSlug={brand.slug}
+                  t={t}
+                  presentLabel={presentLabel}
+                />
               ))}
             </div>
           </section>
         )}
 
-        {/* Discontinued families */}
         {discontinuedFamilies.length > 0 && (
           <section>
             <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-600">
-              Discontinued Lines
+              {t('discontinuedLines')}
             </h2>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {discontinuedFamilies.map((family) => (
-                <FamilyCard key={family.id} family={family} brandSlug={brand.slug} />
+                <FamilyCard
+                  key={family.id}
+                  family={family}
+                  brandSlug={brand.slug}
+                  t={t}
+                  presentLabel={presentLabel}
+                />
               ))}
             </div>
           </section>
         )}
 
         {brand.families.length === 0 && (
-          <p className="py-12 text-center text-sm text-neutral-600">
-            No ball families catalogued for this brand yet.
-          </p>
+          <p className="py-12 text-center text-sm text-neutral-600">{t('empty')}</p>
         )}
       </div>
     </RegistryLayout>
   )
 }
 
-function FamilyCard({ family, brandSlug }: { family: FamilyWithVersions; brandSlug: string }) {
-  const range = yearRange(family)
+type TranslationFn = Awaited<ReturnType<typeof getTranslations>>
+
+function FamilyCard({
+  family,
+  brandSlug,
+  t,
+  presentLabel,
+}: {
+  family: FamilyWithVersions
+  brandSlug: string
+  t: TranslationFn
+  presentLabel: string
+}) {
+  const range = yearRange(family, presentLabel)
   const topSegs = family.versions
     .flatMap((v) => v.segments)
     .reduce<Record<string, string>>((acc, s) => {
@@ -363,7 +381,7 @@ function FamilyCard({ family, brandSlug }: { family: FamilyWithVersions; brandSl
           {range && <p className="mt-0.5 font-mono text-xs text-neutral-600">{range}</p>}
         </div>
         <span className="shrink-0 font-mono text-xs text-neutral-600">
-          {family.versions.length} version{family.versions.length !== 1 ? 's' : ''}
+          {t('versions', { count: family.versions.length })}
         </span>
       </div>
 
@@ -381,13 +399,12 @@ function FamilyCard({ family, brandSlug }: { family: FamilyWithVersions; brandSl
         </div>
       )}
 
-      {/* Version links */}
       {family.versions.length > 0 && (
         <div className="flex flex-wrap gap-2 border-t border-white/[0.04] pt-3">
           {family.versions.slice(0, 6).map((v) => (
             <Link
               key={v.id}
-              href={`/balls/${v.slug}` as Route}
+              href={`/balls/${v.slug}`}
               className="rounded border border-white/[0.06] px-2 py-1 font-mono text-xs text-neutral-500 transition-colors hover:border-white/[0.12] hover:text-neutral-300"
             >
               {v.release_year ?? v.name}
@@ -395,10 +412,10 @@ function FamilyCard({ family, brandSlug }: { family: FamilyWithVersions; brandSl
           ))}
           {family.versions.length > 6 && (
             <Link
-              href={`/search?q=${encodeURIComponent(family.name)}&brand=${brandSlug}` as Route}
+              href={`/search?q=${encodeURIComponent(family.name)}&brand=${brandSlug}`}
               className="rounded border border-white/[0.06] px-2 py-1 font-mono text-xs text-neutral-600 transition-colors hover:text-neutral-400"
             >
-              +{family.versions.length - 6} more
+              {t('moreVersions', { count: family.versions.length - 6 })}
             </Link>
           )}
         </div>

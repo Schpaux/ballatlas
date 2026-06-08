@@ -1,15 +1,31 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
 
 import { BallCard, type BallCardData } from '@/components/registry/BallCard'
 import { FilterPanel } from '@/components/registry/FilterPanel'
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
 import { SearchBar } from '@/components/registry/SearchBar'
+import { locales } from '@/i18n/routing'
+import { env } from '@/lib/env'
 import { createClient } from '@/lib/supabase/server'
 
-export const metadata: Metadata = {
-  title: 'Browse Golf Balls',
-  robots: { index: false },
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'metadata.search' })
+  const base = env.NEXT_PUBLIC_APP_URL
+
+  return {
+    title: t('title'),
+    robots: { index: false },
+    alternates: {
+      languages: Object.fromEntries(locales.map((l) => [l, `${base}/${l}/search`])),
+    },
+  }
 }
 
 type SearchParams = {
@@ -44,8 +60,6 @@ async function searchBalls(params: SearchParams) {
   try {
     const supabase = await createClient()
 
-    // When filtering by segment, collect matching version IDs first via the
-    // version_segments join. This avoids N+1 and works cleanly with pagination.
     let segmentVersionIds: string[] | null = null
     if (segment) {
       const { data: segRows } = await supabase
@@ -53,13 +67,11 @@ async function searchBalls(params: SearchParams) {
         .select('version_id, segment:segments!inner(slug)')
         .eq('segment.slug', segment)
       segmentVersionIds = segRows?.map((r) => r.version_id) ?? []
-      // If segment exists but has no versions, return empty immediately
       if (segmentVersionIds.length === 0) {
         return { balls: [], total: 0, pageNum, pageSize, error: null }
       }
     }
 
-    // Alias lookup — find version IDs matching the query as an alias
     let aliasVersionIds: string[] = []
     if (q) {
       const { data: aliasRows } = await supabase
@@ -96,7 +108,6 @@ async function searchBalls(params: SearchParams) {
     if (compression_min) query = query.gte('specs.compression', parseInt(compression_min, 10))
     if (compression_max) query = query.lte('specs.compression', parseInt(compression_max, 10))
     if (brand) query = query.eq('family.brand.slug', brand)
-    // Segment filter applied as an IN constraint on pre-collected version IDs
     if (segmentVersionIds !== null) query = query.in('id', segmentVersionIds)
 
     const { data: ftsBalls, count, error } = await query
@@ -104,7 +115,6 @@ async function searchBalls(params: SearchParams) {
 
     const ftsData = (ftsBalls ?? []) as BallCardData[]
 
-    // Fetch alias-only hits not already in FTS results (page 1 only)
     let aliasBalls: BallCardData[] = []
     if (pageNum === 1 && aliasVersionIds.length > 0) {
       const ftsIds = new Set(ftsData.map((b) => b.id))
@@ -140,9 +150,10 @@ async function searchBalls(params: SearchParams) {
   }
 }
 
-async function SearchResults({ params }: { params: SearchParams }) {
+async function SearchResults({ params, locale }: { params: SearchParams; locale: string }) {
   const { balls, total, pageNum, pageSize, error } = await searchBalls(params)
   const { q } = params
+  const t = await getTranslations({ locale, namespace: 'search' })
 
   if (error) {
     return (
@@ -156,13 +167,9 @@ async function SearchResults({ params }: { params: SearchParams }) {
     return (
       <div className="py-12 text-center">
         <p className="text-sm text-neutral-400">
-          {q ? `No results for "${q}"` : 'No balls found with these filters.'}
+          {q ? t('noResults', { query: q }) : t('noFilterResults')}
         </p>
-        {q && (
-          <p className="mt-2 text-xs text-neutral-600">
-            Try a different spelling or browse by segment.
-          </p>
-        )}
+        {q && <p className="mt-2 text-xs text-neutral-600">{t('noResultsHint')}</p>}
       </div>
     )
   }
@@ -172,8 +179,7 @@ async function SearchResults({ params }: { params: SearchParams }) {
   return (
     <div>
       <p className="mb-4 text-xs text-neutral-600">
-        {total.toLocaleString()} result{total !== 1 ? 's' : ''}
-        {q ? ` for "${q}"` : ''}
+        {q ? t('resultsFor', { count: total, query: q }) : t('results', { count: total })}
       </p>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -182,7 +188,6 @@ async function SearchResults({ params }: { params: SearchParams }) {
         ))}
       </div>
 
-      {/* Pagination */}
       {totalPages > 1 && (
         <div className="mt-8 flex items-center justify-center gap-3 text-sm">
           {pageNum > 1 && (
@@ -190,18 +195,18 @@ async function SearchResults({ params }: { params: SearchParams }) {
               href={buildPageUrl(params, pageNum - 1)}
               className="rounded-lg border border-white/[0.08] px-4 py-2 text-neutral-400 transition-colors hover:border-white/[0.14] hover:text-neutral-100"
             >
-              ← Previous
+              {t('previous')}
             </a>
           )}
           <span className="text-neutral-600">
-            Page {pageNum} of {totalPages}
+            {t('pageOf', { current: pageNum, total: totalPages })}
           </span>
           {pageNum < totalPages && (
             <a
               href={buildPageUrl(params, pageNum + 1)}
               className="rounded-lg border border-white/[0.08] px-4 py-2 text-neutral-400 transition-colors hover:border-white/[0.14] hover:text-neutral-100"
             >
-              Next →
+              {t('next')}
             </a>
           )}
         </div>
@@ -237,33 +242,32 @@ function ResultsSkeleton() {
 }
 
 export default async function SearchPage({
+  params,
   searchParams,
 }: {
+  params: Promise<{ locale: string }>
   searchParams: Promise<SearchParams>
 }) {
-  const params = await searchParams
-  const [brands] = await Promise.all([getBrands()])
+  const { locale } = await params
+  const sp = await searchParams
+  const [brands, t] = await Promise.all([
+    getBrands(),
+    getTranslations({ locale, namespace: 'search' }),
+  ])
 
   return (
     <RegistryLayout>
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
-        {/* Search bar */}
-        <SearchBar
-          initialValue={params.q ?? ''}
-          placeholder="Search golf balls…"
-          className="mb-6"
-        />
+        <SearchBar initialValue={sp.q ?? ''} placeholder={t('placeholder')} className="mb-6" />
 
         <div className="flex gap-8">
-          {/* Filters — sidebar on desktop, toggle on mobile */}
           <Suspense fallback={null}>
             <FilterPanel brands={brands} />
           </Suspense>
 
-          {/* Results */}
           <div className="min-w-0 flex-1">
             <Suspense fallback={<ResultsSkeleton />}>
-              <SearchResults params={params} />
+              <SearchResults params={sp} locale={locale} />
             </Suspense>
           </div>
         </div>

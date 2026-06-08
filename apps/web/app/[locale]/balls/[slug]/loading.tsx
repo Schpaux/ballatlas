@@ -4,14 +4,11 @@ export default function BallDetailLoading() {
   return (
     <RegistryLayout>
       <div className="mx-auto max-w-4xl animate-pulse px-4 py-8 sm:px-6">
-        {/* Breadcrumb skeleton */}
         <div className="mb-6 flex gap-2">
           {[60, 80, 120].map((w) => (
             <div key={w} className="h-3 rounded bg-white/[0.04]" style={{ width: w }} />
           ))}
         </div>
-
-        {/* Hero skeleton */}
         <div className="mb-10">
           <div className="mb-2 h-4 w-24 rounded bg-white/[0.04]" />
           <div className="mb-3 h-10 w-80 rounded bg-white/[0.06]" />
@@ -20,8 +17,6 @@ export default function BallDetailLoading() {
             <div className="h-5 w-20 rounded-full bg-white/[0.04]" />
           </div>
         </div>
-
-        {/* Content skeleton */}
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_300px]">
           <div className="space-y-8">
             {[1, 2].map((i) => (

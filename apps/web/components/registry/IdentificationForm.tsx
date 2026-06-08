@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import type { IdentificationResult } from '@ballatlas/golf-data'
@@ -47,6 +48,7 @@ type Props = {
 }
 
 export function IdentificationForm({ onResults }: Props) {
+  const t = useTranslations('identify.form')
   const [features, setFeatures] = useState<ObservedFeatures>(EMPTY)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -84,7 +86,7 @@ export function IdentificationForm({ onResults }: Props) {
         onResults(json.data)
       }
     } catch {
-      setError('Network error. Please try again.')
+      setError(t('networkError'))
     } finally {
       setLoading(false)
     }
@@ -98,9 +100,8 @@ export function IdentificationForm({ onResults }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Brand + Logo Text */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Brand" hint="e.g. Titleist, Callaway, TaylorMade">
+        <Field label={t('brand')} hint={t('brandHint')}>
           <input
             type="text"
             value={features.brand}
@@ -109,7 +110,7 @@ export function IdentificationForm({ onResults }: Props) {
             className={inputClass}
           />
         </Field>
-        <Field label="Logo Text" hint="Text printed on the ball, e.g. Pro V1, Chrome Soft">
+        <Field label={t('logoText')} hint={t('logoTextHint')}>
           <input
             type="text"
             value={features.logoText}
@@ -120,9 +121,8 @@ export function IdentificationForm({ onResults }: Props) {
         </Field>
       </div>
 
-      {/* Alignment + Number Color */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Alignment Marking" hint="e.g. Triple Track, single line, arrow, none">
+        <Field label={t('alignmentMarking')} hint={t('alignmentMarkingHint')}>
           <input
             type="text"
             value={features.alignmentMarking}
@@ -131,20 +131,19 @@ export function IdentificationForm({ onResults }: Props) {
             className={inputClass}
           />
         </Field>
-        <Field label="Number Color" hint="Color of the play number">
+        <Field label={t('numberColor')} hint={t('numberColorHint')}>
           <select value={features.numberColor} onChange={set('numberColor')} className={inputClass}>
             {NUMBER_COLOR_OPTIONS.map((o) => (
               <option key={o} value={o}>
-                {o === '' ? 'Select…' : capitalize(o)}
+                {o === '' ? t('select') : capitalize(o)}
               </option>
             ))}
           </select>
         </Field>
       </div>
 
-      {/* Logo Style + Play Number */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Logo Style" hint="Visual style of the brand logo, e.g. Titleist script">
+        <Field label={t('logoStyle')} hint={t('logoStyleHint')}>
           <input
             type="text"
             value={features.logoStyle}
@@ -153,7 +152,7 @@ export function IdentificationForm({ onResults }: Props) {
             className={inputClass}
           />
         </Field>
-        <Field label="Play Number" hint="The number on the ball (1–8)">
+        <Field label={t('playNumber')} hint={t('playNumberHint')}>
           <input
             type="text"
             value={features.playNumber}
@@ -165,18 +164,17 @@ export function IdentificationForm({ onResults }: Props) {
         </Field>
       </div>
 
-      {/* Cover Finish + Primary Color */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Cover Finish" hint="Surface texture of the ball">
+        <Field label={t('coverFinish')} hint={t('coverFinishHint')}>
           <select value={features.coverFinish} onChange={set('coverFinish')} className={inputClass}>
             {FINISH_OPTIONS.map((o) => (
               <option key={o} value={o}>
-                {o === '' ? 'Select…' : capitalize(o)}
+                {o === '' ? t('select') : capitalize(o)}
               </option>
             ))}
           </select>
         </Field>
-        <Field label="Ball Color" hint="Dominant color of the ball">
+        <Field label={t('ballColor')} hint={t('ballColorHint')}>
           <select
             value={features.primaryColor}
             onChange={set('primaryColor')}
@@ -184,18 +182,14 @@ export function IdentificationForm({ onResults }: Props) {
           >
             {COLOR_OPTIONS.map((o) => (
               <option key={o} value={o}>
-                {o === '' ? 'Select…' : capitalize(o)}
+                {o === '' ? t('select') : capitalize(o)}
               </option>
             ))}
           </select>
         </Field>
       </div>
 
-      {/* Visual Pattern */}
-      <Field
-        label="Visual Pattern"
-        hint="Any distinctive surface pattern, e.g. Truvis, hexagonal, camo"
-      >
+      <Field label={t('visualPattern')} hint={t('visualPatternHint')}>
         <input
           type="text"
           value={features.visualPattern}
@@ -217,7 +211,7 @@ export function IdentificationForm({ onResults }: Props) {
           disabled={!hasAnyFeature || loading}
           className="rounded-md bg-white px-4 py-2 text-sm font-medium text-neutral-900 transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
         >
-          {loading ? 'Identifying…' : 'Identify Ball'}
+          {loading ? t('submitting') : t('submit')}
         </button>
         {hasAnyFeature && !loading && (
           <button
@@ -225,7 +219,7 @@ export function IdentificationForm({ onResults }: Props) {
             onClick={handleReset}
             className="text-sm text-neutral-500 transition-colors hover:text-neutral-300"
           >
-            Reset
+            {t('reset')}
           </button>
         )}
       </div>

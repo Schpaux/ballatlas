@@ -1,10 +1,10 @@
-import type { Route } from 'next'
-import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 
 import { rankBySimilarity, type BallProfile } from '@ballatlas/golf-data'
 
 import { SegmentBadge } from './SegmentBadge'
 
+import { Link } from '@/i18n/navigation'
 import { createClient } from '@/lib/supabase/server'
 
 type SimilarBallsProps = {
@@ -31,9 +31,8 @@ export async function SimilarBalls({
 }: SimilarBallsProps) {
   if (segmentIds.length === 0) return null
 
-  const supabase = await createClient()
+  const [supabase, t] = await Promise.all([createClient(), getTranslations('similarBalls')])
 
-  // Fetch a candidate pool: same segments + ±30 compression tolerance
   let query = supabase
     .from('ball_versions')
     .select(
@@ -65,14 +64,12 @@ export async function SimilarBalls({
   const { data } = await query
   if (!data || data.length === 0) return null
 
-  // Filter to candidates sharing at least one segment
   const candidates = data.filter((v) =>
     v.version_segments.some((vs) => vs.segment && segmentIds.includes(vs.segment.id))
   )
 
   if (candidates.length === 0) return null
 
-  // Map to BallProfile shape for the scoring engine
   const reference: BallProfile = {
     id: versionId,
     slug: '',
@@ -119,10 +116,8 @@ export async function SimilarBalls({
   })
 
   const ranked = rankBySimilarity(reference, candidateProfiles)
-
   if (ranked.length === 0) return null
 
-  // Re-join display data from original query results
   const byId = Object.fromEntries(candidates.map((c) => [c.id, c]))
 
   return (
@@ -148,7 +143,7 @@ export async function SimilarBalls({
         return (
           <Link
             key={profile.id}
-            href={`/balls/${profile.slug}` as Route}
+            href={`/balls/${profile.slug}`}
             className="group flex flex-col gap-2 rounded-lg border border-white/[0.06] bg-white/[0.02] p-3 transition-all hover:border-white/[0.12] hover:bg-white/[0.04]"
           >
             <div className="flex items-center justify-between">
@@ -171,7 +166,6 @@ export async function SimilarBalls({
                 ))}
               </div>
             )}
-            {/* Similarity reasons */}
             {reasons.length > 0 && (
               <div className="flex flex-wrap gap-1 border-t border-white/[0.04] pt-2">
                 {reasons.map((r, i) => (
@@ -187,7 +181,9 @@ export async function SimilarBalls({
             {specs && (
               <div className="flex gap-3 text-xs text-neutral-600">
                 {(specs as { compression?: number | null }).compression != null && (
-                  <span>Comp {(specs as { compression: number }).compression}</span>
+                  <span>
+                    {t('comp')} {(specs as { compression: number }).compression}
+                  </span>
                 )}
                 {(specs as { cover_material?: string | null }).cover_material && (
                   <span>{(specs as { cover_material: string }).cover_material}</span>

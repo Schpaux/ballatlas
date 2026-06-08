@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
 
 import {
@@ -17,6 +18,8 @@ import { SimilarBalls } from '@/components/registry/SimilarBalls'
 import { SpecGrid } from '@/components/registry/SpecGrid'
 import { ValuationCard } from '@/components/registry/ValuationCard'
 import { VisualIdentityCard } from '@/components/registry/VisualIdentityCard'
+import { Link } from '@/i18n/navigation'
+import { locales } from '@/i18n/routing'
 import { env } from '@/lib/env'
 import { createClient } from '@/lib/supabase/server'
 
@@ -154,9 +157,9 @@ async function getValuationProfile(primarySegmentSlug: string | null) {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
-  const { slug } = await params
+  const { locale, slug } = await params
   const ball = await getBall(slug)
   if (!ball) return { title: 'Ball Not Found' }
 
@@ -171,35 +174,35 @@ export async function generateMetadata({
     feelProfile: ball.specs?.feel_profile ?? null,
   })
 
+  const base = env.NEXT_PUBLIC_APP_URL
+
   return {
     title: ball.name,
     description: summary,
+    alternates: {
+      canonical: `${base}/${locale}/balls/${ball.slug}`,
+      languages: Object.fromEntries(locales.map((l) => [l, `${base}/${l}/balls/${ball.slug}`])),
+    },
     openGraph: {
       title: `${ball.name} | BallAtlas`,
       description: summary,
-      url: `${env.NEXT_PUBLIC_APP_URL}/balls/${ball.slug}`,
+      url: `${base}/${locale}/balls/${ball.slug}`,
     },
   }
 }
 
-// ── Section wrapper ───────────────────────────────────────────────────────────
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section>
-      <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-600">
-        {title}
-      </h2>
-      {children}
-    </section>
-  )
-}
-
 // ── Page ──────────────────────────────────────────────────────────────────────
 
-export default async function BallDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const ball = await getBall(slug)
+export default async function BallDetailPage({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>
+}) {
+  const { locale, slug } = await params
+  const [ball, t] = await Promise.all([
+    getBall(slug),
+    getTranslations({ locale, namespace: 'ballDetail' }),
+  ])
 
   if (!ball) notFound()
 
@@ -210,7 +213,6 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
 
   const valuationProfile = await getValuationProfile(primarySegment?.slug ?? null)
 
-  // Map observations to engine input shape
   const observations: ObservationInput[] = ball.price_observations.map((o) => ({
     price: o.price,
     currency: o.currency,
@@ -229,7 +231,6 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
     valuation_rule: valuationProfile?.valuation_rules?.[0] ?? null,
   })
 
-  // Data completeness
   const hasApprovedImage = ball.images.some((img) => img.review_status === 'approved')
   const completenessInput: CompletenessInput = {
     specs: ball.specs,
@@ -238,7 +239,6 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
     hasApprovedImage,
   }
 
-  // Build JSON-LD summary
   const summaryText = buildBallSummary({
     name: ball.name,
     segmentSlug: primarySegment?.slug ?? null,
@@ -257,7 +257,7 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
     '@type': 'Product',
     name: ball.name,
     description: summaryText,
-    url: `${env.NEXT_PUBLIC_APP_URL}/balls/${ball.slug}`,
+    url: `${env.NEXT_PUBLIC_APP_URL}/${locale}/balls/${ball.slug}`,
     ...(brand && { brand: { '@type': 'Brand', name: brand.name } }),
     ...(ball.release_year && { releaseDate: String(ball.release_year) }),
   }
@@ -272,29 +272,29 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
       <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
         {/* Breadcrumb */}
         <nav className="mb-6 flex items-center gap-2 text-xs text-neutral-600">
-          <a href="/search" className="transition-colors hover:text-neutral-400">
-            Browse
-          </a>
+          <Link href="/search" className="transition-colors hover:text-neutral-400">
+            {t('browse')}
+          </Link>
           {brand && (
             <>
               <span>/</span>
-              <a
+              <Link
                 href={`/brands/${brand.slug}`}
                 className="transition-colors hover:text-neutral-400"
               >
                 {brand.name}
-              </a>
+              </Link>
             </>
           )}
           {family && (
             <>
               <span>/</span>
-              <a
+              <Link
                 href={`/search?q=${encodeURIComponent(family.name)}`}
                 className="transition-colors hover:text-neutral-400"
               >
                 {family.name}
-              </a>
+              </Link>
             </>
           )}
           <span>/</span>
@@ -307,7 +307,7 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
             {brand && <span className="text-sm font-medium text-neutral-500">{brand.name}</span>}
             {ball.status === 'discontinued' && (
               <span className="rounded-full bg-neutral-800 px-2 py-0.5 text-xs text-neutral-500">
-                Discontinued
+                {t('discontinued')}
               </span>
             )}
           </div>
@@ -324,7 +324,9 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
               <SegmentBadge key={seg!.id} slug={seg!.slug} name={seg!.name} />
             ))}
             {ball.msrp_usd != null && (
-              <span className="text-sm text-neutral-600">${ball.msrp_usd}/dz at launch</span>
+              <span className="text-sm text-neutral-600">
+                {t('atLaunch', { price: ball.msrp_usd })}
+              </span>
             )}
           </div>
 
@@ -339,15 +341,15 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_300px]">
           {/* Left column */}
           <div className="flex flex-col gap-10">
-            <Section title="Technical Specifications">
+            <Section title={t('sections.technicalSpecs')}>
               <SpecGrid specs={ball.specs} />
             </Section>
 
-            <Section title="Visual Identification">
+            <Section title={t('sections.visualIdentification')}>
               <VisualIdentityCard visual={ball.visual} />
             </Section>
 
-            <Section title="Similar Balls">
+            <Section title={t('sections.similarBalls')}>
               <Suspense
                 fallback={
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -386,14 +388,14 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
             {brand && (
               <div className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-4">
                 <p className="mb-1 text-xs font-medium uppercase tracking-wider text-neutral-600">
-                  Brand
+                  {t('sections.brand')}
                 </p>
-                <a
+                <Link
                   href={`/brands/${brand.slug}`}
                   className="text-sm font-medium text-neutral-200 transition-colors hover:text-white"
                 >
                   {brand.name}
-                </a>
+                </Link>
                 {brand.country && (
                   <p className="mt-0.5 text-xs text-neutral-600">{brand.country}</p>
                 )}
@@ -413,30 +415,32 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
             {/* Quick stats */}
             <div className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-4">
               <p className="mb-3 text-xs font-medium uppercase tracking-wider text-neutral-600">
-                Quick Facts
+                {t('sections.quickFacts')}
               </p>
               <div className="flex flex-col gap-2 text-sm">
                 {ball.specs?.construction_layers != null && (
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">Construction</span>
-                    <span className="text-neutral-300">{ball.specs.construction_layers}-piece</span>
+                    <span className="text-neutral-500">{t('specs.construction')}</span>
+                    <span className="text-neutral-300">
+                      {t('specs.constructionPiece', { layers: ball.specs.construction_layers })}
+                    </span>
                   </div>
                 )}
                 {ball.specs?.compression != null && (
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">Compression</span>
+                    <span className="text-neutral-500">{t('specs.compression')}</span>
                     <span className="text-neutral-300">{ball.specs.compression}</span>
                   </div>
                 )}
                 {ball.specs?.cover_material && (
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">Cover</span>
+                    <span className="text-neutral-500">{t('specs.cover')}</span>
                     <span className="text-neutral-300">{ball.specs.cover_material}</span>
                   </div>
                 )}
                 {ball.release_year && (
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">Year</span>
+                    <span className="text-neutral-500">{t('specs.year')}</span>
                     <span className="font-mono text-neutral-300">{ball.release_year}</span>
                   </div>
                 )}
@@ -444,12 +448,12 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
             </div>
 
             {/* Compare link */}
-            <a
+            <Link
               href={`/compare?balls=${ball.slug}`}
               className="block rounded-lg border border-white/[0.06] bg-white/[0.02] p-3 text-center text-xs text-neutral-500 transition-all hover:border-white/[0.12] hover:text-neutral-300"
             >
-              Compare this ball →
-            </a>
+              {t('compareCta')}
+            </Link>
           </div>
         </div>
 
@@ -459,5 +463,16 @@ export default async function BallDetailPage({ params }: { params: Promise<{ slu
         </div>
       </div>
     </RegistryLayout>
+  )
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section>
+      <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-600">
+        {title}
+      </h2>
+      {children}
+    </section>
   )
 }

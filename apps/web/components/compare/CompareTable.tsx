@@ -1,4 +1,10 @@
+'use client'
+
+import { useTranslations } from 'next-intl'
+
 import type { CompareBallProfile, FieldRow, HighlightTag } from '@ballatlas/golf-data'
+
+import { Link } from '@/i18n/navigation'
 
 type CompareTableProps = {
   profiles: CompareBallProfile[]
@@ -33,6 +39,8 @@ function formatValue(value: string | number | null, format?: FieldRow['format'])
 }
 
 export function CompareTable({ profiles, rows }: CompareTableProps) {
+  const t = useTranslations('compare.legend')
+
   if (profiles.length === 0) return null
 
   return (
@@ -45,12 +53,12 @@ export function CompareTable({ profiles, rows }: CompareTableProps) {
               <th key={p.id} className="pb-4 text-left font-normal">
                 <div className="pr-4">
                   <p className="text-xs text-neutral-600">{p.brandName}</p>
-                  <a
+                  <Link
                     href={`/balls/${p.slug}`}
                     className="font-medium text-neutral-200 transition-colors hover:text-white"
                   >
                     {p.name}
-                  </a>
+                  </Link>
                   {p.releaseYear && (
                     <p className="font-mono text-xs text-neutral-600">{p.releaseYear}</p>
                   )}
@@ -61,7 +69,6 @@ export function CompareTable({ profiles, rows }: CompareTableProps) {
         </thead>
         <tbody>
           {rows.map((row) => {
-            // Skip rows where every value is missing
             const allMissing = row.highlights.every((h) => h === 'missing')
             if (allMissing) return null
 
@@ -85,19 +92,18 @@ export function CompareTable({ profiles, rows }: CompareTableProps) {
         </tbody>
       </table>
 
-      {/* Legend */}
       <div className="mt-6 flex flex-wrap gap-4 text-xs text-neutral-600">
         <div className="flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full bg-emerald-600" />
-          Highest value
+          {t('highest')}
         </div>
         <div className="flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full bg-amber-600" />
-          Lowest value
+          {t('lowest')}
         </div>
         <div className="flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full bg-sky-700" />
-          Unique to this ball
+          {t('unique')}
         </div>
       </div>
     </div>

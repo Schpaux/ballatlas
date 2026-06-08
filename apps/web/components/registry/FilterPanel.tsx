@@ -1,8 +1,10 @@
 'use client'
 
-import type { Route } from 'next'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
+
+import { useRouter } from '@/i18n/navigation'
 
 type Brand = { id: string; name: string; slug: string }
 
@@ -17,6 +19,7 @@ const SEGMENTS = [
 const COVER_MATERIALS = ['Urethane', 'Surlyn', 'Ionomer', 'Rubber']
 
 export function FilterPanel({ brands }: { brands: Brand[] }) {
+  const t = useTranslations('filters')
   const router = useRouter()
   const params = useSearchParams()
   const [open, setOpen] = useState(false)
@@ -49,12 +52,12 @@ export function FilterPanel({ brands }: { brands: Brand[] }) {
       Object.entries(current).forEach(([k, v]) => {
         if (v) next.set(k, v)
       })
-      return `/search?${next.toString()}` as Route
+      return `/search?${next.toString()}`
     },
     [q, activeBrand, activeSegment, activeYear, activeCover, activeCompMin, activeCompMax]
   )
 
-  const filterBtn = (label: string, isActive: boolean, href: Route) => (
+  const filterBtn = (label: string, isActive: boolean, href: string) => (
     <a
       key={label}
       href={href}
@@ -74,59 +77,58 @@ export function FilterPanel({ brands }: { brands: Brand[] }) {
 
   const panelContent = (
     <div className="flex flex-col gap-6">
-      {/* Brand */}
       <div>
-        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-600">Brand</p>
+        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-600">
+          {t('brand')}
+        </p>
         <div className="flex flex-wrap gap-1.5">
-          {filterBtn('All', !activeBrand, buildUrl({ brand: '' }))}
+          {filterBtn(t('all'), !activeBrand, buildUrl({ brand: '' }))}
           {brands
             .slice(0, 12)
             .map((b) => filterBtn(b.name, activeBrand === b.slug, buildUrl({ brand: b.slug })))}
         </div>
       </div>
 
-      {/* Segment */}
       <div>
         <p className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-600">
-          Segment
+          {t('segment')}
         </p>
         <div className="flex flex-wrap gap-1.5">
-          {filterBtn('All', !activeSegment, buildUrl({ segment: '' }))}
+          {filterBtn(t('all'), !activeSegment, buildUrl({ segment: '' }))}
           {SEGMENTS.map((s) =>
             filterBtn(s.name, activeSegment === s.slug, buildUrl({ segment: s.slug }))
           )}
         </div>
       </div>
 
-      {/* Year */}
       <div>
-        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-600">Year</p>
+        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-600">
+          {t('year')}
+        </p>
         <div className="flex flex-wrap gap-1.5">
-          {filterBtn('All', !activeYear, buildUrl({ year: '' }))}
+          {filterBtn(t('all'), !activeYear, buildUrl({ year: '' }))}
           {[2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018].map((y) =>
             filterBtn(String(y), activeYear === String(y), buildUrl({ year: String(y) }))
           )}
         </div>
       </div>
 
-      {/* Cover material */}
       <div>
-        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-600">Cover</p>
+        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-600">
+          {t('cover')}
+        </p>
         <div className="flex flex-wrap gap-1.5">
-          {filterBtn('All', !activeCover, buildUrl({ cover: '' }))}
+          {filterBtn(t('all'), !activeCover, buildUrl({ cover: '' }))}
           {COVER_MATERIALS.map((m) => filterBtn(m, activeCover === m, buildUrl({ cover: m })))}
         </div>
       </div>
 
-      {/* Clear all */}
       {activeCount > 0 && (
         <button
-          onClick={() =>
-            router.push((q ? `/search?q=${encodeURIComponent(q)}` : '/search') as Route)
-          }
+          onClick={() => router.push(q ? `/search?q=${encodeURIComponent(q)}` : '/search')}
           className="text-left text-xs text-neutral-600 underline-offset-2 hover:text-neutral-400 hover:underline"
         >
-          Clear {activeCount} filter{activeCount > 1 ? 's' : ''}
+          {t('clearFilters', { count: activeCount })}
         </button>
       )}
     </div>
@@ -148,7 +150,7 @@ export function FilterPanel({ brands }: { brands: Brand[] }) {
               d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25"
             />
           </svg>
-          Filters
+          {t('title')}
           {activeCount > 0 && (
             <span className="rounded-full bg-white/[0.08] px-1.5 py-0.5 text-xs text-neutral-300">
               {activeCount}

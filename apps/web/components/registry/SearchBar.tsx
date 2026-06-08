@@ -1,14 +1,14 @@
 'use client'
 
-import type { Route } from 'next'
-import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import type { AutocompleteSuggestion } from '@/app/api/autocomplete/route'
+import { useRouter } from '@/i18n/navigation'
 
 export function SearchBar({
   initialValue = '',
-  placeholder = 'Search golf balls…',
+  placeholder,
   autoFocus = false,
   className,
 }: {
@@ -17,6 +17,7 @@ export function SearchBar({
   autoFocus?: boolean
   className?: string
 }) {
+  const t = useTranslations('search')
   const router = useRouter()
   const [value, setValue] = useState(initialValue)
   const [suggestions, setSuggestions] = useState<AutocompleteSuggestion[]>([])
@@ -24,6 +25,8 @@ export function SearchBar({
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const acRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [activeIndex, setActiveIndex] = useState(-1)
+
+  const resolvedPlaceholder = placeholder ?? t('placeholder')
 
   useEffect(() => {
     setValue(initialValue)
@@ -33,9 +36,9 @@ export function SearchBar({
     (query: string) => {
       setShowSuggestions(false)
       if (query.trim()) {
-        router.push(`/search?q=${encodeURIComponent(query.trim())}` as Route)
+        router.push(`/search?q=${encodeURIComponent(query.trim())}`)
       } else {
-        router.push('/search' as Route)
+        router.push('/search')
       }
     },
     [router]
@@ -92,7 +95,7 @@ export function SearchBar({
       if (s) {
         if (debounceRef.current) clearTimeout(debounceRef.current)
         setShowSuggestions(false)
-        router.push(s.href as Route)
+        router.push(s.href)
       }
     } else if (e.key === 'Escape') {
       setShowSuggestions(false)
@@ -109,7 +112,7 @@ export function SearchBar({
           onKeyDown={handleKeyDown}
           onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
-          placeholder={placeholder}
+          placeholder={resolvedPlaceholder}
           autoFocus={autoFocus}
           autoComplete="off"
           spellCheck={false}
@@ -128,7 +131,7 @@ export function SearchBar({
                 e.preventDefault()
                 if (debounceRef.current) clearTimeout(debounceRef.current)
                 setShowSuggestions(false)
-                router.push(s.href as Route)
+                router.push(s.href)
               }}
               className={`flex items-center justify-between px-4 py-2.5 text-sm transition-colors ${
                 i === activeIndex ? 'bg-white/[0.06]' : 'hover:bg-white/[0.04]'

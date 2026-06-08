@@ -1,15 +1,12 @@
-import type { Metadata, Route } from 'next'
-import Link from 'next/link'
+import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
 import { SearchBar } from '@/components/registry/SearchBar'
+import { Link } from '@/i18n/navigation'
+import { locales } from '@/i18n/routing'
+import { env } from '@/lib/env'
 import { createClient } from '@/lib/supabase/server'
-
-export const metadata: Metadata = {
-  title: 'BallAtlas — Golf Ball Intelligence',
-  description:
-    'The most comprehensive golf ball registry, identification platform, and intelligence database.',
-}
 
 const POPULAR = [
   { label: 'Pro V1', query: 'Pro V1' },
@@ -19,6 +16,29 @@ const POPULAR = [
   { label: 'Tour B X', query: 'Tour B X' },
   { label: 'Vice Pro', query: 'Vice Pro' },
 ]
+
+export async function generateStaticParams() {
+  return locales.map((locale) => ({ locale }))
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'metadata.home' })
+  const base = env.NEXT_PUBLIC_APP_URL
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    alternates: {
+      canonical: `${base}/${locale}`,
+      languages: Object.fromEntries(locales.map((l) => [l, `${base}/${l}`])),
+    },
+  }
+}
 
 async function getStats() {
   try {
@@ -37,8 +57,9 @@ async function getStats() {
   }
 }
 
-export default async function HomePage() {
-  const stats = await getStats()
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const [stats, t] = await Promise.all([getStats(), getTranslations({ locale, namespace: 'home' })])
 
   return (
     <RegistryLayout>
@@ -52,7 +73,7 @@ export default async function HomePage() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
-              Golf ball intelligence database
+              {t('liveIndicator')}
             </div>
 
             {/* Wordmark */}
@@ -60,19 +81,17 @@ export default async function HomePage() {
               Ball<span className="text-neutral-600">Atlas</span>
             </h1>
 
-            <p className="mb-10 text-base leading-relaxed text-neutral-500">
-              Identify, research, and value any golf ball ever made.
-            </p>
+            <p className="mb-10 text-base leading-relaxed text-neutral-500">{t('tagline')}</p>
 
             {/* Search */}
-            <SearchBar placeholder="Search Pro V1, Chrome Soft, TP5…" autoFocus className="mb-4" />
+            <SearchBar placeholder={t('searchPlaceholder')} autoFocus className="mb-4" />
 
             {/* Popular links */}
             <div className="flex flex-wrap justify-center gap-2">
               {POPULAR.map(({ label, query }) => (
                 <Link
                   key={label}
-                  href={`/search?q=${encodeURIComponent(query)}` as Route}
+                  href={`/search?q=${encodeURIComponent(query)}`}
                   className="rounded-full border border-white/[0.06] bg-white/[0.02] px-3 py-1 text-xs text-neutral-500 transition-colors hover:border-white/[0.10] hover:text-neutral-300"
                 >
                   {label}
@@ -90,19 +109,19 @@ export default async function HomePage() {
                 <p className="font-mono text-2xl font-bold text-neutral-100 sm:text-3xl">
                   {stats.brands}
                 </p>
-                <p className="mt-1 text-xs text-neutral-600">Brands</p>
+                <p className="mt-1 text-xs text-neutral-600">{t('stats.brands')}</p>
               </div>
               <div>
                 <p className="font-mono text-2xl font-bold text-neutral-100 sm:text-3xl">
                   {stats.families}
                 </p>
-                <p className="mt-1 text-xs text-neutral-600">Families</p>
+                <p className="mt-1 text-xs text-neutral-600">{t('stats.families')}</p>
               </div>
               <div>
                 <p className="font-mono text-2xl font-bold text-neutral-100 sm:text-3xl">
                   {stats.versions}
                 </p>
-                <p className="mt-1 text-xs text-neutral-600">Versions</p>
+                <p className="mt-1 text-xs text-neutral-600">{t('stats.versions')}</p>
               </div>
             </div>
           </div>
