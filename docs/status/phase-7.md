@@ -1,6 +1,6 @@
 # Phase 7 — Identification Intelligence & Dataset Expansion
 
-**Status:** In Progress  
+**Status:** Complete  
 **Started:** 2026-06-11
 
 ---
@@ -51,7 +51,7 @@ This is NOT computer vision. This is NOT image recognition. BallAtlas owns ident
 
 ### Workstream 6 — Similarity Integration
 
-- [ ] "Closest alternatives" on /identify when multiple candidates have similar confidence — deferred; similarity engine available for future wiring
+- [x] Ambiguous results banner on /identify when top 2 candidates are within 10 confidence points
 
 ### Workstream 7 — Identification UI
 
@@ -75,7 +75,7 @@ This is NOT computer vision. This is NOT image recognition. BallAtlas owns ident
 - [x] `docs/decisions/ADR-015-identification-intelligence-strategy.md`
 - [x] `docs/identification/README.md`
 - [x] `docs/status/phase-7.md` (this file)
-- [ ] `docs/intelligence/README.md` — update (minor)
+- [x] `docs/intelligence/README.md` — extended with identification engine section
 
 ---
 
@@ -140,4 +140,4 @@ Data quality rule remains in effect: **never fabricate**. Missing specs are acce
 
 ---
 
-_Last updated: 2026-06-11 — Phase 7: Identification Intelligence (dataset expansion stopped at 353 versions)_
+_Last updated: 2026-06-11 — Phase 7: Complete_

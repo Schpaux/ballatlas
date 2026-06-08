@@ -115,3 +115,118 @@ To add a new segment description:
 
 1. Ensure the segment slug is in `SEGMENT_SLUGS` in `packages/golf-data/src/taxonomy/segments.ts`
 2. Add an entry to `SEGMENT_DESCRIPTIONS` in `summaries.ts`
+
+---
+
+# Identification Engine
+
+Phase 7 deterministic identification services in `packages/golf-data/src/identification/`.
+
+Pure functions only — no DB client, no framework imports. The Next.js layer loads candidates; the engine scores them.
+
+---
+
+## Modules
+
+### config.ts — Identification weights
+
+```typescript
+DEFAULT_IDENTIFICATION_WEIGHTS: IdentificationWeights
+IDENTIFICATION_CONFIDENCE_THRESHOLD: number // 30 — minimum confidence to surface a candidate
+IDENTIFICATION_MAX_RESULTS: number // 8
+```
+
+**Weight table (defaults):**
+
+| Factor            | Max points | Signal                                           |
+| ----------------- | ---------- | ------------------------------------------------ |
+| Brand match       | 40         | Brand text or `brandName` contains observed term |
+| Logo text match   | 20         | Model text or `visual.logoText` contains term    |
+| Alignment marking | 15         | Alignment feature or `visual.alignmentMarking`   |
+| Number color      | 10         | Exact match on number color feature              |
+| Logo style        | 5          | Logo feature or `visual.logoStyle` contains term |
+| Play number       | 5          | Exact match on play number feature               |
+| Other visual      | 5          | First match among color, finish, visual_pattern  |
+
+Maximum possible score: 100. Confidence = `rawScore / totalWeight × 100`.
+
+Weights are the tunable surface. Never hardcode points in `engine.ts`.
+
+---
+
+### engine.ts — Scoring engine
+
+**Signature:**
+
+```typescript
+identifyBall(
+  observed: ObservedFeatures,
+  candidates: IdentificationCandidate[],
+  weights?: IdentificationWeights,
+  confidenceThreshold?: number,
+  maxResults?: number
+): IdentificationResult[]
+```
+
+`ObservedFeatures` — all fields optional; at least one must be provided by the caller.  
+`IdentificationCandidate` — pre-loaded from DB by the Next.js layer.  
+Returns results sorted descending by confidence, then rawScore. Candidates below threshold are excluded.
+
+Each `IdentificationResult` includes:
+
+- `confidence` — 0–100, evidence-based (not a probability)
+- `matchedFeatures: MatchedFeature[]` — which features matched and how many points each earned
+- `missingFeatures: string[]` — categories not provided by the user (potential improvement hints)
+- `explanation` — one-sentence plain-English summary
+
+**Matching strategy:**
+
+- Text fields (brand, logoText, alignmentMarking, logoStyle, visualPattern): case-insensitive `includes()` in either direction
+- Enum fields (numberColor, playNumber, coverFinish, primaryColor): case-insensitive exact match
+
+---
+
+### contracts.ts — AI readiness layer
+
+Defines the interface between a future vision pipeline and the identification engine.
+
+```typescript
+FeatureExtractionInput // what a vision pipeline receives (image URL + optional hints)
+FeatureExtractionResult // what a vision pipeline returns — structurally identical to ObservedFeatures
+```
+
+**Critical invariant:** `FeatureExtractionResult` is structurally identical to `ObservedFeatures`. A future AI system produces it; the engine consumes it without modification. This boundary must not drift.
+
+---
+
+### coverage.ts — Identification readiness scoring
+
+```typescript
+computeIdentificationCoverage(versions: CoverageInput[]): IdentificationCoverageReport
+```
+
+Readiness levels per version: `full` | `partial` | `minimal` | `none`.
+
+| Level     | Condition                                       |
+| --------- | ----------------------------------------------- |
+| `full`    | Has brand text + model text + ≥1 other feature  |
+| `partial` | Has brand text or model text                    |
+| `minimal` | Has ≥1 feature but neither brand nor model text |
+| `none`    | No identification features at all               |
+
+Used by `/admin/data-quality` — Identification Readiness section.
+
+---
+
+## Adding a new observed feature
+
+1. Add the field to `ObservedFeatures` in `engine.ts`
+2. Add a weight key to `IdentificationWeights` in `config.ts` and a default value
+3. Add scoring logic in `identifyBall()` following the existing pattern
+4. Update `FeatureExtractionResult` in `contracts.ts` to match
+5. Update this document
+
+## Tuning identification weights
+
+Edit `packages/golf-data/src/identification/config.ts`.  
+Do not touch the algorithm in `engine.ts` — the weights are the only tunable surface.

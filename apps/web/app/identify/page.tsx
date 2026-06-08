@@ -69,6 +69,24 @@ export default function IdentifyPage() {
                   </h2>
                   <p className="text-xs text-neutral-600">Ranked by confidence</p>
                 </div>
+
+                {/* Ambiguous results banner */}
+                {results.length >= 2 &&
+                  results[0] !== undefined &&
+                  results[1] !== undefined &&
+                  results[0].confidence - results[1].confidence <= 10 && (
+                    <div className="rounded-lg border border-amber-500/20 bg-amber-500/[0.04] px-4 py-3">
+                      <p className="text-xs font-medium text-amber-400">
+                        Multiple close candidates
+                      </p>
+                      <p className="mt-0.5 text-xs text-neutral-500">
+                        The top results are difficult to distinguish with the provided features.
+                        Adding alignment markings, number color, or logo style will narrow the
+                        result.
+                      </p>
+                    </div>
+                  )}
+
                 {results.map((result, i) => (
                   <IdentificationResultCard key={result.versionId} result={result} rank={i + 1} />
                 ))}
