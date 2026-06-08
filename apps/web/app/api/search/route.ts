@@ -3,6 +3,16 @@ import { z } from 'zod'
 
 import { createClient } from '@/lib/supabase/server'
 
+function buildPrefixTsQuery(q: string): string {
+  const words = q
+    .replace(/[^a-zA-Z0-9\s]/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+  if (words.length === 0) return ''
+  return words.map((w, i) => (i === words.length - 1 ? `${w}:*` : w)).join(' & ')
+}
+
 const SearchSchema = z.object({
   q: z.string().min(1).max(200),
   page: z.coerce.number().int().positive().default(1),
@@ -47,11 +57,11 @@ export async function GET(request: Request) {
       .from('ball_versions')
       .select(BALL_SELECT, { count: 'exact' })
       .in('status', ['published', 'discontinued'])
-      .textSearch('search_vector', q, { type: 'plain' })
+      .filter('search_vector', 'fts', buildPrefixTsQuery(q))
       .order('release_year', { ascending: false })
       .range(from, to),
 
-    supabase.from('ball_aliases').select('version_id').ilike('alias', q).limit(20),
+    supabase.from('ball_aliases').select('version_id').ilike('alias', `%${q}%`).limit(20),
   ])
 
   if (ftsResult.error) {

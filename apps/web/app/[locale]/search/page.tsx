@@ -49,6 +49,16 @@ async function getBrands() {
   }
 }
 
+function buildPrefixTsQuery(q: string): string {
+  const words = q
+    .replace(/[^a-zA-Z0-9\s]/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+  if (words.length === 0) return ''
+  return words.map((w, i) => (i === words.length - 1 ? `${w}:*` : w)).join(' & ')
+}
+
 async function searchBalls(params: SearchParams) {
   const { q, brand, segment, year, cover, compression_min, compression_max, page = '1' } = params
 
@@ -77,7 +87,7 @@ async function searchBalls(params: SearchParams) {
       const { data: aliasRows } = await supabase
         .from('ball_aliases')
         .select('version_id')
-        .ilike('alias', q)
+        .ilike('alias', `%${q}%`)
         .limit(20)
       aliasVersionIds = aliasRows?.map((r) => r.version_id) ?? []
     }
@@ -102,7 +112,10 @@ async function searchBalls(params: SearchParams) {
       .order('release_year', { ascending: false })
       .range(from, to)
 
-    if (q) query = query.textSearch('search_vector', q, { type: 'plain' })
+    if (q) {
+      const tsQuery = buildPrefixTsQuery(q)
+      if (tsQuery) query = query.filter('search_vector', 'fts', tsQuery)
+    }
     if (year) query = query.eq('release_year', parseInt(year, 10))
     if (cover) query = query.ilike('specs.cover_material', `%${cover}%`)
     if (compression_min) query = query.gte('specs.compression', parseInt(compression_min, 10))
