@@ -1,8 +1,8 @@
 import { getTranslations } from 'next-intl/server'
 
-import { RegistryLayout } from '@/components/registry/RegistryLayout'
-
 import { IdentifyInterface } from './IdentifyInterface'
+
+import { RegistryLayout } from '@/components/registry/RegistryLayout'
 
 export default async function IdentifyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
