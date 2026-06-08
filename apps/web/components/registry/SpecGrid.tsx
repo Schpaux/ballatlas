@@ -11,19 +11,27 @@ type Specs = {
   notes: string | null
 }
 
-function ProfilePills({ levels, value }: { levels: readonly string[]; value: string }) {
+const GAUGE_LEVELS_3 = ['low', 'mid', 'high'] as const
+const GAUGE_LEVELS_FEEL = ['soft', 'medium', 'firm'] as const
+
+function GaugePills({ levels, value }: { levels: readonly string[]; value: string }) {
   return (
     <div className="flex items-center gap-1">
-      {levels.map((level) => (
-        <span
-          key={level}
-          className={`rounded px-2 py-0.5 text-[11px] capitalize transition-colors ${
-            level === value ? 'bg-neutral-700 text-neutral-100' : 'text-neutral-700'
-          }`}
-        >
-          {level}
-        </span>
-      ))}
+      {levels.map((level) => {
+        const isActive = level === value
+        return (
+          <span
+            key={level}
+            className={`rounded px-2 py-0.5 text-[11px] capitalize transition-colors ${
+              isActive
+                ? 'bg-emerald-500/15 text-emerald-400 ring-1 ring-emerald-500/25'
+                : 'text-neutral-700'
+            }`}
+          >
+            {level}
+          </span>
+        )
+      })}
     </div>
   )
 }
@@ -33,6 +41,22 @@ function SpecRow({ label, value }: { label: string; value: React.ReactNode }) {
     <div className="flex items-center justify-between gap-4 py-3">
       <span className="text-sm text-neutral-500">{label}</span>
       <span className="text-right text-sm text-neutral-200">{value}</span>
+    </div>
+  )
+}
+
+function CompressionBar({ value }: { value: number }) {
+  const pct = Math.min(100, (value / 120) * 100)
+  return (
+    <div className="flex items-center gap-3">
+      <div className="relative h-1.5 w-24 overflow-hidden rounded-full bg-neutral-800/80">
+        {/* Track gradient: emerald at low end → neutral at high */}
+        <div
+          className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-emerald-600/80 to-emerald-400/60 transition-all"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+      <span className="font-mono text-neutral-200">{value}</span>
     </div>
   )
 }
@@ -52,25 +76,12 @@ export function SpecGrid({ specs }: { specs: Specs | null }) {
   }
 
   return (
-    <div className="divide-y divide-white/[0.04]">
+    <div className="divide-y divide-white/[0.05]">
       {specs.construction_layers != null && (
         <SpecRow label="Construction" value={`${specs.construction_layers}-piece`} />
       )}
       {specs.compression != null && (
-        <SpecRow
-          label="Compression"
-          value={
-            <div className="flex items-center gap-3">
-              <div className="relative h-1.5 w-20 overflow-hidden rounded-full bg-neutral-800">
-                <div
-                  className="absolute inset-y-0 left-0 rounded-full bg-neutral-400"
-                  style={{ width: `${Math.min(100, (specs.compression / 120) * 100)}%` }}
-                />
-              </div>
-              <span className="font-mono text-neutral-200">{specs.compression}</span>
-            </div>
-          }
-        />
+        <SpecRow label="Compression" value={<CompressionBar value={specs.compression} />} />
       )}
       {specs.cover_material && <SpecRow label="Cover" value={specs.cover_material} />}
       {specs.core_material && <SpecRow label="Core" value={specs.core_material} />}
@@ -81,25 +92,19 @@ export function SpecGrid({ specs }: { specs: Specs | null }) {
       {specs.launch_profile && (
         <SpecRow
           label="Launch"
-          value={
-            <ProfilePills levels={['low', 'mid', 'high'] as const} value={specs.launch_profile} />
-          }
+          value={<GaugePills levels={GAUGE_LEVELS_3} value={specs.launch_profile} />}
         />
       )}
       {specs.spin_profile && (
         <SpecRow
           label="Spin"
-          value={
-            <ProfilePills levels={['low', 'mid', 'high'] as const} value={specs.spin_profile} />
-          }
+          value={<GaugePills levels={GAUGE_LEVELS_3} value={specs.spin_profile} />}
         />
       )}
       {specs.feel_profile && (
         <SpecRow
           label="Feel"
-          value={
-            <ProfilePills levels={['soft', 'medium', 'firm'] as const} value={specs.feel_profile} />
-          }
+          value={<GaugePills levels={GAUGE_LEVELS_FEEL} value={specs.feel_profile} />}
         />
       )}
       {specs.notes && (

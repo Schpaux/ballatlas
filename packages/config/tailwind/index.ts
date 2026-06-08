@@ -64,11 +64,21 @@ export const baseConfig: Partial<Config> = {
           from: { opacity: '0', transform: 'translateY(4px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
+        'glow-pulse': {
+          '0%, 100%': { opacity: '0.5' },
+          '50%': { opacity: '1' },
+        },
+        'atmosphere-drift': {
+          '0%, 100%': { transform: 'translate(-50%, 0) scale(1)' },
+          '50%': { transform: 'translate(-50%, -1%) scale(1.02)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.15s ease-out',
+        'glow-pulse': 'glow-pulse 4s ease-in-out infinite',
+        'atmosphere-drift': 'atmosphere-drift 16s ease-in-out infinite',
       },
     },
   },

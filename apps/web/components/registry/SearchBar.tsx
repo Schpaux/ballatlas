@@ -9,8 +9,8 @@ import { useRouter } from '@/i18n/navigation'
 function SearchIcon() {
   return (
     <svg
-      width="15"
-      height="15"
+      width="16"
+      height="16"
       viewBox="0 0 15 15"
       fill="none"
       className="text-neutral-500"
@@ -131,7 +131,7 @@ export function SearchBar({
   return (
     <div className={`relative ${className ?? ''}`}>
       <form onSubmit={handleSubmit} className="relative">
-        <div className="pointer-events-none absolute inset-y-0 left-4 flex items-center">
+        <div className="pointer-events-none absolute inset-y-0 left-4 flex items-center pl-0.5">
           <SearchIcon />
         </div>
         <input
@@ -146,12 +146,12 @@ export function SearchBar({
           autoComplete="off"
           spellCheck={false}
           aria-autocomplete="list"
-          className="h-12 w-full rounded-xl border border-white/[0.08] bg-white/[0.04] pl-11 pr-4 text-sm text-neutral-100 placeholder-neutral-500 outline-none transition-all duration-150 focus:border-white/[0.18] focus:bg-white/[0.06] focus:ring-1 focus:ring-white/[0.06]"
+          className="h-14 w-full rounded-xl border border-white/[0.10] bg-neutral-900/60 pl-12 pr-4 text-sm text-neutral-100 placeholder-neutral-500 outline-none backdrop-blur-md transition-all duration-200 focus:border-emerald-500/30 focus:bg-neutral-900/80 focus:shadow-[0_0_0_3px_rgba(16,185,129,0.07)]"
         />
       </form>
 
       {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute left-0 right-0 top-full z-50 mt-1.5 overflow-hidden rounded-xl border border-white/[0.08] bg-neutral-900/95 shadow-2xl shadow-black/30 backdrop-blur-md">
+        <div className="absolute left-0 right-0 top-full z-50 mt-1.5 overflow-hidden rounded-xl border border-white/[0.09] bg-neutral-900/90 shadow-[0_24px_48px_rgba(0,0,0,0.45)] backdrop-blur-xl">
           {suggestions.map((s, i) => (
             <a
               key={s.href}
@@ -162,15 +162,17 @@ export function SearchBar({
                 setShowSuggestions(false)
                 router.push(s.href)
               }}
-              className={`flex items-center justify-between px-4 py-2.5 text-sm transition-colors ${
-                i === activeIndex ? 'bg-white/[0.07]' : 'hover:bg-white/[0.04]'
+              className={`flex items-center justify-between px-4 py-3 text-sm transition-colors ${
+                i === activeIndex
+                  ? 'bg-emerald-500/[0.08] text-neutral-100'
+                  : 'text-neutral-300 hover:bg-white/[0.04]'
               }`}
             >
               <div className="flex min-w-0 items-center gap-2.5">
-                <span className="truncate text-neutral-200">{s.name}</span>
+                <span className="truncate">{s.name}</span>
                 {s.meta && <span className="shrink-0 text-xs text-neutral-600">{s.meta}</span>}
               </div>
-              <span className="ml-3 shrink-0 rounded bg-neutral-800 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-neutral-600">
+              <span className="ml-3 shrink-0 rounded border border-white/[0.06] bg-neutral-800/80 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-neutral-500">
                 {TYPE_LABELS[s.type] ?? s.type}
               </span>
             </a>

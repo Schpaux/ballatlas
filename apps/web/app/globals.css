@@ -70,3 +70,31 @@
     color: rgb(209 250 229);
   }
 }
+
+@layer utilities {
+  /* Subtle dot grid — references golf ball dimple pattern */
+  .bg-dot-grid {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Glass material — requires interesting background behind it */
+  .surface-glass {
+    background-color: rgb(15 23 35 / 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Elevated surface — one step above bg-neutral-950 */
+  .surface-elevated {
+    background-color: rgb(17 25 38 / 0.75);
+  }
+
+  /* Emerald focus ring for interactive elements */
+  .focus-ring-emerald:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 1px rgba(16, 185, 129, 0.35),
+      0 0 0 3px rgba(16, 185, 129, 0.08);
+  }
+}

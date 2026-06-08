@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
+import { GolfBallSVG } from '@/components/registry/GolfBallSVG'
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
 import { SearchBar } from '@/components/registry/SearchBar'
 import { Link } from '@/i18n/navigation'
@@ -64,16 +65,30 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <RegistryLayout>
       <div className="flex min-h-[calc(100vh-56px)] flex-col">
-        {/* Hero */}
-        <div className="relative flex flex-1 flex-col items-center justify-center px-4 py-24 sm:px-6">
-          {/* Ambient glow behind search */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[520px] overflow-hidden">
-            <div className="absolute left-1/2 top-20 h-[420px] w-[640px] -translate-x-1/2 rounded-full bg-emerald-500/[0.05] blur-[100px]" />
+        {/* ── Hero ──────────────────────────────────────────────────────────── */}
+        <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden px-4 py-24 sm:px-6">
+          {/* Hero-specific atmosphere — layers on top of the RegistryLayout base glows */}
+          <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+            {/* Concentrated search spotlight — central bright bloom */}
+            <div className="absolute left-1/2 top-1/2 h-[560px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/[0.042] blur-[110px]" />
+            {/* Wider outer haze */}
+            <div className="absolute left-1/2 top-[30%] h-[400px] w-[1000px] -translate-x-1/2 rounded-full bg-teal-500/[0.018] blur-[140px]" />
           </div>
 
-          <div className="relative w-full max-w-xl text-center">
+          {/* Decorative golf ball — atmospheric, right side, hidden on mobile */}
+          <div
+            className="pointer-events-none absolute right-[4%] top-1/2 hidden -translate-y-1/2 opacity-[0.22] sm:block xl:right-[8%]"
+            aria-hidden="true"
+          >
+            {/* Glow behind the ball */}
+            <div className="absolute inset-0 scale-75 rounded-full bg-emerald-500/[0.06] blur-[60px]" />
+            <GolfBallSVG size={400} className="relative" />
+          </div>
+
+          {/* Content — z-10 above the atmospheric layers */}
+          <div className="relative z-10 w-full max-w-xl text-center">
             {/* Live indicator */}
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/[0.06] bg-white/[0.02] px-3 py-1 text-xs text-neutral-500">
+            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.02] px-3.5 py-1.5 text-xs text-neutral-500">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
@@ -81,24 +96,33 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {t('liveIndicator')}
             </div>
 
+            {/* Eyebrow — establishes platform category before the wordmark */}
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-600">
+              Golf Intelligence Platform
+            </p>
+
             {/* Wordmark */}
             <h1 className="mb-5 text-5xl font-bold tracking-tight sm:text-6xl">
               <span className="text-neutral-100">Ball</span>
-              <span className="text-neutral-600">Atlas</span>
+              <span className="text-neutral-700">Atlas</span>
             </h1>
 
             <p className="mb-10 text-base leading-relaxed text-neutral-500">{t('tagline')}</p>
 
-            {/* Search */}
-            <SearchBar placeholder={t('searchPlaceholder')} autoFocus className="mb-5" />
+            {/* Search — wrapped in a spotlight container */}
+            <div className="relative mb-5">
+              {/* Subtle search spotlight glow */}
+              <div className="pointer-events-none absolute -inset-3 rounded-2xl bg-emerald-500/[0.025] blur-xl" />
+              <SearchBar placeholder={t('searchPlaceholder')} autoFocus className="relative" />
+            </div>
 
-            {/* Popular links */}
+            {/* Popular searches */}
             <div className="flex flex-wrap justify-center gap-2">
               {POPULAR.map(({ label, query }) => (
                 <Link
                   key={label}
                   href={`/search?q=${encodeURIComponent(query)}`}
-                  className="rounded-full border border-white/[0.06] bg-white/[0.02] px-3 py-1 text-xs text-neutral-500 transition-all duration-150 hover:border-white/[0.10] hover:bg-white/[0.04] hover:text-neutral-300"
+                  className="rounded-full border border-white/[0.07] bg-white/[0.02] px-3 py-1 text-xs text-neutral-500 transition-all duration-150 hover:border-white/[0.12] hover:bg-white/[0.04] hover:text-neutral-300"
                 >
                   {label}
                 </Link>
@@ -107,10 +131,22 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </div>
 
-        {/* Registry stats */}
-        <div className="border-t border-white/[0.04] px-4 py-10 sm:px-6">
+        {/* ── Registry instrument panel ─────────────────────────────────────── */}
+        <div className="border-t border-white/[0.05] bg-neutral-950/60 px-4 py-10 backdrop-blur-sm sm:px-6">
           <div className="mx-auto max-w-xl">
-            <div className="grid grid-cols-3 divide-x divide-white/[0.04] text-center">
+            {/* Live registry label */}
+            <div className="mb-6 flex items-center justify-center gap-2">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-50" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500/70" />
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.16em] text-neutral-700">
+                Live Registry
+              </span>
+            </div>
+
+            {/* Stats grid */}
+            <div className="grid grid-cols-3 divide-x divide-white/[0.05] text-center">
               <div className="px-4">
                 <p className="font-mono text-3xl font-bold tracking-tight text-neutral-100">
                   {stats.brands}

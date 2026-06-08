@@ -38,10 +38,13 @@ export function BallCard({ ball }: { ball: BallCardData }) {
   return (
     <Link
       href={`/balls/${ball.slug}`}
-      className="group relative flex flex-col gap-3.5 overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 transition-all duration-200 hover:border-white/[0.11] hover:bg-white/[0.035]"
+      className="group relative flex flex-col gap-3.5 overflow-hidden rounded-xl border border-white/[0.07] bg-neutral-900/50 p-5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-px hover:border-white/[0.13] hover:bg-neutral-900/70 hover:shadow-[0_8px_32px_rgba(0,0,0,0.32)]"
     >
-      {/* Emerald accent — slides in on hover */}
-      <div className="absolute inset-y-0 left-0 w-[2px] bg-emerald-500/50 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+      {/* Emerald left accent — gradient, slides in on hover */}
+      <div className="absolute inset-y-0 left-0 w-[2px] bg-gradient-to-b from-emerald-500/70 via-emerald-500/40 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+
+      {/* Top inner highlight — premium glass edge */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
       {/* Brand + year */}
       <div className="flex items-center justify-between gap-2">
@@ -50,7 +53,7 @@ export function BallCard({ ball }: { ball: BallCardData }) {
         </span>
         <div className="flex items-center gap-2">
           {isDiscontinued && (
-            <span className="rounded bg-neutral-800/80 px-1.5 py-0.5 text-[10px] uppercase tracking-widest text-neutral-600">
+            <span className="rounded border border-white/[0.05] bg-neutral-800/70 px-1.5 py-0.5 text-[10px] uppercase tracking-widest text-neutral-600">
               disc
             </span>
           )}

@@ -12,6 +12,7 @@ import {
 
 import { DataCompletenessCard } from '@/components/registry/DataCompletenessCard'
 import { FeedbackForm } from '@/components/registry/FeedbackForm'
+import { GolfBallSVG } from '@/components/registry/GolfBallSVG'
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
 import { SegmentBadge } from '@/components/registry/SegmentBadge'
 import { SimilarBalls } from '@/components/registry/SimilarBalls'
@@ -302,7 +303,15 @@ export default async function BallDetailPage({
         </nav>
 
         {/* Hero */}
-        <div className="mb-12 border-b border-white/[0.04] pb-10">
+        <div className="relative mb-12 overflow-hidden border-b border-white/[0.05] pb-10">
+          {/* Decorative golf ball — atmospheric, right side */}
+          <div
+            className="pointer-events-none absolute -right-10 -top-6 hidden opacity-[0.14] sm:block"
+            aria-hidden="true"
+          >
+            <GolfBallSVG size={240} />
+          </div>
+
           {/* Brand pill + status */}
           <div className="mb-5 flex flex-wrap items-center gap-2">
             {brand && (
@@ -395,7 +404,7 @@ export default async function BallDetailPage({
 
             {/* Brand info */}
             {brand && (
-              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+              <div className="rounded-xl border border-white/[0.08] bg-neutral-900/50 p-4 backdrop-blur-sm">
                 <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-neutral-600">
                   {t('sections.brand')}
                 </p>
@@ -422,7 +431,7 @@ export default async function BallDetailPage({
             )}
 
             {/* Quick stats */}
-            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/50 p-4 backdrop-blur-sm">
               <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.1em] text-neutral-600">
                 {t('sections.quickFacts')}
               </p>
@@ -459,7 +468,7 @@ export default async function BallDetailPage({
             {/* Compare link */}
             <Link
               href={`/compare?balls=${ball.slug}`}
-              className="block rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 text-center text-xs text-neutral-500 transition-all duration-150 hover:border-white/[0.12] hover:bg-white/[0.04] hover:text-neutral-300"
+              className="block rounded-xl border border-white/[0.07] bg-neutral-900/50 p-3 text-center text-xs text-neutral-500 backdrop-blur-sm transition-all duration-150 hover:border-white/[0.13] hover:bg-neutral-900/70 hover:text-neutral-300"
             >
               {t('compareCta')}
             </Link>
@@ -478,9 +487,13 @@ export default async function BallDetailPage({
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.1em] text-neutral-600">
-        {title}
-      </h2>
+      <div className="mb-5 flex items-center gap-3">
+        <div className="h-px flex-1 bg-white/[0.04]" />
+        <h2 className="text-[11px] font-semibold uppercase tracking-[0.12em] text-neutral-600">
+          {title}
+        </h2>
+        <div className="h-px flex-1 bg-white/[0.04]" />
+      </div>
       {children}
     </section>
   )

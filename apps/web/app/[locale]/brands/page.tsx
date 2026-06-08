@@ -95,14 +95,17 @@ export default async function BrandsPage({ params }: { params: Promise<{ locale:
             <Link
               key={brand.id}
               href={`/brands/${brand.slug}`}
-              className="group flex flex-col gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] p-4 transition-all hover:border-white/[0.12] hover:bg-white/[0.04]"
+              className="group relative flex flex-col gap-3 overflow-hidden rounded-xl border border-white/[0.07] bg-neutral-900/50 p-4 backdrop-blur-sm transition-all duration-200 hover:-translate-y-px hover:border-white/[0.13] hover:bg-neutral-900/70 hover:shadow-[0_8px_32px_rgba(0,0,0,0.32)]"
             >
+              {/* Top inner highlight */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+
               <div className="flex items-start justify-between gap-2">
                 <p className="font-medium text-neutral-200 transition-colors group-hover:text-white">
                   {brand.name}
                 </p>
                 {brand.country && (
-                  <span className="shrink-0 rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-xs text-neutral-500">
+                  <span className="shrink-0 rounded border border-white/[0.05] bg-neutral-800/70 px-1.5 py-0.5 font-mono text-xs text-neutral-500">
                     {brand.country}
                   </span>
                 )}
