@@ -11,26 +11,26 @@ type Specs = {
   notes: string | null
 }
 
-function ProfileBar({ value }: { value: 'low' | 'mid' | 'high' }) {
-  const filled = value === 'low' ? 1 : value === 'mid' ? 2 : 3
+function ProfilePills({ levels, value }: { levels: readonly string[]; value: string }) {
   return (
     <div className="flex items-center gap-1">
-      {[1, 2, 3].map((n) => (
-        <div
-          key={n}
-          className={`h-1.5 w-5 rounded-full transition-colors ${
-            n <= filled ? 'bg-neutral-300' : 'bg-neutral-700'
+      {levels.map((level) => (
+        <span
+          key={level}
+          className={`rounded px-2 py-0.5 text-[11px] capitalize transition-colors ${
+            level === value ? 'bg-neutral-700 text-neutral-100' : 'text-neutral-700'
           }`}
-        />
+        >
+          {level}
+        </span>
       ))}
-      <span className="ml-1 text-xs capitalize text-neutral-400">{value}</span>
     </div>
   )
 }
 
 function SpecRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div className="flex items-start justify-between gap-4 py-3">
+    <div className="flex items-center justify-between gap-4 py-3">
       <span className="text-sm text-neutral-500">{label}</span>
       <span className="text-right text-sm text-neutral-200">{value}</span>
     </div>
@@ -60,14 +60,14 @@ export function SpecGrid({ specs }: { specs: Specs | null }) {
         <SpecRow
           label="Compression"
           value={
-            <div className="flex items-center gap-2">
-              <div className="relative h-1.5 w-24 overflow-hidden rounded-full bg-neutral-800">
+            <div className="flex items-center gap-3">
+              <div className="relative h-1.5 w-20 overflow-hidden rounded-full bg-neutral-800">
                 <div
-                  className="absolute inset-y-0 left-0 rounded-full bg-neutral-300"
+                  className="absolute inset-y-0 left-0 rounded-full bg-neutral-400"
                   style={{ width: `${Math.min(100, (specs.compression / 120) * 100)}%` }}
                 />
               </div>
-              <span>{specs.compression}</span>
+              <span className="font-mono text-neutral-200">{specs.compression}</span>
             </div>
           }
         />
@@ -79,17 +79,32 @@ export function SpecGrid({ specs }: { specs: Specs | null }) {
       )}
       {specs.dimple_pattern && <SpecRow label="Dimple pattern" value={specs.dimple_pattern} />}
       {specs.launch_profile && (
-        <SpecRow label="Launch" value={<ProfileBar value={specs.launch_profile} />} />
+        <SpecRow
+          label="Launch"
+          value={
+            <ProfilePills levels={['low', 'mid', 'high'] as const} value={specs.launch_profile} />
+          }
+        />
       )}
       {specs.spin_profile && (
-        <SpecRow label="Spin" value={<ProfileBar value={specs.spin_profile} />} />
+        <SpecRow
+          label="Spin"
+          value={
+            <ProfilePills levels={['low', 'mid', 'high'] as const} value={specs.spin_profile} />
+          }
+        />
       )}
       {specs.feel_profile && (
-        <SpecRow label="Feel" value={<span className="capitalize">{specs.feel_profile}</span>} />
+        <SpecRow
+          label="Feel"
+          value={
+            <ProfilePills levels={['soft', 'medium', 'firm'] as const} value={specs.feel_profile} />
+          }
+        />
       )}
       {specs.notes && (
         <div className="py-3">
-          <p className="text-xs text-neutral-500">{specs.notes}</p>
+          <p className="text-xs leading-relaxed text-neutral-500">{specs.notes}</p>
         </div>
       )}
     </div>

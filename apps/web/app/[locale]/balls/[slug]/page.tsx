@@ -302,21 +302,31 @@ export default async function BallDetailPage({
         </nav>
 
         {/* Hero */}
-        <div className="mb-10">
-          <div className="mb-2 flex items-center gap-3">
-            {brand && <span className="text-sm font-medium text-neutral-500">{brand.name}</span>}
+        <div className="mb-12 border-b border-white/[0.04] pb-10">
+          {/* Brand pill + status */}
+          <div className="mb-5 flex flex-wrap items-center gap-2">
+            {brand && (
+              <Link
+                href={`/brands/${brand.slug}`}
+                className="inline-flex items-center rounded-full border border-white/[0.06] bg-white/[0.02] px-3 py-1 text-xs font-medium text-neutral-400 transition-all duration-150 hover:border-white/[0.10] hover:text-neutral-200"
+              >
+                {brand.name}
+              </Link>
+            )}
             {ball.status === 'discontinued' && (
-              <span className="rounded-full bg-neutral-800 px-2 py-0.5 text-xs text-neutral-500">
+              <span className="rounded-full border border-white/[0.04] bg-neutral-800/50 px-3 py-1 text-xs text-neutral-500">
                 {t('discontinued')}
               </span>
             )}
           </div>
 
-          <h1 className="mb-3 text-3xl font-bold tracking-tight text-neutral-100 sm:text-4xl">
+          {/* Ball name — primary focal point */}
+          <h1 className="mb-5 text-4xl font-bold tracking-tight text-neutral-100 sm:text-5xl">
             {ball.name}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-3">
+          {/* Metadata strip */}
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             {ball.release_year && (
               <span className="font-mono text-sm text-neutral-500">{ball.release_year}</span>
             )}
@@ -330,10 +340,9 @@ export default async function BallDetailPage({
             )}
           </div>
 
-          {family?.description && (
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-neutral-500">
-              {family.description}
-            </p>
+          {/* Intelligence summary */}
+          {summaryText && (
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-neutral-500">{summaryText}</p>
           )}
         </div>
 
@@ -386,8 +395,8 @@ export default async function BallDetailPage({
 
             {/* Brand info */}
             {brand && (
-              <div className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-4">
-                <p className="mb-1 text-xs font-medium uppercase tracking-wider text-neutral-600">
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-neutral-600">
                   {t('sections.brand')}
                 </p>
                 <Link
@@ -413,11 +422,11 @@ export default async function BallDetailPage({
             )}
 
             {/* Quick stats */}
-            <div className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-4">
-              <p className="mb-3 text-xs font-medium uppercase tracking-wider text-neutral-600">
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.1em] text-neutral-600">
                 {t('sections.quickFacts')}
               </p>
-              <div className="flex flex-col gap-2 text-sm">
+              <div className="flex flex-col gap-2.5 text-sm">
                 {ball.specs?.construction_layers != null && (
                   <div className="flex justify-between">
                     <span className="text-neutral-500">{t('specs.construction')}</span>
@@ -429,7 +438,7 @@ export default async function BallDetailPage({
                 {ball.specs?.compression != null && (
                   <div className="flex justify-between">
                     <span className="text-neutral-500">{t('specs.compression')}</span>
-                    <span className="text-neutral-300">{ball.specs.compression}</span>
+                    <span className="font-mono text-neutral-300">{ball.specs.compression}</span>
                   </div>
                 )}
                 {ball.specs?.cover_material && (
@@ -450,7 +459,7 @@ export default async function BallDetailPage({
             {/* Compare link */}
             <Link
               href={`/compare?balls=${ball.slug}`}
-              className="block rounded-lg border border-white/[0.06] bg-white/[0.02] p-3 text-center text-xs text-neutral-500 transition-all hover:border-white/[0.12] hover:text-neutral-300"
+              className="block rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 text-center text-xs text-neutral-500 transition-all duration-150 hover:border-white/[0.12] hover:bg-white/[0.04] hover:text-neutral-300"
             >
               {t('compareCta')}
             </Link>
@@ -469,7 +478,7 @@ export default async function BallDetailPage({
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-600">
+      <h2 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.1em] text-neutral-600">
         {title}
       </h2>
       {children}

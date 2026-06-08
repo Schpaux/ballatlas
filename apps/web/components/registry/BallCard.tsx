@@ -38,14 +38,20 @@ export function BallCard({ ball }: { ball: BallCardData }) {
   return (
     <Link
       href={`/balls/${ball.slug}`}
-      className="group flex flex-col gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] p-4 transition-all duration-150 hover:border-white/[0.12] hover:bg-white/[0.04]"
+      className="group relative flex flex-col gap-3.5 overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 transition-all duration-200 hover:border-white/[0.11] hover:bg-white/[0.035]"
     >
-      <div className="flex items-center justify-between">
-        <span className="text-xs text-neutral-500">{ball.family?.brand.name ?? '—'}</span>
+      {/* Emerald accent — slides in on hover */}
+      <div className="absolute inset-y-0 left-0 w-[2px] bg-emerald-500/50 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+
+      {/* Brand + year */}
+      <div className="flex items-center justify-between gap-2">
+        <span className="text-xs tracking-wide text-neutral-500">
+          {ball.family?.brand.name ?? '—'}
+        </span>
         <div className="flex items-center gap-2">
           {isDiscontinued && (
-            <span className="rounded-full bg-neutral-800 px-1.5 py-0.5 text-[10px] text-neutral-500">
-              disc.
+            <span className="rounded bg-neutral-800/80 px-1.5 py-0.5 text-[10px] uppercase tracking-widest text-neutral-600">
+              disc
             </span>
           )}
           {ball.release_year && (
@@ -54,10 +60,12 @@ export function BallCard({ ball }: { ball: BallCardData }) {
         </div>
       </div>
 
-      <h3 className="text-sm font-medium text-neutral-200 transition-colors group-hover:text-white">
+      {/* Ball name — primary focal point */}
+      <h3 className="text-base font-semibold leading-snug tracking-tight text-neutral-100 transition-colors group-hover:text-white">
         {ball.name}
       </h3>
 
+      {/* Segments */}
       {segments.length > 0 && (
         <div className="flex flex-wrap gap-1">
           {segments.map((seg) => (
@@ -66,20 +74,23 @@ export function BallCard({ ball }: { ball: BallCardData }) {
         </div>
       )}
 
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-neutral-500">
+      {/* Technical specs strip */}
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
         {ball.specs?.construction_layers != null && (
-          <span>{ball.specs.construction_layers}-piece</span>
+          <span className="text-neutral-500">{ball.specs.construction_layers}-piece</span>
         )}
         {ball.specs?.compression != null && (
-          <span>
-            <span className="text-neutral-600">Comp </span>
-            {ball.specs.compression}
+          <span className="text-neutral-500">
+            Comp <span className="font-mono text-neutral-400">{ball.specs.compression}</span>
           </span>
         )}
-        {ball.specs?.cover_material && <span>{ball.specs.cover_material}</span>}
+        {ball.specs?.cover_material && (
+          <span className="text-neutral-500">{ball.specs.cover_material}</span>
+        )}
+        {ball.msrp_usd != null && (
+          <span className="ml-auto font-mono text-neutral-600">${ball.msrp_usd}/dz</span>
+        )}
       </div>
-
-      {ball.msrp_usd != null && <div className="text-xs text-neutral-600">${ball.msrp_usd}/dz</div>}
     </Link>
   )
 }

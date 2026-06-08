@@ -65,8 +65,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <RegistryLayout>
       <div className="flex min-h-[calc(100vh-56px)] flex-col">
         {/* Hero */}
-        <div className="flex flex-1 flex-col items-center justify-center px-4 py-24 sm:px-6">
-          <div className="w-full max-w-xl text-center">
+        <div className="relative flex flex-1 flex-col items-center justify-center px-4 py-24 sm:px-6">
+          {/* Ambient glow behind search */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[520px] overflow-hidden">
+            <div className="absolute left-1/2 top-20 h-[420px] w-[640px] -translate-x-1/2 rounded-full bg-emerald-500/[0.05] blur-[100px]" />
+          </div>
+
+          <div className="relative w-full max-w-xl text-center">
             {/* Live indicator */}
             <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/[0.06] bg-white/[0.02] px-3 py-1 text-xs text-neutral-500">
               <span className="relative flex h-1.5 w-1.5">
@@ -77,14 +82,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </div>
 
             {/* Wordmark */}
-            <h1 className="mb-6 text-5xl font-bold tracking-tight text-neutral-100 sm:text-6xl">
-              Ball<span className="text-neutral-600">Atlas</span>
+            <h1 className="mb-5 text-5xl font-bold tracking-tight sm:text-6xl">
+              <span className="text-neutral-100">Ball</span>
+              <span className="text-neutral-600">Atlas</span>
             </h1>
 
             <p className="mb-10 text-base leading-relaxed text-neutral-500">{t('tagline')}</p>
 
             {/* Search */}
-            <SearchBar placeholder={t('searchPlaceholder')} autoFocus className="mb-4" />
+            <SearchBar placeholder={t('searchPlaceholder')} autoFocus className="mb-5" />
 
             {/* Popular links */}
             <div className="flex flex-wrap justify-center gap-2">
@@ -92,7 +98,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <Link
                   key={label}
                   href={`/search?q=${encodeURIComponent(query)}`}
-                  className="rounded-full border border-white/[0.06] bg-white/[0.02] px-3 py-1 text-xs text-neutral-500 transition-colors hover:border-white/[0.10] hover:text-neutral-300"
+                  className="rounded-full border border-white/[0.06] bg-white/[0.02] px-3 py-1 text-xs text-neutral-500 transition-all duration-150 hover:border-white/[0.10] hover:bg-white/[0.04] hover:text-neutral-300"
                 >
                   {label}
                 </Link>
@@ -102,26 +108,32 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
 
         {/* Registry stats */}
-        <div className="border-t border-white/[0.04] px-4 py-8 sm:px-6">
+        <div className="border-t border-white/[0.04] px-4 py-10 sm:px-6">
           <div className="mx-auto max-w-xl">
-            <div className="grid grid-cols-3 gap-4 text-center">
-              <div>
-                <p className="font-mono text-2xl font-bold text-neutral-100 sm:text-3xl">
+            <div className="grid grid-cols-3 divide-x divide-white/[0.04] text-center">
+              <div className="px-4">
+                <p className="font-mono text-3xl font-bold tracking-tight text-neutral-100">
                   {stats.brands}
                 </p>
-                <p className="mt-1 text-xs text-neutral-600">{t('stats.brands')}</p>
+                <p className="mt-1.5 text-[11px] uppercase tracking-wider text-neutral-600">
+                  {t('stats.brands')}
+                </p>
               </div>
-              <div>
-                <p className="font-mono text-2xl font-bold text-neutral-100 sm:text-3xl">
+              <div className="px-4">
+                <p className="font-mono text-3xl font-bold tracking-tight text-neutral-100">
                   {stats.families}
                 </p>
-                <p className="mt-1 text-xs text-neutral-600">{t('stats.families')}</p>
+                <p className="mt-1.5 text-[11px] uppercase tracking-wider text-neutral-600">
+                  {t('stats.families')}
+                </p>
               </div>
-              <div>
-                <p className="font-mono text-2xl font-bold text-neutral-100 sm:text-3xl">
+              <div className="px-4">
+                <p className="font-mono text-3xl font-bold tracking-tight text-neutral-100">
                   {stats.versions}
                 </p>
-                <p className="mt-1 text-xs text-neutral-600">{t('stats.versions')}</p>
+                <p className="mt-1.5 text-[11px] uppercase tracking-wider text-neutral-600">
+                  {t('stats.versions')}
+                </p>
               </div>
             </div>
           </div>

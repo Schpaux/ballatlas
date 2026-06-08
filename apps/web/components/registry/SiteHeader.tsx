@@ -8,14 +8,15 @@ export async function SiteHeader() {
   const t = await getTranslations('navigation')
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-neutral-950/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-white/[0.05] bg-neutral-950/90 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link
-          href="/"
-          className="text-sm font-semibold tracking-tight text-neutral-100 transition-opacity hover:opacity-70"
-        >
-          Ball<span className="text-neutral-500">Atlas</span>
+        {/* Wordmark */}
+        <Link href="/" className="flex items-center gap-1 transition-opacity hover:opacity-75">
+          <span className="text-sm font-semibold tracking-tight text-neutral-100">Ball</span>
+          <span className="h-1 w-1 rounded-full bg-emerald-500" />
+          <span className="text-sm font-semibold tracking-tight text-neutral-500">Atlas</span>
         </Link>
+
         <nav className="flex items-center gap-5 text-sm">
           <Link
             href="/search"
@@ -35,13 +36,15 @@ export async function SiteHeader() {
           >
             {t('compare')}
           </Link>
+          {/* Identify — intelligence feature, gets subtle accent treatment */}
           <Link
             href="/identify"
-            className="text-neutral-400 transition-colors hover:text-neutral-100"
+            className="flex items-center gap-1.5 text-neutral-400 transition-colors hover:text-neutral-100"
           >
+            <span className="h-1 w-1 rounded-full bg-emerald-500/70" />
             {t('identify')}
           </Link>
-          <a href="/admin" className="text-neutral-600 transition-colors hover:text-neutral-400">
+          <a href="/admin" className="text-neutral-700 transition-colors hover:text-neutral-500">
             {t('admin')}
           </a>
           <LanguageSwitcher />

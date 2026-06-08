@@ -62,5 +62,11 @@
     font-feature-settings:
       'rlig' 1,
       'calt' 1;
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background: rgb(16 185 129 / 0.18);
+    color: rgb(209 250 229);
   }
 }
