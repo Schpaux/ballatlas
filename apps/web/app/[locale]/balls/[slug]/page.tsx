@@ -10,6 +10,7 @@ import {
   type ObservationInput,
 } from '@ballatlas/golf-data'
 
+import { BrandLogo } from '@/components/registry/BrandLogo'
 import { BallDNACard } from '@/components/registry/BallDNACard'
 import { DataCompletenessCard } from '@/components/registry/DataCompletenessCard'
 import { FeedbackForm } from '@/components/registry/FeedbackForm'
@@ -346,11 +347,7 @@ export default async function BallDetailPage({
                   className="transition-opacity hover:opacity-70"
                 >
                   {brand.logoUrl ? (
-                    <img
-                      src={brand.logoUrl}
-                      alt={brand.name}
-                      className="h-7 w-auto max-w-[120px] object-contain"
-                    />
+                    <BrandLogo src={brand.logoUrl} alt={brand.name} className="h-7" />
                   ) : (
                     <span
                       className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium"
@@ -491,11 +488,7 @@ export default async function BallDetailPage({
                   style={{ color: 'var(--ba-ink)' }}
                 >
                   {brand.logoUrl && (
-                    <img
-                      src={brand.logoUrl}
-                      alt={brand.name}
-                      className="h-5 w-auto max-w-[80px] object-contain"
-                    />
+                    <BrandLogo src={brand.logoUrl} alt={brand.name} className="h-5" />
                   )}
                   <span className="text-sm font-medium">{brand.name}</span>
                 </Link>

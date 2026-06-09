@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
+import { BrandLogo } from '@/components/registry/BrandLogo'
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
 import { Link } from '@/i18n/navigation'
 import { locales } from '@/i18n/routing'
@@ -116,10 +117,10 @@ export default async function BrandsPage({ params }: { params: Promise<{ locale:
               }}
             >
               {brand.logoUrl && (
-                <img
+                <BrandLogo
                   src={brand.logoUrl}
                   alt={brand.name}
-                  className="h-6 w-auto max-w-[100px] object-contain transition-opacity group-hover:opacity-70"
+                  className="h-7 transition-opacity group-hover:opacity-70"
                 />
               )}
               <div className="flex items-start justify-between gap-2">

@@ -1,3 +1,4 @@
+import { BrandLogo } from './BrandLogo'
 import { GolfBall } from './GolfBall'
 import { SegmentBadge } from './SegmentBadge'
 
@@ -55,11 +56,10 @@ export function BallCard({ ball }: { ball: BallCardData }) {
       {/* Card header: brand + year */}
       <div className="flex items-center justify-between px-4 pb-0 pt-4">
         {ball.family?.brand.logoUrl ? (
-          <img
+          <BrandLogo
             src={ball.family.brand.logoUrl}
             alt={ball.family.brand.name}
-            className="h-4 w-auto max-w-[72px] object-contain"
-            style={{ opacity: 0.8 }}
+            className="h-5 opacity-80"
           />
         ) : (
           <span className="text-xs font-medium tracking-wide" style={{ color: 'var(--ba-subtle)' }}>

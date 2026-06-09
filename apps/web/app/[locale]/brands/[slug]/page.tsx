@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
+import { BrandLogo } from '@/components/registry/BrandLogo'
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
 import { SegmentBadge } from '@/components/registry/SegmentBadge'
 import { Link } from '@/i18n/navigation'
@@ -256,10 +257,10 @@ export default async function BrandDetailPage({
         <div className="mb-10">
           <div className="mb-4 flex items-end gap-3">
             {logo ? (
-              <img
+              <BrandLogo
                 src={logo.url}
                 alt={logo.alt_text ?? `${brand.name} logo`}
-                className="h-10 w-auto max-w-[200px] object-contain"
+                className="h-10"
               />
             ) : (
               <h1
