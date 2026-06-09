@@ -254,37 +254,30 @@ export default async function BrandDetailPage({
 
         {/* Brand header */}
         <div className="mb-10">
-          <div className="mb-3 flex items-center gap-3">
-            {logo && (
-              <div
-                className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md p-1.5"
-                style={{
-                  background: 'var(--ba-surface)',
-                  border: '1px solid var(--ba-line-strong)',
-                }}
+          <div className="mb-4 flex items-end gap-3">
+            {logo ? (
+              <img
+                src={logo.url}
+                alt={logo.alt_text ?? `${brand.name} logo`}
+                className="h-10 w-auto max-w-[200px] object-contain"
+              />
+            ) : (
+              <h1
+                className="text-3xl font-bold tracking-tight sm:text-4xl"
+                style={{ color: 'var(--ba-ink)' }}
               >
-                <img
-                  src={logo.url}
-                  alt={logo.alt_text ?? `${brand.name} logo`}
-                  className="h-full w-full object-contain"
-                />
-              </div>
+                {brand.name}
+              </h1>
             )}
             {brand.country && (
               <span
-                className="rounded px-1.5 py-0.5 font-mono text-xs"
+                className="mb-0.5 rounded px-1.5 py-0.5 font-mono text-xs"
                 style={{ background: 'var(--ba-paper)', color: 'var(--ba-ghost)' }}
               >
                 {brand.country}
               </span>
             )}
           </div>
-          <h1
-            className="text-3xl font-bold tracking-tight sm:text-4xl"
-            style={{ color: 'var(--ba-ink)' }}
-          >
-            {brand.name}
-          </h1>
           {brand.website && (
             <a
               href={brand.website}
