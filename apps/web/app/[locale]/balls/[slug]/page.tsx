@@ -10,8 +10,8 @@ import {
   type ObservationInput,
 } from '@ballatlas/golf-data'
 
-import { BrandLogo } from '@/components/registry/BrandLogo'
 import { BallDNACard } from '@/components/registry/BallDNACard'
+import { BrandLogo } from '@/components/registry/BrandLogo'
 import { DataCompletenessCard } from '@/components/registry/DataCompletenessCard'
 import { FeedbackForm } from '@/components/registry/FeedbackForm'
 import { GolfBall } from '@/components/registry/GolfBall'
