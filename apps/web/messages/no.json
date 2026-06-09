@@ -47,6 +47,7 @@
     "discontinued": "Utgått",
     "atLaunch": "${price}/dz ved lansering",
     "sections": {
+      "ballDNA": "Ball DNA",
       "technicalSpecs": "Tekniske spesifikasjoner",
       "visualIdentification": "Visuell identifikasjon",
       "similarBalls": "Lignende baller",
@@ -61,6 +62,129 @@
       "year": "År"
     },
     "compareCta": "Sammenlign denne ballen →"
+  },
+  "ballDNA": {
+    "title": "Ball DNA",
+    "subtitle": "Ytelsesprofil",
+    "noData": "Tekniske spesifikasjoner kreves for DNA-analyse.",
+    "derivedFrom": "Utledet fra spesifikasjoner · {count} signaler",
+    "traits": {
+      "distance": "Distanse",
+      "control": "Kontroll",
+      "feel": "Følelse",
+      "workability": "Formbarhet",
+      "forgiveness": "Tilgivelse"
+    }
+  },
+  "idConfidence": {
+    "title": "ID-konfidens",
+    "missing": "Mangler: {feature}",
+    "ratings": {
+      "exceptional": "Eksepsjonell",
+      "excellent": "Utmerket",
+      "good": "God",
+      "limited": "Begrenset",
+      "insufficient": "Utilstrekkelig"
+    },
+    "explanations": {
+      "exceptional": "Høy pålitelighet for visuell identifikasjon.",
+      "excellent": "Sterk pålitelighet for visuell identifikasjon.",
+      "good": "Rimelig identifikasjonsdata tilgjengelig.",
+      "limited": "Identifikasjonsdata er ufullstendige.",
+      "insufficient": "Utilstrekkelig visuell funksjonsdata for pålitelig identifikasjon."
+    },
+    "strengths": {
+      "brandText": "Merketekstfunksjon",
+      "modelText": "Modelltekstfunksjon",
+      "alignmentAid": "Tydelig linjemarking",
+      "numberColor": "Særpreget nummerfarge",
+      "logoStyle": "Logostil dokumentert",
+      "uniqueMarkings": "Unike visuelle merker"
+    },
+    "gaps": {
+      "brandText": "Merketekst",
+      "modelText": "Modelltekst",
+      "alignmentMarking": "Linjemarking",
+      "numberColor": "Nummerfarge",
+      "logoStyle": "Logostil"
+    }
+  },
+  "ballProfile": {
+    "title": "Ballprofil",
+    "coverageLabels": {
+      "full": "Full dekning",
+      "good": "God dekning",
+      "partial": "Delvis",
+      "minimal": "Minimal"
+    },
+    "categories": {
+      "technicalSpecs": "Tekniske spesifikasjoner",
+      "valuation": "Verdivurdering",
+      "visualId": "Visuell ID",
+      "images": "Bilder"
+    },
+    "missingFields": {
+      "compression": "Kompresjon",
+      "constructionLayers": "Konstruksjonslag",
+      "coverMaterial": "Dekkmateriale",
+      "coreMaterial": "Kjernmateriale",
+      "dimpleCount": "Antall dimpler",
+      "launchProfile": "Avfyringsprofil",
+      "spinProfile": "Spinprofil",
+      "feelProfile": "Følelsesprofil",
+      "ballColor": "Ballfarge",
+      "finishType": "Overflatetype",
+      "logoStyle": "Logostil",
+      "logoText": "Logotekst",
+      "marketPriceData": "Markedsprisdata",
+      "productImage": "Produktbilde"
+    }
+  },
+  "valuation": {
+    "title": "Markedsverdi",
+    "noData": "Ingen data",
+    "noDataDescription": "Markedsdata for denne ballen er ennå ikke samlet inn. Verdivurderinger er basert på observerte salgspriser — manglende verdier er tomme heller enn estimerte.",
+    "mintCondition": "Perfekt stand · midt {price}",
+    "confidence": "{pct}% konfidens",
+    "observations": "{count, plural, one {# markedsobservasjon} other {# markedsobservasjoner}}",
+    "dataAge": "data {days}d gammel"
+  },
+  "specGrid": {
+    "noSpecs": "Spesifikasjoner er ennå ikke tilgjengelig for denne versjonen.",
+    "labels": {
+      "construction": "Konstruksjon",
+      "constructionValue": "{layers}-delt",
+      "compression": "Kompresjon",
+      "cover": "Dekke",
+      "core": "Kjerne",
+      "dimples": "Dimpler",
+      "dimplesValue": "{count} dimpler",
+      "dimplePattern": "Dimplermønster",
+      "launch": "Avfyring",
+      "spin": "Spin",
+      "feel": "Følelse"
+    },
+    "gaugeLevels": {
+      "low": "lav",
+      "mid": "midt",
+      "high": "høy",
+      "soft": "myk",
+      "medium": "medium",
+      "firm": "fast"
+    }
+  },
+  "visualId": {
+    "noData": "Visuell identifikasjonsdata er ennå ikke tilgjengelig.",
+    "labels": {
+      "color": "Farge",
+      "finish": "Overflate",
+      "logo": "Logo",
+      "logoStyle": "Logostil",
+      "alignment": "Linjemarking",
+      "numberStyle": "Nummerstil",
+      "numberColor": "Nummerfarge",
+      "specialMarkings": "Spesielle markeringer"
+    }
   },
   "similarBalls": {
     "comp": "Komp"

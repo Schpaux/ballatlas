@@ -47,6 +47,7 @@
     "discontinued": "Discontinued",
     "atLaunch": "${price}/dz at launch",
     "sections": {
+      "ballDNA": "Ball DNA",
       "technicalSpecs": "Technical Specifications",
       "visualIdentification": "Visual Identification",
       "similarBalls": "Similar Balls",
@@ -61,6 +62,129 @@
       "year": "Year"
     },
     "compareCta": "Compare this ball →"
+  },
+  "ballDNA": {
+    "title": "Ball DNA",
+    "subtitle": "Performance trait profile",
+    "noData": "Technical specifications required for DNA analysis.",
+    "derivedFrom": "Derived from specifications · {count} signals",
+    "traits": {
+      "distance": "Distance",
+      "control": "Control",
+      "feel": "Feel",
+      "workability": "Workability",
+      "forgiveness": "Forgiveness"
+    }
+  },
+  "idConfidence": {
+    "title": "ID Confidence",
+    "missing": "Missing: {feature}",
+    "ratings": {
+      "exceptional": "Exceptional",
+      "excellent": "Excellent",
+      "good": "Good",
+      "limited": "Limited",
+      "insufficient": "Insufficient"
+    },
+    "explanations": {
+      "exceptional": "High visual identification reliability.",
+      "excellent": "Strong visual identification reliability.",
+      "good": "Reasonable identification data available.",
+      "limited": "Identification data is incomplete.",
+      "insufficient": "Insufficient visual feature data for reliable identification."
+    },
+    "strengths": {
+      "brandText": "Brand text feature",
+      "modelText": "Model text feature",
+      "alignmentAid": "Distinct alignment aid",
+      "numberColor": "Distinctive number color",
+      "logoStyle": "Logo style documented",
+      "uniqueMarkings": "Unique visual markings"
+    },
+    "gaps": {
+      "brandText": "Brand text",
+      "modelText": "Model text",
+      "alignmentMarking": "Alignment marking",
+      "numberColor": "Number color",
+      "logoStyle": "Logo style"
+    }
+  },
+  "ballProfile": {
+    "title": "Ball Profile",
+    "coverageLabels": {
+      "full": "Full Coverage",
+      "good": "Good Coverage",
+      "partial": "Partial",
+      "minimal": "Minimal"
+    },
+    "categories": {
+      "technicalSpecs": "Technical Specs",
+      "valuation": "Valuation",
+      "visualId": "Visual ID",
+      "images": "Images"
+    },
+    "missingFields": {
+      "compression": "Compression",
+      "constructionLayers": "Construction layers",
+      "coverMaterial": "Cover material",
+      "coreMaterial": "Core material",
+      "dimpleCount": "Dimple count",
+      "launchProfile": "Launch profile",
+      "spinProfile": "Spin profile",
+      "feelProfile": "Feel profile",
+      "ballColor": "Ball color",
+      "finishType": "Finish type",
+      "logoStyle": "Logo style",
+      "logoText": "Logo text",
+      "marketPriceData": "Market price data",
+      "productImage": "Product image"
+    }
+  },
+  "valuation": {
+    "title": "Market Value",
+    "noData": "No data",
+    "noDataDescription": "Market data for this ball hasn't been collected yet. Valuations are based on observed sale prices — missing values are left empty rather than estimated.",
+    "mintCondition": "Mint condition · mid {price}",
+    "confidence": "{pct}% confidence",
+    "observations": "{count, plural, one {# market observation} other {# market observations}}",
+    "dataAge": "data {days}d old"
+  },
+  "specGrid": {
+    "noSpecs": "Specifications not yet available for this version.",
+    "labels": {
+      "construction": "Construction",
+      "constructionValue": "{layers}-piece",
+      "compression": "Compression",
+      "cover": "Cover",
+      "core": "Core",
+      "dimples": "Dimples",
+      "dimplesValue": "{count} dimples",
+      "dimplePattern": "Dimple pattern",
+      "launch": "Launch",
+      "spin": "Spin",
+      "feel": "Feel"
+    },
+    "gaugeLevels": {
+      "low": "low",
+      "mid": "mid",
+      "high": "high",
+      "soft": "soft",
+      "medium": "medium",
+      "firm": "firm"
+    }
+  },
+  "visualId": {
+    "noData": "Visual identification data not yet available.",
+    "labels": {
+      "color": "Color",
+      "finish": "Finish",
+      "logo": "Logo",
+      "logoStyle": "Logo style",
+      "alignment": "Alignment",
+      "numberStyle": "Number style",
+      "numberColor": "Number color",
+      "specialMarkings": "Special markings"
+    }
   },
   "similarBalls": {
     "comp": "Comp"

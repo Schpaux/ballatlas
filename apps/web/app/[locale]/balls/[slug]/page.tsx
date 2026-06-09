@@ -445,7 +445,7 @@ export default async function BallDetailPage({
 
         {/* Ball DNA — full width */}
         <div className="mb-10">
-          <Section title="Ball DNA">
+          <Section title={t('sections.ballDNA')}>
             <BallDNACard input={dnaInput} />
           </Section>
         </div>

@@ -1,6 +1,7 @@
+import { getTranslations } from 'next-intl/server'
+
 import {
   computeIdentificationConfidence,
-  CONFIDENCE_RATING_LABELS,
   type IdentificationConfidenceInput,
   type IdentificationConfidenceRating,
 } from '@ballatlas/golf-data'
@@ -23,11 +24,31 @@ function ratingStyle(rating: IdentificationConfidenceRating) {
   }
 }
 
-export function IdentificationConfidenceCard({ input }: IdentificationConfidenceCardProps) {
-  const result = computeIdentificationConfidence(input)
-  const { score, rating, explanation, strengths, gaps } = result
+// Map package-generated English strength strings to translation keys
+const STRENGTH_KEY_MAP: Record<string, string> = {
+  'Brand text feature': 'brandText',
+  'Model text feature': 'modelText',
+  'Distinct alignment aid': 'alignmentAid',
+  'Logo style documented': 'logoStyle',
+  'Unique visual markings': 'uniqueMarkings',
+}
 
-  const ratingLabel = CONFIDENCE_RATING_LABELS[rating]
+// Map package-generated English gap strings to translation keys
+const GAP_KEY_MAP: Record<string, string> = {
+  'Brand text': 'brandText',
+  'Model text': 'modelText',
+  'Alignment marking': 'alignmentMarking',
+  'Number color': 'numberColor',
+  'Logo style': 'logoStyle',
+}
+
+export async function IdentificationConfidenceCard({ input }: IdentificationConfidenceCardProps) {
+  const t = await getTranslations('idConfidence')
+  const result = computeIdentificationConfidence(input)
+  const { score, rating, strengths, gaps } = result
+
+  const ratingLabel = t(`ratings.${rating}`)
+  const explanation = t(`explanations.${rating}`)
   const style = ratingStyle(rating)
 
   return (
@@ -38,7 +59,7 @@ export function IdentificationConfidenceCard({ input }: IdentificationConfidence
       {/* Header */}
       <div className="mb-3 flex items-start justify-between gap-3">
         <div>
-          <p className="kicker">ID Confidence</p>
+          <p className="kicker">{t('title')}</p>
           <p className="mt-0.5 text-xs font-medium" style={{ color: style.color }}>
             {ratingLabel}
           </p>
@@ -75,34 +96,44 @@ export function IdentificationConfidenceCard({ input }: IdentificationConfidence
       {/* Strengths */}
       {strengths.length > 0 && (
         <div className="flex flex-wrap gap-1">
-          {strengths.slice(0, 3).map((s, i) => (
-            <span
-              key={i}
-              className="rounded-full px-2 py-0.5 text-[10px]"
-              style={{
-                background: 'var(--ba-green-soft)',
-                color: 'var(--ba-green)',
-                border: '1px solid rgba(31,106,71,0.18)',
-              }}
-            >
-              {s}
-            </span>
-          ))}
+          {strengths.slice(0, 3).map((s, i) => {
+            // Handle "Distinctive number color (X)" which has a dynamic color value
+            const isNumberColor = s.startsWith('Distinctive number color')
+            const key = isNumberColor ? 'numberColor' : (STRENGTH_KEY_MAP[s] ?? null)
+            const label = key ? t(`strengths.${key}`) : s
+            return (
+              <span
+                key={i}
+                className="rounded-full px-2 py-0.5 text-[10px]"
+                style={{
+                  background: 'var(--ba-green-soft)',
+                  color: 'var(--ba-green)',
+                  border: '1px solid rgba(31,106,71,0.18)',
+                }}
+              >
+                {label}
+              </span>
+            )
+          })}
         </div>
       )}
 
       {/* Gaps — only for limited/insufficient */}
       {gaps.length > 0 && (rating === 'limited' || rating === 'insufficient') && (
         <div className="mt-2 flex flex-wrap gap-1">
-          {gaps.slice(0, 3).map((g, i) => (
-            <span
-              key={i}
-              className="rounded-full px-2 py-0.5 text-[10px]"
-              style={{ background: 'var(--ba-paper)', color: 'var(--ba-ghost)' }}
-            >
-              Missing: {g}
-            </span>
-          ))}
+          {gaps.slice(0, 3).map((g, i) => {
+            const key = GAP_KEY_MAP[g] ?? null
+            const feature = key ? t(`gaps.${key}`) : g
+            return (
+              <span
+                key={i}
+                className="rounded-full px-2 py-0.5 text-[10px]"
+                style={{ background: 'var(--ba-paper)', color: 'var(--ba-ghost)' }}
+              >
+                {t('missing', { feature })}
+              </span>
+            )
+          })}
         </div>
       )}
     </div>

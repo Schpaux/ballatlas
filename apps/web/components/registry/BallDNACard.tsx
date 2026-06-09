@@ -1,21 +1,16 @@
+import { getTranslations } from 'next-intl/server'
+
 import { computeBallDNA, type BallDNAInput, type DNATraitScore } from '@ballatlas/golf-data'
 
 type BallDNACardProps = {
   input: BallDNAInput
 }
 
-const TRAITS: {
-  key: keyof Omit<ReturnType<typeof computeBallDNA>, 'totalSignalCount'>
-  label: string
-}[] = [
-  { key: 'distance', label: 'Distance' },
-  { key: 'control', label: 'Control' },
-  { key: 'feel', label: 'Feel' },
-  { key: 'workability', label: 'Workability' },
-  { key: 'forgiveness', label: 'Forgiveness' },
-]
+type TraitKey = 'distance' | 'control' | 'feel' | 'workability' | 'forgiveness'
 
-function TraitBar({ trait, score }: { trait: string; score: DNATraitScore }) {
+const TRAIT_KEYS: TraitKey[] = ['distance', 'control', 'feel', 'workability', 'forgiveness']
+
+function TraitBar({ label, score }: { label: string; score: DNATraitScore }) {
   const { score: value, signalCount } = score
   const lowConfidence = signalCount <= 1
 
@@ -42,7 +37,7 @@ function TraitBar({ trait, score }: { trait: string; score: DNATraitScore }) {
           className="text-xs font-medium"
           style={{ color: lowConfidence ? 'var(--ba-ghost)' : 'var(--ba-subtle)' }}
         >
-          {trait}
+          {label}
         </span>
       </div>
       <div
@@ -63,8 +58,29 @@ function TraitBar({ trait, score }: { trait: string; score: DNATraitScore }) {
   )
 }
 
-export function BallDNACard({ input }: BallDNACardProps) {
+export async function BallDNACard({ input }: BallDNACardProps) {
+  const t = await getTranslations('ballDNA')
   const profile = computeBallDNA(input)
+
+  const header = (
+    <div className="mb-5 flex items-center justify-between">
+      <div>
+        <p className="kicker">{t('title')}</p>
+        <p className="mt-0.5 text-[11px]" style={{ color: 'var(--ba-ghost)' }}>
+          {t('subtitle')}
+        </p>
+      </div>
+      <div className="flex items-end gap-px opacity-25" aria-hidden="true">
+        {[2, 3, 4, 5, 4, 3, 4, 5, 6, 5, 4, 3].map((h, i) => (
+          <div
+            key={i}
+            className="w-px rounded-full"
+            style={{ height: `${h * 2}px`, background: 'var(--ba-green)' }}
+          />
+        ))}
+      </div>
+    </div>
+  )
 
   if (profile.totalSignalCount === 0) {
     return (
@@ -72,9 +88,9 @@ export function BallDNACard({ input }: BallDNACardProps) {
         className="rounded-xl p-5"
         style={{ background: 'var(--ba-surface)', border: '1px solid var(--ba-line-strong)' }}
       >
-        <Header />
+        {header}
         <p className="text-sm" style={{ color: 'var(--ba-ghost)' }}>
-          Technical specifications required for DNA analysis.
+          {t('noData')}
         </p>
       </div>
     )
@@ -85,11 +101,12 @@ export function BallDNACard({ input }: BallDNACardProps) {
       className="rounded-xl p-5"
       style={{ background: 'var(--ba-surface)', border: '1px solid var(--ba-line-strong)' }}
     >
-      <Header />
+      {header}
 
       <div className="flex flex-col gap-3.5">
-        {TRAITS.map(({ key, label }) => {
+        {TRAIT_KEYS.map((key) => {
           const traitScore = profile[key]
+          const label = t(`traits.${key}`)
           if (!traitScore) {
             return (
               <div key={key} className="flex items-center gap-4">
@@ -110,35 +127,13 @@ export function BallDNACard({ input }: BallDNACardProps) {
               </div>
             )
           }
-          return <TraitBar key={key} trait={label} score={traitScore} />
+          return <TraitBar key={key} label={label} score={traitScore} />
         })}
       </div>
 
       <p className="mt-4 text-[10px] leading-relaxed" style={{ color: 'var(--ba-ghost)' }}>
-        Derived from specifications · {profile.totalSignalCount} signals
+        {t('derivedFrom', { count: profile.totalSignalCount })}
       </p>
-    </div>
-  )
-}
-
-function Header() {
-  return (
-    <div className="mb-5 flex items-center justify-between">
-      <div>
-        <p className="kicker">Ball DNA</p>
-        <p className="mt-0.5 text-[11px]" style={{ color: 'var(--ba-ghost)' }}>
-          Performance trait profile
-        </p>
-      </div>
-      <div className="flex items-end gap-px opacity-25" aria-hidden="true">
-        {[2, 3, 4, 5, 4, 3, 4, 5, 6, 5, 4, 3].map((h, i) => (
-          <div
-            key={i}
-            className="w-px rounded-full"
-            style={{ height: `${h * 2}px`, background: 'var(--ba-green)' }}
-          />
-        ))}
-      </div>
     </div>
   )
 }

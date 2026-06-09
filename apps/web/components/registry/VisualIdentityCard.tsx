@@ -1,3 +1,5 @@
+import { getTranslations } from 'next-intl/server'
+
 type VisualSignature = {
   primary_color: string | null
   finish: 'glossy' | 'matte' | 'satin' | null
@@ -36,8 +38,7 @@ function ColorSwatch({ color }: { color: string }) {
   )
 }
 
-function VisualRow({ label, value }: { label: string; value: string }) {
-  const isColor = label === 'Color'
+function VisualRow({ label, value, isColor }: { label: string; value: string; isColor: boolean }) {
   return (
     <div
       className="flex items-start justify-between gap-4 py-3"
@@ -54,40 +55,42 @@ function VisualRow({ label, value }: { label: string; value: string }) {
   )
 }
 
-export function VisualIdentityCard({ visual }: { visual: VisualSignature | null }) {
+export async function VisualIdentityCard({ visual }: { visual: VisualSignature | null }) {
+  const t = await getTranslations('visualId')
+
   if (!visual) {
     return (
       <p className="text-sm" style={{ color: 'var(--ba-ghost)' }}>
-        Visual identification data not yet available.
+        {t('noData')}
       </p>
     )
   }
 
-  const primaryRows: Array<{ label: string; value: string | null }> = [
-    { label: 'Color', value: visual.primary_color },
-    { label: 'Finish', value: visual.finish },
-    { label: 'Logo', value: visual.logo_text },
-    { label: 'Logo style', value: visual.logo_style },
+  const primaryRows = [
+    { labelKey: 'color' as const, value: visual.primary_color, isColor: true },
+    { labelKey: 'finish' as const, value: visual.finish, isColor: false },
+    { labelKey: 'logo' as const, value: visual.logo_text, isColor: false },
+    { labelKey: 'logoStyle' as const, value: visual.logo_style, isColor: false },
   ]
 
-  const secondaryRows: Array<{ label: string; value: string | null }> = [
-    { label: 'Alignment', value: visual.alignment_marking },
-    { label: 'Number style', value: visual.number_style },
-    { label: 'Number color', value: visual.number_color },
-    { label: 'Special markings', value: visual.special_markings },
+  const secondaryRows = [
+    { labelKey: 'alignment' as const, value: visual.alignment_marking, isColor: false },
+    { labelKey: 'numberStyle' as const, value: visual.number_style, isColor: false },
+    { labelKey: 'numberColor' as const, value: visual.number_color, isColor: false },
+    { labelKey: 'specialMarkings' as const, value: visual.special_markings, isColor: false },
   ]
 
   const primary = primaryRows.filter(
-    (r): r is { label: string; value: string } => r.value !== null && r.value !== ''
+    (r): r is typeof r & { value: string } => r.value !== null && r.value !== ''
   )
   const secondary = secondaryRows.filter(
-    (r): r is { label: string; value: string } => r.value !== null && r.value !== ''
+    (r): r is typeof r & { value: string } => r.value !== null && r.value !== ''
   )
 
   if (primary.length === 0 && secondary.length === 0) {
     return (
       <p className="text-sm" style={{ color: 'var(--ba-ghost)' }}>
-        Visual identification data not yet available.
+        {t('noData')}
       </p>
     )
   }
@@ -95,10 +98,20 @@ export function VisualIdentityCard({ visual }: { visual: VisualSignature | null 
   return (
     <div>
       {primary.map((r) => (
-        <VisualRow key={r.label} label={r.label} value={r.value} />
+        <VisualRow
+          key={r.labelKey}
+          label={t(`labels.${r.labelKey}`)}
+          value={r.value}
+          isColor={r.isColor}
+        />
       ))}
       {secondary.map((r) => (
-        <VisualRow key={r.label} label={r.label} value={r.value} />
+        <VisualRow
+          key={r.labelKey}
+          label={t(`labels.${r.labelKey}`)}
+          value={r.value}
+          isColor={r.isColor}
+        />
       ))}
     </div>
   )

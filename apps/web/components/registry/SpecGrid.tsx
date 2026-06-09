@@ -1,3 +1,5 @@
+import { getTranslations } from 'next-intl/server'
+
 type Specs = {
   construction_layers: number | null
   compression: number | null
@@ -11,10 +13,17 @@ type Specs = {
   notes: string | null
 }
 
-const GAUGE_LEVELS_3 = ['low', 'mid', 'high'] as const
-const GAUGE_LEVELS_FEEL = ['soft', 'medium', 'firm'] as const
+type GaugeLevel = 'low' | 'mid' | 'high' | 'soft' | 'medium' | 'firm'
 
-function GaugePills({ levels, value }: { levels: readonly string[]; value: string }) {
+function GaugePills({
+  levels,
+  value,
+  labels,
+}: {
+  levels: readonly GaugeLevel[]
+  value: string
+  labels: Record<string, string>
+}) {
   return (
     <div className="flex items-center gap-1">
       {levels.map((level) => {
@@ -22,7 +31,7 @@ function GaugePills({ levels, value }: { levels: readonly string[]; value: strin
         return (
           <span
             key={level}
-            className="rounded px-2 py-0.5 text-[11px] capitalize transition-colors"
+            className="rounded px-2 py-0.5 text-[11px] transition-colors"
             style={
               isActive
                 ? {
@@ -33,7 +42,7 @@ function GaugePills({ levels, value }: { levels: readonly string[]; value: strin
                 : { color: 'var(--ba-ghost)' }
             }
           >
-            {level}
+            {labels[level] ?? level}
           </span>
         )
       })}
@@ -80,11 +89,25 @@ function CompressionBar({ value }: { value: number }) {
   )
 }
 
-export function SpecGrid({ specs }: { specs: Specs | null }) {
+const GAUGE_LEVELS_3 = ['low', 'mid', 'high'] as const
+const GAUGE_LEVELS_FEEL = ['soft', 'medium', 'firm'] as const
+
+export async function SpecGrid({ specs }: { specs: Specs | null }) {
+  const t = await getTranslations('specGrid')
+
+  const gaugeLevels: Record<string, string> = {
+    low: t('gaugeLevels.low'),
+    mid: t('gaugeLevels.mid'),
+    high: t('gaugeLevels.high'),
+    soft: t('gaugeLevels.soft'),
+    medium: t('gaugeLevels.medium'),
+    firm: t('gaugeLevels.firm'),
+  }
+
   if (!specs) {
     return (
       <p className="text-sm" style={{ color: 'var(--ba-ghost)' }}>
-        Specifications not yet available for this version.
+        {t('noSpecs')}
       </p>
     )
   }
@@ -93,7 +116,7 @@ export function SpecGrid({ specs }: { specs: Specs | null }) {
   if (!hasAny) {
     return (
       <p className="text-sm" style={{ color: 'var(--ba-ghost)' }}>
-        Specifications not yet available for this version.
+        {t('noSpecs')}
       </p>
     )
   }
@@ -101,33 +124,54 @@ export function SpecGrid({ specs }: { specs: Specs | null }) {
   return (
     <div>
       {specs.construction_layers != null && (
-        <SpecRow label="Construction" value={`${specs.construction_layers}-piece`} />
+        <SpecRow
+          label={t('labels.construction')}
+          value={t('labels.constructionValue', { layers: specs.construction_layers })}
+        />
       )}
       {specs.compression != null && (
-        <SpecRow label="Compression" value={<CompressionBar value={specs.compression} />} />
+        <SpecRow
+          label={t('labels.compression')}
+          value={<CompressionBar value={specs.compression} />}
+        />
       )}
-      {specs.cover_material && <SpecRow label="Cover" value={specs.cover_material} />}
-      {specs.core_material && <SpecRow label="Core" value={specs.core_material} />}
+      {specs.cover_material && <SpecRow label={t('labels.cover')} value={specs.cover_material} />}
+      {specs.core_material && <SpecRow label={t('labels.core')} value={specs.core_material} />}
       {specs.dimple_count != null && (
-        <SpecRow label="Dimples" value={`${specs.dimple_count} dimples`} />
+        <SpecRow
+          label={t('labels.dimples')}
+          value={t('labels.dimplesValue', { count: specs.dimple_count })}
+        />
       )}
-      {specs.dimple_pattern && <SpecRow label="Dimple pattern" value={specs.dimple_pattern} />}
+      {specs.dimple_pattern && (
+        <SpecRow label={t('labels.dimplePattern')} value={specs.dimple_pattern} />
+      )}
       {specs.launch_profile && (
         <SpecRow
-          label="Launch"
-          value={<GaugePills levels={GAUGE_LEVELS_3} value={specs.launch_profile} />}
+          label={t('labels.launch')}
+          value={
+            <GaugePills levels={GAUGE_LEVELS_3} value={specs.launch_profile} labels={gaugeLevels} />
+          }
         />
       )}
       {specs.spin_profile && (
         <SpecRow
-          label="Spin"
-          value={<GaugePills levels={GAUGE_LEVELS_3} value={specs.spin_profile} />}
+          label={t('labels.spin')}
+          value={
+            <GaugePills levels={GAUGE_LEVELS_3} value={specs.spin_profile} labels={gaugeLevels} />
+          }
         />
       )}
       {specs.feel_profile && (
         <SpecRow
-          label="Feel"
-          value={<GaugePills levels={GAUGE_LEVELS_FEEL} value={specs.feel_profile} />}
+          label={t('labels.feel')}
+          value={
+            <GaugePills
+              levels={GAUGE_LEVELS_FEEL}
+              value={specs.feel_profile}
+              labels={gaugeLevels}
+            />
+          }
         />
       )}
       {specs.notes && (

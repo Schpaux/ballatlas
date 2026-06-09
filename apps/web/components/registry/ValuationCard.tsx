@@ -1,3 +1,5 @@
+import { getLocale, getTranslations } from 'next-intl/server'
+
 import type { ValuationResult } from '@ballatlas/golf-data'
 
 export type ValuationCardProps = {
@@ -5,16 +7,7 @@ export type ValuationCardProps = {
   valuationResult: ValuationResult | null
 }
 
-function fmt(price: number, currency: string) {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: currency === 'NOK' ? 'NOK' : 'USD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(price)
-}
-
-function ConfidenceBar({ score }: { score: number }) {
+function ConfidenceBar({ score, label }: { score: number; label: string }) {
   const pct = Math.round(score * 100)
   const barColor = pct >= 70 ? 'var(--ba-green)' : pct >= 40 ? 'var(--ba-gold)' : 'var(--ba-ghost)'
   const textColor = pct >= 70 ? 'var(--ba-green)' : pct >= 40 ? 'var(--ba-gold)' : 'var(--ba-ghost)'
@@ -31,15 +24,29 @@ function ConfidenceBar({ score }: { score: number }) {
         />
       </div>
       <span className="text-xs" style={{ color: textColor }}>
-        {pct}% confidence
+        {label}
       </span>
     </div>
   )
 }
 
-export function ValuationCard({ primarySegment, valuationResult }: ValuationCardProps) {
+export async function ValuationCard({ primarySegment, valuationResult }: ValuationCardProps) {
+  const [t, locale] = await Promise.all([getTranslations('valuation'), getLocale()])
+
+  const numberLocale = locale === 'no' ? 'nb-NO' : 'en-US'
+
+  function fmt(price: number, currency: string) {
+    return new Intl.NumberFormat(numberLocale, {
+      style: 'currency',
+      currency: currency === 'NOK' ? 'NOK' : 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(price)
+  }
+
+  const segmentLabel = primarySegment?.replace(/-/g, ' ') ?? null
+
   if (!valuationResult || !valuationResult.ok) {
-    const reason = valuationResult && !valuationResult.ok ? valuationResult.reason : null
     return (
       <div
         className="rounded-xl p-5"
@@ -51,11 +58,11 @@ export function ValuationCard({ primarySegment, valuationResult }: ValuationCard
               className="text-xs font-semibold uppercase tracking-[0.1em]"
               style={{ color: 'var(--ba-subtle)' }}
             >
-              Market Value
+              {t('title')}
             </p>
-            {primarySegment && (
+            {segmentLabel && (
               <p className="mt-0.5 text-xs capitalize" style={{ color: 'var(--ba-ghost)' }}>
-                {primarySegment.replace(/-/g, ' ')}
+                {segmentLabel}
               </p>
             )}
           </div>
@@ -67,18 +74,20 @@ export function ValuationCard({ primarySegment, valuationResult }: ValuationCard
               border: '1px solid var(--ba-line)',
             }}
           >
-            No data
+            {t('noData')}
           </span>
         </div>
         <p className="text-xs leading-relaxed" style={{ color: 'var(--ba-ghost)' }}>
-          {reason ??
-            "Market data for this ball hasn't been collected yet. Valuations are based on observed sale prices — missing values are left empty rather than estimated."}
+          {t('noDataDescription')}
         </p>
       </div>
     )
   }
 
   const { valuation } = valuationResult
+  const pct = Math.round(valuation.confidence * 100)
+  const confidenceLabel = t('confidence', { pct })
+  const observationsLabel = t('observations', { count: valuation.observation_count })
 
   return (
     <div
@@ -91,11 +100,11 @@ export function ValuationCard({ primarySegment, valuationResult }: ValuationCard
           className="text-xs font-semibold uppercase tracking-[0.1em]"
           style={{ color: 'var(--ba-subtle)' }}
         >
-          Market Value
+          {t('title')}
         </p>
-        {primarySegment && (
+        {segmentLabel && (
           <p className="mt-0.5 text-xs capitalize" style={{ color: 'var(--ba-ghost)' }}>
-            {primarySegment.replace(/-/g, ' ')}
+            {segmentLabel}
           </p>
         )}
       </div>
@@ -114,18 +123,17 @@ export function ValuationCard({ primarySegment, valuationResult }: ValuationCard
         </p>
       </div>
       <p className="mb-4 text-xs" style={{ color: 'var(--ba-ghost)' }}>
-        Mint condition · mid {fmt(valuation.mid, valuation.currency)}
+        {t('mintCondition', { price: fmt(valuation.mid, valuation.currency) })}
       </p>
 
-      <ConfidenceBar score={valuation.confidence} />
+      <ConfidenceBar score={valuation.confidence} label={confidenceLabel} />
 
       {/* Footer meta */}
       <p className="mt-3 text-xs" style={{ color: 'var(--ba-ghost)' }}>
-        {valuation.observation_count} market observation
-        {valuation.observation_count !== 1 ? 's' : ''}
-        {valuation.data_age_days != null && ` · data ${valuation.data_age_days}d old`}
+        {observationsLabel}
+        {valuation.data_age_days != null && ` · ${t('dataAge', { days: valuation.data_age_days })}`}
       </p>
-      {valuation.confidence < 0.7 && (
+      {valuation.confidence < 0.7 && valuation.confidence_reason && (
         <p className="mt-1 text-xs" style={{ color: 'var(--ba-ghost)' }}>
           {valuation.confidence_reason}
         </p>
