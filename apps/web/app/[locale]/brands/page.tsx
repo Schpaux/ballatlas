@@ -120,7 +120,7 @@ export default async function BrandsPage({ params }: { params: Promise<{ locale:
                 <BrandLogo
                   src={brand.logoUrl}
                   alt={brand.name}
-                  className="h-7 transition-opacity group-hover:opacity-70"
+                  className="h-7 self-start transition-opacity group-hover:opacity-70"
                 />
               )}
               <div className="flex items-start justify-between gap-2">
