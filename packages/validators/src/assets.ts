@@ -14,6 +14,12 @@ export type SvgValidationResult = { ok: true } | { ok: false; errors: string[] }
 
 const SVG_MAX_BYTES = 512 * 1024 // 512 KB
 
+// Strip on* event handler attributes — design tools (Illustrator, Figma) sometimes emit
+// these in exported SVGs. They are never needed in static logos and are safe to remove.
+export function sanitizeSvg(content: string): string {
+  return content.replace(/\s+on\w+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]*)/gi, '')
+}
+
 export function validateSvgSafety(content: string, sizeBytes?: number): SvgValidationResult {
   const errors: string[] = []
 

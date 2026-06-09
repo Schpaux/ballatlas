@@ -1,8 +1,10 @@
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 import {
   BrandAssetMetaSchema,
   BrandAssetUpdateSchema,
+  sanitizeSvg,
   validateSvgSafety,
 } from '@ballatlas/validators'
 
@@ -38,9 +40,9 @@ type ReviewStatus = (typeof STATUS_TABS)[number]['value']
 export default async function BrandAssetsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ status?: string; brand?: string }>
+  searchParams: Promise<{ status?: string; brand?: string; uploadError?: string }>
 }) {
-  const { status: statusParam = 'uploaded', brand: brandParam } = await searchParams
+  const { status: statusParam = 'uploaded', brand: brandParam, uploadError } = await searchParams
 
   const status: ReviewStatus = (
     ['uploaded', 'pending_review', 'approved', 'archived'] as const
@@ -90,26 +92,30 @@ export default async function BrandAssetsPage({
     const quality = qualityRaw ? Number(qualityRaw) : null
 
     const file = formData.get('file') as File | null
-    if (!file || file.size === 0) throw new Error('A file is required')
+
+    const fail = (msg: string) =>
+      redirect(`/admin/brand-assets?uploadError=${encodeURIComponent(msg)}`)
+
+    if (!file || file.size === 0) return fail('A file is required')
 
     const isSvg = file.type === 'image/svg+xml' || file.name.endsWith('.svg')
     const isPng = file.type === 'image/png'
     const isJpeg = file.type === 'image/jpeg' || file.type === 'image/jpg'
 
-    if (!isSvg && !isPng && !isJpeg) {
-      throw new Error('File must be SVG, PNG, or JPEG')
-    }
-
-    if (file.size > 10 * 1024 * 1024) throw new Error('File must be under 10MB')
+    if (!isSvg && !isPng && !isJpeg) return fail('File must be SVG, PNG, or JPEG')
+    if (file.size > 10 * 1024 * 1024) return fail('File must be under 10MB')
 
     const mime = isSvg ? 'image/svg+xml' : isPng ? 'image/png' : 'image/jpeg'
 
+    let fileContent: ArrayBuffer
     if (isSvg) {
-      const text = await file.text()
-      const result = validateSvgSafety(text, file.size)
-      if (!result.ok) {
-        throw new Error(`SVG validation failed: ${result.errors.join('; ')}`)
-      }
+      const raw = await file.text()
+      const sanitized = sanitizeSvg(raw)
+      const result = validateSvgSafety(sanitized, file.size)
+      if (!result.ok) return fail(`SVG validation failed: ${result.errors.join('; ')}`)
+      fileContent = new TextEncoder().encode(sanitized).buffer
+    } else {
+      fileContent = await file.arrayBuffer()
     }
 
     const admin = await createAdminClient()
@@ -119,11 +125,10 @@ export default async function BrandAssetsPage({
     const ext = isSvg ? 'svg' : isPng ? 'png' : 'jpg'
     const path = `${brandSlug}/${assetType}-${Date.now()}.${ext}`
 
-    const arrayBuffer = await file.arrayBuffer()
-    const { error: uploadError } = await admin.storage
+    const { error: storageError } = await admin.storage
       .from('brand-assets')
-      .upload(path, arrayBuffer, { contentType: mime, upsert: false })
-    if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`)
+      .upload(path, fileContent, { contentType: mime, upsert: false })
+    if (storageError) return fail(`Upload failed: ${storageError.message}`)
 
     const parsed = BrandAssetMetaSchema.safeParse({
       brand_id: brandId,
@@ -138,10 +143,10 @@ export default async function BrandAssetsPage({
       review_status: 'uploaded',
       quality_score: quality,
     })
-    if (!parsed.success) throw new Error(parsed.error.issues.map((i) => i.message).join(', '))
+    if (!parsed.success) return fail(parsed.error.issues.map((i) => i.message).join(', '))
 
-    const { error } = await admin.from('brand_assets').insert(parsed.data)
-    if (error) throw new Error(error.message)
+    const { error: dbError } = await admin.from('brand_assets').insert(parsed.data)
+    if (dbError) return fail(dbError.message)
     revalidatePath('/admin/brand-assets')
   }
 
@@ -203,6 +208,12 @@ export default async function BrandAssetsPage({
           </a>
         ))}
       </div>
+
+      {uploadError && (
+        <div className="mb-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {decodeURIComponent(uploadError)}
+        </div>
+      )}
 
       {/* Upload form */}
       <details className="mb-6 rounded-lg border border-stone-200 p-4">
