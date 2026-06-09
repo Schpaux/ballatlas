@@ -71,6 +71,7 @@ async function searchBalls(params: SearchParams) {
   try {
     const supabase = await createClient()
 
+    // Segment filter: pre-fetch matching version IDs
     let segmentVersionIds: string[] | null = null
     if (segment) {
       const { data: segRows } = await supabase
@@ -79,6 +80,42 @@ async function searchBalls(params: SearchParams) {
         .eq('segment.slug', segment)
       segmentVersionIds = segRows?.map((r) => r.version_id) ?? []
       if (segmentVersionIds.length === 0) {
+        return { balls: [], total: 0, pageNum, pageSize, error: null }
+      }
+    }
+
+    // Brand filter: pre-fetch matching family IDs (filtering on embedded resources
+    // without !inner doesn't exclude non-matching parent rows in Supabase)
+    let brandFamilyIds: string[] | null = null
+    if (brand) {
+      const { data: brandRow } = await supabase
+        .from('brands')
+        .select('id')
+        .eq('slug', brand)
+        .single()
+      if (!brandRow) {
+        return { balls: [], total: 0, pageNum, pageSize, error: null }
+      }
+      const { data: familyRows } = await supabase
+        .from('ball_families')
+        .select('id')
+        .eq('brand_id', brandRow.id)
+      brandFamilyIds = familyRows?.map((r) => r.id) ?? []
+      if (brandFamilyIds.length === 0) {
+        return { balls: [], total: 0, pageNum, pageSize, error: null }
+      }
+    }
+
+    // Specs filters: pre-fetch matching version IDs from technical_specs
+    let specsVersionIds: string[] | null = null
+    if (cover || compression_min || compression_max) {
+      let specsQuery = supabase.from('technical_specs').select('version_id')
+      if (cover) specsQuery = specsQuery.ilike('cover_material', `%${cover}%`)
+      if (compression_min) specsQuery = specsQuery.gte('compression', parseInt(compression_min, 10))
+      if (compression_max) specsQuery = specsQuery.lte('compression', parseInt(compression_max, 10))
+      const { data: specsRows } = await specsQuery
+      specsVersionIds = specsRows?.map((r) => r.version_id) ?? []
+      if (specsVersionIds.length === 0) {
         return { balls: [], total: 0, pageNum, pageSize, error: null }
       }
     }
@@ -105,7 +142,8 @@ async function searchBalls(params: SearchParams) {
         specs:technical_specs(compression, cover_material, construction_layers),
         version_segments(
           segment:segments(id, name, slug)
-        )
+        ),
+        images(image_type, storage_path, source_url, image_quality_score, alt_text)
         `,
         { count: 'exact' }
       )
@@ -118,10 +156,8 @@ async function searchBalls(params: SearchParams) {
       if (tsQuery) query = query.filter('search_vector', 'fts', tsQuery)
     }
     if (year) query = query.eq('release_year', parseInt(year, 10))
-    if (cover) query = query.ilike('specs.cover_material', `%${cover}%`)
-    if (compression_min) query = query.gte('specs.compression', parseInt(compression_min, 10))
-    if (compression_max) query = query.lte('specs.compression', parseInt(compression_max, 10))
-    if (brand) query = query.eq('family.brand.slug', brand)
+    if (brandFamilyIds !== null) query = query.in('family_id', brandFamilyIds)
+    if (specsVersionIds !== null) query = query.in('id', specsVersionIds)
     if (segmentVersionIds !== null) query = query.in('id', segmentVersionIds)
 
     const { data: ftsBalls, count, error } = await query
@@ -146,7 +182,8 @@ async function searchBalls(params: SearchParams) {
             specs:technical_specs(compression, cover_material, construction_layers),
             version_segments(
               segment:segments(id, name, slug)
-            )
+            ),
+            images(image_type, storage_path, source_url, image_quality_score, alt_text)
             `
           )
           .in('id', missingIds)

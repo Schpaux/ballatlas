@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
@@ -91,7 +92,14 @@ type BallDetail = {
     is_archived: boolean
     source: { id: string; name: string; url: string | null; reliability_score: number } | null
   }>
-  images: Array<{ review_status: string }>
+  images: Array<{
+    review_status: string
+    image_type: string
+    storage_path: string | null
+    source_url: string | null
+    alt_text: string | null
+    image_quality_score: number | null
+  }>
   identification_features: Array<{
     feature_type: string
     importance_score: number
@@ -127,7 +135,7 @@ async function getBall(slug: string): Promise<BallDetail | null> {
           condition, price, currency, observed_at, is_archived,
           source:sources(id, name, url, reliability_score)
         ),
-        images(review_status),
+        images(review_status, image_type, storage_path, source_url, alt_text, image_quality_score),
         identification_features(feature_type, importance_score)
         `
       )
@@ -263,6 +271,16 @@ export default async function BallDetailPage({
   }
 
   const hasApprovedImage = ball.images.some((img) => img.review_status === 'approved')
+
+  const heroImage =
+    [...ball.images].sort((a, b) => {
+      if (a.image_type === 'hero' && b.image_type !== 'hero') return -1
+      if (b.image_type === 'hero' && a.image_type !== 'hero') return 1
+      return (b.image_quality_score ?? 0) - (a.image_quality_score ?? 0)
+    })[0] ?? null
+  const heroImageUrl = heroImage?.storage_path
+    ? `${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/ball-images/${heroImage.storage_path}`
+    : (heroImage?.source_url ?? null)
   const completenessInput: CompletenessInput = {
     specs: ball.specs,
     visual: ball.visual,
@@ -406,9 +424,22 @@ export default async function BallDetailPage({
             )}
           </div>
 
-          {/* Right: floating ball */}
+          {/* Right: approved photo or CSS sphere fallback */}
           <div className="hidden items-start justify-center lg:flex">
-            <GolfBall size="lg" />
+            {heroImageUrl ? (
+              <div className="relative h-56 w-56 overflow-hidden rounded-2xl">
+                <Image
+                  src={heroImageUrl}
+                  alt={heroImage?.alt_text ?? ball.name}
+                  fill
+                  className="object-contain"
+                  sizes="224px"
+                  priority
+                />
+              </div>
+            ) : (
+              <GolfBall size="lg" />
+            )}
           </div>
         </div>
 

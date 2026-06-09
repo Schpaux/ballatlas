@@ -1,8 +1,11 @@
+import Image from 'next/image'
+
 import { BrandLogo } from './BrandLogo'
 import { GolfBall } from './GolfBall'
 import { SegmentBadge } from './SegmentBadge'
 
 import { Link } from '@/i18n/navigation'
+import { env } from '@/lib/env'
 
 export type BallCardData = {
   id: string
@@ -33,6 +36,31 @@ export type BallCardData = {
       slug: string
     } | null
   }>
+  images?: Array<{
+    image_type: string
+    storage_path: string | null
+    source_url: string | null
+    image_quality_score: number | null
+    alt_text: string | null
+  }>
+}
+
+function pickCardImage(images: BallCardData['images']) {
+  if (!images?.length) return null
+  return (
+    [...images].sort((a, b) => {
+      if (a.image_type === 'hero' && b.image_type !== 'hero') return -1
+      if (b.image_type === 'hero' && a.image_type !== 'hero') return 1
+      return (b.image_quality_score ?? 0) - (a.image_quality_score ?? 0)
+    })[0] ?? null
+  )
+}
+
+function resolveImageUrl(img: NonNullable<ReturnType<typeof pickCardImage>>): string | null {
+  if (img.storage_path) {
+    return `${env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/ball-images/${img.storage_path}`
+  }
+  return img.source_url
 }
 
 export function BallCard({ ball }: { ball: BallCardData }) {
@@ -43,6 +71,9 @@ export function BallCard({ ball }: { ball: BallCardData }) {
   if (ball.specs?.construction_layers != null) specParts.push(`${ball.specs.construction_layers}pc`)
   if (ball.specs?.compression != null) specParts.push(`C${ball.specs.compression}`)
   if (ball.specs?.cover_material) specParts.push(ball.specs.cover_material)
+
+  const cardImage = pickCardImage(ball.images)
+  const imageUrl = cardImage ? resolveImageUrl(cardImage) : null
 
   return (
     <Link
@@ -83,9 +114,21 @@ export function BallCard({ ball }: { ball: BallCardData }) {
         </div>
       </div>
 
-      {/* Ball image placeholder — centered CSS sphere */}
+      {/* Ball image — approved photo or CSS sphere fallback */}
       <div className="flex items-center justify-center py-5">
-        <GolfBall size="sm" />
+        {imageUrl ? (
+          <div className="relative h-20 w-20">
+            <Image
+              src={imageUrl}
+              alt={cardImage?.alt_text ?? ball.name}
+              fill
+              className="object-contain"
+              sizes="80px"
+            />
+          </div>
+        ) : (
+          <GolfBall size="sm" />
+        )}
       </div>
 
       {/* Content */}
