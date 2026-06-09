@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server'
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
 import { Link } from '@/i18n/navigation'
 import { locales } from '@/i18n/routing'
+import { resolveBrandLogoUrlsBatch } from '@/lib/brand-logo'
 import { env } from '@/lib/env'
 import { createClient } from '@/lib/supabase/server'
 
@@ -34,6 +35,7 @@ type BrandStat = {
   website: string | null
   familyCount: number
   versionCount: number
+  logoUrl: string | null
 }
 
 async function getBrandsWithStats(): Promise<BrandStat[]> {
@@ -62,13 +64,21 @@ async function getBrandsWithStats(): Promise<BrandStat[]> {
       return acc
     }, {})
 
+    const brandIds = brands.map((b) => b.id)
+    const logoMap = await resolveBrandLogoUrlsBatch(supabase, brandIds)
+
     return brands.map((brand) => {
       const brandFamilyIds = familiesByBrand[brand.id] ?? []
       const versionCount = brandFamilyIds.reduce(
         (sum, fid) => sum + (versionsByFamily[fid] ?? 0),
         0
       )
-      return { ...brand, familyCount: brandFamilyIds.length, versionCount }
+      return {
+        ...brand,
+        familyCount: brandFamilyIds.length,
+        versionCount,
+        logoUrl: logoMap.get(brand.id) ?? null,
+      }
     })
   } catch {
     return []
@@ -105,6 +115,13 @@ export default async function BrandsPage({ params }: { params: Promise<{ locale:
                 border: '1px solid var(--ba-line-strong)',
               }}
             >
+              {brand.logoUrl && (
+                <img
+                  src={brand.logoUrl}
+                  alt={brand.name}
+                  className="h-6 w-auto max-w-[100px] object-contain transition-opacity group-hover:opacity-70"
+                />
+              )}
               <div className="flex items-start justify-between gap-2">
                 <p
                   className="font-medium transition-opacity group-hover:opacity-80"
