@@ -1,7 +1,6 @@
 'use client'
 
 import type { CSSProperties } from 'react'
-
 import { useTranslations } from 'next-intl'
 
 import type { CompareBallProfile, FieldRow, HighlightTag } from '@ballatlas/golf-data'
