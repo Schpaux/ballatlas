@@ -23,6 +23,7 @@ import { ValuationCard } from '@/components/registry/ValuationCard'
 import { VisualIdentityCard } from '@/components/registry/VisualIdentityCard'
 import { Link } from '@/i18n/navigation'
 import { locales } from '@/i18n/routing'
+import { resolveBrandLogoUrl } from '@/lib/brand-logo'
 import { env } from '@/lib/env'
 import { createClient } from '@/lib/supabase/server'
 
@@ -48,6 +49,8 @@ type BallDetail = {
       slug: string
       country: string | null
       website: string | null
+      logo_url: string | null
+      logoUrl?: string | null
     }
   } | null
   specs: {
@@ -106,7 +109,7 @@ async function getBall(slug: string): Promise<BallDetail | null> {
         id, name, slug, release_year, release_date, msrp_usd, msrp_nok, status,
         family:ball_families(
           id, name, slug, description,
-          brand:brands(id, name, slug, country, website)
+          brand:brands(id, name, slug, country, website, logo_url)
         ),
         specs:technical_specs(
           construction_layers, compression, cover_material, core_material,
@@ -207,12 +210,21 @@ export default async function BallDetailPage({
   params: Promise<{ locale: string; slug: string }>
 }) {
   const { locale, slug } = await params
+  const supabase = await createClient()
   const [ball, t] = await Promise.all([
     getBall(slug),
     getTranslations({ locale, namespace: 'ballDetail' }),
   ])
 
   if (!ball) notFound()
+
+  if (ball.family?.brand) {
+    ball.family.brand.logoUrl = await resolveBrandLogoUrl(
+      supabase,
+      ball.family.brand.id,
+      ball.family.brand.logo_url
+    )
+  }
 
   const brand = ball.family?.brand
   const family = ball.family
@@ -331,13 +343,21 @@ export default async function BallDetailPage({
               {brand && (
                 <Link
                   href={`/brands/${brand.slug}`}
-                  className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-all duration-150"
+                  className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium transition-all duration-150"
                   style={{
                     background: 'var(--ba-paper)',
                     border: '1px solid var(--ba-line-strong)',
                     color: 'var(--ba-subtle)',
                   }}
                 >
+                  {brand.logoUrl && (
+                    <img
+                      src={brand.logoUrl}
+                      alt={brand.name}
+                      className="h-3.5 w-auto max-w-[56px] object-contain"
+                      style={{ opacity: 0.75 }}
+                    />
+                  )}
                   {brand.name}
                 </Link>
               )}
@@ -463,10 +483,17 @@ export default async function BallDetailPage({
                 <p className="kicker mb-2">{t('sections.brand')}</p>
                 <Link
                   href={`/brands/${brand.slug}`}
-                  className="text-sm font-medium transition-opacity hover:opacity-70"
+                  className="inline-flex items-center gap-2 transition-opacity hover:opacity-70"
                   style={{ color: 'var(--ba-ink)' }}
                 >
-                  {brand.name}
+                  {brand.logoUrl && (
+                    <img
+                      src={brand.logoUrl}
+                      alt={brand.name}
+                      className="h-5 w-auto max-w-[80px] object-contain"
+                    />
+                  )}
+                  <span className="text-sm font-medium">{brand.name}</span>
                 </Link>
                 {brand.country && (
                   <p className="mt-0.5 text-xs" style={{ color: 'var(--ba-ghost)' }}>

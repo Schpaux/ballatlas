@@ -14,8 +14,10 @@ export type BallCardData = {
     name: string
     slug: string
     brand: {
+      id: string
       name: string
       slug: string
+      logoUrl?: string | null
     }
   } | null
   specs: {
@@ -52,9 +54,18 @@ export function BallCard({ ball }: { ball: BallCardData }) {
     >
       {/* Card header: brand + year */}
       <div className="flex items-center justify-between px-4 pb-0 pt-4">
-        <span className="text-xs font-medium tracking-wide" style={{ color: 'var(--ba-subtle)' }}>
-          {ball.family?.brand.name ?? '—'}
-        </span>
+        {ball.family?.brand.logoUrl ? (
+          <img
+            src={ball.family.brand.logoUrl}
+            alt={ball.family.brand.name}
+            className="h-4 w-auto max-w-[72px] object-contain"
+            style={{ opacity: 0.8 }}
+          />
+        ) : (
+          <span className="text-xs font-medium tracking-wide" style={{ color: 'var(--ba-subtle)' }}>
+            {ball.family?.brand.name ?? '—'}
+          </span>
+        )}
         <div className="flex items-center gap-1.5">
           {isDiscontinued && (
             <span

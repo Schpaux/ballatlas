@@ -7,6 +7,7 @@ import { FilterPanel } from '@/components/registry/FilterPanel'
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
 import { SearchBar } from '@/components/registry/SearchBar'
 import { locales } from '@/i18n/routing'
+import { resolveBrandLogoUrlsBatch } from '@/lib/brand-logo'
 import { env } from '@/lib/env'
 import { createClient } from '@/lib/supabase/server'
 
@@ -99,7 +100,7 @@ async function searchBalls(params: SearchParams) {
         id, name, slug, release_year, msrp_usd, status,
         family:ball_families(
           id, name, slug,
-          brand:brands(id, name, slug)
+          brand:brands(id, name, slug, logo_url)
         ),
         specs:technical_specs(compression, cover_material, construction_layers),
         version_segments(
@@ -140,7 +141,7 @@ async function searchBalls(params: SearchParams) {
             id, name, slug, release_year, msrp_usd, status,
             family:ball_families(
               id, name, slug,
-              brand:brands(id, name, slug)
+              brand:brands(id, name, slug, logo_url)
             ),
             specs:technical_specs(compression, cover_material, construction_layers),
             version_segments(
@@ -157,7 +158,26 @@ async function searchBalls(params: SearchParams) {
     const balls = pageNum === 1 ? [...aliasBalls, ...ftsData] : ftsData
     const total = (count ?? 0) + aliasBalls.length
 
-    return { balls, total, pageNum, pageSize, error: null }
+    // Batch-fetch brand logos in a single query
+    const brandIds = [
+      ...new Set(
+        balls
+          .map((b) => (b.family?.brand as { id: string } | undefined)?.id)
+          .filter(Boolean) as string[]
+      ),
+    ]
+    const logoMap = await resolveBrandLogoUrlsBatch(supabase, brandIds)
+
+    const enrichedBalls = balls.map((ball) => {
+      const brandId = (ball.family?.brand as { id: string } | undefined)?.id
+      const logoUrl = brandId ? (logoMap.get(brandId) ?? null) : null
+      return {
+        ...ball,
+        family: ball.family ? { ...ball.family, brand: { ...ball.family.brand, logoUrl } } : null,
+      }
+    })
+
+    return { balls: enrichedBalls, total, pageNum, pageSize, error: null }
   } catch {
     return { balls: [], total: 0, pageNum: 1, pageSize: 24, error: 'Search failed' }
   }
