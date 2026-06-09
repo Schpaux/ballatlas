@@ -343,22 +343,26 @@ export default async function BallDetailPage({
               {brand && (
                 <Link
                   href={`/brands/${brand.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium transition-all duration-150"
-                  style={{
-                    background: 'var(--ba-paper)',
-                    border: '1px solid var(--ba-line-strong)',
-                    color: 'var(--ba-subtle)',
-                  }}
+                  className="transition-opacity hover:opacity-70"
                 >
-                  {brand.logoUrl && (
+                  {brand.logoUrl ? (
                     <img
                       src={brand.logoUrl}
                       alt={brand.name}
-                      className="h-3.5 w-auto max-w-[56px] object-contain"
-                      style={{ opacity: 0.75 }}
+                      className="h-7 w-auto max-w-[120px] object-contain"
                     />
+                  ) : (
+                    <span
+                      className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium"
+                      style={{
+                        background: 'var(--ba-paper)',
+                        border: '1px solid var(--ba-line-strong)',
+                        color: 'var(--ba-subtle)',
+                      }}
+                    >
+                      {brand.name}
+                    </span>
                   )}
-                  {brand.name}
                 </Link>
               )}
               {ball.status === 'discontinued' && (
