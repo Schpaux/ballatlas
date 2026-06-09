@@ -86,8 +86,12 @@ export default async function BrandsPage({ params }: { params: Promise<{ locale:
     <RegistryLayout>
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold tracking-tight text-neutral-100">{t('title')}</h1>
-          <p className="mt-1 text-sm text-neutral-500">{t('subtitle', { count: brands.length })}</p>
+          <h1 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--ba-ink)' }}>
+            {t('title')}
+          </h1>
+          <p className="mt-1 text-sm" style={{ color: 'var(--ba-subtle)' }}>
+            {t('subtitle', { count: brands.length })}
+          </p>
         </div>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -95,22 +99,29 @@ export default async function BrandsPage({ params }: { params: Promise<{ locale:
             <Link
               key={brand.id}
               href={`/brands/${brand.slug}`}
-              className="group relative flex flex-col gap-3 overflow-hidden rounded-xl border border-white/[0.07] bg-neutral-900/50 p-4 backdrop-blur-sm transition-all duration-200 hover:-translate-y-px hover:border-white/[0.13] hover:bg-neutral-900/70 hover:shadow-[0_8px_32px_rgba(0,0,0,0.32)]"
+              className="group flex flex-col gap-3 rounded-xl p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(24,36,29,0.10)]"
+              style={{
+                background: 'var(--ba-surface)',
+                border: '1px solid var(--ba-line-strong)',
+              }}
             >
-              {/* Top inner highlight */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
-
               <div className="flex items-start justify-between gap-2">
-                <p className="font-medium text-neutral-200 transition-colors group-hover:text-white">
+                <p
+                  className="font-medium transition-opacity group-hover:opacity-80"
+                  style={{ color: 'var(--ba-ink)' }}
+                >
                   {brand.name}
                 </p>
                 {brand.country && (
-                  <span className="shrink-0 rounded border border-white/[0.05] bg-neutral-800/70 px-1.5 py-0.5 font-mono text-xs text-neutral-500">
+                  <span
+                    className="shrink-0 rounded px-1.5 py-0.5 font-mono text-xs"
+                    style={{ background: 'var(--ba-paper)', color: 'var(--ba-ghost)' }}
+                  >
                     {brand.country}
                   </span>
                 )}
               </div>
-              <div className="flex gap-4 text-xs text-neutral-600">
+              <div className="flex gap-4 text-xs" style={{ color: 'var(--ba-ghost)' }}>
                 <span>{t('models', { count: brand.familyCount })}</span>
                 <span>{t('versions', { count: brand.versionCount })}</span>
               </div>
@@ -119,7 +130,9 @@ export default async function BrandsPage({ params }: { params: Promise<{ locale:
         </div>
 
         {brands.length === 0 && (
-          <p className="py-12 text-center text-sm text-neutral-600">{t('empty')}</p>
+          <p className="py-12 text-center text-sm" style={{ color: 'var(--ba-ghost)' }}>
+            {t('empty')}
+          </p>
         )}
       </div>
     </RegistryLayout>

@@ -68,50 +68,41 @@ export default async function ValuationPage() {
     <div className="max-w-3xl">
       <div className="mb-6">
         <h1 className="text-2xl font-semibold">Valuation</h1>
-        <p className="mt-1 text-sm text-neutral-400">
+        <p className="mt-1 text-sm text-stone-500">
           Manage valuation profiles, condition multipliers, and adjustment rules.
         </p>
       </div>
 
       {/* Create profile */}
-      <details className="mb-8 rounded-lg border border-neutral-800 p-4">
-        <summary className="cursor-pointer text-sm font-medium text-neutral-300">
+      <details className="mb-8 rounded-lg border border-stone-200 p-4">
+        <summary className="cursor-pointer text-sm font-medium text-stone-600">
           + New Valuation Profile
         </summary>
         <form action={createProfile} className="mt-4 space-y-3">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-xs text-neutral-400">Segment *</label>
-              <input
-                name="segment"
-                required
-                placeholder="tour-premium"
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
-              />
+              <label className="mb-1 block text-xs text-stone-500">Segment *</label>
+              <input name="segment" required placeholder="tour-premium" className="ba-input" />
             </div>
             <div>
-              <label className="mb-1 block text-xs text-neutral-400">Active</label>
-              <select
-                name="is_active"
-                defaultValue="true"
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-              >
+              <label className="mb-1 block text-xs text-stone-500">Active</label>
+              <select name="is_active" defaultValue="true" className="ba-input">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
           </div>
           <div>
-            <label className="mb-1 block text-xs text-neutral-400">Description</label>
+            <label className="mb-1 block text-xs text-stone-500">Description</label>
             <input
               name="description"
               placeholder="Used for tour-level premium balls in mint condition"
-              className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
+              className="ba-input"
             />
           </div>
           <button
             type="submit"
-            className="rounded-md bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-100"
+            className="rounded-md bg-stone-800 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700"
           >
             Create Profile
           </button>
@@ -137,16 +128,16 @@ export default async function ValuationPage() {
               | undefined
 
             return (
-              <div key={profile.id} className="rounded-lg border border-neutral-800 p-5">
+              <div key={profile.id} className="rounded-lg border border-stone-200 p-5">
                 <div className="mb-4 flex items-center justify-between">
                   <div>
                     <h2 className="font-semibold">{profile.segment}</h2>
                     {profile.description && (
-                      <p className="mt-0.5 text-sm text-neutral-400">{profile.description}</p>
+                      <p className="mt-0.5 text-sm text-stone-500">{profile.description}</p>
                     )}
                   </div>
                   <span
-                    className={`text-xs ${profile.is_active ? 'text-green-400' : 'text-neutral-500'}`}
+                    className={`text-xs ${profile.is_active ? 'text-green-700' : 'text-stone-400'}`}
                   >
                     {profile.is_active ? 'active' : 'inactive'}
                   </span>
@@ -154,23 +145,23 @@ export default async function ValuationPage() {
 
                 {/* Condition multipliers */}
                 <div className="mb-4">
-                  <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-500">
+                  <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-stone-400">
                     Condition Multipliers
                   </h3>
                   {multipliers.length > 0 ? (
                     <div className="mb-3 space-y-1">
                       {multipliers.map((m) => (
                         <div key={m.id} className="flex items-center justify-between text-sm">
-                          <span className="text-neutral-300">{m.condition}</span>
-                          <span className="font-mono text-neutral-400">×{m.multiplier}</span>
+                          <span className="text-stone-600">{m.condition}</span>
+                          <span className="font-mono text-stone-500">×{m.multiplier}</span>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <p className="mb-3 text-xs text-neutral-600">No multipliers yet.</p>
+                    <p className="mb-3 text-xs text-stone-400">No multipliers yet.</p>
                   )}
                   <details>
-                    <summary className="cursor-pointer text-xs text-neutral-500 hover:text-neutral-300">
+                    <summary className="cursor-pointer text-xs text-stone-400 hover:text-stone-600">
                       + Add multiplier
                     </summary>
                     <form action={addConditionMultiplier} className="mt-2 flex gap-2">
@@ -179,7 +170,7 @@ export default async function ValuationPage() {
                         name="condition"
                         placeholder="mint"
                         required
-                        className="flex-1 rounded-md border border-neutral-700 bg-neutral-900 px-2 py-1.5 text-xs text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
+                        className="flex-1 rounded-md border border-stone-300 bg-stone-50 px-2 py-1.5 text-xs text-stone-800 focus:border-stone-400 focus:outline-none"
                       />
                       <input
                         name="multiplier"
@@ -188,11 +179,11 @@ export default async function ValuationPage() {
                         min="0"
                         placeholder="1.000"
                         required
-                        className="w-24 rounded-md border border-neutral-700 bg-neutral-900 px-2 py-1.5 text-xs text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
+                        className="w-24 rounded-md border border-stone-300 bg-stone-50 px-2 py-1.5 text-xs text-stone-800 focus:border-stone-400 focus:outline-none"
                       />
                       <button
                         type="submit"
-                        className="rounded-md bg-neutral-800 px-3 py-1.5 text-xs text-neutral-200 hover:bg-neutral-700"
+                        className="rounded-md bg-stone-100 px-3 py-1.5 text-xs text-stone-700 hover:bg-stone-200"
                       >
                         Add
                       </button>
@@ -202,7 +193,7 @@ export default async function ValuationPage() {
 
                 {/* Adjustment rule */}
                 <div>
-                  <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-500">
+                  <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-stone-400">
                     Adjustment Rule
                   </h3>
                   <form action={upsertValuationRule} className="space-y-2">
@@ -226,30 +217,30 @@ export default async function ValuationPage() {
                         },
                       ].map((f) => (
                         <div key={f.name}>
-                          <label className="mb-1 block text-xs text-neutral-500">{f.label}</label>
+                          <label className="mb-1 block text-xs text-stone-400">{f.label}</label>
                           <input
                             name={f.name}
                             type="number"
                             step="0.001"
                             min="0"
                             defaultValue={f.defaultValue}
-                            className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-2 py-1.5 text-xs text-neutral-100 focus:border-neutral-500 focus:outline-none"
+                            className="w-full rounded-md border border-stone-300 bg-stone-50 px-2 py-1.5 text-xs text-stone-800 focus:border-stone-400 focus:outline-none"
                           />
                         </div>
                       ))}
                     </div>
                     <div>
-                      <label className="mb-1 block text-xs text-neutral-500">Notes</label>
+                      <label className="mb-1 block text-xs text-stone-400">Notes</label>
                       <input
                         name="notes"
                         defaultValue={rule?.notes ?? ''}
                         placeholder="Optional notes"
-                        className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-2 py-1.5 text-xs text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
+                        className="w-full rounded-md border border-stone-300 bg-stone-50 px-2 py-1.5 text-xs text-stone-800 focus:border-stone-400 focus:outline-none"
                       />
                     </div>
                     <button
                       type="submit"
-                      className="rounded-md bg-neutral-800 px-3 py-1.5 text-xs text-neutral-200 hover:bg-neutral-700"
+                      className="rounded-md bg-stone-100 px-3 py-1.5 text-xs text-stone-700 hover:bg-stone-200"
                     >
                       {rule ? 'Update Rule' : 'Create Rule'}
                     </button>
@@ -260,7 +251,7 @@ export default async function ValuationPage() {
           })}
         </div>
       ) : (
-        <p className="text-sm text-neutral-500">
+        <p className="text-sm text-stone-400">
           No valuation profiles yet. Create one above to get started.
         </p>
       )}

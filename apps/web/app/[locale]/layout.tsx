@@ -1,6 +1,5 @@
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
 import type { Metadata, Viewport } from 'next'
+import { Space_Grotesk, Space_Mono } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
@@ -8,6 +7,19 @@ import { getMessages, getTranslations } from 'next-intl/server'
 import '../../app/globals.css'
 
 import { locales, type Locale } from '@/i18n/routing'
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+})
+
+const spaceMono = Space_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-space-mono',
+  display: 'swap',
+})
 
 export async function generateMetadata({
   params,
@@ -36,10 +48,7 @@ export async function generateMetadata({
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
-  ],
+  themeColor: '#F4F1E8',
 }
 
 export function generateStaticParams() {
@@ -62,14 +71,12 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale: locale as Locale })
 
   return (
-    // Font variables on <html> — required for Tailwind CSS variable resolution
-    // suppressHydrationWarning prevents dark mode class hydration mismatch
     <html
       lang={locale}
-      className={`${GeistSans.variable} ${GeistMono.variable} dark`}
+      className={`${spaceGrotesk.variable} ${spaceMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="bg-background min-h-screen font-sans antialiased">
+      <body className="min-h-screen font-sans antialiased">
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
       </body>
     </html>

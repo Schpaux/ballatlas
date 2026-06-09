@@ -36,7 +36,7 @@ export default async function AliasesPage({
     .limit(500)
 
   if (error) {
-    return <p className="text-red-400">Failed to load aliases: {error.message}</p>
+    return <p className="text-red-600">Failed to load aliases: {error.message}</p>
   }
 
   async function createAlias(formData: FormData) {
@@ -72,23 +72,26 @@ export default async function AliasesPage({
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold">Aliases</h1>
-          <p className="mt-1 text-sm text-neutral-400">{count ?? 0} aliases</p>
+          <p className="mt-1 text-sm" style={{ color: 'var(--ba-subtle)' }}>
+            {count ?? 0} aliases
+          </p>
         </div>
       </div>
 
       {/* Add alias form */}
-      <details className="mb-6 rounded-lg border border-neutral-800 p-4">
-        <summary className="cursor-pointer text-sm font-medium text-neutral-300">
+      <details
+        className="mb-6 rounded-xl p-4"
+        style={{ border: '1px solid var(--ba-line-strong)' }}
+      >
+        <summary className="cursor-pointer text-sm font-medium" style={{ color: 'var(--ba-ink)' }}>
           + Add Alias
         </summary>
         <form action={createAlias} className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
           <div>
-            <label className="mb-1 block text-xs text-neutral-400">Version *</label>
-            <select
-              name="version_id"
-              required
-              className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-            >
+            <label className="mb-1 block text-xs" style={{ color: 'var(--ba-subtle)' }}>
+              Version *
+            </label>
+            <select name="version_id" required className="ba-input">
               <option value="">Select version…</option>
               {versions?.map((v) => (
                 <option key={v.id} value={v.id}>
@@ -98,21 +101,16 @@ export default async function AliasesPage({
             </select>
           </div>
           <div>
-            <label className="mb-1 block text-xs text-neutral-400">Alias *</label>
-            <input
-              name="alias"
-              required
-              placeholder="e.g. Pro V1"
-              className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
-            />
+            <label className="mb-1 block text-xs" style={{ color: 'var(--ba-subtle)' }}>
+              Alias *
+            </label>
+            <input name="alias" required placeholder="e.g. Pro V1" className="ba-input" />
           </div>
           <div>
-            <label className="mb-1 block text-xs text-neutral-400">Type</label>
-            <select
-              name="alias_type"
-              defaultValue="common_name"
-              className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-            >
+            <label className="mb-1 block text-xs" style={{ color: 'var(--ba-subtle)' }}>
+              Type
+            </label>
+            <select name="alias_type" defaultValue="common_name" className="ba-input">
               {[
                 'common_name',
                 'abbreviation',
@@ -129,7 +127,8 @@ export default async function AliasesPage({
           <div className="sm:col-span-3">
             <button
               type="submit"
-              className="rounded-md bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-100"
+              className="rounded-md px-4 py-2 text-sm font-medium transition-opacity hover:opacity-80"
+              style={{ background: 'var(--ba-ink)', color: 'var(--ba-paper)' }}
             >
               Add Alias
             </button>
@@ -143,35 +142,52 @@ export default async function AliasesPage({
           name="q"
           defaultValue={q}
           placeholder="Search aliases…"
-          className="w-full max-w-xs rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
+          className="ba-input max-w-xs"
         />
       </form>
 
-      <div className="overflow-hidden rounded-lg border border-neutral-800">
+      <div
+        className="overflow-hidden rounded-xl"
+        style={{ border: '1px solid var(--ba-line-strong)' }}
+      >
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-neutral-800 bg-neutral-900">
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Alias</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Type</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Version</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400"></th>
+            <tr
+              style={{ borderBottom: '1px solid var(--ba-line)', background: 'var(--ba-surface)' }}
+            >
+              {['Alias', 'Type', 'Version', ''].map((h) => (
+                <th
+                  key={h}
+                  className="px-4 py-3 text-left font-normal"
+                  style={{ color: 'var(--ba-subtle)' }}
+                >
+                  {h}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
             {aliases?.map((a) => {
               const version = a.version as { name: string; slug: string } | null
               return (
-                <tr
-                  key={a.id}
-                  className="border-b border-neutral-800 last:border-0 hover:bg-neutral-900/50"
-                >
-                  <td className="px-4 py-3 font-medium">{a.alias}</td>
-                  <td className="px-4 py-3 font-mono text-xs text-neutral-400">{a.alias_type}</td>
-                  <td className="px-4 py-3 text-neutral-400">{version?.name ?? '—'}</td>
+                <tr key={a.id} className="admin-table-row">
+                  <td className="px-4 py-3 font-medium" style={{ color: 'var(--ba-ink)' }}>
+                    {a.alias}
+                  </td>
+                  <td className="px-4 py-3 font-mono text-xs" style={{ color: 'var(--ba-subtle)' }}>
+                    {a.alias_type}
+                  </td>
+                  <td className="px-4 py-3" style={{ color: 'var(--ba-subtle)' }}>
+                    {version?.name ?? '—'}
+                  </td>
                   <td className="px-4 py-3 text-right">
                     <form action={deleteAlias}>
                       <input type="hidden" name="id" value={a.id} />
-                      <button type="submit" className="text-xs text-neutral-600 hover:text-red-400">
+                      <button
+                        type="submit"
+                        className="text-xs transition-colors hover:text-red-600"
+                        style={{ color: 'var(--ba-ghost)' }}
+                      >
                         Delete
                       </button>
                     </form>
@@ -188,18 +204,20 @@ export default async function AliasesPage({
           {page > 1 && (
             <a
               href={`/admin/aliases?page=${page - 1}${q ? `&q=${q}` : ''}`}
-              className="text-neutral-400 hover:text-neutral-100"
+              className="transition-opacity hover:opacity-70"
+              style={{ color: 'var(--ba-subtle)' }}
             >
               ← Previous
             </a>
           )}
-          <span className="text-neutral-600">
+          <span style={{ color: 'var(--ba-ghost)' }}>
             Page {page} of {totalPages}
           </span>
           {page < totalPages && (
             <a
               href={`/admin/aliases?page=${page + 1}${q ? `&q=${q}` : ''}`}
-              className="text-neutral-400 hover:text-neutral-100"
+              className="transition-opacity hover:opacity-70"
+              style={{ color: 'var(--ba-subtle)' }}
             >
               Next →
             </a>

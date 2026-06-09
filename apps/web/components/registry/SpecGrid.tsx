@@ -22,11 +22,16 @@ function GaugePills({ levels, value }: { levels: readonly string[]; value: strin
         return (
           <span
             key={level}
-            className={`rounded px-2 py-0.5 text-[11px] capitalize transition-colors ${
+            className="rounded px-2 py-0.5 text-[11px] capitalize transition-colors"
+            style={
               isActive
-                ? 'bg-emerald-500/15 text-emerald-400 ring-1 ring-emerald-500/25'
-                : 'text-neutral-700'
-            }`}
+                ? {
+                    background: 'var(--ba-green-soft)',
+                    color: 'var(--ba-green)',
+                    boxShadow: '0 0 0 1px rgba(31,106,71,0.2)',
+                  }
+                : { color: 'var(--ba-ghost)' }
+            }
           >
             {level}
           </span>
@@ -38,9 +43,16 @@ function GaugePills({ levels, value }: { levels: readonly string[]; value: strin
 
 function SpecRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between gap-4 py-3">
-      <span className="text-sm text-neutral-500">{label}</span>
-      <span className="text-right text-sm text-neutral-200">{value}</span>
+    <div
+      className="flex items-center justify-between gap-4 py-3"
+      style={{ borderBottom: '1px solid var(--ba-line)' }}
+    >
+      <span className="text-sm" style={{ color: 'var(--ba-subtle)' }}>
+        {label}
+      </span>
+      <span className="text-right text-sm" style={{ color: 'var(--ba-ink)' }}>
+        {value}
+      </span>
     </div>
   )
 }
@@ -49,14 +61,21 @@ function CompressionBar({ value }: { value: number }) {
   const pct = Math.min(100, (value / 120) * 100)
   return (
     <div className="flex items-center gap-3">
-      <div className="relative h-1.5 w-24 overflow-hidden rounded-full bg-neutral-800/80">
-        {/* Track gradient: emerald at low end → neutral at high */}
+      <div
+        className="relative h-1.5 w-24 overflow-hidden rounded-full"
+        style={{ background: 'var(--ba-sand)' }}
+      >
         <div
-          className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-emerald-600/80 to-emerald-400/60 transition-all"
-          style={{ width: `${pct}%` }}
+          className="absolute inset-y-0 left-0 rounded-full transition-all"
+          style={{
+            width: `${pct}%`,
+            background: 'linear-gradient(to right, var(--ba-green-d), var(--ba-green-l))',
+          }}
         />
       </div>
-      <span className="font-mono text-neutral-200">{value}</span>
+      <span className="font-mono" style={{ color: 'var(--ba-ink)' }}>
+        {value}
+      </span>
     </div>
   )
 }
@@ -64,19 +83,23 @@ function CompressionBar({ value }: { value: number }) {
 export function SpecGrid({ specs }: { specs: Specs | null }) {
   if (!specs) {
     return (
-      <p className="text-sm text-neutral-600">Specifications not yet available for this version.</p>
+      <p className="text-sm" style={{ color: 'var(--ba-ghost)' }}>
+        Specifications not yet available for this version.
+      </p>
     )
   }
 
   const hasAny = Object.values(specs).some((v) => v !== null && v !== undefined && v !== '')
   if (!hasAny) {
     return (
-      <p className="text-sm text-neutral-600">Specifications not yet available for this version.</p>
+      <p className="text-sm" style={{ color: 'var(--ba-ghost)' }}>
+        Specifications not yet available for this version.
+      </p>
     )
   }
 
   return (
-    <div className="divide-y divide-white/[0.05]">
+    <div>
       {specs.construction_layers != null && (
         <SpecRow label="Construction" value={`${specs.construction_layers}-piece`} />
       )}
@@ -109,7 +132,9 @@ export function SpecGrid({ specs }: { specs: Specs | null }) {
       )}
       {specs.notes && (
         <div className="py-3">
-          <p className="text-xs leading-relaxed text-neutral-500">{specs.notes}</p>
+          <p className="text-xs leading-relaxed" style={{ color: 'var(--ba-subtle)' }}>
+            {specs.notes}
+          </p>
         </div>
       )}
     </div>

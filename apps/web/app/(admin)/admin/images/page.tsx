@@ -21,9 +21,9 @@ const REVIEW_STATUS_LABELS: Record<string, string> = {
 }
 
 const REVIEW_STATUS_COLORS: Record<string, string> = {
-  pending: 'text-yellow-400',
-  approved: 'text-green-400',
-  rejected: 'text-red-400',
+  pending: 'text-yellow-700',
+  approved: 'text-green-700',
+  rejected: 'text-red-600',
 }
 
 export default async function ImagesPage({
@@ -179,7 +179,7 @@ export default async function ImagesPage({
     <div>
       <div className="mb-6">
         <h1 className="text-2xl font-semibold">Images</h1>
-        <p className="mt-1 text-sm text-neutral-400">
+        <p className="mt-1 text-sm text-stone-500">
           {totalCount ?? 0} total — upload, categorize, and review ball images
         </p>
       </div>
@@ -191,19 +191,19 @@ export default async function ImagesPage({
             label: 'Pending Review',
             count: pendingCount ?? 0,
             status: 'pending',
-            color: 'text-yellow-400',
+            color: 'text-yellow-700',
           },
           {
             label: 'Approved',
             count: approvedCount ?? 0,
             status: 'approved',
-            color: 'text-green-400',
+            color: 'text-green-700',
           },
           {
             label: 'Rejected',
             count: rejectedCount ?? 0,
             status: 'rejected',
-            color: 'text-red-400',
+            color: 'text-red-600',
           },
         ].map((s) => (
           <a
@@ -211,30 +211,24 @@ export default async function ImagesPage({
             href={`/admin/images?status=${s.status}`}
             className={`rounded-lg border p-4 transition-colors ${
               status === s.status
-                ? 'border-neutral-600 bg-neutral-800'
-                : 'border-neutral-800 bg-neutral-900 hover:border-neutral-600'
+                ? 'border-stone-300 bg-stone-100'
+                : 'border-stone-200 bg-stone-50 hover:border-stone-300'
             }`}
           >
             <div className={`font-mono text-2xl font-bold ${s.color}`}>{s.count}</div>
-            <div className="mt-1 text-xs text-neutral-400">{s.label}</div>
+            <div className="mt-1 text-xs text-stone-500">{s.label}</div>
           </a>
         ))}
       </div>
 
       {/* Add image form */}
-      <details className="mb-6 rounded-lg border border-neutral-800 p-4">
-        <summary className="cursor-pointer text-sm font-medium text-neutral-300">
-          + Add Image
-        </summary>
+      <details className="mb-6 rounded-lg border border-stone-200 p-4">
+        <summary className="cursor-pointer text-sm font-medium text-stone-600">+ Add Image</summary>
         <form action={addImageRecord} encType="multipart/form-data" className="mt-4 space-y-3">
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             <div className="sm:col-span-2">
-              <label className="mb-1 block text-xs text-neutral-400">Version *</label>
-              <select
-                name="version_id"
-                required
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-              >
+              <label className="mb-1 block text-xs text-stone-500">Version *</label>
+              <select name="version_id" required className="ba-input">
                 <option value="">Select version…</option>
                 {versions?.map((v) => (
                   <option key={v.id} value={v.id}>
@@ -244,12 +238,8 @@ export default async function ImagesPage({
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs text-neutral-400">Image Type *</label>
-              <select
-                name="image_type"
-                required
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-              >
+              <label className="mb-1 block text-xs text-stone-500">Image Type *</label>
+              <select name="image_type" required className="ba-input">
                 {IMAGE_TYPES.map((t) => (
                   <option key={t} value={t}>
                     {t}
@@ -261,34 +251,25 @@ export default async function ImagesPage({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-xs text-neutral-400">Upload File</label>
+              <label className="mb-1 block text-xs text-stone-500">Upload File</label>
               <input
                 name="file"
                 type="file"
                 accept="image/jpeg,image/png,image/webp,image/avif"
-                className="w-full text-sm text-neutral-400 file:mr-3 file:rounded-md file:border-0 file:bg-neutral-800 file:px-3 file:py-1.5 file:text-xs file:text-neutral-200 hover:file:bg-neutral-700"
+                className="w-full text-sm text-stone-500 file:mr-3 file:rounded-md file:border-0 file:bg-stone-100 file:px-3 file:py-1.5 file:text-xs file:text-stone-700 hover:file:bg-stone-200"
               />
-              <p className="mt-0.5 text-xs text-neutral-600">JPEG, PNG, WebP, AVIF — max 10MB</p>
+              <p className="mt-0.5 text-xs text-stone-400">JPEG, PNG, WebP, AVIF — max 10MB</p>
             </div>
             <div>
-              <label className="mb-1 block text-xs text-neutral-400">Or Source URL</label>
-              <input
-                name="source_url"
-                type="url"
-                placeholder="https://…"
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
-              />
+              <label className="mb-1 block text-xs text-stone-500">Or Source URL</label>
+              <input name="source_url" type="url" placeholder="https://…" className="ba-input" />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             <div>
-              <label className="mb-1 block text-xs text-neutral-400">License *</label>
-              <select
-                name="license"
-                required
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-              >
+              <label className="mb-1 block text-xs text-stone-500">License *</label>
+              <select name="license" required className="ba-input">
                 {LICENSE_OPTIONS.map((l) => (
                   <option key={l.value} value={l.value}>
                     {l.label}
@@ -297,38 +278,34 @@ export default async function ImagesPage({
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs text-neutral-400">Quality (1–10)</label>
+              <label className="mb-1 block text-xs text-stone-500">Quality (1–10)</label>
               <input
                 name="image_quality_score"
                 type="number"
                 min="1"
                 max="10"
                 placeholder="7"
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
+                className="ba-input"
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="mb-1 block text-xs text-neutral-400">Attribution</label>
-              <input
-                name="attribution"
-                placeholder="e.g. © Titleist 2025"
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
-              />
+              <label className="mb-1 block text-xs text-stone-500">Attribution</label>
+              <input name="attribution" placeholder="e.g. © Titleist 2025" className="ba-input" />
             </div>
           </div>
 
           <div>
-            <label className="mb-1 block text-xs text-neutral-400">Alt Text</label>
+            <label className="mb-1 block text-xs text-stone-500">Alt Text</label>
             <input
               name="alt_text"
               placeholder="e.g. Titleist Pro V1 2025 hero view"
-              className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
+              className="ba-input"
             />
           </div>
 
           <button
             type="submit"
-            className="rounded-md bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-100"
+            className="rounded-md bg-stone-800 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700"
           >
             Add Image
           </button>
@@ -336,15 +313,15 @@ export default async function ImagesPage({
       </details>
 
       {/* Tabs */}
-      <div className="mb-4 flex gap-1 border-b border-neutral-800">
+      <div className="mb-4 flex gap-1 border-b border-stone-200">
         {(['pending', 'approved', 'rejected'] as const).map((s) => (
           <a
             key={s}
             href={`/admin/images?status=${s}`}
             className={`px-4 py-2 text-sm transition-colors ${
               status === s
-                ? 'border-b-2 border-white text-neutral-100'
-                : 'text-neutral-500 hover:text-neutral-300'
+                ? 'border-b-2 border-stone-800 text-stone-800'
+                : 'text-stone-400 hover:text-stone-600'
             }`}
           >
             {REVIEW_STATUS_LABELS[s]}
@@ -352,21 +329,21 @@ export default async function ImagesPage({
         ))}
       </div>
 
-      {error && <p className="mb-4 text-sm text-red-400">{error.message}</p>}
+      {error && <p className="mb-4 text-sm text-red-600">{error.message}</p>}
 
       {!images?.length ? (
-        <p className="py-8 text-center text-sm text-neutral-500">No {status} images.</p>
+        <p className="py-8 text-center text-sm text-stone-400">No {status} images.</p>
       ) : (
-        <div className="overflow-hidden rounded-lg border border-neutral-800">
+        <div className="overflow-hidden rounded-lg border border-stone-200">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-neutral-800 bg-neutral-900">
-                <th className="px-4 py-3 text-left font-normal text-neutral-400">Version</th>
-                <th className="px-4 py-3 text-left font-normal text-neutral-400">Type</th>
-                <th className="px-4 py-3 text-left font-normal text-neutral-400">License</th>
-                <th className="px-4 py-3 text-left font-normal text-neutral-400">Quality</th>
-                <th className="px-4 py-3 text-left font-normal text-neutral-400">Status</th>
-                <th className="px-4 py-3 text-left font-normal text-neutral-400">Actions</th>
+              <tr className="border-b border-stone-200 bg-stone-50">
+                <th className="px-4 py-3 text-left font-normal text-stone-500">Version</th>
+                <th className="px-4 py-3 text-left font-normal text-stone-500">Type</th>
+                <th className="px-4 py-3 text-left font-normal text-stone-500">License</th>
+                <th className="px-4 py-3 text-left font-normal text-stone-500">Quality</th>
+                <th className="px-4 py-3 text-left font-normal text-stone-500">Status</th>
+                <th className="px-4 py-3 text-left font-normal text-stone-500">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -383,7 +360,7 @@ export default async function ImagesPage({
                 return (
                   <tr
                     key={img.id}
-                    className="border-b border-neutral-800 last:border-0 hover:bg-neutral-900/50"
+                    className="border-b border-stone-200 last:border-0 hover:bg-stone-50/50"
                   >
                     <td className="px-4 py-3">
                       <div className="font-medium">
@@ -394,22 +371,20 @@ export default async function ImagesPage({
                           href={imageUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-xs text-neutral-600 hover:text-neutral-400"
+                          className="text-xs text-stone-400 hover:text-stone-500"
                         >
                           View →
                         </a>
                       )}
                     </td>
-                    <td className="px-4 py-3 font-mono text-xs text-neutral-400">
-                      {img.image_type}
-                    </td>
-                    <td className="px-4 py-3 text-xs text-neutral-400">{img.license ?? '—'}</td>
-                    <td className="px-4 py-3 font-mono text-xs text-neutral-400">
+                    <td className="px-4 py-3 font-mono text-xs text-stone-500">{img.image_type}</td>
+                    <td className="px-4 py-3 text-xs text-stone-500">{img.license ?? '—'}</td>
+                    <td className="px-4 py-3 font-mono text-xs text-stone-500">
                       {img.image_quality_score ?? '—'}
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={`text-xs ${REVIEW_STATUS_COLORS[img.review_status] ?? 'text-neutral-400'}`}
+                        className={`text-xs ${REVIEW_STATUS_COLORS[img.review_status] ?? 'text-stone-500'}`}
                       >
                         {REVIEW_STATUS_LABELS[img.review_status] ?? img.review_status}
                       </span>
@@ -423,7 +398,7 @@ export default async function ImagesPage({
                               <input type="hidden" name="review_status" value="approved" />
                               <button
                                 type="submit"
-                                className="text-xs text-green-500 hover:text-green-400"
+                                className="text-xs text-green-500 hover:text-green-700"
                               >
                                 Approve
                               </button>
@@ -433,7 +408,7 @@ export default async function ImagesPage({
                               <input type="hidden" name="review_status" value="rejected" />
                               <button
                                 type="submit"
-                                className="text-xs text-red-500 hover:text-red-400"
+                                className="text-xs text-red-500 hover:text-red-600"
                               >
                                 Reject
                               </button>
@@ -446,7 +421,7 @@ export default async function ImagesPage({
                             <input type="hidden" name="review_status" value="approved" />
                             <button
                               type="submit"
-                              className="text-xs text-neutral-500 hover:text-neutral-300"
+                              className="text-xs text-stone-400 hover:text-stone-600"
                             >
                               Re-approve
                             </button>
@@ -457,7 +432,7 @@ export default async function ImagesPage({
                           <input type="hidden" name="storage_path" value={img.storage_path ?? ''} />
                           <button
                             type="submit"
-                            className="text-xs text-neutral-700 hover:text-red-400"
+                            className="text-xs text-stone-300 hover:text-red-600"
                           >
                             Delete
                           </button>
@@ -477,18 +452,18 @@ export default async function ImagesPage({
           {page > 1 && (
             <a
               href={`/admin/images?status=${status}&page=${page - 1}`}
-              className="text-neutral-400 hover:text-neutral-100"
+              className="text-stone-500 hover:text-stone-800"
             >
               ← Previous
             </a>
           )}
-          <span className="text-neutral-600">
+          <span className="text-stone-400">
             Page {page} of {totalPages}
           </span>
           {page < totalPages && (
             <a
               href={`/admin/images?status=${status}&page=${page + 1}`}
-              className="text-neutral-400 hover:text-neutral-100"
+              className="text-stone-500 hover:text-stone-800"
             >
               Next →
             </a>

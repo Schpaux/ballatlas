@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Route } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -8,48 +8,50 @@ export const metadata: Metadata = {
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100">
-      <nav className="border-b border-neutral-800 bg-neutral-900 px-6 py-3">
+    <div className="min-h-screen" style={{ background: 'var(--ba-paper)' }}>
+      <nav
+        style={{
+          background: 'var(--ba-ink)',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+        }}
+        className="px-6 py-3"
+      >
         <div className="flex items-center gap-6">
-          <span className="font-mono text-sm font-semibold text-neutral-300">BallAtlas Admin</span>
-          <div className="flex gap-4 text-sm text-neutral-400">
-            <Link href="/admin" className="transition-colors hover:text-neutral-100">
-              Dashboard
-            </Link>
-            <Link href="/admin/brands" className="transition-colors hover:text-neutral-100">
-              Brands
-            </Link>
-            <Link href="/admin/families" className="transition-colors hover:text-neutral-100">
-              Families
-            </Link>
-            <Link href="/admin/versions" className="transition-colors hover:text-neutral-100">
-              Versions
-            </Link>
-            <Link href="/admin/aliases" className="transition-colors hover:text-neutral-100">
-              Aliases
-            </Link>
-            <Link href="/admin/images" className="transition-colors hover:text-neutral-100">
-              Images
-            </Link>
-            <Link href="/admin/prices" className="transition-colors hover:text-neutral-100">
-              Prices
-            </Link>
-            <Link href="/admin/valuation" className="transition-colors hover:text-neutral-100">
-              Valuation
-            </Link>
-            <Link href="/admin/data-quality" className="transition-colors hover:text-neutral-100">
-              Data Quality
-            </Link>
-            <Link href="/admin/brand-assets" className="transition-colors hover:text-neutral-100">
-              Brand Assets
-            </Link>
-            <Link href="/admin/feedback" className="transition-colors hover:text-neutral-100">
-              Feedback
-            </Link>
+          <span
+            className="font-mono text-sm font-semibold"
+            style={{ color: 'rgba(255,255,255,0.9)' }}
+          >
+            BallAtlas Admin
+          </span>
+          <div className="flex flex-wrap gap-4 text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+            {[
+              { href: '/admin', label: 'Dashboard' },
+              { href: '/admin/brands', label: 'Brands' },
+              { href: '/admin/families', label: 'Families' },
+              { href: '/admin/versions', label: 'Versions' },
+              { href: '/admin/aliases', label: 'Aliases' },
+              { href: '/admin/images', label: 'Images' },
+              { href: '/admin/prices', label: 'Prices' },
+              { href: '/admin/valuation', label: 'Valuation' },
+              { href: '/admin/data-quality', label: 'Data Quality' },
+              { href: '/admin/brand-assets', label: 'Brand Assets' },
+              { href: '/admin/feedback', label: 'Feedback' },
+            ].map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href as Route}
+                className="transition-opacity hover:opacity-100"
+                style={{ color: 'rgba(255,255,255,0.55)' }}
+              >
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
       </nav>
-      <main className="mx-auto max-w-6xl px-6 py-8">{children}</main>
+      <main className="mx-auto max-w-6xl px-6 py-8" style={{ color: 'var(--ba-ink)' }}>
+        {children}
+      </main>
     </div>
   )
 }

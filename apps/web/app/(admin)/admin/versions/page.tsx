@@ -30,7 +30,7 @@ export default async function VersionsPage({
     .range(from, to)
 
   if (error) {
-    return <p className="text-red-400">Failed to load versions: {error.message}</p>
+    return <p className="text-red-600">Failed to load versions: {error.message}</p>
   }
 
   const totalPages = Math.ceil((count ?? 0) / pageSize)
@@ -40,55 +40,71 @@ export default async function VersionsPage({
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold">Versions</h1>
-          <p className="mt-1 text-sm text-neutral-400">{count ?? 0} versions</p>
+          <p className="mt-1 text-sm" style={{ color: 'var(--ba-subtle)' }}>
+            {count ?? 0} versions
+          </p>
         </div>
         <Link
           href="/admin/versions/new"
-          className="rounded-md bg-white px-3 py-1.5 text-sm font-medium text-neutral-900 hover:bg-neutral-100"
+          className="rounded-md px-3 py-1.5 text-sm font-medium transition-opacity hover:opacity-80"
+          style={{ background: 'var(--ba-ink)', color: 'var(--ba-paper)' }}
         >
           + New Version
         </Link>
       </div>
 
-      <div className="overflow-hidden rounded-lg border border-neutral-800">
+      <div
+        className="overflow-hidden rounded-xl"
+        style={{ border: '1px solid var(--ba-line-strong)' }}
+      >
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-neutral-800 bg-neutral-900">
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Brand</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Name</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Year</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">MSRP</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Status</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400"></th>
+            <tr
+              style={{ borderBottom: '1px solid var(--ba-line)', background: 'var(--ba-surface)' }}
+            >
+              {['Brand', 'Name', 'Year', 'MSRP', 'Status', ''].map((h) => (
+                <th
+                  key={h}
+                  className="px-4 py-3 text-left font-normal"
+                  style={{ color: 'var(--ba-subtle)' }}
+                >
+                  {h}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
             {versions?.map((v) => {
               const brandName = v.family?.brand?.name as string | undefined
+              const statusStyle =
+                v.status === 'published'
+                  ? { background: 'var(--ba-green-soft)', color: 'var(--ba-green)' }
+                  : v.status === 'discontinued'
+                    ? { background: 'var(--ba-paper-2)', color: 'var(--ba-ghost)' }
+                    : { background: 'var(--ba-gold-soft)', color: 'var(--ba-gold)' }
               return (
-                <tr
-                  key={v.id}
-                  className="border-b border-neutral-800 last:border-0 hover:bg-neutral-900/50"
-                >
-                  <td className="px-4 py-3 text-neutral-400">{brandName ?? '—'}</td>
-                  <td className="px-4 py-3 font-medium">
-                    <Link href={`/admin/versions/${v.id}` as Route} className="hover:underline">
+                <tr key={v.id} className="admin-table-row">
+                  <td className="px-4 py-3" style={{ color: 'var(--ba-subtle)' }}>
+                    {brandName ?? '—'}
+                  </td>
+                  <td className="px-4 py-3 font-medium" style={{ color: 'var(--ba-ink)' }}>
+                    <Link
+                      href={`/admin/versions/${v.id}` as Route}
+                      className="transition-opacity hover:opacity-70"
+                    >
                       {v.name}
                     </Link>
                   </td>
-                  <td className="px-4 py-3 text-neutral-400">{v.release_year ?? '—'}</td>
-                  <td className="px-4 py-3 font-mono text-xs text-neutral-400">
+                  <td className="px-4 py-3" style={{ color: 'var(--ba-subtle)' }}>
+                    {v.release_year ?? '—'}
+                  </td>
+                  <td className="px-4 py-3 font-mono text-xs" style={{ color: 'var(--ba-subtle)' }}>
                     {v.msrp_usd ? `$${v.msrp_usd}` : '—'}
                   </td>
                   <td className="px-4 py-3">
                     <span
-                      className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${
-                        v.status === 'published'
-                          ? 'bg-green-950 text-green-400'
-                          : v.status === 'discontinued'
-                            ? 'bg-neutral-800 text-neutral-400'
-                            : 'bg-yellow-950 text-yellow-400'
-                      }`}
+                      className="inline-flex rounded-full px-2 py-0.5 text-xs font-medium"
+                      style={statusStyle}
                     >
                       {v.status}
                     </span>
@@ -96,7 +112,8 @@ export default async function VersionsPage({
                   <td className="px-4 py-3 text-right">
                     <Link
                       href={`/admin/versions/${v.id}/edit` as Route}
-                      className="text-xs text-neutral-500 hover:text-neutral-200"
+                      className="text-xs transition-opacity hover:opacity-70"
+                      style={{ color: 'var(--ba-green)' }}
                     >
                       Edit
                     </Link>
@@ -113,18 +130,20 @@ export default async function VersionsPage({
           {page > 1 && (
             <Link
               href={`/admin/versions?page=${page - 1}` as Route}
-              className="text-neutral-400 hover:text-neutral-100"
+              className="transition-opacity hover:opacity-70"
+              style={{ color: 'var(--ba-subtle)' }}
             >
               ← Previous
             </Link>
           )}
-          <span className="text-neutral-600">
+          <span style={{ color: 'var(--ba-ghost)' }}>
             Page {page} of {totalPages}
           </span>
           {page < totalPages && (
             <Link
               href={`/admin/versions?page=${page + 1}` as Route}
-              className="text-neutral-400 hover:text-neutral-100"
+              className="transition-opacity hover:opacity-70"
+              style={{ color: 'var(--ba-subtle)' }}
             >
               Next →
             </Link>

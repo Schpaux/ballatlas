@@ -200,7 +200,14 @@ export function IdentificationForm({ onResults }: Props) {
       </Field>
 
       {error && (
-        <p className="rounded-md border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400">
+        <p
+          className="rounded-md px-3 py-2 text-sm"
+          style={{
+            background: 'rgba(180,60,40,0.08)',
+            border: '1px solid rgba(180,60,40,0.2)',
+            color: '#b43c28',
+          }}
+        >
           {error}
         </p>
       )}
@@ -209,7 +216,8 @@ export function IdentificationForm({ onResults }: Props) {
         <button
           type="submit"
           disabled={!hasAnyFeature || loading}
-          className="rounded-md bg-white px-4 py-2 text-sm font-medium text-neutral-900 transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+          className="rounded-md px-4 py-2 text-sm font-medium transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+          style={{ background: 'var(--ba-ink)', color: 'var(--ba-paper)' }}
         >
           {loading ? t('submitting') : t('submit')}
         </button>
@@ -217,7 +225,8 @@ export function IdentificationForm({ onResults }: Props) {
           <button
             type="button"
             onClick={handleReset}
-            className="text-sm text-neutral-500 transition-colors hover:text-neutral-300"
+            className="text-sm transition-opacity hover:opacity-70"
+            style={{ color: 'var(--ba-ghost)' }}
           >
             {t('reset')}
           </button>
@@ -238,15 +247,18 @@ function Field({
 }) {
   return (
     <div className="space-y-1.5">
-      <label className="block text-xs font-medium text-neutral-300">{label}</label>
+      <label className="block text-xs font-medium" style={{ color: 'var(--ba-ink)' }}>
+        {label}
+      </label>
       {children}
-      <p className="text-[11px] text-neutral-600">{hint}</p>
+      <p className="text-[11px]" style={{ color: 'var(--ba-ghost)' }}>
+        {hint}
+      </p>
     </div>
   )
 }
 
-const inputClass =
-  'w-full rounded-md border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 outline-none transition-colors focus:border-white/20 focus:bg-white/[0.05]'
+const inputClass = 'ba-input'
 
 function capitalize(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1)

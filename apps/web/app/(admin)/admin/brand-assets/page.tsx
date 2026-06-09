@@ -27,10 +27,10 @@ const LICENSE_OPTIONS = [
 ]
 
 const STATUS_TABS = [
-  { value: 'uploaded', label: 'Uploaded', color: 'text-neutral-400' },
-  { value: 'pending_review', label: 'Pending Review', color: 'text-yellow-400' },
-  { value: 'approved', label: 'Approved', color: 'text-green-400' },
-  { value: 'archived', label: 'Archived', color: 'text-neutral-600' },
+  { value: 'uploaded', label: 'Uploaded', color: 'text-stone-500' },
+  { value: 'pending_review', label: 'Pending Review', color: 'text-yellow-700' },
+  { value: 'approved', label: 'Approved', color: 'text-green-700' },
+  { value: 'archived', label: 'Archived', color: 'text-stone-400' },
 ] as const
 
 type ReviewStatus = (typeof STATUS_TABS)[number]['value']
@@ -179,7 +179,7 @@ export default async function BrandAssetsPage({
     <div>
       <div className="mb-6">
         <h1 className="text-2xl font-semibold">Brand Assets</h1>
-        <p className="mt-1 text-sm text-neutral-400">
+        <p className="mt-1 text-sm text-stone-500">
           Upload and manage brand logos, marks, and visual assets
         </p>
       </div>
@@ -192,32 +192,28 @@ export default async function BrandAssetsPage({
             href={`/admin/brand-assets?status=${tab.value}`}
             className={`rounded-lg border p-3 transition-colors ${
               status === tab.value
-                ? 'border-neutral-600 bg-neutral-800'
-                : 'border-neutral-800 bg-neutral-900 hover:border-neutral-600'
+                ? 'border-stone-300 bg-stone-100'
+                : 'border-stone-200 bg-stone-50 hover:border-stone-300'
             }`}
           >
             <div className={`font-mono text-xl font-bold ${tab.color}`}>
               {counts[tab.value] ?? 0}
             </div>
-            <div className="mt-0.5 text-xs text-neutral-500">{tab.label}</div>
+            <div className="mt-0.5 text-xs text-stone-400">{tab.label}</div>
           </a>
         ))}
       </div>
 
       {/* Upload form */}
-      <details className="mb-6 rounded-lg border border-neutral-800 p-4">
-        <summary className="cursor-pointer text-sm font-medium text-neutral-300">
+      <details className="mb-6 rounded-lg border border-stone-200 p-4">
+        <summary className="cursor-pointer text-sm font-medium text-stone-600">
           + Upload Brand Asset
         </summary>
         <form action={uploadBrandAsset} encType="multipart/form-data" className="mt-4 space-y-3">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-xs text-neutral-400">Brand *</label>
-              <select
-                name="brand_id"
-                required
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-              >
+              <label className="mb-1 block text-xs text-stone-500">Brand *</label>
+              <select name="brand_id" required className="ba-input">
                 <option value="">Select brand…</option>
                 {brands?.map((b) => (
                   <option key={b.id} value={b.id}>
@@ -227,12 +223,8 @@ export default async function BrandAssetsPage({
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs text-neutral-400">Asset Type *</label>
-              <select
-                name="asset_type"
-                required
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-              >
+              <label className="mb-1 block text-xs text-stone-500">Asset Type *</label>
+              <select name="asset_type" required className="ba-input">
                 {ASSET_TYPE_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
                     {opt.label}
@@ -243,26 +235,23 @@ export default async function BrandAssetsPage({
           </div>
 
           <div>
-            <label className="mb-1 block text-xs text-neutral-400">File *</label>
+            <label className="mb-1 block text-xs text-stone-500">File *</label>
             <input
               name="file"
               type="file"
               accept="image/svg+xml,.svg,image/png,image/jpeg"
               required
-              className="w-full text-sm text-neutral-400 file:mr-3 file:rounded-md file:border-0 file:bg-neutral-800 file:px-3 file:py-1.5 file:text-xs file:text-neutral-200 hover:file:bg-neutral-700"
+              className="w-full text-sm text-stone-500 file:mr-3 file:rounded-md file:border-0 file:bg-stone-100 file:px-3 file:py-1.5 file:text-xs file:text-stone-700 hover:file:bg-stone-200"
             />
-            <p className="mt-0.5 text-xs text-neutral-600">
+            <p className="mt-0.5 text-xs text-stone-400">
               SVG (preferred for logos), PNG, or JPEG — max 10MB. SVGs are validated for safety.
             </p>
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             <div>
-              <label className="mb-1 block text-xs text-neutral-400">License</label>
-              <select
-                name="license"
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-              >
+              <label className="mb-1 block text-xs text-stone-500">License</label>
+              <select name="license" className="ba-input">
                 <option value="">—</option>
                 {LICENSE_OPTIONS.map((l) => (
                   <option key={l.value} value={l.value}>
@@ -272,49 +261,40 @@ export default async function BrandAssetsPage({
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs text-neutral-400">Quality (1–10)</label>
+              <label className="mb-1 block text-xs text-stone-500">Quality (1–10)</label>
               <input
                 name="quality_score"
                 type="number"
                 min="1"
                 max="10"
                 placeholder="8"
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
+                className="ba-input"
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="mb-1 block text-xs text-neutral-400">Attribution</label>
+              <label className="mb-1 block text-xs text-stone-500">Attribution</label>
               <input
                 name="attribution"
                 placeholder="e.g. © Titleist / Acushnet Company"
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
+                className="ba-input"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-xs text-neutral-400">Source URL</label>
-              <input
-                name="source_url"
-                type="url"
-                placeholder="https://…"
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
-              />
+              <label className="mb-1 block text-xs text-stone-500">Source URL</label>
+              <input name="source_url" type="url" placeholder="https://…" className="ba-input" />
             </div>
             <div>
-              <label className="mb-1 block text-xs text-neutral-400">Alt Text</label>
-              <input
-                name="alt_text"
-                placeholder="e.g. Titleist logo"
-                className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
-              />
+              <label className="mb-1 block text-xs text-stone-500">Alt Text</label>
+              <input name="alt_text" placeholder="e.g. Titleist logo" className="ba-input" />
             </div>
           </div>
 
           <button
             type="submit"
-            className="rounded-md bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-100"
+            className="rounded-md bg-stone-800 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700"
           >
             Upload Asset
           </button>
@@ -324,13 +304,11 @@ export default async function BrandAssetsPage({
       {/* Brand filter */}
       {brands && brands.length > 0 && (
         <div className="mb-4 flex flex-wrap items-center gap-2">
-          <span className="text-xs text-neutral-600">Filter:</span>
+          <span className="text-xs text-stone-400">Filter:</span>
           <a
             href={`/admin/brand-assets?status=${status}`}
             className={`rounded px-2 py-0.5 text-xs transition-colors ${
-              !brandParam
-                ? 'bg-neutral-700 text-neutral-200'
-                : 'text-neutral-500 hover:text-neutral-300'
+              !brandParam ? 'bg-stone-200 text-stone-700' : 'text-stone-400 hover:text-stone-600'
             }`}
           >
             All brands
@@ -341,8 +319,8 @@ export default async function BrandAssetsPage({
               href={`/admin/brand-assets?status=${status}&brand=${b.slug}`}
               className={`rounded px-2 py-0.5 text-xs transition-colors ${
                 brandParam === b.slug
-                  ? 'bg-neutral-700 text-neutral-200'
-                  : 'text-neutral-500 hover:text-neutral-300'
+                  ? 'bg-stone-200 text-stone-700'
+                  : 'text-stone-400 hover:text-stone-600'
               }`}
             >
               {b.name}
@@ -352,15 +330,15 @@ export default async function BrandAssetsPage({
       )}
 
       {/* Status tabs */}
-      <div className="mb-4 flex gap-1 border-b border-neutral-800">
+      <div className="mb-4 flex gap-1 border-b border-stone-200">
         {STATUS_TABS.map((tab) => (
           <a
             key={tab.value}
             href={`/admin/brand-assets?status=${tab.value}${brandParam ? `&brand=${brandParam}` : ''}`}
             className={`px-4 py-2 text-sm transition-colors ${
               status === tab.value
-                ? 'border-b-2 border-white text-neutral-100'
-                : 'text-neutral-500 hover:text-neutral-300'
+                ? 'border-b-2 border-stone-800 text-stone-800'
+                : 'text-stone-400 hover:text-stone-600'
             }`}
           >
             {tab.label}
@@ -368,23 +346,23 @@ export default async function BrandAssetsPage({
         ))}
       </div>
 
-      {error && <p className="mb-4 text-sm text-red-400">{error.message}</p>}
+      {error && <p className="mb-4 text-sm text-red-600">{error.message}</p>}
 
       {assets.length === 0 ? (
-        <p className="py-8 text-center text-sm text-neutral-500">
+        <p className="py-8 text-center text-sm text-stone-400">
           No {status.replace('_', ' ')} assets{brandParam ? ` for this brand` : ''}.
         </p>
       ) : (
-        <div className="overflow-hidden rounded-lg border border-neutral-800">
+        <div className="overflow-hidden rounded-lg border border-stone-200">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-neutral-800 bg-neutral-900">
-                <th className="px-4 py-3 text-left font-normal text-neutral-400">Brand</th>
-                <th className="px-4 py-3 text-left font-normal text-neutral-400">Type</th>
-                <th className="px-4 py-3 text-left font-normal text-neutral-400">Format</th>
-                <th className="px-4 py-3 text-left font-normal text-neutral-400">License</th>
-                <th className="px-4 py-3 text-left font-normal text-neutral-400">Quality</th>
-                <th className="px-4 py-3 text-left font-normal text-neutral-400">Actions</th>
+              <tr className="border-b border-stone-200 bg-stone-50">
+                <th className="px-4 py-3 text-left font-normal text-stone-500">Brand</th>
+                <th className="px-4 py-3 text-left font-normal text-stone-500">Type</th>
+                <th className="px-4 py-3 text-left font-normal text-stone-500">Format</th>
+                <th className="px-4 py-3 text-left font-normal text-stone-500">License</th>
+                <th className="px-4 py-3 text-left font-normal text-stone-500">Quality</th>
+                <th className="px-4 py-3 text-left font-normal text-stone-500">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -397,7 +375,7 @@ export default async function BrandAssetsPage({
                 return (
                   <tr
                     key={asset.id}
-                    className="border-b border-neutral-800 last:border-0 hover:bg-neutral-900/50"
+                    className="border-b border-stone-200 last:border-0 hover:bg-stone-50/50"
                   >
                     <td className="px-4 py-3">
                       <div className="font-medium">{brand?.name ?? '—'}</div>
@@ -406,13 +384,13 @@ export default async function BrandAssetsPage({
                           href={assetUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-xs text-neutral-600 hover:text-neutral-400"
+                          className="text-xs text-stone-400 hover:text-stone-500"
                         >
                           View →
                         </a>
                       )}
                     </td>
-                    <td className="px-4 py-3 font-mono text-xs text-neutral-400">
+                    <td className="px-4 py-3 font-mono text-xs text-stone-500">
                       {asset.asset_type}
                     </td>
                     <td className="px-4 py-3">
@@ -420,7 +398,7 @@ export default async function BrandAssetsPage({
                         className={`rounded px-1.5 py-0.5 font-mono text-xs ${
                           asset.mime_type === 'image/svg+xml'
                             ? 'bg-blue-950 text-blue-400'
-                            : 'bg-neutral-800 text-neutral-400'
+                            : 'bg-stone-100 text-stone-500'
                         }`}
                       >
                         {asset.mime_type === 'image/svg+xml'
@@ -430,8 +408,8 @@ export default async function BrandAssetsPage({
                             : 'JPEG'}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-xs text-neutral-400">{asset.license ?? '—'}</td>
-                    <td className="px-4 py-3 font-mono text-xs text-neutral-400">
+                    <td className="px-4 py-3 text-xs text-stone-500">{asset.license ?? '—'}</td>
+                    <td className="px-4 py-3 font-mono text-xs text-stone-500">
                       {asset.quality_score ?? '—'}
                     </td>
                     <td className="px-4 py-3">
@@ -442,7 +420,7 @@ export default async function BrandAssetsPage({
                             <input type="hidden" name="review_status" value="approved" />
                             <button
                               type="submit"
-                              className="text-xs text-green-500 hover:text-green-400"
+                              className="text-xs text-green-500 hover:text-green-700"
                             >
                               Approve
                             </button>
@@ -454,7 +432,7 @@ export default async function BrandAssetsPage({
                             <input type="hidden" name="review_status" value="pending_review" />
                             <button
                               type="submit"
-                              className="text-xs text-yellow-500 hover:text-yellow-400"
+                              className="text-xs text-yellow-500 hover:text-yellow-700"
                             >
                               Queue
                             </button>
@@ -466,7 +444,7 @@ export default async function BrandAssetsPage({
                             <input type="hidden" name="review_status" value="archived" />
                             <button
                               type="submit"
-                              className="text-xs text-neutral-600 hover:text-neutral-400"
+                              className="text-xs text-stone-400 hover:text-stone-500"
                             >
                               Archive
                             </button>
@@ -477,7 +455,7 @@ export default async function BrandAssetsPage({
                           <input type="hidden" name="storage_path" value={asset.storage_path} />
                           <button
                             type="submit"
-                            className="text-xs text-neutral-700 hover:text-red-400"
+                            className="text-xs text-stone-300 hover:text-red-600"
                           >
                             Delete
                           </button>

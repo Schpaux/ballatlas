@@ -183,16 +183,16 @@ export default async function DataQualityPage() {
   ]
 
   const severityBadge = {
-    high: 'bg-red-500/10 text-red-400 border border-red-500/20',
-    medium: 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20',
-    low: 'bg-neutral-800 text-neutral-400 border border-neutral-700',
+    high: 'bg-red-50 text-red-600 border border-red-200',
+    medium: 'bg-yellow-500/10 text-yellow-700 border border-yellow-500/20',
+    low: 'bg-stone-100 text-stone-500 border border-stone-300',
   }
 
   return (
     <div>
       <div className="mb-6">
         <h1 className="text-2xl font-semibold">Data Quality</h1>
-        <p className="mt-1 text-sm text-neutral-400">
+        <p className="mt-1 text-sm text-stone-500">
           Gap analysis and enrichment targets. Missing values are acceptable; fabricated values are
           not.
         </p>
@@ -204,17 +204,17 @@ export default async function DataQualityPage() {
           <Link
             key={s.label}
             href={s.href}
-            className="rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-colors hover:border-neutral-600"
+            className="rounded-lg border border-stone-200 bg-stone-50 p-4 transition-colors hover:border-stone-300"
           >
             <div className="font-mono text-2xl font-bold">{s.value.toLocaleString()}</div>
-            <div className="mt-1 text-xs text-neutral-400">{s.label}</div>
+            <div className="mt-1 text-xs text-stone-500">{s.label}</div>
           </Link>
         ))}
       </div>
 
       {/* Coverage scores */}
-      <div className="mb-8 rounded-lg border border-neutral-800 p-5">
-        <h2 className="mb-4 text-sm font-medium uppercase tracking-wider text-neutral-500">
+      <div className="mb-8 rounded-lg border border-stone-200 p-5">
+        <h2 className="mb-4 text-sm font-medium uppercase tracking-wider text-stone-400">
           Coverage at a Glance
         </h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -245,12 +245,12 @@ export default async function DataQualityPage() {
             return (
               <div key={c.label}>
                 <div className="mb-1 flex justify-between text-xs">
-                  <span className="text-neutral-400">{c.label}</span>
-                  <span className="font-mono text-neutral-300">
+                  <span className="text-stone-500">{c.label}</span>
+                  <span className="font-mono text-stone-600">
                     {c.count}/{c.total} ({pct}%)
                   </span>
                 </div>
-                <div className="h-1.5 overflow-hidden rounded-full bg-neutral-800">
+                <div className="h-1.5 overflow-hidden rounded-full bg-stone-100">
                   <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
                 </div>
               </div>
@@ -260,11 +260,11 @@ export default async function DataQualityPage() {
       </div>
 
       {/* Identification Readiness */}
-      <div className="mb-8 rounded-lg border border-neutral-800 p-5">
-        <h2 className="mb-1 text-sm font-medium uppercase tracking-wider text-neutral-500">
+      <div className="mb-8 rounded-lg border border-stone-200 p-5">
+        <h2 className="mb-1 text-sm font-medium uppercase tracking-wider text-stone-400">
           Identification Readiness
         </h2>
-        <p className="mb-4 text-xs text-neutral-600">
+        <p className="mb-4 text-xs text-stone-400">
           Coverage of structured visual and identification data required by the identification
           engine.
         </p>
@@ -296,12 +296,12 @@ export default async function DataQualityPage() {
             return (
               <div key={c.label}>
                 <div className="mb-1 flex justify-between text-xs">
-                  <span className="text-neutral-400">{c.label}</span>
-                  <span className="font-mono text-neutral-300">
+                  <span className="text-stone-500">{c.label}</span>
+                  <span className="font-mono text-stone-600">
                     {c.count}/{c.total} ({pct}%)
                   </span>
                 </div>
-                <div className="h-1.5 overflow-hidden rounded-full bg-neutral-800">
+                <div className="h-1.5 overflow-hidden rounded-full bg-stone-100">
                   <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
                 </div>
               </div>
@@ -310,8 +310,8 @@ export default async function DataQualityPage() {
         </div>
 
         {versionsWithoutIdentification && versionsWithoutIdentification.length > 0 && (
-          <div className="mt-4 border-t border-neutral-800 pt-4">
-            <p className="mb-2 text-xs text-neutral-500">
+          <div className="mt-4 border-t border-stone-200 pt-4">
+            <p className="mb-2 text-xs text-stone-400">
               {versionsWithoutIdentification.length} published version
               {versionsWithoutIdentification.length !== 1 ? 's' : ''} missing visual signatures:
             </p>
@@ -319,7 +319,7 @@ export default async function DataQualityPage() {
               {versionsWithoutIdentification.map((v) => (
                 <span
                   key={v.id}
-                  className="rounded border border-neutral-700 px-2 py-0.5 font-mono text-[11px] text-neutral-500"
+                  className="rounded border border-stone-300 px-2 py-0.5 font-mono text-[11px] text-stone-400"
                 >
                   {v.slug}
                 </span>
@@ -331,7 +331,7 @@ export default async function DataQualityPage() {
 
       {/* Brands without images */}
       {brandsWithoutImages && brandsWithoutImages.length > 0 && (
-        <div className="mb-6 rounded-lg border border-neutral-800 p-5">
+        <div className="mb-6 rounded-lg border border-stone-200 p-5">
           <h2 className="mb-3 flex items-center gap-2 text-sm font-medium">
             <span className={`rounded px-2 py-0.5 text-xs ${severityBadge.high}`}>
               {brandsWithoutImages.length} brands
@@ -343,7 +343,7 @@ export default async function DataQualityPage() {
               <Link
                 key={b.id}
                 href={`/admin/brands/${b.id}/edit`}
-                className="rounded-md border border-neutral-700 px-3 py-1 text-xs text-neutral-300 transition-colors hover:border-neutral-500 hover:text-neutral-100"
+                className="rounded-md border border-stone-300 px-3 py-1 text-xs text-stone-600 transition-colors hover:border-stone-400 hover:text-stone-800"
               >
                 {b.name}
               </Link>
@@ -355,8 +355,8 @@ export default async function DataQualityPage() {
       {/* Gap tables */}
       <div className="space-y-6">
         {gaps.map((gap) => (
-          <div key={gap.label} className="rounded-lg border border-neutral-800">
-            <div className="flex items-center justify-between border-b border-neutral-800 px-5 py-4">
+          <div key={gap.label} className="rounded-lg border border-stone-200">
+            <div className="flex items-center justify-between border-b border-stone-200 px-5 py-4">
               <h2 className="flex items-center gap-2 text-sm font-medium">
                 <span className={`rounded px-2 py-0.5 text-xs ${severityBadge[gap.severity]}`}>
                   {gap.versions.length}
@@ -364,13 +364,13 @@ export default async function DataQualityPage() {
                 </span>
                 <span>{gap.label}</span>
               </h2>
-              <Link href={gap.href} className="text-xs text-neutral-500 hover:text-neutral-300">
+              <Link href={gap.href} className="text-xs text-stone-400 hover:text-stone-600">
                 Fix →
               </Link>
             </div>
 
             {gap.versions.length === 0 ? (
-              <p className="px-5 py-4 text-sm text-green-400">✓ All published versions covered</p>
+              <p className="px-5 py-4 text-sm text-green-700">✓ All published versions covered</p>
             ) : (
               <div className="max-h-64 overflow-y-auto">
                 <table className="w-full text-sm">
@@ -378,17 +378,17 @@ export default async function DataQualityPage() {
                     {gap.versions.map((v) => (
                       <tr
                         key={v.id}
-                        className="border-b border-neutral-800 last:border-0 hover:bg-neutral-900/50"
+                        className="border-b border-stone-200 last:border-0 hover:bg-stone-50/50"
                       >
                         <td className="px-5 py-2.5">
                           <Link
                             href={`/admin/versions/${v.id}/edit`}
-                            className="font-medium hover:text-neutral-300"
+                            className="font-medium hover:text-stone-600"
                           >
                             {v.family?.brand?.name} {v.name}
                           </Link>
                         </td>
-                        <td className="px-5 py-2.5 font-mono text-xs text-neutral-600">{v.slug}</td>
+                        <td className="px-5 py-2.5 font-mono text-xs text-stone-400">{v.slug}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -399,7 +399,7 @@ export default async function DataQualityPage() {
         ))}
       </div>
 
-      <p className="mt-6 text-xs text-neutral-700">
+      <p className="mt-6 text-xs text-stone-300">
         Gap tables show up to 50 records. Numbers shown above each table reflect the full count for
         published versions.
       </p>

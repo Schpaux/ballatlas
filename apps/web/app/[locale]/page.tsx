@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
-import { GolfBallSVG } from '@/components/registry/GolfBallSVG'
+import { GolfBall } from '@/components/registry/GolfBall'
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
 import { SearchBar } from '@/components/registry/SearchBar'
 import { Link } from '@/i18n/navigation'
@@ -64,112 +64,112 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <RegistryLayout>
-      <div className="flex min-h-[calc(100vh-56px)] flex-col">
+      <div className="flex min-h-[calc(100vh-64px)] flex-col">
         {/* ── Hero ──────────────────────────────────────────────────────────── */}
-        <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden px-4 py-24 sm:px-6">
-          {/* Hero-specific atmosphere — layers on top of the RegistryLayout base glows */}
-          <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-            {/* Concentrated search spotlight — central bright bloom */}
-            <div className="absolute left-1/2 top-1/2 h-[560px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/[0.042] blur-[110px]" />
-            {/* Wider outer haze */}
-            <div className="absolute left-1/2 top-[30%] h-[400px] w-[1000px] -translate-x-1/2 rounded-full bg-teal-500/[0.018] blur-[140px]" />
-          </div>
-
-          {/* Decorative golf ball — atmospheric, right side, hidden on mobile */}
+        <div className="relative flex flex-1 items-center overflow-hidden px-4 py-20 sm:px-6">
+          {/* Floating golf ball — right side, hidden on mobile */}
           <div
-            className="pointer-events-none absolute right-[4%] top-1/2 hidden -translate-y-1/2 opacity-[0.22] sm:block xl:right-[8%]"
+            className="pointer-events-none absolute right-[6%] top-1/2 hidden -translate-y-1/2 sm:block xl:right-[10%]"
             aria-hidden="true"
           >
-            {/* Glow behind the ball */}
-            <div className="absolute inset-0 scale-75 rounded-full bg-emerald-500/[0.06] blur-[60px]" />
-            <GolfBallSVG size={400} className="relative" />
+            <GolfBall size="xl" float className="opacity-90" />
           </div>
 
-          {/* Content — z-10 above the atmospheric layers */}
-          <div className="relative z-10 w-full max-w-xl text-center">
-            {/* Live indicator */}
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.02] px-3.5 py-1.5 text-xs text-neutral-500">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              </span>
-              {t('liveIndicator')}
-            </div>
-
-            {/* Eyebrow — establishes platform category before the wordmark */}
-            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-600">
-              Golf Intelligence Platform
-            </p>
-
-            {/* Wordmark */}
-            <h1 className="mb-5 text-5xl font-bold tracking-tight sm:text-6xl">
-              <span className="text-neutral-100">Ball</span>
-              <span className="text-neutral-700">Atlas</span>
-            </h1>
-
-            <p className="mb-10 text-base leading-relaxed text-neutral-500">{t('tagline')}</p>
-
-            {/* Search — wrapped in a spotlight container */}
-            <div className="relative mb-5">
-              {/* Subtle search spotlight glow */}
-              <div className="pointer-events-none absolute -inset-3 rounded-2xl bg-emerald-500/[0.025] blur-xl" />
-              <SearchBar placeholder={t('searchPlaceholder')} autoFocus className="relative" />
-            </div>
-
-            {/* Popular searches */}
-            <div className="flex flex-wrap justify-center gap-2">
-              {POPULAR.map(({ label, query }) => (
-                <Link
-                  key={label}
-                  href={`/search?q=${encodeURIComponent(query)}`}
-                  className="rounded-full border border-white/[0.07] bg-white/[0.02] px-3 py-1 text-xs text-neutral-500 transition-all duration-150 hover:border-white/[0.12] hover:bg-white/[0.04] hover:text-neutral-300"
+          {/* Hero content — left aligned */}
+          <div className="relative z-10 mx-auto w-full max-w-6xl">
+            <div className="max-w-xl">
+              {/* Kicker badge */}
+              <div className="anim d1 mb-6 inline-flex items-center gap-2">
+                <span
+                  className="rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.1em]"
+                  style={{
+                    background: 'var(--ba-green-soft)',
+                    color: 'var(--ba-green)',
+                    border: '1px solid rgba(31,106,71,0.18)',
+                  }}
                 >
-                  {label}
-                </Link>
-              ))}
+                  {t('liveIndicator')}
+                </span>
+              </div>
+
+              {/* Eyebrow */}
+              <p className="anim d2 kicker mb-3">Golf Intelligence Platform</p>
+
+              {/* Wordmark */}
+              <h1 className="anim d3 mb-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+                <span style={{ color: 'var(--ba-ink)' }}>Ball</span>
+                <span style={{ color: 'var(--ba-green)' }}>Atlas</span>
+              </h1>
+
+              <p
+                className="anim d4 mb-10 text-base leading-relaxed"
+                style={{ color: 'var(--ba-subtle)' }}
+              >
+                {t('tagline')}
+              </p>
+
+              {/* Search */}
+              <div className="anim d5 relative mb-5">
+                <SearchBar placeholder={t('searchPlaceholder')} autoFocus className="relative" />
+              </div>
+
+              {/* Popular searches */}
+              <div className="anim d6 flex flex-wrap gap-2">
+                {POPULAR.map(({ label, query }) => (
+                  <Link
+                    key={label}
+                    href={`/search?q=${encodeURIComponent(query)}`}
+                    className="rounded-full px-3 py-1 text-xs transition-all duration-150"
+                    style={{
+                      background: 'var(--ba-surface)',
+                      border: '1px solid var(--ba-line-strong)',
+                      color: 'var(--ba-subtle)',
+                    }}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* ── Registry instrument panel ─────────────────────────────────────── */}
-        <div className="border-t border-white/[0.05] bg-neutral-950/60 px-4 py-10 backdrop-blur-sm sm:px-6">
-          <div className="mx-auto max-w-xl">
-            {/* Live registry label */}
-            <div className="mb-6 flex items-center justify-center gap-2">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-50" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500/70" />
-              </span>
-              <span className="text-[10px] uppercase tracking-[0.16em] text-neutral-700">
-                Live Registry
-              </span>
-            </div>
-
-            {/* Stats grid */}
-            <div className="grid grid-cols-3 divide-x divide-white/[0.05] text-center">
+        {/* ── Stats band ────────────────────────────────────────────────────── */}
+        <div
+          className="px-4 py-8 sm:px-6"
+          style={{ borderTop: '1px solid var(--ba-line)', background: 'var(--ba-paper-2)' }}
+        >
+          <div className="mx-auto max-w-6xl">
+            <div
+              className="grid grid-cols-3 divide-x text-center"
+              style={{ borderColor: 'var(--ba-line)' }}
+            >
               <div className="px-4">
-                <p className="font-mono text-3xl font-bold tracking-tight text-neutral-100">
+                <p
+                  className="font-mono text-3xl font-bold tracking-tight"
+                  style={{ color: 'var(--ba-ink)' }}
+                >
                   {stats.brands}
                 </p>
-                <p className="mt-1.5 text-[11px] uppercase tracking-wider text-neutral-600">
-                  {t('stats.brands')}
-                </p>
+                <p className="kicker mt-1">{t('stats.brands')}</p>
               </div>
               <div className="px-4">
-                <p className="font-mono text-3xl font-bold tracking-tight text-neutral-100">
+                <p
+                  className="font-mono text-3xl font-bold tracking-tight"
+                  style={{ color: 'var(--ba-ink)' }}
+                >
                   {stats.families}
                 </p>
-                <p className="mt-1.5 text-[11px] uppercase tracking-wider text-neutral-600">
-                  {t('stats.families')}
-                </p>
+                <p className="kicker mt-1">{t('stats.families')}</p>
               </div>
               <div className="px-4">
-                <p className="font-mono text-3xl font-bold tracking-tight text-neutral-100">
+                <p
+                  className="font-mono text-3xl font-bold tracking-tight"
+                  style={{ color: 'var(--ba-ink)' }}
+                >
                   {stats.versions}
                 </p>
-                <p className="mt-1.5 text-[11px] uppercase tracking-wider text-neutral-600">
-                  {t('stats.versions')}
-                </p>
+                <p className="kicker mt-1">{t('stats.versions')}</p>
               </div>
             </div>
           </div>

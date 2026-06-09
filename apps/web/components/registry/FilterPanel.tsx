@@ -57,7 +57,7 @@ export function FilterPanel({ brands }: { brands: Brand[] }) {
     [q, activeBrand, activeSegment, activeYear, activeCover, activeCompMin, activeCompMax]
   )
 
-  const filterBtn = (label: string, isActive: boolean, href: string) => (
+  const filterChip = (label: string, isActive: boolean, href: string) => (
     <a
       key={label}
       href={href}
@@ -65,68 +65,71 @@ export function FilterPanel({ brands }: { brands: Brand[] }) {
         e.preventDefault()
         router.push(href)
       }}
-      className={`rounded-md border px-3 py-1.5 text-xs transition-colors ${
-        isActive
-          ? 'border-white/[0.20] bg-white/[0.08] text-neutral-100'
-          : 'border-white/[0.06] bg-transparent text-neutral-500 hover:border-white/[0.10] hover:text-neutral-300'
-      }`}
+      className="rounded-full px-3 py-1 text-xs font-medium transition-colors"
+      style={{
+        background: isActive ? 'var(--ba-ink)' : 'var(--ba-surface)',
+        color: isActive ? 'var(--ba-paper)' : 'var(--ba-subtle)',
+        border: isActive ? '1px solid var(--ba-ink)' : '1px solid var(--ba-line-strong)',
+      }}
     >
       {label}
     </a>
   )
 
+  const sectionLabel = (text: string) => (
+    <p
+      className="mb-2 text-[10px] font-semibold uppercase tracking-[0.12em]"
+      style={{ color: 'var(--ba-ghost)' }}
+    >
+      {text}
+    </p>
+  )
+
   const panelContent = (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-5">
       <div>
-        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-600">
-          {t('brand')}
-        </p>
+        {sectionLabel(t('brand'))}
         <div className="flex flex-wrap gap-1.5">
-          {filterBtn(t('all'), !activeBrand, buildUrl({ brand: '' }))}
+          {filterChip(t('all'), !activeBrand, buildUrl({ brand: '' }))}
           {brands
             .slice(0, 12)
-            .map((b) => filterBtn(b.name, activeBrand === b.slug, buildUrl({ brand: b.slug })))}
+            .map((b) => filterChip(b.name, activeBrand === b.slug, buildUrl({ brand: b.slug })))}
         </div>
       </div>
 
       <div>
-        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-600">
-          {t('segment')}
-        </p>
+        {sectionLabel(t('segment'))}
         <div className="flex flex-wrap gap-1.5">
-          {filterBtn(t('all'), !activeSegment, buildUrl({ segment: '' }))}
+          {filterChip(t('all'), !activeSegment, buildUrl({ segment: '' }))}
           {SEGMENTS.map((s) =>
-            filterBtn(s.name, activeSegment === s.slug, buildUrl({ segment: s.slug }))
+            filterChip(s.name, activeSegment === s.slug, buildUrl({ segment: s.slug }))
           )}
         </div>
       </div>
 
       <div>
-        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-600">
-          {t('year')}
-        </p>
+        {sectionLabel(t('year'))}
         <div className="flex flex-wrap gap-1.5">
-          {filterBtn(t('all'), !activeYear, buildUrl({ year: '' }))}
+          {filterChip(t('all'), !activeYear, buildUrl({ year: '' }))}
           {[2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018].map((y) =>
-            filterBtn(String(y), activeYear === String(y), buildUrl({ year: String(y) }))
+            filterChip(String(y), activeYear === String(y), buildUrl({ year: String(y) }))
           )}
         </div>
       </div>
 
       <div>
-        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-600">
-          {t('cover')}
-        </p>
+        {sectionLabel(t('cover'))}
         <div className="flex flex-wrap gap-1.5">
-          {filterBtn(t('all'), !activeCover, buildUrl({ cover: '' }))}
-          {COVER_MATERIALS.map((m) => filterBtn(m, activeCover === m, buildUrl({ cover: m })))}
+          {filterChip(t('all'), !activeCover, buildUrl({ cover: '' }))}
+          {COVER_MATERIALS.map((m) => filterChip(m, activeCover === m, buildUrl({ cover: m })))}
         </div>
       </div>
 
       {activeCount > 0 && (
         <button
           onClick={() => router.push(q ? `/search?q=${encodeURIComponent(q)}` : '/search')}
-          className="text-left text-xs text-neutral-600 underline-offset-2 hover:text-neutral-400 hover:underline"
+          className="text-left text-xs underline-offset-2 hover:underline"
+          style={{ color: 'var(--ba-clay)' }}
         >
           {t('clearFilters', { count: activeCount })}
         </button>
@@ -140,7 +143,12 @@ export function FilterPanel({ brands }: { brands: Brand[] }) {
       <div className="lg:hidden">
         <button
           onClick={() => setOpen((o) => !o)}
-          className="flex items-center gap-2 rounded-lg border border-white/[0.08] px-3 py-2 text-sm text-neutral-400 transition-colors hover:text-neutral-100"
+          className="flex items-center gap-2 rounded-full px-4 py-2 text-sm transition-colors"
+          style={{
+            background: 'var(--ba-surface)',
+            border: '1px solid var(--ba-line-strong)',
+            color: 'var(--ba-subtle)',
+          }}
         >
           <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
@@ -152,14 +160,23 @@ export function FilterPanel({ brands }: { brands: Brand[] }) {
           </svg>
           {t('title')}
           {activeCount > 0 && (
-            <span className="rounded-full bg-white/[0.08] px-1.5 py-0.5 text-xs text-neutral-300">
+            <span
+              className="rounded-full px-1.5 py-0.5 text-xs font-semibold"
+              style={{ background: 'var(--ba-ink)', color: 'var(--ba-paper)' }}
+            >
               {activeCount}
             </span>
           )}
         </button>
 
         {open && (
-          <div className="mt-3 rounded-lg border border-white/[0.06] bg-white/[0.02] p-4">
+          <div
+            className="mt-3 rounded-xl p-4"
+            style={{
+              background: 'var(--ba-surface)',
+              border: '1px solid var(--ba-line-strong)',
+            }}
+          >
             {panelContent}
           </div>
         )}

@@ -1,40 +1,61 @@
-const SEGMENT_CONFIG: Record<string, { label: string; className: string }> = {
+type SegmentStyle = {
+  color: string
+  bg: string
+  border: string
+}
+
+const SEGMENT_STYLES: Record<string, SegmentStyle> = {
   'tour-premium': {
-    label: 'Tour Premium',
-    className: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+    color: 'var(--ba-gold)',
+    bg: 'var(--ba-gold-soft)',
+    border: 'rgba(138,100,32,0.22)',
   },
   performance: {
-    label: 'Performance',
-    className: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+    color: 'var(--ba-seg-blue)',
+    bg: 'var(--ba-seg-blue-soft)',
+    border: 'rgba(43,89,127,0.22)',
   },
   'soft-feel': {
-    label: 'Soft Feel',
-    className: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
+    color: 'var(--ba-seg-violet)',
+    bg: 'var(--ba-seg-violet-soft)',
+    border: 'rgba(97,80,154,0.22)',
   },
   value: {
-    label: 'Value',
-    className: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+    color: 'var(--ba-green)',
+    bg: 'var(--ba-green-soft)',
+    border: 'rgba(31,106,71,0.22)',
   },
   distance: {
-    label: 'Distance',
-    className: 'bg-orange-500/10 text-orange-400 border-orange-500/20',
+    color: 'var(--ba-seg-orange)',
+    bg: 'var(--ba-seg-orange-soft)',
+    border: 'rgba(168,91,42,0.22)',
   },
   'lake-ball': {
-    label: 'Lake Ball',
-    className: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
+    color: 'var(--ba-subtle)',
+    bg: 'var(--ba-sand)',
+    border: 'rgba(24,36,29,0.14)',
   },
 }
 
+const DEFAULT_STYLE: SegmentStyle = {
+  color: 'var(--ba-subtle)',
+  bg: 'var(--ba-sand)',
+  border: 'rgba(24,36,29,0.14)',
+}
+
 export function SegmentBadge({ slug, name }: { slug: string; name: string }) {
-  const config = SEGMENT_CONFIG[slug] ?? {
-    label: name,
-    className: 'bg-neutral-500/10 text-neutral-400 border-neutral-500/20',
-  }
+  const style = SEGMENT_STYLES[slug] ?? DEFAULT_STYLE
+
   return (
     <span
-      className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium ${config.className}`}
+      className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium"
+      style={{
+        color: style.color,
+        background: style.bg,
+        border: `1px solid ${style.border}`,
+      }}
     >
-      {config.label}
+      {name}
     </span>
   )
 }

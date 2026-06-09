@@ -31,8 +31,12 @@ export default async function AdminDashboard() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-semibold">Dashboard</h1>
-        <p className="mt-1 text-sm text-neutral-400">BallAtlas data platform overview</p>
+        <h1 className="text-2xl font-semibold" style={{ color: 'var(--ba-ink)' }}>
+          Dashboard
+        </h1>
+        <p className="mt-1 text-sm" style={{ color: 'var(--ba-subtle)' }}>
+          BallAtlas data platform overview
+        </p>
       </div>
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -40,57 +44,66 @@ export default async function AdminDashboard() {
           <Link
             key={stat.label}
             href={stat.href}
-            className="rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-colors hover:border-neutral-600"
+            className="rounded-xl p-4 transition-all hover:opacity-80"
+            style={{ background: 'var(--ba-surface)', border: '1px solid var(--ba-line-strong)' }}
           >
-            <div className="font-mono text-3xl font-bold">{stat.value}</div>
-            <div className="mt-1 text-sm text-neutral-400">{stat.label}</div>
+            <div className="font-mono text-3xl font-bold" style={{ color: 'var(--ba-ink)' }}>
+              {stat.value}
+            </div>
+            <div className="mt-1 text-sm" style={{ color: 'var(--ba-subtle)' }}>
+              {stat.label}
+            </div>
           </Link>
         ))}
       </div>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        <Link
-          href="/admin/brands/new"
-          className="rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-colors hover:border-neutral-600"
-        >
-          <div className="font-medium">+ New Brand</div>
-          <div className="mt-1 text-sm text-neutral-500">Register a golf ball manufacturer</div>
-        </Link>
-        <Link
-          href="/admin/families"
-          className="rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-colors hover:border-neutral-600"
-        >
-          <div className="font-medium">Manage Families</div>
-          <div className="mt-1 text-sm text-neutral-500">View and edit ball model lines</div>
-        </Link>
-        <Link
-          href="/admin/versions/new"
-          className="rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-colors hover:border-neutral-600"
-        >
-          <div className="font-medium">+ New Version</div>
-          <div className="mt-1 text-sm text-neutral-500">Add a specific ball release year</div>
-        </Link>
-        <Link
-          href="/admin/images?status=pending"
-          className="rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-colors hover:border-neutral-600"
-        >
-          <div className="font-medium">Image Review Queue</div>
-          <div className="mt-1 text-sm text-neutral-500">Approve or reject pending images</div>
-        </Link>
-        <Link
-          href="/admin/prices"
-          className="rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-colors hover:border-neutral-600"
-        >
-          <div className="font-medium">Price Observations</div>
-          <div className="mt-1 text-sm text-neutral-500">Manage market pricing data</div>
-        </Link>
-        <Link
-          href="/admin/data-quality"
-          className="rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-colors hover:border-neutral-600"
-        >
-          <div className="font-medium">Data Quality</div>
-          <div className="mt-1 text-sm text-neutral-500">Gap analysis and enrichment targets</div>
-        </Link>
+        {[
+          {
+            href: '/admin/brands/new',
+            title: '+ New Brand',
+            desc: 'Register a golf ball manufacturer',
+          },
+          {
+            href: '/admin/families',
+            title: 'Manage Families',
+            desc: 'View and edit ball model lines',
+          },
+          {
+            href: '/admin/versions/new',
+            title: '+ New Version',
+            desc: 'Add a specific ball release year',
+          },
+          {
+            href: '/admin/images?status=pending',
+            title: 'Image Review Queue',
+            desc: 'Approve or reject pending images',
+          },
+          {
+            href: '/admin/prices',
+            title: 'Price Observations',
+            desc: 'Manage market pricing data',
+          },
+          {
+            href: '/admin/data-quality',
+            title: 'Data Quality',
+            desc: 'Gap analysis and enrichment targets',
+          },
+        ].map(({ href, title, desc }) => (
+          <Link
+            key={href}
+            href={href as Route}
+            className="rounded-xl p-4 transition-all hover:opacity-80"
+            style={{ background: 'var(--ba-surface)', border: '1px solid var(--ba-line)' }}
+          >
+            <div className="font-medium" style={{ color: 'var(--ba-ink)' }}>
+              {title}
+            </div>
+            <div className="mt-1 text-sm" style={{ color: 'var(--ba-ghost)' }}>
+              {desc}
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   )

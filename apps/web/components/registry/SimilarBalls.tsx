@@ -144,22 +144,33 @@ export async function SimilarBalls({
           <Link
             key={profile.id}
             href={`/balls/${profile.slug}`}
-            className="group flex flex-col gap-2 rounded-lg border border-white/[0.06] bg-white/[0.02] p-3 transition-all hover:border-white/[0.12] hover:bg-white/[0.04]"
+            className="group flex flex-col gap-2 rounded-xl p-3 transition-all"
+            style={{
+              background: 'var(--ba-surface)',
+              border: '1px solid var(--ba-line-strong)',
+            }}
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs text-neutral-500">
+              <span className="text-xs" style={{ color: 'var(--ba-subtle)' }}>
                 {typeof brand === 'object' && brand !== null
                   ? (brand as { name: string }).name
                   : '—'}
               </span>
               <div className="flex items-center gap-2">
                 {raw.release_year && (
-                  <span className="font-mono text-[11px] text-neutral-700">{raw.release_year}</span>
+                  <span className="font-mono text-[11px]" style={{ color: 'var(--ba-ghost)' }}>
+                    {raw.release_year}
+                  </span>
                 )}
-                <span className="font-mono text-xs font-medium text-emerald-400/70">{score}%</span>
+                <span
+                  className="font-mono text-xs font-semibold"
+                  style={{ color: 'var(--ba-green)' }}
+                >
+                  {score}%
+                </span>
               </div>
             </div>
-            <p className="text-sm font-medium text-neutral-200 transition-colors group-hover:text-white">
+            <p className="text-sm font-medium transition-colors" style={{ color: 'var(--ba-ink)' }}>
               {profile.name}
             </p>
             {segs.length > 0 && (
@@ -170,11 +181,18 @@ export async function SimilarBalls({
               </div>
             )}
             {reasons.length > 0 && (
-              <div className="flex flex-wrap gap-1 border-t border-white/[0.04] pt-2">
+              <div
+                className="flex flex-wrap gap-1 pt-2"
+                style={{ borderTop: '1px solid var(--ba-line)' }}
+              >
                 {reasons.map((r, i) => (
                   <span
                     key={i}
-                    className="rounded-full bg-neutral-800 px-2 py-0.5 text-xs text-neutral-500"
+                    className="rounded-full px-2 py-0.5 text-xs"
+                    style={{
+                      background: 'var(--ba-paper)',
+                      color: 'var(--ba-ghost)',
+                    }}
                   >
                     {r.label}
                   </span>
@@ -182,9 +200,9 @@ export async function SimilarBalls({
               </div>
             )}
             {specs && (
-              <div className="flex gap-3 text-xs text-neutral-600">
+              <div className="flex gap-3 text-xs" style={{ color: 'var(--ba-ghost)' }}>
                 {(specs as { compression?: number | null }).compression != null && (
-                  <span>
+                  <span className="font-mono">
                     {t('comp')} {(specs as { compression: number }).compression}
                   </span>
                 )}

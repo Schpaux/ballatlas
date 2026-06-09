@@ -9,32 +9,17 @@ type IdentificationConfidenceCardProps = {
   input: IdentificationConfidenceInput
 }
 
-function ratingColor(rating: IdentificationConfidenceRating): string {
-  switch (rating) {
-    case 'exceptional':
-      return 'text-emerald-300'
-    case 'excellent':
-      return 'text-emerald-400'
-    case 'good':
-      return 'text-neutral-300'
-    case 'limited':
-      return 'text-amber-400'
-    case 'insufficient':
-      return 'text-neutral-600'
-  }
-}
-
-function barColor(rating: IdentificationConfidenceRating): string {
+function ratingStyle(rating: IdentificationConfidenceRating) {
   switch (rating) {
     case 'exceptional':
     case 'excellent':
-      return 'bg-gradient-to-r from-emerald-600/80 to-emerald-400/60'
+      return { color: 'var(--ba-green)', bar: 'var(--ba-green)' }
     case 'good':
-      return 'bg-neutral-500'
+      return { color: 'var(--ba-subtle)', bar: 'var(--ba-subtle)' }
     case 'limited':
-      return 'bg-amber-600/70'
+      return { color: 'var(--ba-gold)', bar: 'var(--ba-gold)' }
     case 'insufficient':
-      return 'bg-neutral-700'
+      return { color: 'var(--ba-ghost)', bar: 'var(--ba-sand)' }
   }
 }
 
@@ -43,35 +28,49 @@ export function IdentificationConfidenceCard({ input }: IdentificationConfidence
   const { score, rating, explanation, strengths, gaps } = result
 
   const ratingLabel = CONFIDENCE_RATING_LABELS[rating]
-  const color = ratingColor(rating)
-  const bar = barColor(rating)
+  const style = ratingStyle(rating)
 
   return (
-    <div className="rounded-xl border border-white/[0.06] bg-white/[0.015] p-4">
+    <div
+      className="rounded-xl p-4"
+      style={{ background: 'var(--ba-surface)', border: '1px solid var(--ba-line-strong)' }}
+    >
       {/* Header */}
       <div className="mb-3 flex items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-medium text-neutral-400">Identification Confidence</p>
-          <p className={`mt-0.5 text-xs font-medium ${color}`}>{ratingLabel}</p>
+          <p className="kicker">ID Confidence</p>
+          <p className="mt-0.5 text-xs font-medium" style={{ color: style.color }}>
+            {ratingLabel}
+          </p>
         </div>
         <div className="text-right">
-          <span className={`font-mono text-2xl font-bold leading-none tracking-tight ${color}`}>
+          <span
+            className="font-mono text-2xl font-bold leading-none tracking-tight"
+            style={{ color: style.color }}
+          >
             {score}
           </span>
-          <span className="ml-0.5 font-mono text-xs text-neutral-600">/ 100</span>
+          <span className="ml-0.5 font-mono text-xs" style={{ color: 'var(--ba-ghost)' }}>
+            / 100
+          </span>
         </div>
       </div>
 
       {/* Score bar */}
-      <div className="mb-3 h-1 overflow-hidden rounded-full bg-neutral-800">
+      <div
+        className="mb-3 h-1.5 overflow-hidden rounded-full"
+        style={{ background: 'var(--ba-sand)' }}
+      >
         <div
-          className={`h-full rounded-full transition-all duration-500 ${bar}`}
-          style={{ width: `${score}%` }}
+          className="h-full rounded-full transition-all duration-500"
+          style={{ width: `${score}%`, background: style.bar }}
         />
       </div>
 
       {/* Explanation */}
-      <p className="mb-3 text-[11px] leading-relaxed text-neutral-600">{explanation}</p>
+      <p className="mb-3 text-[11px] leading-relaxed" style={{ color: 'var(--ba-ghost)' }}>
+        {explanation}
+      </p>
 
       {/* Strengths */}
       {strengths.length > 0 && (
@@ -79,7 +78,12 @@ export function IdentificationConfidenceCard({ input }: IdentificationConfidence
           {strengths.slice(0, 3).map((s, i) => (
             <span
               key={i}
-              className="rounded-full border border-emerald-500/10 bg-emerald-500/[0.06] px-2 py-0.5 text-[10px] text-emerald-600"
+              className="rounded-full px-2 py-0.5 text-[10px]"
+              style={{
+                background: 'var(--ba-green-soft)',
+                color: 'var(--ba-green)',
+                border: '1px solid rgba(31,106,71,0.18)',
+              }}
             >
               {s}
             </span>
@@ -87,13 +91,14 @@ export function IdentificationConfidenceCard({ input }: IdentificationConfidence
         </div>
       )}
 
-      {/* Gaps — only show for limited/insufficient */}
+      {/* Gaps — only for limited/insufficient */}
       {gaps.length > 0 && (rating === 'limited' || rating === 'insufficient') && (
         <div className="mt-2 flex flex-wrap gap-1">
           {gaps.slice(0, 3).map((g, i) => (
             <span
               key={i}
-              className="rounded-full bg-neutral-800/60 px-2 py-0.5 text-[10px] text-neutral-700"
+              className="rounded-full px-2 py-0.5 text-[10px]"
+              style={{ background: 'var(--ba-paper)', color: 'var(--ba-ghost)' }}
             >
               Missing: {g}
             </span>

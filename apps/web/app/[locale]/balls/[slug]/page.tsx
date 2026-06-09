@@ -13,7 +13,7 @@ import {
 import { BallDNACard } from '@/components/registry/BallDNACard'
 import { DataCompletenessCard } from '@/components/registry/DataCompletenessCard'
 import { FeedbackForm } from '@/components/registry/FeedbackForm'
-import { GolfBallSVG } from '@/components/registry/GolfBallSVG'
+import { GolfBall } from '@/components/registry/GolfBall'
 import { IdentificationConfidenceCard } from '@/components/registry/IdentificationConfidenceCard'
 import { RegistryLayout } from '@/components/registry/RegistryLayout'
 import { SegmentBadge } from '@/components/registry/SegmentBadge'
@@ -287,19 +287,19 @@ export default async function BallDetailPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
+      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
         {/* Breadcrumb */}
-        <nav className="mb-6 flex items-center gap-2 text-xs text-neutral-600">
-          <Link href="/search" className="transition-colors hover:text-neutral-400">
+        <nav
+          className="mb-8 flex items-center gap-1.5 text-xs"
+          style={{ color: 'var(--ba-ghost)' }}
+        >
+          <Link href="/search" className="transition-opacity hover:opacity-70">
             {t('browse')}
           </Link>
           {brand && (
             <>
               <span>/</span>
-              <Link
-                href={`/brands/${brand.slug}`}
-                className="transition-colors hover:text-neutral-400"
-              >
+              <Link href={`/brands/${brand.slug}`} className="transition-opacity hover:opacity-70">
                 {brand.name}
               </Link>
             </>
@@ -309,70 +309,89 @@ export default async function BallDetailPage({
               <span>/</span>
               <Link
                 href={`/search?q=${encodeURIComponent(family.name)}`}
-                className="transition-colors hover:text-neutral-400"
+                className="transition-opacity hover:opacity-70"
               >
                 {family.name}
               </Link>
             </>
           )}
           <span>/</span>
-          <span className="text-neutral-500">{ball.name}</span>
+          <span style={{ color: 'var(--ba-subtle)' }}>{ball.name}</span>
         </nav>
 
-        {/* Hero */}
-        <div className="relative mb-12 overflow-hidden border-b border-white/[0.05] pb-10">
-          {/* Decorative golf ball — atmospheric, right side */}
-          <div
-            className="pointer-events-none absolute -right-10 -top-6 hidden opacity-[0.14] sm:block"
-            aria-hidden="true"
-          >
-            <GolfBallSVG size={240} />
+        {/* Hero grid */}
+        <div
+          className="mb-10 grid grid-cols-1 gap-8 pb-10 lg:grid-cols-[1fr_auto]"
+          style={{ borderBottom: '1px solid var(--ba-line)' }}
+        >
+          {/* Left: text */}
+          <div>
+            {/* Brand pill + status */}
+            <div className="mb-5 flex flex-wrap items-center gap-2">
+              {brand && (
+                <Link
+                  href={`/brands/${brand.slug}`}
+                  className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-all duration-150"
+                  style={{
+                    background: 'var(--ba-paper)',
+                    border: '1px solid var(--ba-line-strong)',
+                    color: 'var(--ba-subtle)',
+                  }}
+                >
+                  {brand.name}
+                </Link>
+              )}
+              {ball.status === 'discontinued' && (
+                <span
+                  className="rounded-full px-3 py-1 text-xs"
+                  style={{
+                    background: 'var(--ba-paper)',
+                    border: '1px solid var(--ba-line)',
+                    color: 'var(--ba-ghost)',
+                  }}
+                >
+                  {t('discontinued')}
+                </span>
+              )}
+            </div>
+
+            <h1
+              className="mb-5 text-4xl font-bold tracking-tight sm:text-5xl"
+              style={{ color: 'var(--ba-ink)' }}
+            >
+              {ball.name}
+            </h1>
+
+            <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+              {ball.release_year && (
+                <span className="font-mono text-sm" style={{ color: 'var(--ba-subtle)' }}>
+                  {ball.release_year}
+                </span>
+              )}
+              {segments.map((seg) => (
+                <SegmentBadge key={seg!.id} slug={seg!.slug} name={seg!.name} />
+              ))}
+              {ball.msrp_usd != null && (
+                <span className="text-sm" style={{ color: 'var(--ba-ghost)' }}>
+                  {t('atLaunch', { price: ball.msrp_usd })}
+                </span>
+              )}
+            </div>
+
+            {summaryText && (
+              <p className="max-w-xl text-sm leading-relaxed" style={{ color: 'var(--ba-subtle)' }}>
+                {summaryText}
+              </p>
+            )}
           </div>
 
-          {/* Brand pill + status */}
-          <div className="mb-5 flex flex-wrap items-center gap-2">
-            {brand && (
-              <Link
-                href={`/brands/${brand.slug}`}
-                className="inline-flex items-center rounded-full border border-white/[0.06] bg-white/[0.02] px-3 py-1 text-xs font-medium text-neutral-400 transition-all duration-150 hover:border-white/[0.10] hover:text-neutral-200"
-              >
-                {brand.name}
-              </Link>
-            )}
-            {ball.status === 'discontinued' && (
-              <span className="rounded-full border border-white/[0.04] bg-neutral-800/50 px-3 py-1 text-xs text-neutral-500">
-                {t('discontinued')}
-              </span>
-            )}
+          {/* Right: floating ball */}
+          <div className="hidden items-start justify-center lg:flex">
+            <GolfBall size="lg" />
           </div>
-
-          {/* Ball name — primary focal point */}
-          <h1 className="mb-5 text-4xl font-bold tracking-tight text-neutral-100 sm:text-5xl">
-            {ball.name}
-          </h1>
-
-          {/* Metadata strip */}
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            {ball.release_year && (
-              <span className="font-mono text-sm text-neutral-500">{ball.release_year}</span>
-            )}
-            {segments.map((seg) => (
-              <SegmentBadge key={seg!.id} slug={seg!.slug} name={seg!.name} />
-            ))}
-            {ball.msrp_usd != null && (
-              <span className="text-sm text-neutral-600">
-                {t('atLaunch', { price: ball.msrp_usd })}
-              </span>
-            )}
-          </div>
-
-          {/* Intelligence summary */}
-          {summaryText && (
-            <p className="mt-5 max-w-xl text-sm leading-relaxed text-neutral-500">{summaryText}</p>
-          )}
         </div>
 
-        {/* Ball DNA — full-width intelligence section */}
+        {/* Ball DNA — full width */}
         <div className="mb-10">
           <Section title="Ball DNA">
             <BallDNACard input={dnaInput} />
@@ -398,7 +417,11 @@ export default async function BallDetailPage({
                     {[1, 2, 3].map((i) => (
                       <div
                         key={i}
-                        className="h-24 animate-pulse rounded-lg border border-white/[0.04] bg-white/[0.02]"
+                        className="h-24 animate-pulse rounded-xl"
+                        style={{
+                          background: 'var(--ba-surface)',
+                          border: '1px solid var(--ba-line)',
+                        }}
                       />
                     ))}
                   </div>
@@ -418,7 +441,7 @@ export default async function BallDetailPage({
           </div>
 
           {/* Right column */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             <IdentificationConfidenceCard input={confidenceInput} />
 
             <ValuationCard
@@ -430,25 +453,33 @@ export default async function BallDetailPage({
 
             {/* Brand info */}
             {brand && (
-              <div className="rounded-xl border border-white/[0.08] bg-neutral-900/50 p-4 backdrop-blur-sm">
-                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-neutral-600">
-                  {t('sections.brand')}
-                </p>
+              <div
+                className="rounded-xl p-4"
+                style={{
+                  background: 'var(--ba-surface)',
+                  border: '1px solid var(--ba-line-strong)',
+                }}
+              >
+                <p className="kicker mb-2">{t('sections.brand')}</p>
                 <Link
                   href={`/brands/${brand.slug}`}
-                  className="text-sm font-medium text-neutral-200 transition-colors hover:text-white"
+                  className="text-sm font-medium transition-opacity hover:opacity-70"
+                  style={{ color: 'var(--ba-ink)' }}
                 >
                   {brand.name}
                 </Link>
                 {brand.country && (
-                  <p className="mt-0.5 text-xs text-neutral-600">{brand.country}</p>
+                  <p className="mt-0.5 text-xs" style={{ color: 'var(--ba-ghost)' }}>
+                    {brand.country}
+                  </p>
                 )}
                 {brand.website && (
                   <a
                     href={brand.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-2 inline-block text-xs text-neutral-600 underline-offset-2 hover:text-neutral-400 hover:underline"
+                    className="mt-2 inline-block text-xs underline-offset-2 hover:underline"
+                    style={{ color: 'var(--ba-ghost)' }}
                   >
                     {brand.website.replace(/^https?:\/\//, '')}
                   </a>
@@ -456,45 +487,58 @@ export default async function BallDetailPage({
               </div>
             )}
 
-            {/* Quick stats */}
-            <div className="rounded-xl border border-white/[0.08] bg-neutral-900/50 p-4 backdrop-blur-sm">
-              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.1em] text-neutral-600">
-                {t('sections.quickFacts')}
-              </p>
+            {/* Quick facts */}
+            <div
+              className="rounded-xl p-4"
+              style={{
+                background: 'var(--ba-surface)',
+                border: '1px solid var(--ba-line-strong)',
+              }}
+            >
+              <p className="kicker mb-3">{t('sections.quickFacts')}</p>
               <div className="flex flex-col gap-2.5 text-sm">
                 {ball.specs?.construction_layers != null && (
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">{t('specs.construction')}</span>
-                    <span className="text-neutral-300">
+                    <span style={{ color: 'var(--ba-subtle)' }}>{t('specs.construction')}</span>
+                    <span style={{ color: 'var(--ba-ink)' }}>
                       {t('specs.constructionPiece', { layers: ball.specs.construction_layers })}
                     </span>
                   </div>
                 )}
                 {ball.specs?.compression != null && (
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">{t('specs.compression')}</span>
-                    <span className="font-mono text-neutral-300">{ball.specs.compression}</span>
+                    <span style={{ color: 'var(--ba-subtle)' }}>{t('specs.compression')}</span>
+                    <span className="font-mono" style={{ color: 'var(--ba-ink)' }}>
+                      {ball.specs.compression}
+                    </span>
                   </div>
                 )}
                 {ball.specs?.cover_material && (
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">{t('specs.cover')}</span>
-                    <span className="text-neutral-300">{ball.specs.cover_material}</span>
+                    <span style={{ color: 'var(--ba-subtle)' }}>{t('specs.cover')}</span>
+                    <span style={{ color: 'var(--ba-ink)' }}>{ball.specs.cover_material}</span>
                   </div>
                 )}
                 {ball.release_year && (
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">{t('specs.year')}</span>
-                    <span className="font-mono text-neutral-300">{ball.release_year}</span>
+                    <span style={{ color: 'var(--ba-subtle)' }}>{t('specs.year')}</span>
+                    <span className="font-mono" style={{ color: 'var(--ba-ink)' }}>
+                      {ball.release_year}
+                    </span>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Compare link */}
+            {/* Compare CTA */}
             <Link
               href={`/compare?balls=${ball.slug}`}
-              className="block rounded-xl border border-white/[0.07] bg-neutral-900/50 p-3 text-center text-xs text-neutral-500 backdrop-blur-sm transition-all duration-150 hover:border-white/[0.13] hover:bg-neutral-900/70 hover:text-neutral-300"
+              className="block rounded-xl p-3 text-center text-xs transition-all duration-150 hover:opacity-80"
+              style={{
+                background: 'var(--ba-surface)',
+                border: '1px solid var(--ba-line-strong)',
+                color: 'var(--ba-subtle)',
+              }}
             >
               {t('compareCta')}
             </Link>
@@ -502,7 +546,7 @@ export default async function BallDetailPage({
         </div>
 
         {/* Feedback */}
-        <div className="mt-12 border-t border-white/[0.04] pt-8">
+        <div className="mt-12 pt-8" style={{ borderTop: '1px solid var(--ba-line)' }}>
           <FeedbackForm versionId={ball.id} ballName={ball.name} />
         </div>
       </div>
@@ -514,11 +558,9 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <section>
       <div className="mb-5 flex items-center gap-3">
-        <div className="h-px flex-1 bg-white/[0.04]" />
-        <h2 className="text-[11px] font-semibold uppercase tracking-[0.12em] text-neutral-600">
-          {title}
-        </h2>
-        <div className="h-px flex-1 bg-white/[0.04]" />
+        <div className="h-px flex-1" style={{ background: 'var(--ba-line)' }} />
+        <h2 className="kicker">{title}</h2>
+        <div className="h-px flex-1" style={{ background: 'var(--ba-line)' }} />
       </div>
       {children}
     </section>

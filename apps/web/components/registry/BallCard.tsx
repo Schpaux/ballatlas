@@ -1,3 +1,4 @@
+import { GolfBall } from './GolfBall'
 import { SegmentBadge } from './SegmentBadge'
 
 import { Link } from '@/i18n/navigation'
@@ -35,64 +36,89 @@ export function BallCard({ ball }: { ball: BallCardData }) {
   const segments = ball.version_segments.map((vs) => vs.segment).filter(Boolean)
   const isDiscontinued = ball.status === 'discontinued'
 
+  const specParts: string[] = []
+  if (ball.specs?.construction_layers != null) specParts.push(`${ball.specs.construction_layers}pc`)
+  if (ball.specs?.compression != null) specParts.push(`C${ball.specs.compression}`)
+  if (ball.specs?.cover_material) specParts.push(ball.specs.cover_material)
+
   return (
     <Link
       href={`/balls/${ball.slug}`}
-      className="group relative flex flex-col gap-3.5 overflow-hidden rounded-xl border border-white/[0.07] bg-neutral-900/50 p-5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-px hover:border-white/[0.13] hover:bg-neutral-900/70 hover:shadow-[0_8px_32px_rgba(0,0,0,0.32)]"
+      className="group flex flex-col gap-0 overflow-hidden rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(24,36,29,0.12)]"
+      style={{
+        background: 'var(--ba-surface)',
+        border: '1px solid var(--ba-line-strong)',
+      }}
     >
-      {/* Emerald left accent — gradient, slides in on hover */}
-      <div className="absolute inset-y-0 left-0 w-[2px] bg-gradient-to-b from-emerald-500/70 via-emerald-500/40 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
-
-      {/* Top inner highlight — premium glass edge */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
-
-      {/* Brand + year */}
-      <div className="flex items-center justify-between gap-2">
-        <span className="text-xs tracking-wide text-neutral-500">
+      {/* Card header: brand + year */}
+      <div className="flex items-center justify-between px-4 pb-0 pt-4">
+        <span className="text-xs font-medium tracking-wide" style={{ color: 'var(--ba-subtle)' }}>
           {ball.family?.brand.name ?? '—'}
         </span>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           {isDiscontinued && (
-            <span className="rounded border border-white/[0.05] bg-neutral-800/70 px-1.5 py-0.5 text-[10px] uppercase tracking-widest text-neutral-600">
+            <span
+              className="rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider"
+              style={{ color: 'var(--ba-ghost)', background: 'var(--ba-paper)' }}
+            >
               disc
             </span>
           )}
           {ball.release_year && (
-            <span className="font-mono text-xs text-neutral-600">{ball.release_year}</span>
+            <span className="font-mono text-xs" style={{ color: 'var(--ba-ghost)' }}>
+              {ball.release_year}
+            </span>
           )}
         </div>
       </div>
 
-      {/* Ball name — primary focal point */}
-      <h3 className="text-base font-semibold leading-snug tracking-tight text-neutral-100 transition-colors group-hover:text-white">
-        {ball.name}
-      </h3>
+      {/* Ball image placeholder — centered CSS sphere */}
+      <div className="flex items-center justify-center py-5">
+        <GolfBall size="sm" />
+      </div>
 
-      {/* Segments */}
-      {segments.length > 0 && (
-        <div className="flex flex-wrap gap-1">
-          {segments.map((seg) => (
-            <SegmentBadge key={seg!.id} slug={seg!.slug} name={seg!.name} />
-          ))}
+      {/* Content */}
+      <div className="flex flex-col gap-2.5 px-4 pb-4">
+        {/* Ball name */}
+        <h3 className="text-sm font-semibold leading-snug" style={{ color: 'var(--ba-ink)' }}>
+          {ball.name}
+        </h3>
+
+        {/* Segments */}
+        {segments.length > 0 && (
+          <div className="flex flex-wrap gap-1">
+            {segments.map((seg) => (
+              <SegmentBadge key={seg!.id} slug={seg!.slug} name={seg!.name} />
+            ))}
+          </div>
+        )}
+
+        {/* Spec strip + price */}
+        <div
+          className="flex items-center justify-between gap-2 pt-1"
+          style={{ borderTop: '1px solid var(--ba-line)' }}
+        >
+          {specParts.length > 0 ? (
+            <span className="font-mono text-[11px]" style={{ color: 'var(--ba-ghost)' }}>
+              {specParts.join(' · ')}
+            </span>
+          ) : (
+            <span />
+          )}
+          <div className="flex items-center gap-1">
+            {ball.msrp_usd != null && (
+              <span className="font-mono text-xs" style={{ color: 'var(--ba-subtle)' }}>
+                ${ball.msrp_usd}
+              </span>
+            )}
+            <span
+              className="text-sm transition-transform duration-150 group-hover:translate-x-0.5"
+              style={{ color: 'var(--ba-ghost)' }}
+            >
+              →
+            </span>
+          </div>
         </div>
-      )}
-
-      {/* Technical specs strip */}
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
-        {ball.specs?.construction_layers != null && (
-          <span className="text-neutral-500">{ball.specs.construction_layers}-piece</span>
-        )}
-        {ball.specs?.compression != null && (
-          <span className="text-neutral-500">
-            Comp <span className="font-mono text-neutral-400">{ball.specs.compression}</span>
-          </span>
-        )}
-        {ball.specs?.cover_material && (
-          <span className="text-neutral-500">{ball.specs.cover_material}</span>
-        )}
-        {ball.msrp_usd != null && (
-          <span className="ml-auto font-mono text-neutral-600">${ball.msrp_usd}/dz</span>
-        )}
       </div>
     </Link>
   )

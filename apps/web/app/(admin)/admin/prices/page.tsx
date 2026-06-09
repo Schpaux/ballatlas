@@ -137,7 +137,7 @@ export default async function PricesPage({
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold">Price Observations</h1>
-          <p className="mt-1 text-sm text-neutral-400">
+          <p className="mt-1 text-sm text-stone-500">
             Append-only market pricing data. Archive to retire, never delete.
           </p>
         </div>
@@ -146,8 +146,8 @@ export default async function PricesPage({
             href="/admin/prices"
             className={`rounded-lg border px-3 py-1.5 transition-colors ${
               !showArchived
-                ? 'border-neutral-600 bg-neutral-800 text-neutral-100'
-                : 'border-neutral-800 text-neutral-400 hover:border-neutral-600'
+                ? 'border-stone-300 bg-stone-100 text-stone-800'
+                : 'border-stone-200 text-stone-500 hover:border-stone-300'
             }`}
           >
             Active ({totalActive ?? 0})
@@ -156,8 +156,8 @@ export default async function PricesPage({
             href="/admin/prices?archived=1"
             className={`rounded-lg border px-3 py-1.5 transition-colors ${
               showArchived
-                ? 'border-neutral-600 bg-neutral-800 text-neutral-100'
-                : 'border-neutral-800 text-neutral-400 hover:border-neutral-600'
+                ? 'border-stone-300 bg-stone-100 text-stone-800'
+                : 'border-stone-200 text-stone-500 hover:border-stone-300'
             }`}
           >
             Archived ({totalArchived ?? 0})
@@ -167,19 +167,15 @@ export default async function PricesPage({
 
       {/* Add observation form */}
       {!showArchived && (
-        <details className="mb-6 rounded-lg border border-neutral-800 p-4">
-          <summary className="cursor-pointer text-sm font-medium text-neutral-300">
+        <details className="mb-6 rounded-lg border border-stone-200 p-4">
+          <summary className="cursor-pointer text-sm font-medium text-stone-600">
             + Add Price Observation
           </summary>
           <form action={addObservation} className="mt-4 space-y-3">
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               <div className="sm:col-span-2">
-                <label className="mb-1 block text-xs text-neutral-400">Version *</label>
-                <select
-                  name="version_id"
-                  required
-                  className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-                >
+                <label className="mb-1 block text-xs text-stone-500">Version *</label>
+                <select name="version_id" required className="ba-input">
                   <option value="">Select version…</option>
                   {versions?.map((v) => (
                     <option key={v.id} value={v.id}>
@@ -189,12 +185,8 @@ export default async function PricesPage({
                 </select>
               </div>
               <div>
-                <label className="mb-1 block text-xs text-neutral-400">Condition *</label>
-                <select
-                  name="condition"
-                  required
-                  className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-                >
+                <label className="mb-1 block text-xs text-stone-500">Condition *</label>
+                <select name="condition" required className="ba-input">
                   {PRICE_CONDITION_ORDER.map((c) => (
                     <option key={c} value={c}>
                       {PRICE_CONDITION_LABELS[c]}
@@ -206,7 +198,7 @@ export default async function PricesPage({
 
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               <div>
-                <label className="mb-1 block text-xs text-neutral-400">Price (per dozen) *</label>
+                <label className="mb-1 block text-xs text-stone-500">Price (per dozen) *</label>
                 <input
                   name="price"
                   type="number"
@@ -214,16 +206,12 @@ export default async function PricesPage({
                   min="0"
                   required
                   placeholder="49.99"
-                  className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
+                  className="ba-input"
                 />
               </div>
               <div>
-                <label className="mb-1 block text-xs text-neutral-400">Currency</label>
-                <select
-                  name="currency"
-                  defaultValue="USD"
-                  className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-                >
+                <label className="mb-1 block text-xs text-stone-500">Currency</label>
+                <select name="currency" defaultValue="USD" className="ba-input">
                   {CURRENCIES.map((c) => (
                     <option key={c} value={c}>
                       {c}
@@ -232,12 +220,8 @@ export default async function PricesPage({
                 </select>
               </div>
               <div>
-                <label className="mb-1 block text-xs text-neutral-400">Market</label>
-                <select
-                  name="market"
-                  defaultValue="global"
-                  className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-                >
+                <label className="mb-1 block text-xs text-stone-500">Market</label>
+                <select name="market" defaultValue="global" className="ba-input">
                   {MARKETS.map((m) => (
                     <option key={m.value} value={m.value}>
                       {m.label}
@@ -246,23 +230,15 @@ export default async function PricesPage({
                 </select>
               </div>
               <div>
-                <label className="mb-1 block text-xs text-neutral-400">Observed At</label>
-                <input
-                  name="observed_at"
-                  type="datetime-local"
-                  className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-                />
+                <label className="mb-1 block text-xs text-stone-500">Observed At</label>
+                <input name="observed_at" type="datetime-local" className="ba-input" />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="mb-1 block text-xs text-neutral-400">Source *</label>
-                <select
-                  name="source_id"
-                  required
-                  className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-                >
+                <label className="mb-1 block text-xs text-stone-500">Source *</label>
+                <select name="source_id" required className="ba-input">
                   <option value="">Select source…</option>
                   {sources?.map((s) => (
                     <option key={s.id} value={s.id}>
@@ -272,18 +248,18 @@ export default async function PricesPage({
                 </select>
               </div>
               <div>
-                <label className="mb-1 block text-xs text-neutral-400">Notes</label>
+                <label className="mb-1 block text-xs text-stone-500">Notes</label>
                 <input
                   name="notes"
                   placeholder="e.g. Holiday sale, 3-for-2 deal…"
-                  className="w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:border-neutral-500 focus:outline-none"
+                  className="ba-input"
                 />
               </div>
             </div>
 
             <button
               type="submit"
-              className="rounded-md bg-white px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-100"
+              className="rounded-md bg-stone-800 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700"
             >
               Add Observation
             </button>
@@ -294,11 +270,7 @@ export default async function PricesPage({
       {/* Filters */}
       <form method="GET" className="mb-4 flex flex-wrap gap-3">
         {showArchived && <input type="hidden" name="archived" value="1" />}
-        <select
-          name="version"
-          defaultValue={versionFilter ?? ''}
-          className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-        >
+        <select name="version" defaultValue={versionFilter ?? ''} className="ba-input">
           <option value="">All versions</option>
           {versions?.map((v) => (
             <option key={v.id} value={v.id}>
@@ -306,11 +278,7 @@ export default async function PricesPage({
             </option>
           ))}
         </select>
-        <select
-          name="condition"
-          defaultValue={conditionFilter ?? ''}
-          className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 focus:border-neutral-500 focus:outline-none"
-        >
+        <select name="condition" defaultValue={conditionFilter ?? ''} className="ba-input">
           <option value="">All conditions</option>
           {PRICE_CONDITION_ORDER.map((c) => (
             <option key={c} value={c}>
@@ -320,25 +288,25 @@ export default async function PricesPage({
         </select>
         <button
           type="submit"
-          className="rounded-md border border-neutral-700 px-3 py-2 text-sm text-neutral-400 hover:border-neutral-500 hover:text-neutral-200"
+          className="rounded-md border border-stone-300 px-3 py-2 text-sm text-stone-500 hover:border-stone-400 hover:text-stone-700"
         >
           Filter
         </button>
       </form>
 
-      {error && <p className="mb-4 text-sm text-red-400">{error.message}</p>}
+      {error && <p className="mb-4 text-sm text-red-600">{error.message}</p>}
 
-      <div className="overflow-hidden rounded-lg border border-neutral-800">
+      <div className="overflow-hidden rounded-lg border border-stone-200">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-neutral-800 bg-neutral-900">
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Version</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Condition</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Price</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Market</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Source</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Observed</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400"></th>
+            <tr className="border-b border-stone-200 bg-stone-50">
+              <th className="px-4 py-3 text-left font-normal text-stone-500">Version</th>
+              <th className="px-4 py-3 text-left font-normal text-stone-500">Condition</th>
+              <th className="px-4 py-3 text-left font-normal text-stone-500">Price</th>
+              <th className="px-4 py-3 text-left font-normal text-stone-500">Market</th>
+              <th className="px-4 py-3 text-left font-normal text-stone-500">Source</th>
+              <th className="px-4 py-3 text-left font-normal text-stone-500">Observed</th>
+              <th className="px-4 py-3 text-left font-normal text-stone-500"></th>
             </tr>
           </thead>
           <tbody>
@@ -348,20 +316,20 @@ export default async function PricesPage({
               return (
                 <tr
                   key={obs.id}
-                  className={`border-b border-neutral-800 last:border-0 hover:bg-neutral-900/50 ${
+                  className={`border-b border-stone-200 last:border-0 hover:bg-stone-50/50 ${
                     obs.is_archived ? 'opacity-60' : ''
                   }`}
                 >
                   <td className="px-4 py-3 font-medium">{version?.name ?? '—'}</td>
-                  <td className="px-4 py-3 text-neutral-400">
+                  <td className="px-4 py-3 text-stone-500">
                     {PRICE_CONDITION_LABELS[obs.condition as keyof typeof PRICE_CONDITION_LABELS] ??
                       obs.condition}
                   </td>
                   <td className="px-4 py-3 font-mono">
                     {obs.currency} {Number(obs.price).toFixed(2)}
                   </td>
-                  <td className="px-4 py-3 font-mono text-xs text-neutral-400">{obs.market}</td>
-                  <td className="px-4 py-3 text-xs text-neutral-400">
+                  <td className="px-4 py-3 font-mono text-xs text-stone-500">{obs.market}</td>
+                  <td className="px-4 py-3 text-xs text-stone-500">
                     {source ? (
                       <span title={`reliability: ${source.reliability_score}/10`}>
                         {source.name}
@@ -370,10 +338,10 @@ export default async function PricesPage({
                       <span className="text-red-500">No source</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-xs text-neutral-500">
+                  <td className="px-4 py-3 text-xs text-stone-400">
                     {new Date(obs.observed_at).toLocaleDateString()}
                     {obs.notes && (
-                      <span className="ml-1 text-neutral-600" title={obs.notes}>
+                      <span className="ml-1 text-stone-400" title={obs.notes}>
                         (note)
                       </span>
                     )}
@@ -384,7 +352,7 @@ export default async function PricesPage({
                         <input type="hidden" name="id" value={obs.id} />
                         <button
                           type="submit"
-                          className="text-xs text-neutral-600 hover:text-neutral-300"
+                          className="text-xs text-stone-400 hover:text-stone-600"
                         >
                           Unarchive
                         </button>
@@ -394,7 +362,7 @@ export default async function PricesPage({
                         <input type="hidden" name="id" value={obs.id} />
                         <button
                           type="submit"
-                          className="text-xs text-neutral-600 hover:text-yellow-400"
+                          className="text-xs text-stone-400 hover:text-yellow-700"
                         >
                           Archive
                         </button>
@@ -406,7 +374,7 @@ export default async function PricesPage({
             })}
             {!observations?.length && (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-sm text-neutral-500">
+                <td colSpan={7} className="px-4 py-8 text-center text-sm text-stone-400">
                   No observations found.
                 </td>
               </tr>
@@ -420,18 +388,18 @@ export default async function PricesPage({
           {page > 1 && (
             <a
               href={`/admin/prices?page=${page - 1}${showArchived ? '&archived=1' : ''}`}
-              className="text-neutral-400 hover:text-neutral-100"
+              className="text-stone-500 hover:text-stone-800"
             >
               ← Previous
             </a>
           )}
-          <span className="text-neutral-600">
+          <span className="text-stone-400">
             Page {page} of {totalPages}
           </span>
           {page < totalPages && (
             <a
               href={`/admin/prices?page=${page + 1}${showArchived ? '&archived=1' : ''}`}
-              className="text-neutral-400 hover:text-neutral-100"
+              className="text-stone-500 hover:text-stone-800"
             >
               Next →
             </a>

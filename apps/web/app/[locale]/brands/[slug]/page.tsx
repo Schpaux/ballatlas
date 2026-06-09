@@ -241,19 +241,28 @@ export default async function BrandDetailPage({
     <RegistryLayout>
       <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
         {/* Breadcrumb */}
-        <nav className="mb-6 flex items-center gap-2 text-xs text-neutral-600">
-          <Link href="/brands" className="transition-colors hover:text-neutral-400">
+        <nav
+          className="mb-6 flex items-center gap-1.5 text-xs"
+          style={{ color: 'var(--ba-ghost)' }}
+        >
+          <Link href="/brands" className="transition-opacity hover:opacity-70">
             {t('breadcrumb')}
           </Link>
           <span>/</span>
-          <span className="text-neutral-500">{brand.name}</span>
+          <span style={{ color: 'var(--ba-subtle)' }}>{brand.name}</span>
         </nav>
 
         {/* Brand header */}
         <div className="mb-10">
           <div className="mb-3 flex items-center gap-3">
             {logo && (
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md border border-white/[0.08] bg-white/[0.04] p-1.5">
+              <div
+                className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md p-1.5"
+                style={{
+                  background: 'var(--ba-surface)',
+                  border: '1px solid var(--ba-line-strong)',
+                }}
+              >
                 <img
                   src={logo.url}
                   alt={logo.alt_text ?? `${brand.name} logo`}
@@ -262,12 +271,18 @@ export default async function BrandDetailPage({
               </div>
             )}
             {brand.country && (
-              <span className="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-xs text-neutral-500">
+              <span
+                className="rounded px-1.5 py-0.5 font-mono text-xs"
+                style={{ background: 'var(--ba-paper)', color: 'var(--ba-ghost)' }}
+              >
                 {brand.country}
               </span>
             )}
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-neutral-100 sm:text-4xl">
+          <h1
+            className="text-3xl font-bold tracking-tight sm:text-4xl"
+            style={{ color: 'var(--ba-ink)' }}
+          >
             {brand.name}
           </h1>
           {brand.website && (
@@ -275,7 +290,8 @@ export default async function BrandDetailPage({
               href={brand.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 inline-block text-sm text-neutral-600 underline-offset-2 hover:text-neutral-400 hover:underline"
+              className="mt-2 inline-block text-sm underline-offset-2 hover:underline"
+              style={{ color: 'var(--ba-ghost)' }}
             >
               {brand.website.replace(/^https?:\/\//, '')}
             </a>
@@ -283,16 +299,20 @@ export default async function BrandDetailPage({
 
           <div className="mt-6 flex flex-wrap gap-6 text-sm">
             <div>
-              <span className="font-mono text-2xl font-semibold text-neutral-100">
+              <span className="font-mono text-2xl font-semibold" style={{ color: 'var(--ba-ink)' }}>
                 {brand.families.length}
               </span>
-              <span className="ml-1.5 text-neutral-500">{t('modelLines')}</span>
+              <span className="ml-1.5" style={{ color: 'var(--ba-subtle)' }}>
+                {t('modelLines')}
+              </span>
             </div>
             <div>
-              <span className="font-mono text-2xl font-semibold text-neutral-100">
+              <span className="font-mono text-2xl font-semibold" style={{ color: 'var(--ba-ink)' }}>
                 {totalVersions}
               </span>
-              <span className="ml-1.5 text-neutral-500">{t('versionsCatalogued')}</span>
+              <span className="ml-1.5" style={{ color: 'var(--ba-subtle)' }}>
+                {t('versionsCatalogued')}
+              </span>
             </div>
           </div>
 
@@ -307,9 +327,7 @@ export default async function BrandDetailPage({
 
         {activeFamilies.length > 0 && (
           <section className="mb-10">
-            <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-600">
-              {t('currentLines')}
-            </h2>
+            <h2 className="kicker mb-4">{t('currentLines')}</h2>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {activeFamilies.map((family) => (
                 <FamilyCard
@@ -326,9 +344,7 @@ export default async function BrandDetailPage({
 
         {discontinuedFamilies.length > 0 && (
           <section>
-            <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-600">
-              {t('discontinuedLines')}
-            </h2>
+            <h2 className="kicker mb-4">{t('discontinuedLines')}</h2>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {discontinuedFamilies.map((family) => (
                 <FamilyCard
@@ -344,7 +360,9 @@ export default async function BrandDetailPage({
         )}
 
         {brand.families.length === 0 && (
-          <p className="py-12 text-center text-sm text-neutral-600">{t('empty')}</p>
+          <p className="py-12 text-center text-sm" style={{ color: 'var(--ba-ghost)' }}>
+            {t('empty')}
+          </p>
         )}
       </div>
     </RegistryLayout>
@@ -374,19 +392,28 @@ function FamilyCard({
   const segEntries = Object.entries(topSegs).slice(0, 2)
 
   return (
-    <div className="flex flex-col gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] p-4">
+    <div
+      className="flex flex-col gap-3 rounded-xl p-4"
+      style={{ background: 'var(--ba-surface)', border: '1px solid var(--ba-line-strong)' }}
+    >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="font-medium text-neutral-200">{family.name}</p>
-          {range && <p className="mt-0.5 font-mono text-xs text-neutral-600">{range}</p>}
+          <p className="font-medium" style={{ color: 'var(--ba-ink)' }}>
+            {family.name}
+          </p>
+          {range && (
+            <p className="mt-0.5 font-mono text-xs" style={{ color: 'var(--ba-ghost)' }}>
+              {range}
+            </p>
+          )}
         </div>
-        <span className="shrink-0 font-mono text-xs text-neutral-600">
+        <span className="shrink-0 font-mono text-xs" style={{ color: 'var(--ba-ghost)' }}>
           {t('versions', { count: family.versions.length })}
         </span>
       </div>
 
       {family.description && (
-        <p className="line-clamp-2 text-xs leading-relaxed text-neutral-500">
+        <p className="line-clamp-2 text-xs leading-relaxed" style={{ color: 'var(--ba-subtle)' }}>
           {family.description}
         </p>
       )}
@@ -400,12 +427,19 @@ function FamilyCard({
       )}
 
       {family.versions.length > 0 && (
-        <div className="flex flex-wrap gap-2 border-t border-white/[0.04] pt-3">
+        <div
+          className="flex flex-wrap gap-2 pt-3"
+          style={{ borderTop: '1px solid var(--ba-line)' }}
+        >
           {family.versions.slice(0, 6).map((v) => (
             <Link
               key={v.id}
               href={`/balls/${v.slug}`}
-              className="rounded border border-white/[0.06] px-2 py-1 font-mono text-xs text-neutral-500 transition-colors hover:border-white/[0.12] hover:text-neutral-300"
+              className="rounded px-2 py-1 font-mono text-xs transition-colors hover:opacity-70"
+              style={{
+                border: '1px solid var(--ba-line-strong)',
+                color: 'var(--ba-subtle)',
+              }}
             >
               {v.release_year ?? v.name}
             </Link>
@@ -413,7 +447,11 @@ function FamilyCard({
           {family.versions.length > 6 && (
             <Link
               href={`/search?q=${encodeURIComponent(family.name)}&brand=${brandSlug}`}
-              className="rounded border border-white/[0.06] px-2 py-1 font-mono text-xs text-neutral-600 transition-colors hover:text-neutral-400"
+              className="rounded px-2 py-1 font-mono text-xs transition-colors hover:opacity-70"
+              style={{
+                border: '1px solid var(--ba-line)',
+                color: 'var(--ba-ghost)',
+              }}
             >
               {t('moreVersions', { count: family.versions.length - 6 })}
             </Link>

@@ -21,7 +21,7 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-1" role="group" aria-label={t('label')}>
+    <div className="flex items-center gap-0.5" role="group" aria-label={t('label')}>
       {locales.map((l) => (
         <button
           key={l}
@@ -29,11 +29,12 @@ export function LanguageSwitcher() {
           aria-pressed={locale === l}
           aria-label={t(l)}
           title={t(l)}
-          className={`rounded px-2 py-1 text-xs transition-colors ${
-            locale === l
-              ? 'bg-white/[0.08] text-neutral-100'
-              : 'text-neutral-600 hover:text-neutral-300'
-          }`}
+          className="rounded px-1.5 py-1 text-xs transition-opacity"
+          style={{
+            background: locale === l ? 'var(--ba-ink)' : 'transparent',
+            color: locale === l ? 'var(--ba-paper)' : 'var(--ba-ghost)',
+            opacity: locale === l ? 1 : 0.7,
+          }}
         >
           <span aria-hidden="true">{FLAG[l]}</span>
           <span className="sr-only">{t(l)}</span>

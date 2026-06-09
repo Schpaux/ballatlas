@@ -1,5 +1,7 @@
 'use client'
 
+import type { CSSProperties } from 'react'
+
 import { useTranslations } from 'next-intl'
 
 import type { CompareBallProfile, FieldRow, HighlightTag } from '@ballatlas/golf-data'
@@ -11,18 +13,18 @@ type CompareTableProps = {
   rows: FieldRow[]
 }
 
-function cellClass(tag: HighlightTag): string {
+function cellStyle(tag: HighlightTag): CSSProperties {
   switch (tag) {
     case 'highest':
-      return 'text-emerald-400 font-medium'
+      return { color: 'var(--ba-green)', fontWeight: 500 }
     case 'lowest':
-      return 'text-amber-400 font-medium'
+      return { color: 'var(--ba-gold)', fontWeight: 500 }
     case 'unique':
-      return 'text-sky-400'
+      return { color: 'var(--ba-seg-blue)' }
     case 'missing':
-      return 'text-neutral-700 italic'
+      return { color: 'var(--ba-ghost)', fontStyle: 'italic' }
     default:
-      return 'text-neutral-300'
+      return { color: 'var(--ba-ink)' }
   }
 }
 
@@ -47,20 +49,28 @@ export function CompareTable({ profiles, rows }: CompareTableProps) {
     <div className="overflow-x-auto">
       <table className="w-full border-collapse text-sm">
         <thead>
-          <tr className="border-b border-white/[0.06]">
-            <th className="w-36 pb-4 text-left text-xs font-medium uppercase tracking-wider text-neutral-600 sm:w-44" />
+          <tr style={{ borderBottom: '1px solid var(--ba-line-strong)' }}>
+            <th
+              className="w-36 pb-4 text-left text-xs font-medium uppercase tracking-wider sm:w-44"
+              style={{ color: 'var(--ba-ghost)' }}
+            />
             {profiles.map((p) => (
               <th key={p.id} className="pb-4 text-left font-normal">
                 <div className="pr-4">
-                  <p className="text-xs text-neutral-600">{p.brandName}</p>
+                  <p className="text-xs" style={{ color: 'var(--ba-ghost)' }}>
+                    {p.brandName}
+                  </p>
                   <Link
                     href={`/balls/${p.slug}`}
-                    className="font-medium text-neutral-200 transition-colors hover:text-white"
+                    className="font-medium transition-opacity hover:opacity-70"
+                    style={{ color: 'var(--ba-ink)' }}
                   >
                     {p.name}
                   </Link>
                   {p.releaseYear && (
-                    <p className="font-mono text-xs text-neutral-600">{p.releaseYear}</p>
+                    <p className="font-mono text-xs" style={{ color: 'var(--ba-ghost)' }}>
+                      {p.releaseYear}
+                    </p>
                   )}
                 </div>
               </th>
@@ -73,15 +83,15 @@ export function CompareTable({ profiles, rows }: CompareTableProps) {
             if (allMissing) return null
 
             return (
-              <tr
-                key={row.key}
-                className="border-b border-white/[0.04] transition-colors hover:bg-white/[0.02]"
-              >
-                <td className="py-3 pr-4 text-xs text-neutral-500">{row.label}</td>
+              <tr key={row.key} className="admin-table-row">
+                <td className="py-3 pr-4 text-xs" style={{ color: 'var(--ba-subtle)' }}>
+                  {row.label}
+                </td>
                 {profiles.map((p, i) => (
                   <td
                     key={p.id}
-                    className={`py-3 pr-4 ${cellClass(row.highlights[i] ?? 'missing')}`}
+                    className="py-3 pr-4"
+                    style={cellStyle(row.highlights[i] ?? 'missing')}
                   >
                     {formatValue(row.values[i] ?? null, row.format)}
                   </td>
@@ -92,17 +102,17 @@ export function CompareTable({ profiles, rows }: CompareTableProps) {
         </tbody>
       </table>
 
-      <div className="mt-6 flex flex-wrap gap-4 text-xs text-neutral-600">
+      <div className="mt-6 flex flex-wrap gap-4 text-xs" style={{ color: 'var(--ba-ghost)' }}>
         <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-emerald-600" />
+          <span className="h-2 w-2 rounded-full" style={{ background: 'var(--ba-green)' }} />
           {t('highest')}
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-amber-600" />
+          <span className="h-2 w-2 rounded-full" style={{ background: 'var(--ba-gold)' }} />
           {t('lowest')}
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-sky-700" />
+          <span className="h-2 w-2 rounded-full" style={{ background: 'var(--ba-seg-blue)' }} />
           {t('unique')}
         </div>
       </div>

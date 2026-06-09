@@ -27,8 +27,11 @@ function ColorSwatch({ color }: { color: string }) {
   if (!hex) return null
   return (
     <span
-      className="mr-1.5 inline-block h-3 w-3 rounded-full border border-white/10 align-middle"
-      style={{ backgroundColor: hex }}
+      className="mr-1.5 inline-block h-3 w-3 rounded-full align-middle"
+      style={{
+        backgroundColor: hex,
+        border: '1px solid var(--ba-line-strong)',
+      }}
     />
   )
 }
@@ -36,9 +39,14 @@ function ColorSwatch({ color }: { color: string }) {
 function VisualRow({ label, value }: { label: string; value: string }) {
   const isColor = label === 'Color'
   return (
-    <div className="flex items-start justify-between gap-4 py-3">
-      <span className="text-sm text-neutral-500">{label}</span>
-      <span className="text-right text-sm text-neutral-200">
+    <div
+      className="flex items-start justify-between gap-4 py-3"
+      style={{ borderBottom: '1px solid var(--ba-line)' }}
+    >
+      <span className="text-sm" style={{ color: 'var(--ba-subtle)' }}>
+        {label}
+      </span>
+      <span className="text-right text-sm" style={{ color: 'var(--ba-ink)' }}>
         {isColor && <ColorSwatch color={value} />}
         {value}
       </span>
@@ -48,7 +56,11 @@ function VisualRow({ label, value }: { label: string; value: string }) {
 
 export function VisualIdentityCard({ visual }: { visual: VisualSignature | null }) {
   if (!visual) {
-    return <p className="text-sm text-neutral-600">Visual identification data not yet available.</p>
+    return (
+      <p className="text-sm" style={{ color: 'var(--ba-ghost)' }}>
+        Visual identification data not yet available.
+      </p>
+    )
   }
 
   const primaryRows: Array<{ label: string; value: string | null }> = [
@@ -73,26 +85,21 @@ export function VisualIdentityCard({ visual }: { visual: VisualSignature | null 
   )
 
   if (primary.length === 0 && secondary.length === 0) {
-    return <p className="text-sm text-neutral-600">Visual identification data not yet available.</p>
+    return (
+      <p className="text-sm" style={{ color: 'var(--ba-ghost)' }}>
+        Visual identification data not yet available.
+      </p>
+    )
   }
 
   return (
     <div>
-      {primary.length > 0 && (
-        <div className="divide-y divide-white/[0.04]">
-          {primary.map((r) => (
-            <VisualRow key={r.label} label={r.label} value={r.value} />
-          ))}
-        </div>
-      )}
-
-      {secondary.length > 0 && (
-        <div className={`divide-y divide-white/[0.04] ${primary.length > 0 ? 'mt-0' : ''}`}>
-          {secondary.map((r) => (
-            <VisualRow key={r.label} label={r.label} value={r.value} />
-          ))}
-        </div>
-      )}
+      {primary.map((r) => (
+        <VisualRow key={r.label} label={r.label} value={r.value} />
+      ))}
+      {secondary.map((r) => (
+        <VisualRow key={r.label} label={r.label} value={r.value} />
+      ))}
     </div>
   )
 }

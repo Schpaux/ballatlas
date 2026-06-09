@@ -170,7 +170,7 @@ async function SearchResults({ params, locale }: { params: SearchParams; locale:
 
   if (error) {
     return (
-      <p className="text-sm text-neutral-600">
+      <p className="text-sm" style={{ color: 'var(--ba-ghost)' }}>
         Unable to load results — database may not be connected.
       </p>
     )
@@ -178,11 +178,15 @@ async function SearchResults({ params, locale }: { params: SearchParams; locale:
 
   if (balls.length === 0) {
     return (
-      <div className="py-12 text-center">
-        <p className="text-sm text-neutral-400">
+      <div className="py-16 text-center">
+        <p className="text-sm" style={{ color: 'var(--ba-subtle)' }}>
           {q ? t('noResults', { query: q }) : t('noFilterResults')}
         </p>
-        {q && <p className="mt-2 text-xs text-neutral-600">{t('noResultsHint')}</p>}
+        {q && (
+          <p className="mt-2 text-xs" style={{ color: 'var(--ba-ghost)' }}>
+            {t('noResultsHint')}
+          </p>
+        )}
       </div>
     )
   }
@@ -191,7 +195,7 @@ async function SearchResults({ params, locale }: { params: SearchParams; locale:
 
   return (
     <div>
-      <p className="mb-4 text-xs text-neutral-600">
+      <p className="mb-5 text-xs" style={{ color: 'var(--ba-ghost)' }}>
         {q ? t('resultsFor', { count: total, query: q }) : t('results', { count: total })}
       </p>
 
@@ -206,18 +210,28 @@ async function SearchResults({ params, locale }: { params: SearchParams; locale:
           {pageNum > 1 && (
             <a
               href={buildPageUrl(params, pageNum - 1)}
-              className="rounded-lg border border-white/[0.08] px-4 py-2 text-neutral-400 transition-colors hover:border-white/[0.14] hover:text-neutral-100"
+              className="rounded-full px-4 py-2 transition-colors"
+              style={{
+                border: '1px solid var(--ba-line-strong)',
+                color: 'var(--ba-subtle)',
+                background: 'var(--ba-surface)',
+              }}
             >
               {t('previous')}
             </a>
           )}
-          <span className="text-neutral-600">
+          <span className="text-xs" style={{ color: 'var(--ba-ghost)' }}>
             {t('pageOf', { current: pageNum, total: totalPages })}
           </span>
           {pageNum < totalPages && (
             <a
               href={buildPageUrl(params, pageNum + 1)}
-              className="rounded-lg border border-white/[0.08] px-4 py-2 text-neutral-400 transition-colors hover:border-white/[0.14] hover:text-neutral-100"
+              className="rounded-full px-4 py-2 transition-colors"
+              style={{
+                border: '1px solid var(--ba-line-strong)',
+                color: 'var(--ba-subtle)',
+                background: 'var(--ba-surface)',
+              }}
             >
               {t('next')}
             </a>
@@ -247,7 +261,8 @@ function ResultsSkeleton() {
       {Array.from({ length: 12 }).map((_, i) => (
         <div
           key={i}
-          className="h-36 animate-pulse rounded-lg border border-white/[0.04] bg-white/[0.02]"
+          className="h-44 animate-pulse rounded-xl"
+          style={{ background: 'var(--ba-surface)', border: '1px solid var(--ba-line)' }}
         />
       ))}
     </div>
@@ -271,7 +286,15 @@ export default async function SearchPage({
   return (
     <RegistryLayout>
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
-        <SearchBar initialValue={sp.q ?? ''} placeholder={t('placeholder')} className="mb-6" />
+        {/* Search bar */}
+        <SearchBar initialValue={sp.q ?? ''} placeholder={t('placeholder')} className="mb-7" />
+
+        {/* Page title */}
+        <div className="mb-6">
+          <h1 className="text-xl font-semibold" style={{ color: 'var(--ba-ink)' }}>
+            {t('title')}
+          </h1>
+        </div>
 
         <div className="flex gap-8">
           <Suspense fallback={null}>

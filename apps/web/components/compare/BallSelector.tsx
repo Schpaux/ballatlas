@@ -74,12 +74,18 @@ export function BallSelector({ selectedSlugs, selectedNames }: BallSelectorProps
           {selectedSlugs.map((slug) => (
             <div
               key={slug}
-              className="flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-xs text-neutral-300"
+              className="flex items-center gap-1.5 rounded-full px-3 py-1 text-xs"
+              style={{
+                background: 'var(--ba-surface)',
+                border: '1px solid var(--ba-line-strong)',
+                color: 'var(--ba-ink)',
+              }}
             >
               <span>{selectedNames[slug] ?? slug}</span>
               <button
                 onClick={() => removeBall(slug)}
-                className="ml-0.5 text-neutral-600 transition-colors hover:text-neutral-300"
+                className="ml-0.5 transition-opacity hover:opacity-70"
+                style={{ color: 'var(--ba-ghost)' }}
                 aria-label={`Remove ${selectedNames[slug] ?? slug}`}
               >
                 ×
@@ -99,16 +105,30 @@ export function BallSelector({ selectedSlugs, selectedNames }: BallSelectorProps
             onFocus={() => suggestions.length > 0 && setOpen(true)}
             onBlur={() => setTimeout(() => setOpen(false), 150)}
             placeholder={selectedSlugs.length === 0 ? t('searchPlaceholder') : t('addPlaceholder')}
-            className="w-full rounded-lg border border-white/[0.08] bg-neutral-900 px-3 py-2 text-sm text-neutral-200 placeholder-neutral-600 outline-none transition-colors focus:border-white/[0.16]"
+            className="w-full rounded-lg px-3 py-2 text-sm outline-none transition-colors"
+            style={{
+              background: 'var(--ba-paper)',
+              border: '1px solid var(--ba-line-strong)',
+              color: 'var(--ba-ink)',
+            }}
           />
           {loading && (
             <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
-              <div className="h-3.5 w-3.5 animate-spin rounded-full border border-neutral-600 border-t-neutral-400" />
+              <div
+                className="h-3.5 w-3.5 animate-spin rounded-full border border-t-transparent"
+                style={{ borderColor: 'var(--ba-line-strong)', borderTopColor: 'var(--ba-green)' }}
+              />
             </div>
           )}
 
           {open && suggestions.length > 0 && (
-            <div className="absolute left-0 right-0 top-full z-50 mt-1 overflow-hidden rounded-lg border border-white/[0.08] bg-neutral-900 shadow-xl">
+            <div
+              className="absolute left-0 right-0 top-full z-50 mt-1 overflow-hidden rounded-lg shadow-xl"
+              style={{
+                background: 'var(--ba-paper)',
+                border: '1px solid var(--ba-line-strong)',
+              }}
+            >
               {suggestions.map((s) => (
                 <button
                   key={s.href}
@@ -118,13 +138,22 @@ export function BallSelector({ selectedSlugs, selectedNames }: BallSelectorProps
                       router.push(s.href as never)
                     }
                   }}
-                  className="flex w-full items-center justify-between px-3 py-2 text-left text-sm transition-colors hover:bg-white/[0.04]"
+                  className="flex w-full items-center justify-between px-3 py-2 text-left text-sm transition-colors hover:bg-black/[0.03]"
                 >
                   <div>
-                    <span className="text-neutral-200">{s.name}</span>
-                    {s.meta && <span className="ml-2 text-xs text-neutral-600">{s.meta}</span>}
+                    <span style={{ color: 'var(--ba-ink)' }}>{s.name}</span>
+                    {s.meta && (
+                      <span className="ml-2 text-xs" style={{ color: 'var(--ba-ghost)' }}>
+                        {s.meta}
+                      </span>
+                    )}
                   </div>
-                  <span className="shrink-0 text-xs capitalize text-neutral-700">{s.type}</span>
+                  <span
+                    className="shrink-0 text-xs capitalize"
+                    style={{ color: 'var(--ba-ghost)' }}
+                  >
+                    {s.type}
+                  </span>
                 </button>
               ))}
             </div>
@@ -133,7 +162,9 @@ export function BallSelector({ selectedSlugs, selectedNames }: BallSelectorProps
       )}
 
       {selectedSlugs.length >= 4 && (
-        <p className="mt-2 text-xs text-neutral-600">{t('maxBalls')}</p>
+        <p className="mt-2 text-xs" style={{ color: 'var(--ba-ghost)' }}>
+          {t('maxBalls')}
+        </p>
       )}
     </div>
   )

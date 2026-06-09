@@ -11,7 +11,7 @@ export default async function BrandsPage() {
     .order('name')
 
   if (error) {
-    return <p className="text-red-400">Failed to load brands: {error.message}</p>
+    return <p className="text-red-600">Failed to load brands: {error.message}</p>
   }
 
   return (
@@ -19,43 +19,65 @@ export default async function BrandsPage() {
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold">Brands</h1>
-          <p className="mt-1 text-sm text-neutral-400">{brands?.length ?? 0} brands</p>
+          <p className="mt-1 text-sm" style={{ color: 'var(--ba-subtle)' }}>
+            {brands?.length ?? 0} brands
+          </p>
         </div>
         <Link
           href="/admin/brands/new"
-          className="rounded-md bg-white px-3 py-1.5 text-sm font-medium text-neutral-900 hover:bg-neutral-100"
+          className="rounded-md px-3 py-1.5 text-sm font-medium transition-opacity hover:opacity-80"
+          style={{ background: 'var(--ba-ink)', color: 'var(--ba-paper)' }}
         >
           + New Brand
         </Link>
       </div>
 
-      <div className="overflow-hidden rounded-lg border border-neutral-800">
+      <div
+        className="overflow-hidden rounded-xl"
+        style={{ border: '1px solid var(--ba-line-strong)' }}
+      >
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-neutral-800 bg-neutral-900">
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Name</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Slug</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Country</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400">Website</th>
-              <th className="px-4 py-3 text-left font-normal text-neutral-400"></th>
+            <tr
+              style={{ borderBottom: '1px solid var(--ba-line)', background: 'var(--ba-surface)' }}
+            >
+              <th className="px-4 py-3 text-left font-normal" style={{ color: 'var(--ba-subtle)' }}>
+                Name
+              </th>
+              <th className="px-4 py-3 text-left font-normal" style={{ color: 'var(--ba-subtle)' }}>
+                Slug
+              </th>
+              <th className="px-4 py-3 text-left font-normal" style={{ color: 'var(--ba-subtle)' }}>
+                Country
+              </th>
+              <th className="px-4 py-3 text-left font-normal" style={{ color: 'var(--ba-subtle)' }}>
+                Website
+              </th>
+              <th
+                className="px-4 py-3 text-left font-normal"
+                style={{ color: 'var(--ba-subtle)' }}
+              ></th>
             </tr>
           </thead>
           <tbody>
             {brands?.map((brand) => (
-              <tr
-                key={brand.id}
-                className="border-b border-neutral-800 last:border-0 hover:bg-neutral-900/50"
-              >
-                <td className="px-4 py-3 font-medium">{brand.name}</td>
-                <td className="px-4 py-3 font-mono text-xs text-neutral-400">{brand.slug}</td>
-                <td className="px-4 py-3 text-neutral-400">{brand.country ?? '—'}</td>
-                <td className="px-4 py-3 text-neutral-400">
+              <tr key={brand.id} className="admin-table-row">
+                <td className="px-4 py-3 font-medium" style={{ color: 'var(--ba-ink)' }}>
+                  {brand.name}
+                </td>
+                <td className="px-4 py-3 font-mono text-xs" style={{ color: 'var(--ba-subtle)' }}>
+                  {brand.slug}
+                </td>
+                <td className="px-4 py-3" style={{ color: 'var(--ba-subtle)' }}>
+                  {brand.country ?? '—'}
+                </td>
+                <td className="px-4 py-3" style={{ color: 'var(--ba-subtle)' }}>
                   {brand.website ? (
                     <a
                       href={brand.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="underline underline-offset-2 hover:text-neutral-100"
+                      className="underline underline-offset-2 transition-opacity hover:opacity-70"
                     >
                       {new URL(brand.website).hostname}
                     </a>
@@ -66,7 +88,8 @@ export default async function BrandsPage() {
                 <td className="px-4 py-3 text-right">
                   <Link
                     href={`/admin/brands/${brand.id}/edit` as Route}
-                    className="text-xs text-neutral-500 hover:text-neutral-200"
+                    className="text-xs transition-opacity hover:opacity-70"
+                    style={{ color: 'var(--ba-green)' }}
                   >
                     Edit
                   </Link>

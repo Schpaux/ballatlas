@@ -143,34 +143,46 @@ export default async function ComparePage({
     <RegistryLayout>
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold tracking-tight text-neutral-100">{t('title')}</h1>
-          <p className="mt-1 text-sm text-neutral-500">{t('subtitle')}</p>
+          <h1 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--ba-ink)' }}>
+            {t('title')}
+          </h1>
+          <p className="mt-1 text-sm" style={{ color: 'var(--ba-subtle)' }}>
+            {t('subtitle')}
+          </p>
         </div>
 
         <BallSelector selectedSlugs={slugs} selectedNames={selectedNames} />
 
         {profiles.length === 0 && (
           <div className="py-16 text-center">
-            <p className="text-sm text-neutral-600">{t('emptySearch')}</p>
+            <p className="text-sm" style={{ color: 'var(--ba-ghost)' }}>
+              {t('emptySearch')}
+            </p>
           </div>
         )}
 
         {profiles.length === 1 && (
           <div className="py-12 text-center">
-            <p className="text-sm text-neutral-600">{t('emptyAddMore')}</p>
+            <p className="text-sm" style={{ color: 'var(--ba-ghost)' }}>
+              {t('emptyAddMore')}
+            </p>
           </div>
         )}
 
         {profiles.length >= 2 && (
           <div className="space-y-8">
             {differenceSummary.length > 0 && (
-              <div className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-4">
-                <p className="mb-2 text-xs font-medium uppercase tracking-wider text-neutral-600">
-                  {t('keyDifferences')}
-                </p>
+              <div
+                className="rounded-xl p-4"
+                style={{
+                  background: 'var(--ba-surface)',
+                  border: '1px solid var(--ba-line-strong)',
+                }}
+              >
+                <p className="kicker mb-2">{t('keyDifferences')}</p>
                 <ul className="space-y-1">
                   {differenceSummary.map((sentence, i) => (
-                    <li key={i} className="text-sm text-neutral-400">
+                    <li key={i} className="text-sm" style={{ color: 'var(--ba-subtle)' }}>
                       {sentence}
                     </li>
                   ))}

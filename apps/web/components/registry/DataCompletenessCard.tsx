@@ -4,42 +4,51 @@ type DataCompletenessCardProps = {
   input: CompletenessInput
 }
 
-function readinessLevel(score: number) {
-  if (score >= 80)
-    return { label: 'Full Coverage', color: 'text-emerald-400', bar: 'bg-emerald-500' }
-  if (score >= 60)
-    return { label: 'Good Coverage', color: 'text-neutral-300', bar: 'bg-neutral-400' }
-  if (score >= 40) return { label: 'Partial', color: 'text-amber-400', bar: 'bg-amber-500' }
-  return { label: 'Minimal', color: 'text-neutral-500', bar: 'bg-neutral-600' }
+function readinessStyle(score: number) {
+  if (score >= 80) return { label: 'Full Coverage', color: 'var(--ba-green)' }
+  if (score >= 60) return { label: 'Good Coverage', color: 'var(--ba-subtle)' }
+  if (score >= 40) return { label: 'Partial', color: 'var(--ba-gold)' }
+  return { label: 'Minimal', color: 'var(--ba-ghost)' }
 }
 
 export function DataCompletenessCard({ input }: DataCompletenessCardProps) {
   const result = computeCompleteness(input)
-  const level = readinessLevel(result.score)
+  const style = readinessStyle(result.score)
 
   return (
-    <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+    <div
+      className="rounded-xl p-4"
+      style={{ background: 'var(--ba-surface)', border: '1px solid var(--ba-line-strong)' }}
+    >
       {/* Header */}
       <div className="mb-4 flex items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-medium text-neutral-400">Ball Profile</p>
-          <p className={`mt-0.5 text-xs ${level.color}`}>{level.label}</p>
+          <p className="kicker">Ball Profile</p>
+          <p className="mt-0.5 text-xs font-medium" style={{ color: style.color }}>
+            {style.label}
+          </p>
         </div>
         <div className="text-right">
           <span
-            className={`font-mono text-2xl font-bold leading-none tracking-tight ${level.color}`}
+            className="font-mono text-2xl font-bold leading-none tracking-tight"
+            style={{ color: style.color }}
           >
             {result.score}
           </span>
-          <span className="ml-0.5 text-xs text-neutral-600">%</span>
+          <span className="ml-0.5 text-xs" style={{ color: 'var(--ba-ghost)' }}>
+            %
+          </span>
         </div>
       </div>
 
       {/* Overall bar */}
-      <div className="mb-4 h-1 overflow-hidden rounded-full bg-neutral-800">
+      <div
+        className="mb-4 h-1.5 overflow-hidden rounded-full"
+        style={{ background: 'var(--ba-sand)' }}
+      >
         <div
-          className={`h-full rounded-full transition-all ${level.bar}`}
-          style={{ width: `${result.score}%` }}
+          className="h-full rounded-full transition-all"
+          style={{ width: `${result.score}%`, background: style.color }}
         />
       </div>
 
@@ -49,15 +58,18 @@ export function DataCompletenessCard({ input }: DataCompletenessCardProps) {
           {result.categories.map((cat) => (
             <div key={cat.name}>
               <div className="mb-1 flex justify-between text-xs">
-                <span className="text-neutral-600">{cat.name}</span>
-                <span className="font-mono text-neutral-700">
+                <span style={{ color: 'var(--ba-subtle)' }}>{cat.name}</span>
+                <span className="font-mono" style={{ color: 'var(--ba-ghost)' }}>
                   {cat.filled}/{cat.total}
                 </span>
               </div>
-              <div className="h-px overflow-hidden rounded-full bg-neutral-800">
+              <div
+                className="h-px overflow-hidden rounded-full"
+                style={{ background: 'var(--ba-sand)' }}
+              >
                 <div
-                  className="h-full rounded-full bg-neutral-600 transition-all"
-                  style={{ width: `${cat.pct}%` }}
+                  className="h-full rounded-full transition-all"
+                  style={{ width: `${cat.pct}%`, background: 'var(--ba-subtle)' }}
                 />
               </div>
             </div>
@@ -67,18 +79,22 @@ export function DataCompletenessCard({ input }: DataCompletenessCardProps) {
 
       {/* Missing fields */}
       {result.missingFields.length > 0 && (
-        <div className="mt-3 border-t border-white/[0.04] pt-3">
+        <div className="mt-3 pt-3" style={{ borderTop: '1px solid var(--ba-line)' }}>
           <div className="flex flex-wrap gap-1">
             {result.missingFields.slice(0, 4).map((f) => (
               <span
                 key={f}
-                className="rounded bg-neutral-800/60 px-1.5 py-0.5 text-[10px] text-neutral-700"
+                className="rounded px-1.5 py-0.5 text-[10px]"
+                style={{ background: 'var(--ba-paper)', color: 'var(--ba-ghost)' }}
               >
                 {f}
               </span>
             ))}
             {result.missingFields.length > 4 && (
-              <span className="rounded bg-neutral-800/60 px-1.5 py-0.5 text-[10px] text-neutral-700">
+              <span
+                className="rounded px-1.5 py-0.5 text-[10px]"
+                style={{ background: 'var(--ba-paper)', color: 'var(--ba-ghost)' }}
+              >
                 +{result.missingFields.length - 4}
               </span>
             )}
