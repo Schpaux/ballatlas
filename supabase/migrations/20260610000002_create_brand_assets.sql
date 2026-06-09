@@ -28,7 +28,7 @@ CREATE INDEX brand_assets_brand_status_idx ON brand_assets (brand_id, asset_type
 -- Auto-update trigger
 CREATE TRIGGER set_brand_assets_updated_at
   BEFORE UPDATE ON brand_assets
-  FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
 -- RLS: public read for approved assets only
 ALTER TABLE brand_assets ENABLE ROW LEVEL SECURITY;
