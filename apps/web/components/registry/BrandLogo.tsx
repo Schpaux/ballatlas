@@ -11,7 +11,7 @@ export function BrandLogo({ src, alt, className }: Props) {
     <img
       src={src}
       alt={alt}
-      className={cn('w-auto', className)}
+      className={cn('w-auto self-start', className)}
       style={{ mixBlendMode: 'multiply' }}
     />
   )
