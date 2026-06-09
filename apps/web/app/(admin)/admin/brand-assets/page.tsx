@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import {
   BrandAssetMetaSchema,
   BrandAssetUpdateSchema,
+  normalizeSvg,
   sanitizeSvg,
   validateSvgSafety,
 } from '@ballatlas/validators'
@@ -113,7 +114,8 @@ export default async function BrandAssetsPage({
       const sanitized = sanitizeSvg(raw)
       const result = validateSvgSafety(sanitized, file.size)
       if (!result.ok) return fail(`SVG validation failed: ${result.errors.join('; ')}`)
-      fileContent = new TextEncoder().encode(sanitized).buffer
+      const normalized = normalizeSvg(sanitized)
+      fileContent = new TextEncoder().encode(normalized).buffer
     } else {
       fileContent = await file.arrayBuffer()
     }
