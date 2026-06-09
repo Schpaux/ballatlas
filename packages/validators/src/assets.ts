@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 const UNSAFE_SVG_PATTERNS = [
   /<script[\s>]/i,
-  /on\w+\s*=/i, // event handlers: onclick=, onload=, etc.
+  /(?:^|\s)on\w+\s*=/im, // event handlers: onclick=, onload=, etc. (word-boundary prevents matching "standalone=", "version=", etc.)
   /javascript\s*:/i, // javascript: URIs
   /<use[^>]+href\s*=\s*["']https?:\/\//i, // external <use> references
   /<foreignobject[\s>]/i, // HTML injection via <foreignObject>
@@ -17,7 +17,9 @@ const SVG_MAX_BYTES = 512 * 1024 // 512 KB
 // Strip on* event handler attributes — design tools (Illustrator, Figma) sometimes emit
 // these in exported SVGs. They are never needed in static logos and are safe to remove.
 export function sanitizeSvg(content: string): string {
-  return content.replace(/\s+on\w+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]*)/gi, '')
+  // Only strip attributes where "on*" is preceded by whitespace (i.e., actual event handler
+  // attributes). This avoids clobbering legitimate strings like "standalone=" or "version=".
+  return content.replace(/(\s+)on\w+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]*)/gi, '$1')
 }
 
 export function validateSvgSafety(content: string, sizeBytes?: number): SvgValidationResult {
