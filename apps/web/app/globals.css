@@ -106,6 +106,13 @@
  * Entry animation system — Emil Kowalski spring physics
  * Usage: add class="anim d2" for a 2nd-slot delay
  * ──────────────────────────────────────────────────────────────────────────*/
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @layer utilities {
   .anim {
     opacity: 0;

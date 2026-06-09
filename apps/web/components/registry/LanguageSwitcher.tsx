@@ -31,9 +31,8 @@ export function LanguageSwitcher() {
           title={t(l)}
           className="rounded px-1.5 py-1 text-xs transition-opacity"
           style={{
-            background: locale === l ? 'var(--ba-ink)' : 'transparent',
-            color: locale === l ? 'var(--ba-paper)' : 'var(--ba-ghost)',
-            opacity: locale === l ? 1 : 0.7,
+            background: locale === l ? 'var(--ba-line-strong)' : 'transparent',
+            opacity: locale === l ? 1 : 0.55,
           }}
         >
           <span aria-hidden="true">{FLAG[l]}</span>
