@@ -66,70 +66,68 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <RegistryLayout>
       <div className="flex min-h-[calc(100vh-64px)] flex-col">
         {/* ── Hero ──────────────────────────────────────────────────────────── */}
-        <div className="relative flex flex-1 items-center overflow-hidden px-4 py-20 sm:px-6">
-          {/* Floating golf ball — right side, hidden on mobile */}
+        <div className="relative flex flex-1 items-center justify-center overflow-hidden px-4 py-20 sm:px-6">
+          {/* Floating golf ball — background, centered behind content */}
           <div
-            className="pointer-events-none absolute right-[6%] top-1/2 hidden -translate-y-1/2 sm:block xl:right-[10%]"
+            className="pointer-events-none absolute right-[5%] top-1/2 -translate-y-1/2 opacity-20 sm:opacity-30 lg:right-[10%] lg:opacity-40"
             aria-hidden="true"
           >
-            <GolfBall size="xl" float className="opacity-90" />
+            <GolfBall size="xl" float />
           </div>
 
-          {/* Hero content — left aligned */}
-          <div className="relative z-10 mx-auto w-full max-w-6xl">
-            <div className="max-w-xl">
-              {/* Kicker badge */}
-              <div className="anim d1 mb-6 inline-flex items-center gap-2">
-                <span
-                  className="rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.1em]"
+          {/* Hero content — centered */}
+          <div className="relative z-10 w-full max-w-2xl text-center">
+            {/* Kicker badge */}
+            <div className="anim d1 mb-6 flex justify-center">
+              <span
+                className="rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.1em]"
+                style={{
+                  background: 'var(--ba-green-soft)',
+                  color: 'var(--ba-green)',
+                  border: '1px solid rgba(31,106,71,0.18)',
+                }}
+              >
+                {t('liveIndicator')}
+              </span>
+            </div>
+
+            {/* Eyebrow */}
+            <p className="anim d2 kicker mb-3">Golf Intelligence Platform</p>
+
+            {/* Wordmark */}
+            <h1 className="anim d3 mb-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+              <span style={{ color: 'var(--ba-ink)' }}>Ball</span>
+              <span style={{ color: 'var(--ba-green)' }}>Atlas</span>
+            </h1>
+
+            <p
+              className="anim d4 mb-10 text-base leading-relaxed"
+              style={{ color: 'var(--ba-subtle)' }}
+            >
+              {t('tagline')}
+            </p>
+
+            {/* Search */}
+            <div className="anim d5 mb-5">
+              <SearchBar placeholder={t('searchPlaceholder')} autoFocus />
+            </div>
+
+            {/* Popular searches */}
+            <div className="anim d6 flex flex-wrap justify-center gap-2">
+              {POPULAR.map(({ label, query }) => (
+                <Link
+                  key={label}
+                  href={`/search?q=${encodeURIComponent(query)}`}
+                  className="rounded-full px-3 py-1 text-xs transition-all duration-150"
                   style={{
-                    background: 'var(--ba-green-soft)',
-                    color: 'var(--ba-green)',
-                    border: '1px solid rgba(31,106,71,0.18)',
+                    background: 'var(--ba-surface)',
+                    border: '1px solid var(--ba-line-strong)',
+                    color: 'var(--ba-subtle)',
                   }}
                 >
-                  {t('liveIndicator')}
-                </span>
-              </div>
-
-              {/* Eyebrow */}
-              <p className="anim d2 kicker mb-3">Golf Intelligence Platform</p>
-
-              {/* Wordmark */}
-              <h1 className="anim d3 mb-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-                <span style={{ color: 'var(--ba-ink)' }}>Ball</span>
-                <span style={{ color: 'var(--ba-green)' }}>Atlas</span>
-              </h1>
-
-              <p
-                className="anim d4 mb-10 text-base leading-relaxed"
-                style={{ color: 'var(--ba-subtle)' }}
-              >
-                {t('tagline')}
-              </p>
-
-              {/* Search */}
-              <div className="anim d5 relative mb-5">
-                <SearchBar placeholder={t('searchPlaceholder')} autoFocus className="relative" />
-              </div>
-
-              {/* Popular searches */}
-              <div className="anim d6 flex flex-wrap gap-2">
-                {POPULAR.map(({ label, query }) => (
-                  <Link
-                    key={label}
-                    href={`/search?q=${encodeURIComponent(query)}`}
-                    className="rounded-full px-3 py-1 text-xs transition-all duration-150"
-                    style={{
-                      background: 'var(--ba-surface)',
-                      border: '1px solid var(--ba-line-strong)',
-                      color: 'var(--ba-subtle)',
-                    }}
-                  >
-                    {label}
-                  </Link>
-                ))}
-              </div>
+                  {label}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
